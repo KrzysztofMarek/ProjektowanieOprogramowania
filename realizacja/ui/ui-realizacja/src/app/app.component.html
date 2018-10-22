@@ -35,7 +35,7 @@
             <td>{{getCoursesList(order)}}</td>
             <td>{{order.price}}</td>
             <td>{{order.orderStatus}}</td>
-            <td>{{order.addingDate | date:'medium'}}</td>
+            <td>{{order.addingDate | date:'short'}}</td>
             <th><button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)">Podejmij zamówienie</button></th>
           </tr>
         </tbody>

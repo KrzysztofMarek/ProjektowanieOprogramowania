@@ -13,7 +13,14 @@ export class HttpService {
   fetchOrders(): Observable<Order[]> {
 
     return this.http.get<Order[]>(
-      'http://localhost:8080/orderList'
+      'http://localhost:8080/orderList/1'
+    );
+  }
+
+  changeOrderStatus(id, status): Observable<Order[]> {
+
+    return this.http.get<Order[]>(
+      'http://localhost:8080/orderStatus/' + id + '/' + status
     );
   }
 }

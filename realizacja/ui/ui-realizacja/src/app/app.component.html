@@ -6,10 +6,10 @@
   </ul>
   <hr>
   <nav class="navbar navbar-light">
-    <a class="nav-item active">Bieżące zamówienie: {{currentOrder}}</a>
+    <a class="nav-item active">Bieżące zamówienie: {{getCoursesList(currentOrder)}}</a>
     <form class="form-inline">
-      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn">Realizacja zakończona</button>
-      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn">Porzuć zamówienie</button>
+      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="finalizeRealisation()">Realizacja zakończona</button>
+      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="dropCurrentOrder()">Porzuć zamówienie</button>
     </form>
   </nav>
   <hr>
@@ -32,7 +32,7 @@
         <tbody>
           <tr *ngFor="let order of orderList">
             <td>{{order.id}}</td>
-            <td></td>
+            <td>{{getCoursesList(order)}}</td>
             <td>{{order.price}}</td>
             <td>{{order.orderStatus}}</td>
             <td>{{order.addingDate | date:'medium'}}</td>

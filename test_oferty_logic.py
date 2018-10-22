@@ -10,14 +10,14 @@ class TestIntegrations(unittest.TestCase):
 
     def test_cities_response(self):
         response = self.app.get('/cities')
-        output = {"Warszawa": 1, "Sierpc": 2, "Radom": 3}
+        output = {"Warszawa": 1, "Sierpc": 3, "Radom": 2}
         self.assertEqual(output, response)
 
 
     def test_restaurants_response(self):
-        response = self.app.get('/cities/offer')
+        response = self.app.get('/cities/1')
         pass
 
     def test_cities_response(self):
-        response = self.app.get('/cities/offer/restaurant')
+        response = self.app.get('/restaurant-offer/1')
         pass

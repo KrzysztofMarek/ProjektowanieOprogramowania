@@ -1,27 +1,31 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
+import sys
 app = Flask(__name__)
+cors = CORS(app)
 
 import oferty_db_mock
 
 
 @app.route('/cities', methods=['GET'])
+@cross_origin()
 def get_cities():
     cities = oferty_db_mock.get_cities()
     return jsonify({"cities": cities})
 
 
-@app.route('/cities/offer', methods=['GET'])
-def get_offer():
-    city_id = request.form["city"]
-    if city_id:
-        return jsonify({"offers": oferty_db_mock.get_restaurants_from_city(city_id)})
+@app.route('/cities/<city_id>', methods=['GET'])
+@cross_origin()
+def get_restaurants(city_id):
+    restaurants = oferty_db_mock.get_restaurants_from_city(city_id)
+    return jsonify({"restaurants": restaurants})
 
 
-@app.route('/cities/offer/restaurant', methods=['GET'])
-def get_restaurants():
-    restaurant_id = request.form["restaurant_id"]
-    if restaurant_id:
-        return jsonify({"menu": oferty_db_mock.get_restaurant_menu(restaurant_id)})
+@app.route('/restaurant-offer/<restaurant_id>', methods=['GET'])
+@cross_origin()
+def get_offer(restaurant_id):
+    menu = oferty_db_mock.get_restaurant_menu(restaurant_id)
+    return jsonify({"menu": menu})
 
 
 if __name__ == "__main__":

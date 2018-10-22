@@ -6,7 +6,7 @@
   </ul>
   <hr>
   <nav class="navbar navbar-light">
-    <a class="nav-item active">Bieżące zamówienie: {{currentOrder.getList()}}</a>
+    <a class="nav-item active">Bieżące zamówienie: {{currentOrder}}</a>
     <form class="form-inline">
       <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn">Realizacja zakończona</button>
       <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn">Porzuć zamówienie</button>
@@ -22,7 +22,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col"></th>
+            <th scope="col">ID Zamówienia</th>
             <th scope="col">Lista zamówionych dań</th>
             <th scope="col">Kwota</th>
             <th scope="col">Satus</th>
@@ -30,26 +30,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+          <tr *ngFor="let order of orderList">
+            <td>{{order.id}}</td>
+            <td></td>
+            <td>{{order.price}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>{{order.addingDate | date:'medium'}}</td>
+            <th><button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)">Podejmij zamówienie</button></th>
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-outline-dark">Podejmij zamówienie</button>
     </div>
     <div class="col">
     </div>

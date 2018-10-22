@@ -1,5 +1,6 @@
 package backend.backendRealisation.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Order {
 
     public Order(){}
 
-    public Order(int id,int clientId,int restaurantId,List<Course> courseList,int price,String orderStatus,Date addingDate,int grade){
+    public Order(int id,int clientId,int restaurantId,List<Course> courseList,int price,String orderStatus,LocalDate addingDate,int grade){
         this.id=id;
         this.clientId=clientId;
         this.restaurantId=restaurantId;
@@ -27,7 +28,7 @@ public class Order {
     private List<Course> courseList;
     private int price;
     private String orderStatus;
-    private Date addingDate;
+    private LocalDate addingDate;
     private int grade;
 
 
@@ -71,11 +72,11 @@ public class Order {
         this.price = price;
     }
 
-    public Date getAddingDate() {
+    public LocalDate getAddingDate() {
         return addingDate;
     }
 
-    public void setAddingDate(Date addingDate) {
+    public void setAddingDate(LocalDate addingDate) {
         this.addingDate = addingDate;
     }
 

@@ -10,7 +10,7 @@ public class Order {
 
     public Order(){}
 
-    public Order(int id,int clientId,int restaurantId,List<Course> courseList,int price,OrderStatus orderStatus,Date addingDate,int grade){
+    public Order(int id,int clientId,int restaurantId,List<Course> courseList,int price,String orderStatus,Date addingDate,int grade){
         this.id=id;
         this.clientId=clientId;
         this.restaurantId=restaurantId;
@@ -26,7 +26,7 @@ public class Order {
     private int restaurantId;
     private List<Course> courseList;
     private int price;
-    private OrderStatus orderStatus;
+    private String orderStatus;
     private Date addingDate;
     private int grade;
 
@@ -71,14 +71,6 @@ public class Order {
         this.price = price;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
     public Date getAddingDate() {
         return addingDate;
     }
@@ -93,5 +85,13 @@ public class Order {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

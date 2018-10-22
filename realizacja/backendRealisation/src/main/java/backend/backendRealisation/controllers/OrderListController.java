@@ -29,8 +29,7 @@ public class OrderListController {
         List<Course> courseList2 = Arrays.asList(new Course(1, 1, "Sałatka", 10, "Z pomidorem"));
         List<Course> courseList3 = Arrays.asList(new Course(1, 1, "Sałatka", 10, "Bez pomidora"));
 
-        return Arrays.asList(new Order(1,1,1,courseList1,100, OrderStatus.WAITING,new Date(2018,10,22),4),new Order(1,3,1,courseList2,120, OrderStatus.INPREPARATION,new Date(2018,10,22),2),new Order(1,3,2,courseList3,12, OrderStatus.INPREPARATION,new Date(2018,10,22),3));
-
+        return Arrays.asList(new Order(1,1,1,courseList1,100, OrderStatus.WAITING.name(),new Date(2018,10,22),4),new Order(1,3,1,courseList2,120, OrderStatus.INPREPARATION.name(),new Date(2018,10,22),2),new Order(1,3,2,courseList3,12, OrderStatus.INPREPARATION.name(),new Date(2018,10,22),3));
 
     }
 

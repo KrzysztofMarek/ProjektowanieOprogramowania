@@ -1,8 +1,0 @@
-backend\backendRealisation\security\WebSecurityConfig.class
-backend\backendRealisation\controllers\OrderController.class
-backend\backendRealisation\services\OrderListService.class
-backend\backendRealisation\model\Order.class
-backend\backendRealisation\model\OrderStatus.class
-backend\backendRealisation\BackendRealisationApplication.class
-backend\backendRealisation\model\Course.class
-backend\backendRealisation\interfaces\PracKReal.class

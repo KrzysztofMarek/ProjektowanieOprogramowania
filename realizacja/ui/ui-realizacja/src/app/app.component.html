@@ -9,7 +9,17 @@
     <a class="nav-item active">Bieżące zamówienie: {{getCoursesList(currentOrder)}}</a>
     <form class="form-inline">
       <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="finalizeRealisation()">Realizacja zakończona</button>
-      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="dropCurrentOrder()">Porzuć zamówienie</button>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Porzuć zamówienie
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Brak składników</a>
+          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Awaria urządzenia</a>
+          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Problem z personelem</a>
+        </div>
+      </div>
     </form>
   </nav>
   <hr>
@@ -36,7 +46,9 @@
             <td>{{order.price}}</td>
             <td>{{order.orderStatus}}</td>
             <td>{{order.addingDate | date:'short'}}</td>
-            <th><button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)">Podejmij zamówienie</button></th>
+            <th>
+              <button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)">Podejmij zamówienie</button>
+            </th>
           </tr>
         </tbody>
       </table>

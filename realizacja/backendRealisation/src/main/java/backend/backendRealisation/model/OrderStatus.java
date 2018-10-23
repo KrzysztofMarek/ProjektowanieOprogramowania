@@ -9,6 +9,4 @@ public enum OrderStatus {
     ONTHEWAY,
     PROVIDED, //DOSTARCZONE
     CANCELED
-
-
 }

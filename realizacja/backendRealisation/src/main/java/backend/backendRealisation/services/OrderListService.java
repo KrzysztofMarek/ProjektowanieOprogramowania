@@ -31,7 +31,7 @@ public class OrderListService {
         List<Course> courseList2 = Arrays.asList(new Course(3, 1, "Sałatka", 10, "Z pomidorem"));
         List<Course> courseList3 = Arrays.asList(new Course(4, 1, "Sałatka", 10, "Bez pomidora"));
 
-        return Arrays.asList(new Order(1,1,1,courseList1,100, OrderStatus.WAITING.name(),LocalDate.of(2018,Calendar.DECEMBER,22),4),new Order(2,3,1,courseList2,120, OrderStatus.INPREPARATION.name(),LocalDate.of(2018,Calendar.DECEMBER,22),2),new Order(2,3,2,courseList3,12, OrderStatus.INPREPARATION.name(),LocalDate.of(2018, Calendar.DECEMBER,22),3));
+        return Arrays.asList(new Order(1,1,1,courseList1,100, OrderStatus.WAITING.name(),LocalDate.of(2018,Calendar.DECEMBER,22),4),new Order(2,3,1,courseList2,120, OrderStatus.INPREPARATION.name(),LocalDate.of(2018,Calendar.DECEMBER,22),2),new Order(3,3,2,courseList3,12, OrderStatus.WAITING.name(),LocalDate.of(2018, Calendar.DECEMBER,22),3));
     }
 
 

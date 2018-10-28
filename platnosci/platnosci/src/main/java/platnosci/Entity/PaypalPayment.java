@@ -17,6 +17,6 @@ public class PaypalPayment implements PaymentInterface{
     } 
     
     private String getPaymentRedirect(PaymentForm paymentForm){
-        return "https://www.paypal.com/pl/home";
+        return "https://localhost:4202/";
     }
 }

@@ -11,5 +11,5 @@ package platnosci.Entity;
  */
 public enum PaymentMethods {
     PAYPAL,
-    PAYU
+    RECEIVE
 }

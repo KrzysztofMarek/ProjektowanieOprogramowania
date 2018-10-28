@@ -10,11 +10,11 @@ public class PaymentVerifierTest {
         String paymentFormJson = "{\n" +
                             "    \"id_klienta\": \"1\",\n" +
                             "    \"id_zamowienia\": \"1\",\n" +
-                            "    \"sposób_zapłaty\": \"PAYU\"\n" +
+                            "    \"sposób_zapłaty\": \"PAYPAL\"\n" +
                             "  }";
         PaymentVerifier paymentVerifier = new PaymentVerifier();
         String result = paymentVerifier.process(paymentFormJson);
-        assertEquals(result, "https://www.payu.pl/");
+        assertEquals(result, "https://localhost:4202/");
     }
     
     @Test

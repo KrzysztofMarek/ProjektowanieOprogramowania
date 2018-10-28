@@ -29,8 +29,8 @@ public class PaymentVerifier {
         switch(PaymentMethods.valueOf(paymentMethod)){
             case PAYPAL:
                 return new PaypalPayment();
-            case PAYU:
-                return new PayuPayment();
+            case RECEIVE:
+                return new ReceivePayment();
             default:
                 return null;
         }

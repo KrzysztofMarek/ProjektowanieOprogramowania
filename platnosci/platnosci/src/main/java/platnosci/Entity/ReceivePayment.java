@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author adas
  */
-public class PayuPayment implements PaymentInterface{
+public class ReceivePayment implements PaymentInterface{
     
-    private static final Logger log = LoggerFactory.getLogger(PayuPayment.class);
+    private static final Logger log = LoggerFactory.getLogger(ReceivePayment.class);
 
     public String pay(PaymentForm paymentForm) {
         paymentForm.validate();
@@ -26,6 +26,6 @@ public class PayuPayment implements PaymentInterface{
     } 
     
     private String getPaymentRedirect(PaymentForm paymentForm){
-        return "https://www.payu.pl/";
+        return "https://localhost:4202/";
     }
 }

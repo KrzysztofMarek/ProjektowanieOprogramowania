@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Dodanie nowego Pracownika</h2>
+  </div>
+
+  <div class="py-5 col-md-8 order-md-1">
+    <h4 class="mb-3">Dane Pracownika</h4>
+    <form class="needs-validation" name="form" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName">Imię</label>
+          <input type="text" class="form-control" [(ngModel)]="employee.firstName" name="imie" #firstName="ngModel" id="firstName" placeholder="" value="" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="lastName">Nazwisko</label>
+          <input type="text" class="form-control" [(ngModel)]="employee.lastName" name="nazwisko" #lastName="ngModel" id="lastName" placeholder="" value="" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_rest">Id restauracji</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">@</span>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="employee.id_rest" name="id_rest" #id_rest="ngModel" id="id_rest" placeholder="Restauracja" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="position">Stanowisko</label>
+        <input type="text" class="form-control" [(ngModel)]="employee.position" name="stanowisko" #position="ngModel" id="position" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email">Nr telefonu</label>
+        <input type="text" class="form-control" [(ngModel)]="employee.phone" name="telefon" #phone="ngModel" id="phone">
+      </div>
+
+      <div class="mb-3">
+        <label for="username">Login</label>
+        <input type="text" class="form-control" [(ngModel)]="employee.username" name="login" #username="ngModel" id="username" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password">Hasło</label>
+        <input type="text" class="form-control" [(ngModel)]="employee.password"  name="haslo" #password="ngModel" id="password">
+      </div>
+
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg btn-block" click="onSubmit">Dodaj</button>
+    </form>
+  </div>
+</div>

@@ -68,3 +68,10 @@ yarn-error.log
 
 # rollup-test output
 /modules/rollup-test/dist/
+
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/

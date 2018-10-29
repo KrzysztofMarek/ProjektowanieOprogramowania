@@ -8,10 +8,24 @@
   <nav class="navbar navbar-light">
     <a class="nav-item active">Bieżące zamówienie: {{getCoursesList(currentOrder)}}</a>
     <form class="form-inline">
-      <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="finalizeRealisation()">Realizacja zakończona</button>
+      <button 
+        type="button" 
+        class="btn btn-outline-dark my-2 my-sm-0 my-btn" 
+        (click)="finalizeRealisation()"
+        [disabled]="currentOrder === null"
+      >
+        Realizacja zakończona
+      </button>
       <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+        <button 
+          id="btnGroupDrop1" 
+          type="button" 
+          class="btn btn-outline-dark dropdown-toggle" 
+          data-toggle="dropdown" 
+          aria-haspopup="true"
+          aria-expanded="false"
+          [disabled]="currentOrder === null"
+        >
           Porzuć zamówienie
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -47,7 +61,14 @@
             <td>{{order.orderStatus}}</td>
             <td>{{order.addingDate | date:'short'}}</td>
             <th>
-              <button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)">Podejmij zamówienie</button>
+              <button 
+                type="button" 
+                class="btn btn-outline-dark"
+                (click)="takeOrder(order.id)"
+                [disabled]="order.orderStatus === 'INPREPARATION' || order.orderStatus === 'ONTHEWAY'"
+              >
+                Podejmij zamówienie
+              </button>
             </th>
           </tr>
         </tbody>

@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private httpService: HttpServiceImpl) { }
 
   ngOnInit() {
+    this.currentOrder = null;
     this.httpService.fetchOrders().subscribe(
       data => {
         this.orderList = data;

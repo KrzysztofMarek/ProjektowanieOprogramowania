@@ -1,12 +1,13 @@
-import { Order } from './../order';
+import { HttpService } from './http.service';
+import { Order } from '../order';
 import { Injectable } from '@angular/core';
-import { Observable } from '../../../node_modules/rxjs';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class HttpServiceImpl implements HttpService {
 
   constructor(private http: HttpClient) { }
 

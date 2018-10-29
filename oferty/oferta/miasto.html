@@ -7,6 +7,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
@@ -33,6 +34,7 @@
 				placeholder: "Wybierz miasto..."
 			});
 		});
+		
 		var getUrlParameter = function getUrlParameter(sParam) {
 			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 			sURLVariables = sPageURL.split('&'),
@@ -47,6 +49,14 @@
 				}
 			}
 		};
+		
+
+		// configure your validation
+		$("#form").validate({
+			rules: {
+				city: { required: true }
+			} 
+		});
 	</script>
 </head>
 <body>
@@ -63,7 +73,7 @@
 	<div class="col">
     </div>
     <div class="col-6">
-        <form  action="restauracja.html">
+        <form  id="form" action="restauracja.html">
             <div class="form-group" style="margin-top:30px">
                 <select class="form-control citySelector" id="city" name="city">
 				</select>

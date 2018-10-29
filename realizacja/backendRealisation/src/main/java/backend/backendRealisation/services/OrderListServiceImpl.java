@@ -16,15 +16,13 @@ import java.util.List;
  * Created by Piotr on 2018-10-22.
  */
 @Service
-public class OrderListService {
+public class OrderListServiceImpl implements OrderListService {
 
     private List<Order> orderList;
 
-    public OrderListService(){
+    public OrderListServiceImpl(){
         orderList=prepareList();
     }
-
-
 
     public List<Order> prepareList() {
         List<Course> courseList1 = Arrays.asList(new Course(1, 1, "Kotlet", 10, "medium rare"), new Course(2, 1, "Stek", 10, "medium rare"));

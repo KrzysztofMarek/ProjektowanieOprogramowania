@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HttpService } from './services/http.service';
-import { CommonModule } from '../../node_modules/@angular/common';
+import { HttpServiceImpl } from './services/http.service.impl';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { CommonModule } from '../../node_modules/@angular/common';
     HttpClientModule,
     CommonModule
   ],
-  providers: [HttpService],
+  providers: [HttpServiceImpl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

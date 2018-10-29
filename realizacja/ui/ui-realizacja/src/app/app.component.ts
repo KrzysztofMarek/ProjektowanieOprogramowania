@@ -1,5 +1,5 @@
 import { Order } from './order';
-import { HttpService } from './services/http.service';
+import { HttpServiceImpl } from './services/http.service.impl';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   orderList: Order[];
   currentOrder: Order;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpServiceImpl) { }
 
   ngOnInit() {
     this.httpService.fetchOrders().subscribe(

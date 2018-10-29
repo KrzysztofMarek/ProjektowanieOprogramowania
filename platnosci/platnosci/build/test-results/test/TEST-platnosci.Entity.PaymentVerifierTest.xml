@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="platnosci.Entity.PaymentVerifierTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-10-21T17:13:15" hostname="adas-PC" time="0.19">
-  <properties/>
-  <testcase name="testProcessValid" classname="platnosci.Entity.PaymentVerifierTest" time="0.178"/>
-  <testcase name="testProcessInvalid" classname="platnosci.Entity.PaymentVerifierTest" time="0.011"/>
-  <system-out><![CDATA[19:13:15.831 [Test worker] INFO platnosci.Entity.PaymentForm - No such payment method as cos
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

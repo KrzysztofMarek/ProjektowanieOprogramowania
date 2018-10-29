@@ -38,11 +38,8 @@ def dodaj_pracownika():
         return "ERROR. Nie moge dostac sie do hasla"
     haslo = str(request.form['haslo'])
 
-
-
     return "Dodano pracownika o loginie " + login + ", oraz imieniu i nazwisku " + imie + " " \
            + nazwisko + " do resturacji " + str(id_restauracji)
-
 
 
 @app.route('/usun_pracownika', methods=['POST'])
@@ -62,7 +59,6 @@ def pobierz_pracownikow():
     if request.args.get("id_restauracji") is None:
         return "ERROR. Nie moge dostac sie do id restauracji"
     id_restauracji = int(request.args.get("id_restauracji"))
-
 
     return jsonify(lista_pracownikow)
 

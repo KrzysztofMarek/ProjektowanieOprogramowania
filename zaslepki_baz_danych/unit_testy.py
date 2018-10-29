@@ -1,21 +1,42 @@
 import unittest
-import requests
+from zaslepki_baz_danych import oferty, realizacja, zamowienia, zarzadzanie_personelem
 
 
 class TestyOfety(unittest.TestCase):
-
     def setUp(self):
-        self.app = '' #tutaj trzeba odpalic flaska xd
+        self.app = oferty.app.test_client()
+        #uruchomienie flaska
+
+    def tearDown(self):
+        pass
 
     def test_pobierz_menu_restauracji(self):
-        self.assertEqual(self.app, (50, 50),
-                         'incorrect default size')
-        r1 = requests.get("http://127.0.0.1:5000/pobierz_menu_restauracji", params={'id_restauracji': 0})
-        print(r1.text)
-
-        if r1.text == '[[1,"Ciastko",29.99,"Pycha ciacho"],[2,"Kawa",5.99,"Dobra kawusia"]]':
-            print("SUCCESS!")
-        else:
-            print("FAILURE!")
+        #r1 = self.app.get('/pobierz_menu_restauracji', json={'id_restauracji': 0})
+        r1 = self.app.get('/pobierz_menu_restauracji', query_string=dict(id_restauracji=0))
+        print(r1.data)
+        print("JSON:")
+        print(r1.get_json())
+        #assert '[[1,"Ciastko",29.99,"Pycha ciacho"],[2,"Kawa",5.99,"Dobra kawusia"]]' in r1
 
 
+class TestyRealizacja(unittest.TestCase):
+    def setUp(self):
+        self.app = realizacja.app.test_client()
+        #uruchomienie flaska
+
+    def tearDown(self):
+         #wyłaczenie flaska
+        pass
+
+  #  def test_pobierz_menu_restauracji(self):
+        #r1 = self.app.get('/pobierz_menu_restauracji', json={'id_restauracji': 0})
+        #data = {'id_restauracji': 0}
+        #r1 = self.app.get('/pobierz_menu_restauracji', query_string=dict(id_restauracji=0))
+        #print(r1.data)
+        #print("JSON:")
+        #print(r1.get_json())
+        #assert '[[1,"Ciastko",29.99,"Pycha ciacho"],[2,"Kawa",5.99,"Dobra kawusia"]]' in r1
+
+
+if __name__ == '__main__':
+    unittest.main()

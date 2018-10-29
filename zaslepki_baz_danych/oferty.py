@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_site():
-    return render_template('test.html')
+    return "None"
 
 
 @app.route('/pobierz_menu_restauracji', methods=['GET'])
@@ -87,3 +87,8 @@ def usun_danie():
 
 if __name__ == '__main__':
     app.run()
+
+
+#def create_app(debug=False):
+ #   app = Flask(__name__)
+  #  app.debug = debug

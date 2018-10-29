@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="zarzadzanie_personelem.Entity.EmployeeCreatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-10-21T18:44:28" hostname="adas-PC" time="0.955">
-  <properties/>
-  <testcase name="testCreateEmployeeInvalid" classname="zarzadzanie_personelem.Entity.EmployeeCreatorTest" time="0.939"/>
-  <testcase name="testCreateEmployeeValid" classname="zarzadzanie_personelem.Entity.EmployeeCreatorTest" time="0.01"/>
-  <system-out><![CDATA[20:44:29.548 [Test worker] INFO zarzadzanie_personelem.Entity.EmployeeForm - Telefon length is 1 instead o 9
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

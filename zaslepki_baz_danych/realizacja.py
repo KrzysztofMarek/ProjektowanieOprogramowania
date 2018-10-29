@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_site():
-    return render_template('test.html')
+    return "None"
 
 
 @app.route('/zmien_status_zamowienia', methods=['POST'])

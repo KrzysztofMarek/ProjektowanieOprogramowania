@@ -27,7 +27,7 @@ public class EmployeeCreatorTest {
         EmployeeCreator employeeCreatorSpy = PowerMockito.spy(employeeCreator);
         
         PowerMockito.doReturn("Success").when(employeeCreatorSpy, "saveEmployeeToDB", Mockito.any());
-        String result = employeeCreatorSpy.createEmployee(employeeFormJson);
+        String result = employeeCreatorSpy.createEmployee(employeeFormJson, "");
         
         assertEquals(result, "Success");
     }
@@ -47,7 +47,7 @@ public class EmployeeCreatorTest {
         EmployeeCreator employeeCreatorSpy = PowerMockito.spy(employeeCreator);
         
         PowerMockito.doReturn("Success").when(employeeCreatorSpy, "saveEmployeeToDB", Mockito.any());
-        String result = employeeCreatorSpy.createEmployee(employeeFormJson);
+        String result = employeeCreatorSpy.createEmployee(employeeFormJson, "");
         
         assertEquals(result, "Invalid input");
     }

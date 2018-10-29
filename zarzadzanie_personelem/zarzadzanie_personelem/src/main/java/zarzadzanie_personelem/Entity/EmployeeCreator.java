@@ -18,21 +18,19 @@ public class EmployeeCreator {
     
     private static final Logger log = LoggerFactory.getLogger(EmployeeCreator.class);
 
-    public String createEmployee(String employeeFormJson) {
+    public String createEmployee(final String employeeFormJson, final String url) {
         EmployeeForm employeeForm = (new Gson()).fromJson(employeeFormJson, EmployeeForm.class);
         employeeForm.validate();
         if(employeeForm.isValid()){
-            return saveEmployeeToDB(employeeForm);
+            return saveEmployeeToDB(employeeForm, url);
         }else{
             return "Invalid input";
         }
     }
     
-    private String saveEmployeeToDB(EmployeeForm employeeForm){
-        final String uri = "http://localhost:9091/dodajPracownika";
-
+    private String saveEmployeeToDB(final EmployeeForm employeeForm, final String url){
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(uri, employeeForm, String.class);      
+        return restTemplate.postForObject(url, employeeForm, String.class);      
     }   
     
 }

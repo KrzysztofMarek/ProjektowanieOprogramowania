@@ -1,7 +1,7 @@
 import unittest
 
-import oferty_logic
-from oferty_logic import app
+import oferty
+from oferty import app
 
 
 class TestIntegrations(unittest.TestCase):

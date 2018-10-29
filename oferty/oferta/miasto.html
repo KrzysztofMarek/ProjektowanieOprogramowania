@@ -50,14 +50,24 @@
 			}
 		};
 		
-
-		// configure your validation
-		$("#form").validate({
-			rules: {
-				city: { required: true }
-			} 
+		
+		jQuery(function($) {
+			// configure your validation
+			$("#form").validate({
+				rules: {
+					city: { required: true }
+				},
+				messages: {
+					city: { required: '<div class="alert alert-danger" role="alert">Wybierz miasto!</div>' }
+				}  
+			});
 		});
 	</script>
+	<style>
+	.error {
+		width: 100% !important;
+	}
+	</style>
 </head>
 <body>
 <ul class="nav nav-tabs">
@@ -75,7 +85,7 @@
     <div class="col-6">
         <form  id="form" action="restauracja.html">
             <div class="form-group" style="margin-top:30px">
-                <select class="form-control citySelector" id="city" name="city">
+                <select class="form-control citySelector" id="city" name="city" class="required">
 				</select>
             </div>
 			<div class="row">

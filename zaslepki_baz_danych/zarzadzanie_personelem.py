@@ -1,53 +1,52 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def main_site():
-    return render_template('test.html')
+    return 404
 
 
 @app.route('/dodaj_pracownika', methods=['POST'])
 def dodaj_pracownika():
     if request.form['id_restauracji'] is None:
-        return "ERROR. Nie moge dostac sie do id restuaracji"
+        return 404
     id_restauracji = int(request.form['id_restauracji'])
 
     if request.form['imie'] is None:
-        return "ERROR. Nie moge dostac sie do imienia"
+        return 404
     imie = str(request.form['imie'])
 
     if request.form['nazwisko'] is None:
-        return "ERROR. Nie moge dostac sie do nazwiska"
+        return 404
     nazwisko = str(request.form['nazwisko'])
 
     if request.form['telefon'] is None:
-        return "ERROR. Nie moge dostac sie do telefonu"
+        return 404
     telefon = str(request.form['telefon'])
 
     if request.form['stanowisko'] is None:
-        return "ERROR. Nie moge dostac sie do stanowiska"
+        return 404
     stanowisko = str(request.form['stanowisko'])
 
     if request.form['login'] is None:
-        return "ERROR. Nie moge dostac sie do loginu"
+        return 404
     login = str(request.form['login'])
 
     if request.form['haslo'] is None:
-        return "ERROR. Nie moge dostac sie do hasla"
+        return 404
     haslo = str(request.form['haslo'])
 
-    return "Dodano pracownika o loginie " + login + ", oraz imieniu i nazwisku " + imie + " " \
-           + nazwisko + " do resturacji " + str(id_restauracji)
+    return 200
 
 
 @app.route('/usun_pracownika', methods=['POST'])
 def usun_pracownika():
     if request.form['id_pracownika'] is None:
-        return "ERROR. Nie moge dostac sie do id pracownika"
+        return 404
     id_pracownika = int(request.form['id_pracownika'])
-    return "Usunieto pracownika o id " + str(id_pracownika)
+    return 200
 
 
 @app.route('/pobierz_pracownikow', methods=['GET'])
@@ -57,10 +56,11 @@ def pobierz_pracownikow():
                          [3, "Adrian", "Hasz", "123456789", "Kucharz", "haszImasz"]]
 
     if request.args.get("id_restauracji") is None:
-        return "ERROR. Nie moge dostac sie do id restauracji"
+        return 404
     id_restauracji = int(request.args.get("id_restauracji"))
 
     return jsonify(lista_pracownikow)
+
 
 
 if __name__ == '__main__':

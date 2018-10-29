@@ -24,8 +24,8 @@ def zmien_status_zamowienia():
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
     lista_zamowien = [[1, "Ciastko"],
-                       [2, "Kawa"],
-                       [3, "Bulka"]]
+                      [2, "Kawa"],
+                      [3, "Bulka"]]
 
     if request.args.get("id_restauracji") is None:
         return "ERROR. Nie moge dostac sie do id restauracji"
@@ -39,8 +39,8 @@ def pobierz_zamowienia():
 @app.route('/pobierz_kontakt', methods=['GET'])
 def pobierz_kontakt():
     lista_zamowien = [[1, "Ciastko"],
-                       [2, "Kawa"],
-                       [3, "Bułka"]]
+                      [2, "Kawa"],
+                      [3, "Bułka"]]
 
     if request.args.get("id_zamowienia") is None:
         return "ERROR. Nie moge dostac sie do id zamowienia"

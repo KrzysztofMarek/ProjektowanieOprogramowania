@@ -1,23 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package platnosci.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author adas
- */
-public class CardPayment implements PaymentInterface{
+public class CardPayment extends PaymentAbstract{
     
     private static final Logger log = LoggerFactory.getLogger(CardPayment.class);
+    
+    public CardPayment(final String url){
+        super(url);
+    }
 
+    @Override
     public String pay(PaymentForm paymentForm) {
-        paymentForm.validate();
         if(paymentForm.isValid()){
             return getPaymentRedirect(paymentForm);
         }else{
@@ -26,6 +21,6 @@ public class CardPayment implements PaymentInterface{
     } 
     
     private String getPaymentRedirect(PaymentForm paymentForm){
-        return "https://localhost:4202/";
+        return "Not implemented";
     }
 }

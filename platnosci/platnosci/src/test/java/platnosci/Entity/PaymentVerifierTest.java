@@ -13,7 +13,7 @@ public class PaymentVerifierTest {
                             "    \"sposób_zapłaty\": \"PAYPAL\"\n" +
                             "  }";
         PaymentVerifier paymentVerifier = new PaymentVerifier();
-        String result = paymentVerifier.process(paymentFormJson);
+        String result = paymentVerifier.process(paymentFormJson, null);
         assertEquals(result, "https://localhost:4202/");
     }
     
@@ -25,7 +25,7 @@ public class PaymentVerifierTest {
                             "    \"sposób_zapłaty\": \"cos\"\n" +
                             "  }";
         PaymentVerifier paymentVerifier = new PaymentVerifier();
-        String result = paymentVerifier.process(paymentFormJson);
+        String result = paymentVerifier.process(paymentFormJson, null);
         assertEquals(result, "Invalid input");
     }
     

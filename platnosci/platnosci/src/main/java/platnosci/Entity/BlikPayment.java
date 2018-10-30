@@ -3,12 +3,16 @@ package platnosci.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BlikPayment implements PaymentInterface{
+public class BlikPayment extends PaymentAbstract{
     
     private static final Logger log = LoggerFactory.getLogger(BlikPayment.class);
+    
+    public BlikPayment(final String url){
+        super(url);
+    }
 
+    @Override
     public String pay(PaymentForm paymentForm) {
-        paymentForm.validate();
         if(paymentForm.isValid()){
             return getPaymentRedirect(paymentForm);
         }else{
@@ -17,6 +21,6 @@ public class BlikPayment implements PaymentInterface{
     } 
     
     private String getPaymentRedirect(PaymentForm paymentForm){
-        return "https://localhost:4202/";
+        return "Not implemented";
     }
 }

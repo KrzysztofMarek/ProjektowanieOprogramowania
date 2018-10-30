@@ -15,19 +15,24 @@ import java.util.List;
  * Created by Piotr on 2018-10-22.
  */
 @RestController
-public class OrderController implements PracKReal{
+public class OrderController implements PracKReal {
 
-    @Autowired
     OrderListService orderListService;
 
-    @RequestMapping(value="/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Order> index(@PathVariable("restaurantId")int restaurantId) {
+    @Autowired
+    public OrderController(OrderListService orderListService) {
+        this.orderListService = orderListService;
+    }
+
+
+    @RequestMapping(value = "/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Order> index(@PathVariable("restaurantId") int restaurantId) {
         return orderListService.getOrderList();
     }
 
-    @RequestMapping(value="/orderStatus/{orderId}/{orderStatus}", method = RequestMethod.GET)
+    @RequestMapping(value = "/orderStatus/{orderId}/{orderStatus}", method = RequestMethod.GET)
     public List<Order> changeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus) {
-        orderListService.changeOrderStatus(orderId,orderStatus);
+        orderListService.changeOrderStatus(orderId, orderStatus);
         return orderListService.getOrderList();
     }
 }

@@ -1,9 +1,11 @@
 package backend.backendRealisation.services;
 
+import backend.backendRealisation.dao.DatabaseAccess;
 import backend.backendRealisation.model.Course;
 import backend.backendRealisation.model.Order;
 import backend.backendRealisation.model.OrderStatus;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,8 +22,11 @@ public class OrderListServiceImpl implements OrderListService {
 
     private List<Order> orderList;
 
-    public OrderListServiceImpl(){
-        orderList=prepareList();
+    DatabaseAccess databaseAccess;
+
+    @Autowired
+    public OrderListServiceImpl(DatabaseAccess databaseAccess){
+        this.databaseAccess=databaseAccess;
     }
 
     public List<Order> prepareList() {

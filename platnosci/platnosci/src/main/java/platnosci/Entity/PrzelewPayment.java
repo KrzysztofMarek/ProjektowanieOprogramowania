@@ -1,11 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package platnosci.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PaypalPayment implements PaymentInterface{
+/**
+ *
+ * @author adas
+ */
+public class PrzelewPayment implements PaymentInterface{
     
-    private static final Logger log = LoggerFactory.getLogger(PaypalPayment.class);
+    private static final Logger log = LoggerFactory.getLogger(PrzelewPayment.class);
 
     public String pay(PaymentForm paymentForm) {
         paymentForm.validate();

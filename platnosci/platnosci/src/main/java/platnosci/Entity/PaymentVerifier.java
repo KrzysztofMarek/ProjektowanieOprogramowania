@@ -27,10 +27,12 @@ public class PaymentVerifier {
     private PaymentInterface getPaymentProcessor(PaymentForm paymentForm){
         String paymentMethod = paymentForm.getSposób_zapłaty();
         switch(PaymentMethods.valueOf(paymentMethod)){
-            case PAYPAL:
-                return new PaypalPayment();
-            case RECEIVE:
-                return new ReceivePayment();
+            case BLIK:
+                return new BlikPayment();
+            case CARD:
+                return new CardPayment();
+            case PRZELEW:
+                return new PrzelewPayment();
             default:
                 return null;
         }

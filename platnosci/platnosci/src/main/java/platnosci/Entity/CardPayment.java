@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author adas
  */
-public class ReceivePayment implements PaymentInterface{
+public class CardPayment implements PaymentInterface{
     
-    private static final Logger log = LoggerFactory.getLogger(ReceivePayment.class);
+    private static final Logger log = LoggerFactory.getLogger(CardPayment.class);
 
     public String pay(PaymentForm paymentForm) {
         paymentForm.validate();

@@ -10,6 +10,7 @@ package platnosci.Entity;
  * @author adas
  */
 public enum PaymentMethods {
-    PAYPAL,
-    RECEIVE
+    BLIK,
+    CARD,
+    PRZELEW
 }

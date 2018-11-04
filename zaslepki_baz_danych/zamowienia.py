@@ -5,28 +5,30 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_site():
-    return render_template('test.html')
+    return 404
 
 
 @app.route('/dodaj_zamowienie', methods=['POST'])
 def dodaj_zamowienie():
     if request.form['id_klienta'] is None:
-        return "ERROR. Nie moge dostac sie do id klienta"
+        return 404
     id_klienta = int(request.form['id_klienta'])
 
     if request.form['id_restauracji'] is None:
-        return "ERROR. Nie moge dostac sie do id restauracji"
+        return 404
     id_restauracji = int(request.form['id_restauracji'])
 
     if request.form['lista_dan'] is None:
-        return "ERROR. Nie moge dostac sie do listy dan"
+        return 404
     lista_dan = request.form['lista_dan']
 
     if request.form['kwota'] is None:
-        return "ERROR. Nie moge dostac sie do kwoty"
+        return 404
     kwota = float(request.form['kwota'])
-    print("KWA")
-    return '44'
+
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
 if __name__ == '__main__':

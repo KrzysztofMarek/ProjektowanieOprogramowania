@@ -13,12 +13,16 @@ export class DataService {
         payment.id_klienta = 1;
         payment.id_zamowienia = 1;
         payment.suma = 30;
-        return this.http.post('localhost:9201/zaplac', payment);
+        return this.http.post('localhost:9201/zaplac', payment).subscribe(res => console.log(res));
     }
 
-    getStatus() {
-        return this.http.get('urlSkądMogęDostaćStatus')
-            .subscribe(res => /*res as Status*/
-            console.log('aaaa'));
+    getSuccess() {
+        return this.http.get('localhost:9093/success')
+            .subscribe(res => console.log('res'));
+    }
+
+    getFailure() {
+        return this.http.get('localhost:9093/failure')
+        .subscribe(res => console.log('res'));
     }
 }

@@ -23,15 +23,18 @@ export class AppComponent {
   constructor(public dataService: DataService) { }
 
   ngOnInit() { 
-    interval(1000)
+  /*  interval(10000)
     .subscribe(res => {
-    this.dataService.getStatus();
+    this.dataService.getSuccess();
     });
+    interval(10000)
+    .subscribe(res => {
+    this.dataService.getFailure();
+    });*/
   }
 
   onSubmit() {
     this.onNavigate();
-    console.log(this.payment);
     this.dataService.pay(this.payment);
   }
 

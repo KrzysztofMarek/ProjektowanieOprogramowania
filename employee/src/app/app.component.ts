@@ -17,11 +17,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit({value}:{value:Employee}){
-    console.log(value);
-    this.dataService.Dodaj_pracownika(this.employee).subscribe(employee => {
-      console.log(employee);
-    });
+  onSubmit(){
+    this.dataService.Dodaj_pracownika(this.employee);
   }
 }
 

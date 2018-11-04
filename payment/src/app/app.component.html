@@ -1,3 +1,4 @@
+<form class="needs-validation" name="form" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
 <div class="bg-light">
 
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -51,14 +52,14 @@
         <h5 class="card-header">Sposób płatności</h5>
         <div class="card-body">
 
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline1"><img width="60px" height="60px" src="https://www.jamroom.net/networkmarket/image/market_image/104/large/_v=1513011920" alt=""></label>
-            
-          </div>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline2"><img width="60px" height="60px" src="https://pbs.twimg.com/profile_images/725683967987339265/Okk14C-n_400x400.jpg" alt=""></label>
+          <div *ngFor="let paymentOption of paymentOptions">
+            <input
+            ng-model="payment.sposob_zaplaty"
+            type="radio" 
+            name="paymentOption" 
+            value="{{paymentOption}}"
+            (change)="radioChangeHandler($event)">
+            <i class="ml-3">{{paymentOption}}</i>
           </div>
         </div>
       </div>
@@ -68,7 +69,8 @@
 
   <div class="row py-5 d-flex align-items-center flex-column justify-content-center">
     <hr class="mb-4">
-    <button class="btn btn-primary btn-lg px-5" (click)="onSubmit()">Zapłać</button>
+    <button class="btn btn-primary btn-lg px-5" type="submit" click="onSubmit()">Zapłać</button>
   </div>
 
 </div>
+</form>

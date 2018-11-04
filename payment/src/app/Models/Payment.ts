@@ -1,5 +1,6 @@
 export class Payment {
-    public id_client: number;
-    public id_order: number;
-    public payment_method: string;
+    public id_klienta: number;
+    public id_zamowienia: number;
+    public sposob_zaplaty: string;
+    public suma: number; 
 }

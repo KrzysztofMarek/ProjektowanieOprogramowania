@@ -72,15 +72,44 @@ class TestyRealizacja(unittest.TestCase):
 
     def test_pobierz_zamowienia(self):
         r1 = self.app.get('/pobierz_zamowienia', query_string=dict(id_restauracji=0))
-        print(r1.get_json())
-        resp= "[[1,[[1,'Ciastko'],[2,'Kawa'],[3,'Bulka']],'Gotowe'],[2,[[1,'Ciastko'],' \
-               '[2,'Kawa'],[3,'Bulka']],'Oczekujace'],[3,[[1,'Ciastko'],' \
-               '[2,'Kawa'],[3,'Bulka']],'Anulowane']]"
-        self.assertEqual(r1.get_json(), resp)
+        json_data = {
+            'lista_zamowien': [
+                {
+                    'id_zamowienia': 1,
+                    'lista_dan': [
+                        {'id_dania': 1, 'nazwa': 'Kawa'},
+                        {'id_dania': 2, 'nazwa': 'Ciastko'},
+                        {'id_dania': 3, 'nazwa': 'Bulka'}
+                    ],
+                    'status': 'oczekujace',
+                },
+                {
+                    'id_zamowienia': 2,
+                    'lista_dan': [
+                        {'id_dania': 1, 'nazwa': 'Kawa'},
+                        {'id_dania': 2, 'nazwa': 'Ciastko'},
+                        {'id_dania': 3, 'nazwa': 'Bulka'}
+                    ],
+                    'status': 'przygotowywane',
+
+                },
+                {
+                    'id_zamowienia': 3,
+                    'lista_dan': [
+                        {'id_dania': 1, 'nazwa': 'Kawa'},
+                        {'id_dania': 2, 'nazwa': 'Ciastko'},
+                        {'id_dania': 3, 'nazwa': 'Bulka'}
+                    ],
+                    'status': 'w_drodze',
+
+                }
+            ]
+        }
+        expctd = json.dumps(json_data)
+        self.assertEqual(json.loads(expctd), json.loads(json.dumps(r1.get_json())))
 
     def test_zmien_status_zamowienia(self):
-        r1 = self.app.post('/zmien_status_zamowienia', data=dict(id_zamowienia=0, status='Anulowano'))
-        print(r1.status_code())
+        r1 = self.app.post('/zmien_status_zamowienia', data=dict(id_zamowienia=0, status='anulowane'))
         self.assertEqual(r1.status_code, 200)
 
 

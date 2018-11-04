@@ -25,7 +25,10 @@ def dodaj_zamowienie():
     if request.form['kwota'] is None:
         return 404
     kwota = float(request.form['kwota'])
-    return 200
+
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
 if __name__ == '__main__':

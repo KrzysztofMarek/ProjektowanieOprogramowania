@@ -38,9 +38,12 @@ def dodaj_pracownika():
         return 404
     haslo = str(request.form['haslo'])
 
-    return 200
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
+# TODO
 @app.route('/usun_pracownika', methods=['POST'])
 def usun_pracownika():
     if request.form['id_pracownika'] is None:
@@ -49,6 +52,7 @@ def usun_pracownika():
     return 200
 
 
+# TODO
 @app.route('/pobierz_pracownikow', methods=['GET'])
 def pobierz_pracownikow():
     lista_pracownikow = [[1, "Jan", "Kek", "123456789", "Kucharz", "JanKe"],
@@ -60,7 +64,6 @@ def pobierz_pracownikow():
     id_restauracji = int(request.args.get("id_restauracji"))
 
     return jsonify(lista_pracownikow)
-
 
 
 if __name__ == '__main__':

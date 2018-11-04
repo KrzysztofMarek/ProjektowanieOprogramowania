@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import json
 
 app = Flask(__name__)
 
@@ -28,7 +27,7 @@ def pobierz_menu_restauracji():
             }
         ]
     }
-    restaurant_menu= {
+    restaurant_menu = {
         'lista': [
             {
                 'id_dania': 1,
@@ -57,71 +56,56 @@ def pobierz_menu_restauracji():
     id_restauracji = int(request.args.get("id_restauracji"))
     if id_restauracji == 0:
         return jsonify(network_menu)
-        #response = app.response_class(
-        #response=json.dumps(network_menu),
-        #status=200,
-        #mimetype='application/json')
-        #return response
     else:
         return jsonify(restaurant_menu)
 
 
-@app.route('/dodaj_danie', methods=['POST'])
-def dodaj_danie():
-    if request.form['id_restauracji'] is None:
+# Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
+@app.route('/pobierz_restauracje', methods=['GET'])
+def pobierz_resturacje():
+    restaurant_list = {
+        'lista': [
+            {
+                'id_restauracji': 1,
+                'nazwa': 'Don Keke',
+                'adres': 'Liliowa 12'
+
+            },
+            {
+                'id_restauracji': 2,
+                'nazwa': 'Bambino',
+                'adres': 'Arnolda 4'
+            },
+            {
+                'id_restauracji': 3,
+                'nazwa': 'Que pasa',
+                'adres': 'Grunwaldzka 13'
+            }
+        ]
+    }
+    if request.args.get("id_restauracji") is None:
         return 404
-    id_restauracji = int(request.form['id_restauracji'])
-
-    if request.form['id_dania'] is None:
-        return 404
-    id_dania = int(request.form['id_dania'])
-
-    if request.form['nazwa'] is None:
-        return 404
-    nazwa = str(request.form['nazwa'])
-
-    if request.form['cena'] is None:
-        return 404
-    cena = float(request.form['cena'])
-
-    if request.form['opis'] is None:
-        return 404
-    opis = str(request.form['opis'])
-
-    return 200
+    miasto = int(request.args.get("miasto"))
+    return jsonify(restaurant_list)
 
 
-@app.route('/modyfikuj_danie', methods=['POST'])
-def modyfikuj_danie():
-    if request.form['id_restauracji'] is None:
-        return 404
-    id_restauracji = int(request.form['id_restauracji'])
-
-    if request.form['id_dania'] is None:
-        return 404
-    id_dania = int(request.form['id_dania'])
-
-    if request.form['nazwa'] is None:
-        return 404
-    nazwa = str(request.form['nazwa'])
-
-    if request.form['cena'] is None:
-        return 404
-    cena = float(request.form['cena'])
-
-    if request.form['opis'] is None:
-        return 404
-    opis = str(request.form['opis'])
-
-    return 200
-
-
-@app.route('/usun_danie', methods=['POST'])
-def usun_danie():
-    if request.form['id_dania'] is None:
-        return 404
-    id_dania = int(request.form['id_dania'])
-    return 200
+# Pobierz_miasta() zwraca (lista[miasto:string])
+@app.route('/pobierz_miasta', methods=['GET'])
+def pobierz_miasta():
+    cities_list = {
+        'lista': [
+            {
+                'nazwa': 'Warszawa'
+            },
+            {
+                'nazwa': 'Radom'
+            },
+            {
+                'nazwa': 'Torun'
+            }
+        ]
+    }
+    return jsonify(cities_list)
 
 
 if __name__ == '__main__':

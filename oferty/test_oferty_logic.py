@@ -16,6 +16,6 @@ class TestIntegrations(unittest.TestCase):
         response = self.app.get('/cities/1')
         self.assertNotEqual(None, response.form)
 
-    def test_cities_response(self): 
+    def test_cities_response(self):
         response = self.app.get('/restaurant-offer/1')
         self.assertNotEqual(None, response.form)

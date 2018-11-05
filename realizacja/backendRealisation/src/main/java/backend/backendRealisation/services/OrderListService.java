@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface OrderListService {
 
-    List<Order> prepareList();
     void changeOrderStatus (int orderId, String orderStatus);
     List<Order> getOrderList(int restaruantId);
-    void setOrderList(List<Order> orderList);
 }

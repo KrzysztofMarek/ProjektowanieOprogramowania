@@ -27,6 +27,7 @@ public class OrderListServiceImpl implements OrderListService {
     @Autowired
     public OrderListServiceImpl(DatabaseAccess databaseAccess){
         this.databaseAccess=databaseAccess;
+      //  orderList=prepareList();
     }
 
     public List<Order> prepareList() {
@@ -46,8 +47,8 @@ public class OrderListServiceImpl implements OrderListService {
         }
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
+    public List<Order> getOrderList(int restaruantId) {
+        return databaseAccess.getOrders(restaruantId);
     }
 
     public void setOrderList(List<Order> orderList) {

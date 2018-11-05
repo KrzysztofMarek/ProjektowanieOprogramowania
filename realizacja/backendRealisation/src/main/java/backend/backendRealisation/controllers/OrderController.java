@@ -27,12 +27,12 @@ public class OrderController implements PracKReal {
 
     @RequestMapping(value = "/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
     public List<Order> index(@PathVariable("restaurantId") int restaurantId) {
-        return orderListService.getOrderList();
+        return orderListService.getOrderList(restaurantId);
     }
 
-    @RequestMapping(value = "/orderStatus/{orderId}/{orderStatus}", method = RequestMethod.GET)
-    public List<Order> changeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus) {
+    @RequestMapping(value = "/orderStatus/{orderId}/{orderStatus}/{restaurantId}", method = RequestMethod.GET)
+    public List<Order> changeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus,@PathVariable ("restaurantId") int restaruantId) {
         orderListService.changeOrderStatus(orderId, orderStatus);
-        return orderListService.getOrderList();
+        return orderListService.getOrderList(restaruantId);
     }
 }

@@ -12,6 +12,12 @@ public class Course {
         this.price=price;
         this.description=description;
     }
+
+    public Course(int id,String name){
+        this.id=id;
+        this.name=name;
+    }
+
     private int id;
     private int restuarantId;
     private String name;

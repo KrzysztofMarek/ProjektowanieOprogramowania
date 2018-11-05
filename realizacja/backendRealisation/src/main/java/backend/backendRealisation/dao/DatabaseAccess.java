@@ -10,6 +10,6 @@ import java.util.List;
 public interface DatabaseAccess {
 
     Order changeOrderStatus(Order order);
-    List<Order> getOrders();
+    List<Order> getOrders(int restaruantId);
     // Contact getContact();
 }

@@ -21,6 +21,11 @@ public class Order {
         this.addingDate=addingDate;
         this.grade=grade;
     }
+    public Order(int id, List<Course> courseList,String orderStatus){
+        this.id=id;
+        this.courseList=courseList;
+        this.orderStatus=orderStatus;
+    }
 
     private int id;
     private int clientId;

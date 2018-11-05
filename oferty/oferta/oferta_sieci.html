@@ -12,41 +12,29 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var host="http://localhost";
-			var port="5000";
-			var endpoint="/restaurant-offer/";
-			var restaurant_id = getUrlParameter('restaurant_id');
+			//var host="http://localhost";
+			//var port="5000";
+			var host="http://192.168.0.13";
+			var port="8080";
+			var endpoint="/pobierz_menu_sieci";
 			$.ajax({
 				type: "GET",
-				url: host+":"+port+endpoint+restaurant_id,
-				success: function(json){
-					console.log(json);
-					var menu = json['menu'];
-					$.each(menu, function(key, value) {
-						var row = '<tr><td>'+key+'</td>';
-						$.each(value, function(i, value2) {
-							row += '<td>'+value2+'</td>';
-						});
+				url: host+":"+port+endpoint,
+				success: function(json_obj){
+					//json_obj = $.parseJSON(json);
+					console.log(json_obj);
+					var menu_list = json_obj['lista'];
+					$.each(menu_list, function(i, menu_item) {
+						var row = '<tr id="' + menu_item.id_dania + '">'; 
+						row += '<td>' + menu_item.nazwa + '</td>';
+						row += '<td>' + menu_item.cena + '</td>';
+						row += '<td>' + menu_item.opis + '</td>';
 						row += '</tr>'
 						$('#menu').children('tbody').append(row);
 					});
 				}
 			});
 		});
-		var getUrlParameter = function getUrlParameter(sParam) {
-			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-			sURLVariables = sPageURL.split('&'),
-			sParameterName,
-			i;
-
-			for (i = 0; i < sURLVariables.length; i++) {
-				sParameterName = sURLVariables[i].split('=');
-
-				if (sParameterName[0] === sParam) {
-					return sParameterName[1] === undefined ? true : sParameterName[1];
-				}
-			}
-		};
 	</script>
 </head>
 <body>
@@ -55,7 +43,10 @@
         <a class="nav-link" href="../mainpage.html">Strona główna</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="../oferta/miasto.html">Oferta</a>
+        <a class="nav-link active" href="oferta_sieci.html">Oferta sieci</a>
+    </li>
+	<li class="nav-item">
+        <a class="nav-link" href="oferta_restauracji.html?restaurant_id=1">Oferta restauracji</a>
     </li>
 </ul>
 </ul>

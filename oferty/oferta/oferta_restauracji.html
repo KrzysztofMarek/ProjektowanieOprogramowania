@@ -7,34 +7,36 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var host="http://localhost";
-			var port="5000";
-			var endpoint="/cities";
+			//var host="http://localhost";
+			//var port="5000";
+			var host="http://192.168.0.13";
+			var port="8080";
+			var endpoint="/pobierz_menu_restauracji";
+			var restaurant_id = getUrlParameter('restaurant_id');
 			$.ajax({
 				type: "GET",
 				url: host+":"+port+endpoint,
-				success: function(json){
-					console.log(json);
-					var cities = json['cities'];
-					$.each(cities, function(key, value) {
-						$('#city').append($('<option>').text(key).attr('value', value));
+				data: {"restaurant_id": restaurant_id},
+				success: function(json_obj){
+					//json_obj = $.parseJSON(json);
+					console.log(json_obj);
+					var menu_list = json_obj['lista'];
+					$.each(menu_list, function(i, menu_item) {
+						var row = '<tr id="' + menu_item.id_dania + '">'; 
+						row += '<td>' + menu_item.nazwa + '</td>';
+						row += '<td>' + menu_item.cena + '</td>';
+						row += '<td>' + menu_item.opis + '</td>';
+						row += '</tr>'
+						$('#menu').children('tbody').append(row);
 					});
-					var city_id = getUrlParameter('city');
-					$('.citySelector').val(city_id);
 				}
 			});
-			$('.citySelector').select2({
-				allowClear: true,
-				placeholder: "Wybierz miasto..."
-			});
 		});
-		
 		var getUrlParameter = function getUrlParameter(sParam) {
 			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 			sURLVariables = sPageURL.split('&'),
@@ -49,25 +51,7 @@
 				}
 			}
 		};
-		
-		
-		jQuery(function($) {
-			// configure your validation
-			$("#form").validate({
-				rules: {
-					city: { required: true }
-				},
-				messages: {
-					city: { required: '<div class="alert alert-danger" role="alert">Wybierz miasto!</div>' }
-				}  
-			});
-		});
 	</script>
-	<style>
-	.error {
-		width: 100% !important;
-	}
-	</style>
 </head>
 <body>
 <ul class="nav nav-tabs">
@@ -75,28 +59,28 @@
         <a class="nav-link" href="../mainpage.html">Strona główna</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="../oferta/miasto.html">Oferta</a>
+        <a class="nav-link" href="oferta_sieci.html">Oferta sieci</a>
+    </li>
+	<li class="nav-item">
+        <a class="nav-link active" href="oferta_restauracji.html?restaurant_id=1">Oferta restauracji</a>
     </li>
 </ul>
 </ul>
 <div class="row">
 	<div class="col">
     </div>
-    <div class="col-6">
-        <form  id="form" action="restauracja.html">
-            <div class="form-group" style="margin-top:30px">
-                <select class="form-control citySelector" id="city" name="city" class="required">
-				</select>
-            </div>
-			<div class="row">
-				<div class="col-md-10">
-					<input type="button" value="Powrót" class="btn btn-primary" onclick="history.back()"/>
-				</div>
-				<div class="col-md-2"><div class="text-right">
-					<input type="submit" value="Dalej" class="btn btn-primary" />
-				</div></div>
-			</div>
-        </form>
+    <div class="col-9">
+        <table id="menu" class="table table-striped" style="margin-top:30px;">
+			<thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Opis</th>
+                <th scope="col">Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+			</tbody>
+		</table>
     </div>
     <div class="col">
     </div>

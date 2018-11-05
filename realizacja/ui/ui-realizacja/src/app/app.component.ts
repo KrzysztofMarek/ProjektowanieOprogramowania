@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   takeOrder(id) {
     this.currentOrder = this.orderList.filter(o => o.id === id)[0];
-    this.httpService.changeOrderStatus(this.currentOrder.id, 'INPREPARATION').subscribe(
+    this.httpService.changeOrderStatus(this.currentOrder.id, 'przygotowywane').subscribe(
       data => {
         this.orderList = data;
       }
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   finalizeRealisation() {
-    this.httpService.changeOrderStatus(this.currentOrder.id, 'ONTHEWAY').subscribe(
+    this.httpService.changeOrderStatus(this.currentOrder.id, 'w_drodze').subscribe(
       data => {
         this.orderList = data;
       }
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   dropCurrentOrder() {
-    this.httpService.changeOrderStatus(this.currentOrder.id, 'WAITING').subscribe(
+    this.httpService.changeOrderStatus(this.currentOrder.id, 'oczekujace').subscribe(
       data => {
         this.orderList = data;
       }

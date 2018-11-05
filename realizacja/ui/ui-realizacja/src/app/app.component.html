@@ -65,7 +65,7 @@
                 type="button" 
                 class="btn btn-outline-dark"
                 (click)="takeOrder(order.id)"
-                [disabled]="order.orderStatus === 'INPREPARATION' || order.orderStatus === 'ONTHEWAY'"
+                [disabled]="order.orderStatus === 'przygotowywane' || order.orderStatus === 'w_drodze'"
               >
                 Podejmij zamówienie
               </button>

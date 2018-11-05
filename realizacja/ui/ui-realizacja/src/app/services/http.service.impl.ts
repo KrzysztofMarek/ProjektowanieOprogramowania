@@ -21,7 +21,7 @@ export class HttpServiceImpl implements HttpService {
   changeOrderStatus(id, status): Observable<Order[]> {
 
     return this.http.get<Order[]>(
-      'http://localhost:8080/orderStatus/' + id + '/' + status
+      'http://localhost:8080/orderStatus/' + id + '/' + status + '/1'
     );
   }
 }

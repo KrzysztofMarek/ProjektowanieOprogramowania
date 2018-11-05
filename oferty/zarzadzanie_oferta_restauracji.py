@@ -1,36 +1,18 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask import Blueprint, request, jsonify
+from flask_cors import cross_origin
 
-from oferty import oferty_model
+from oferty.zarzadzanie_restauracja_model import pobierz_menu_restauracji as pobierz_mr
 
-app = Flask(__name__)
-cors = CORS(app)
+zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __name__)
 
 
-@app.route('/cities', methods=['GET'])
+@zarzadzanie_oferta_restauracji.route('/pobierz_menu_restauracji', methods=['GET'])
 @cross_origin()
 def pobierz_menu_restauracji():
-    cities = oferty_model.get_cities()
-    return jsonify({"cities": cities})
+    print(request.args.get('id_restauracji'))
+    if request.args.get("id_restauracji") is None:
+        return 404
+    id_restauracji = int(request.args.get("id_restauracji"))
+    menu_restauarcji = pobierz_mr(id_restauracji)
+    return jsonify(menu_restauarcji)
 
-
-@app.route('/cities/<city_id>', methods=['GET'])
-@cross_origin()
-def dodaj_danie(nazwa, cena, opis):
-    return "City id is not int"
-
-
-@app.route('/cities/<city_id>', methods=['GET'])
-@cross_origin()
-def modyfikuj_danie(danie_id, nazwa, cena, opis):
-    return "City id is not int"
-
-
-@app.route('/restaurant-offer/<restaurant_id>', methods=['GET'])
-@cross_origin()
-def usun_danie(danie_id):
-    return "Restaurant id is not int"
-
-
-if __name__ == "__main__":
-    app.run(debug=True)

@@ -40,11 +40,7 @@ public class OrderListServiceImpl implements OrderListService {
 
 
     public void changeOrderStatus (int orderId, String orderStatus){
-        for(Order order : orderList){
-            if(order.getId() == orderId){
-                order.setOrderStatus(orderStatus);
-            }
-        }
+        databaseAccess.changeOrderStatus(orderId,orderStatus);
     }
 
     public List<Order> getOrderList(int restaruantId) {

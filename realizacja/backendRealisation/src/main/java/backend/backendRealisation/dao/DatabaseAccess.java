@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface DatabaseAccess {
 
-    Order changeOrderStatus(Order order);
+    void changeOrderStatus(int orderId, String orderStatus);
     List<Order> getOrders(int restaruantId);
     // Contact getContact();
 }

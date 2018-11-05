@@ -6,6 +6,7 @@ import java.util.List;
  * Created by Piotr on 2018-11-05.
  */
 public class OrderListDTO {
+
     private List<OrderDTO> lista_zamowien;
 
     public List<OrderDTO> getLista_zamowien() {

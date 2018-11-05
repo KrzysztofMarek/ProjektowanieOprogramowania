@@ -1,9 +1,13 @@
 package backend.backendRealisation.dao;
 
 import backend.backendRealisation.model.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -17,8 +21,27 @@ public class DatabaseAccessImpl implements DatabaseAccess {
     RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public Order changeOrderStatus(Order order) {
-        return null;
+    public void changeOrderStatus(int orderId, String orderStatus) {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+
+        map.add("id_zamowienia", Integer.toString(orderId));
+        map.add("status", orderStatus);
+
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+        HttpEntity<Void> response = restTemplate.exchange("http://127.0.0.1:5000/zmien_status_zamowienia", HttpMethod.POST, entity, Void.class);
+
+/*        HttpEntity<OrderListDTO> response = restTemplate.exchange(
+                "http://localhost:5000/pobierz_zamowienia?id_restauracji=" + restaruantId,
+                HttpMethod.GET,
+                entity,
+                OrderListDTO.class
+        );*/
     }
 
     @Override
@@ -38,10 +61,11 @@ public class DatabaseAccessImpl implements DatabaseAccess {
                 "http://localhost:5000/pobierz_zamowienia?id_restauracji=" + restaruantId,
                 HttpMethod.GET,
                 entity,
-                OrderListDTO.class);
+                OrderListDTO.class
+        );
 
 
-        OrderListDTO orderListDTO=response.getBody();
+        OrderListDTO orderListDTO = response.getBody();
 
         orderDTOList = orderListDTO.getLista_zamowien();
 

@@ -1,15 +1,17 @@
 package backend.backendRealisation.model;
 
-import java.util.List;
-
 /**
  * Created by Piotr on 2018-11-05.
  */
-public class OrderDTO {
+public class ChangeStatusDTO {
 
     private int id_zamowienia;
-    private List<CourseDTO> lista_dan;
     private String status;
+
+    public ChangeStatusDTO(int id_zamowienia, String status) {
+        this.id_zamowienia = id_zamowienia;
+        this.status = status;
+    }
 
     public String getStatus() {
         return status;
@@ -19,21 +21,11 @@ public class OrderDTO {
         this.status = status;
     }
 
-
-
     public int getId_zamowienia() {
         return id_zamowienia;
     }
 
     public void setId_zamowienia(int id_zamowienia) {
         this.id_zamowienia = id_zamowienia;
-    }
-
-    public List<CourseDTO> getLista_dan() {
-        return lista_dan;
-    }
-
-    public void setLista_dan(List<CourseDTO> lista_dan) {
-        this.lista_dan = lista_dan;
     }
 }

@@ -9,7 +9,6 @@ zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __n
 @zarzadzanie_oferta_restauracji.route('/pobierz_menu_restauracji', methods=['GET'])
 @cross_origin()
 def pobierz_menu_restauracji():
-    print(request.args.get('id_restauracji'))
     if request.args.get("id_restauracji") is None:
         return 404
     id_restauracji = int(request.args.get("id_restauracji"))

@@ -1,36 +1,34 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask import Blueprint, jsonify, request
+from flask_cors import cross_origin
 
 from oferty import oferty_model
 
-app = Flask(__name__)
-cors = CORS(app)
+oferta = Blueprint('oferta', __name__)
 
 
-@app.route('/cities', methods=['GET'])
+@oferta.route('/pobierz_miasta', methods=['GET'])
 @cross_origin()
-def get_cities():
+def pobierz_miasta():
     cities = oferty_model.get_cities()
     return jsonify({"cities": cities})
 
 
-@app.route('/cities/<city_id>', methods=['GET'])
+@oferta.route('/cities/<city_id>', methods=['GET'])
 @cross_origin()
-def get_restaurants(city_id):
-    if isinstance(city_id, int):
-        restaurants = oferty_model.get_restaurants_from_city(city_id)
-        return jsonify({"restaurants": restaurants})
-    return "City id is not int"
+def pobierz_restauracje():
+    if request.args.get("id_restauracji") is None:
+        return 404
+    id_restauracji = int(request.args.get("id_restauracji"))
+    menu_restauracji = oferty_model.pobierz_menu_restauracji(id_restauracji)
+    return jsonify(menu_restauracji)
 
 
-@app.route('/restaurant-offer/<restaurant_id>', methods=['GET'])
+@oferta.route('/restaurant-offer/<restaurant_id>', methods=['GET'])
 @cross_origin()
-def get_offer(restaurant_id):
-    if isinstance(restaurant_id, int):
-        menu = oferty_model.get_restaurant_menu(restaurant_id)
-        return jsonify({"menu": menu})
-    return "Restaurant id is not int"
+def pobierz_oferte():
+    if request.args.get("id_restauracji") is None:
+        return 404
+    id_restauracji = int(request.args.get("id_restauracji"))
+    menu_restauracji = oferty_model.pobierz_restauracje(id_restauracji)
+    return jsonify(menu_restauracji)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)

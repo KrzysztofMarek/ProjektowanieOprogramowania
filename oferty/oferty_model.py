@@ -1,19 +1,17 @@
+import json
+import requests
 
 
-
-def pobierz_menu_restauracji(restaurant_id):
-    menu = {"danie1": ["ładny opis", "20.01 zł"], "danie2": ["smaczne i zdrowe", "120.00 zł"]}
-    return menu
+def pobierz_menu_restauracji(id_restauracji):
+    menu_restauracji = requests.get(f'http://0.0.0.0:5000/pobierz_menu_restauracji?id_restauracji={id_restauracji}')
+    return json.loads(menu_restauracji.text)
 
 
 def pobierz_miasta():
-    return {"Warszawa": 1, "Sierpc": 3, "Radom": 2}
+    miasta = requests.get(f'http://0.0.0.0:5000/pobierz_miasta')
+    return json.loads(miasta.text)
 
 
-def pobierz_restauracje(city_id):
-    if city_id == '1':
-        return ["Warszawska restauracja 1", "Warszawska restauracja 2"]
-    elif city_id == '2':
-        return ["Radomska restauracja 1", "Radomska restauracja 2"]
-    elif city_id == '3':
-        return ["Sierpcowe zakamarki", "Sierpcowe jadło"]
+def pobierz_restauracje(id_miasta: int):
+    miasta = requests.get(f'http://0.0.0.0:5000/pobierz_restauracje?id_miasta={id_miasta}')
+    return json.loads(miasta.text)

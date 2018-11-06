@@ -1,0 +1,11 @@
+Uruchamianie
+java -jar order-rest-service-0.1.jar
+
+Pobieranie zawartości koszyka (GET):
+localhost:8080/getBasket
+
+Składanie zamówienia (POST):
+localhost:8080/placeOrder/{id}
+
+body np.
+{"restaurantName":"Bar Mleczny","restaurantId":1,"orderItems":[{"amount":1,"price":5,"dishId":1,"dishName":"Mielone","restaurantId":1}]}

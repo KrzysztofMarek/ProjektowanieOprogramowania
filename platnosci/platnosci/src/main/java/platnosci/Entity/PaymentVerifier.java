@@ -49,7 +49,10 @@ public class PaymentVerifier {
         if(token == null){
             return "Invalid id";
         }
-        return EasyCache.getElement(token);
+        
+        HashMap<String, String> response = new HashMap();
+        response.put("status", EasyCache.getElement(token));
+        return (new Gson()).toJson(response);
     }
     
     private PaymentAbstract getPaymentProcessor(PaymentForm paymentForm, Environment env){
@@ -73,6 +76,9 @@ public class PaymentVerifier {
         );
         EasyCache.addElement(redirectData.get("id"), redirectData.get("token"));
         EasyCache.addElement(redirectData.get("token"), "started");
-        return redirectData.get("redirectLink");
+        
+        HashMap<String, String> response = new HashMap();
+        response.put("redirectLink", redirectData.get("redirectLink"));
+        return (new Gson()).toJson(response);
     }    
 }

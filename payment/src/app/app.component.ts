@@ -14,34 +14,26 @@ export class AppComponent {
   title = 'payment';
   payment: Payment = new Payment();
   paymentOptions: any = [
-    'Karta',
-    'Blik',
-    'Przelew24'
+    'BLIK',
+    'CARD',
+    'PRZELEW'
   ];
   status: string;
 
   constructor(public dataService: DataService) { }
 
   ngOnInit() { 
-  /*  interval(10000)
-    .subscribe(res => {
-    this.dataService.getSuccess();
-    });
     interval(10000)
     .subscribe(res => {
-    this.dataService.getFailure();
-    });*/
+    this.dataService.getStatus();
+    });
   }
 
   onSubmit() {
-    this.onNavigate();
     this.dataService.pay(this.payment);
   }
 
-  onNavigate() {
-    window.open("http://localhost:4202/", "_blank");
-  }
   radioChangeHandler(event: any) {
-    this.payment.sposob_zaplaty = event.target.value;
+    this.payment.sposób_zapłaty = event.target.value;
   }
 }

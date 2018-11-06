@@ -56,6 +56,7 @@ public class PaymentController {
         }
     }
     
+    @CrossOrigin
     @GetMapping("/pobierz_status")
     public String getStatus(
             @RequestParam String id) 

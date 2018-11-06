@@ -20,7 +20,11 @@ public class BankConnector {
         
         RestTemplate restTemplate = new RestTemplate();
         log.info("Sending failure response with token {}", token);
-        return restTemplate.postForObject(url, token, String.class);    
+        
+        String message = restTemplate.postForObject(url, token, String.class);
+        HashMap<String, String> response = new HashMap();
+        response.put("message", message);
+        return (new Gson()).toJson(response);    
     }
     
     public String failure(String id, Environment env){
@@ -29,7 +33,11 @@ public class BankConnector {
         
         RestTemplate restTemplate = new RestTemplate();
         log.info("Sending failure response with token {}", token);
-        return restTemplate.postForObject(url, token, String.class);             
+        
+        String message = restTemplate.postForObject(url, token, String.class);
+        HashMap<String, String> response = new HashMap();
+        response.put("message", message);
+        return (new Gson()).toJson(response);    
     }
     
     public String startPayment(String paymentJson, Environment env){

@@ -9,16 +9,24 @@ export class DataService {
 
     constructor(public http: HttpClient) { }
 
+    id: string;
+
     pay(payment: Payment) {
         payment.id_klienta = 1;
         payment.id_zamowienia = 1;
         payment.suma = 30;
-        return this.http.post('localhost:9201/zaplac', payment);
+        return this.http.post('http://localhost:9092/zaplac', payment).subscribe(res => this.processLink(res));
     }
 
-    getStatus() {
-        return this.http.get('urlSkądMogęDostaćStatus')
-            .subscribe(res => /*res as Status*/
-            console.log('aaaa'));
+    processLink(res) {
+        window.open(res["redirectLink"], "_blank")
+        this.id = res["redirectLink"].split("/")[3];
+        console.log(this.id);
     }
+
+    
+    getStatus() {
+        return this.http.get(`http://localhost:9092/pobierz_status?id=${this.id}`)
+            .subscribe(res => console.log(res));
+    } 
 }

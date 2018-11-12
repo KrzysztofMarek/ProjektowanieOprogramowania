@@ -11,30 +11,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var host="http://localhost";
-			//var port="5000";
-			//var host="http://192.168.0.13";
-			var port="8080";
-			var endpoint="/pobierz_menu_sieci";
-			$.ajax({
-				type: "GET",
-				url: host+":"+port+endpoint,
-				success: function(json_obj){
-					//json_obj = $.parseJSON(json);
-					console.log(json_obj);
-					var menu_list = json_obj['lista'];
-					$.each(menu_list, function(i, menu_item) {
-						var row = '<tr id="' + menu_item.id_dania + '">'; 
-						row += '<td>' + menu_item.nazwa + '</td>';
-						row += '<td>' + menu_item.cena + '</td>';
-						row += '<td>' + menu_item.opis + '</td>';
-						row += '</tr>'
-						$('#menu').children('tbody').append(row);
-					});
-				}
-			});
-		});
 	</script>
 </head>
 <body>
@@ -50,34 +26,33 @@
     </li>
 </ul>
 </ul>
-<div class="row">
-	<div class="col">
-    </div>
-    <div class="col-9">
-        <table id="menu" class="table table-striped" style="margin-top:30px;">
-			<thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Opis</th>
-                <th scope="col">Cena</th>
-            </tr>
-            </thead>
-            <tbody>
-			</tbody>
-		</table>
-    </div>
-    <div class="col">
-    </div>
-</div>
 
 <div class="row">
 	<div class="col">
     </div>
     <div class="col-9">
-		<a class="btn btn-outline-primary" role="button" href="formularz_potrawy_sieci.html">Dodaj potrawę</a>
+        <form  action="oferta_sieci.html">
+            <div class="form-group">
+                <label for="name">Nazwa:</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="price">Cena:</label>
+                <input type="text" class="form-control" id="price">
+            </div>
+            <div class="form-group">
+                <label for="description">Opis:</label>
+                <input type="text" class="form-control" id="description">
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="window.alert('Dodano potrawę!')">Dodaj</button>
+            <a href="oferta_sieci.html" class="alert-link">
+                <button type="button" class="btn btn-outline-primary">Anuluj</button>
+            </a>
+        </form>
     </div>
     <div class="col">
     </div>
 </div>
+
 </body>
 </html>

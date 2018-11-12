@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { oferty } from "../backend";
 
 export default {
     name: "Browse",
@@ -49,26 +49,23 @@ export default {
         dishes: [
             {
                 id_dania: 0,
-                id_restauracji: 0,
                 nazwa: "Zupa miso",
-                cena: "34",
+                cena: 10,
                 opis: "Pyszna zupa miso",
             },
             {
                 id_dania: 1,
-                id_restauracji: 0,
                 nazwa: "Pierogi z serem",
-                cena: "34",
+                cena: 8,
                 opis: "Zestaw ośmiu pierogów z serem",
             }
         ]
     }),
     created() {
         let self = this;
-        axios
-            .get("http://localhost:8090/getProducts")
+        oferty
+            .get(`Pobierz_menu_restauracji?id_restauracji=${this.$store.state.restaurant.id_restauracji}`)
             .then((response) => {
-                console.log(response.data);
                 self.dishes = response.data;
             })
     },

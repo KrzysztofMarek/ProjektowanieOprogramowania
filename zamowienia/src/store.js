@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         order: [],
+        current_restaurant: null,
     },
     mutations: {
         add_product(state, product) {
@@ -14,6 +15,10 @@ export const store = new Vuex.Store({
 
         clear_order(state) {
             state.order = [];
-        }
+        },
+
+        set_restaurant(state, restaurant) {
+            state.restaurant = restaurant
+        },
     }
 })

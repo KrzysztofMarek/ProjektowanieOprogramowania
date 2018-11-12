@@ -7,12 +7,14 @@ import { store } from "./store"
 import App from './App.vue'
 import Order from "./components/Order" 
 import Browse from "./components/Browse" 
+import RestauranChooser from "./components/RestaurantChooser" 
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter);
 
 const routes = [
+  { path: "/",  component: RestauranChooser },
   { path: "/checkout",  component: Order },
   { path: "/browse",  component: Browse }
 ];

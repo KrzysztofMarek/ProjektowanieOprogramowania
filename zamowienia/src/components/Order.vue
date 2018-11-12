@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { zamowienia } from "../backend";
 import XRegExp from "xregexp";
 
 function phone_length_validator(s) {
@@ -162,8 +162,14 @@ export default {
         create_order: function() {
             this.is_loading = true;
             let self = this;
-            axios
-                .post("http://localhost:8090/createOrder", this.$store.state.order)
+            let zamowienie = {
+                id_klienta: 0,
+                id_restauracji: this.$store.state.restaurant.id_restauracji,
+                lista: this.$store.state.order.map(v => { v.id_dania, v.nazwa }),
+                kwota: this.total_price
+            };
+            zamowienia
+                .post("/Zloz_zamowienie", zamowienie)
                 .then((response) => {
                     self.is_loading = false;
                     window.location.href = response.data;
@@ -184,7 +190,7 @@ export default {
     },
     computed: {
         total_price: function() {
-            return this.$store.state.order.reduce((sum, val) => sum + parseFloat(val.cena), 0);
+            return this.$store.state.order.reduce((sum, val) => sum + val.cena, 0);
         },
         order_active: function() {
             return this.valid && this.$store.state.order.length != 0 && this.is_tos_accepted

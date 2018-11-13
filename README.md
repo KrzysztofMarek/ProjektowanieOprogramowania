@@ -17,6 +17,7 @@ HOW TO RUN!!!!:
 
 
 PORTY:
+
     zarzadzanie_personelem = 9090
     baza_personel = 9091
     platnosci = 9092

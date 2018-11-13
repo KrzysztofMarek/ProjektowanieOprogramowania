@@ -21,8 +21,8 @@ PORTY:
     baza_personel = 9091
     platnosci = 9092
     bank = 9093
-    zarzadzanie_restauracja = 9094
-    baza_zarzadzanie_restauracja = 9095
+    zarzadzanie_siecia = 9094
+    baza_zarzadzanie_siecia = 9095
 
     platnosci_gui = 4200
     ui_menadzera_sieci = 4201

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package baza_personel.Entity;
+package baza_zarzadzanie_siecia.Entity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,23 +26,11 @@ public class SQLConnector implements Connector {
     private static final Logger log = LoggerFactory.getLogger(SQLConnector.class);
 
     @Override
-    public String createEmployee(final String employeeFormJson, final String url) {
-        HttpEntity<MultiValueMap<String, String>> request = getRequest(employeeFormJson); 
+    public String createRestaurant(final String restaurantFormJson, final String url) {
+        HttpEntity<MultiValueMap<String, String>> request = getRequest(restaurantFormJson); 
         
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForObject(url, request, String.class); 
-    }
-    @Override
-    public String createEmployeeOffer(final String employeeOfferFormJson, final String url) {
-        HttpEntity<MultiValueMap<String, String>> request = getRequest(employeeOfferFormJson); 
-        
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(url, request, String.class); 
-    }
-    @Override
-    public String getEmployeeOffers(final String url) {        
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(url, String.class); 
     }
     
     private HttpEntity<MultiValueMap<String, String>> getRequest(String formJson){

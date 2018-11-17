@@ -13,10 +13,11 @@ HOW TO RUN!!!!:
 -angular:
 1. Wchodzimy do folderu.
 2. npm install
-3. ng serve --port=<numer portu>
+3. ng serve --port="wolny numer portu"
 
 
 PORTY:
+
     zarzadzanie_personelem = 9090
     baza_personel = 9091
     platnosci = 9092

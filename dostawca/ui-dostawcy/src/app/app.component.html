@@ -32,8 +32,8 @@
               <button 
                 type="button" 
                 class="btn btn-outline-dark"
-                (click)="deliver(order.id)"
-                [disabled]="order.orderStatus === 'dostarczono'"
+                (click)="deliver(order.order.id)"
+                [disabled]="order.order.orderStatus === 'dostarczono'"
               >
                 Dostarcz
               </button>

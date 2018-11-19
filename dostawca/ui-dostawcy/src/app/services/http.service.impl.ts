@@ -22,7 +22,7 @@ export class HttpServiceImpl implements HttpService {
   changeOrderStatus(id, status): Observable<OrderWithContact[]> {
 
     return this.http.get<OrderWithContact[]>(
-      'http://localhost:8080/delivery/orderStatus/' + id + '/' + status + '/1'
+      'http://localhost:8080/delivery/' + id + '/' + status + '/1'
     );
   }
 }

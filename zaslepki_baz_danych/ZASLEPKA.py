@@ -53,13 +53,22 @@ def pobierz_menu_restauracji():
         ]
     }
 
-    if request.args.get("id_restauracji") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_restauracji"))
-    if id_restauracji == 0:
-        return jsonify(network_menu)
-    else:
-        return jsonify(restaurant_menu)
+    rrequest = request.get_json()
+    print(rrequest)
+    try:
+        if rrequest["id_restauracji"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest["id_restauracji"])
+        if id_restauracji == 0:
+            return jsonify(network_menu)
+        else:
+            return jsonify(restaurant_menu)
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
@@ -85,29 +94,15 @@ def pobierz_resturacje():
             }
         ]
     }
-    if request.args.get("id_restauracji") is None:
-        return 404
-    miasto = int(request.args.get("miasto"))
+    try:
+        if request.args.get("id_restauracji") is None:
+            return 404
+        miasto = int(request.args.get("miasto"))
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     return jsonify(restaurant_list)
-
-
-# Pobierz_miasta() zwraca (lista[miasto:string])
-@app.route('/pobierz_miasta', methods=['GET'])
-def pobierz_miasta():
-    cities_list = {
-        'lista': [
-            {
-                'nazwa': 'Warszawa'
-            },
-            {
-                'nazwa': 'Radom'
-            },
-            {
-                'nazwa': 'Torun'
-            }
-        ]
-    }
-    return jsonify(cities_list)
 
 
 lista_zamowien = {
@@ -147,16 +142,25 @@ lista_zamowien = {
 
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():
-    if request.form['id_zamowienia'] is None:
-        return 404
-    id_zamowienia = int(request.form['id_zamowienia'])
-    if request.form['status'] is None:
-        return 404
-    status = str(request.form['status'])
-    for zamowienie in lista_zamowien['lista_zamowien']:
-        if zamowienie['id_zamowienia'] == id_zamowienia:
-            zamowienie['status'] = str(status)
-
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_zamowienia"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_zamowienia = int(rrequest['id_zamowienia'])
+        if rrequest['status'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        status = str(rrequest['status'])
+        for zamowienie in lista_zamowien['lista_zamowien']:
+            if zamowienie['id_zamowienia'] == id_zamowienia:
+                zamowienie['status'] = str(status)
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -164,29 +168,70 @@ def zmien_status_zamowienia():
 
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-    if request.args.get("id_restauracji") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_restauracji"))
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_restauracji"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest["id_restauracji"])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     return jsonify(lista_zamowien)
+
+
+# Pobierz_miasta() zwraca (lista[miasto:string])
+@app.route('/pobierz_miasta', methods=['GET'])
+def pobierz_miasta():
+    cities_list = {
+        'lista': [
+            {
+                'nazwa': 'Warszawa'
+            },
+            {
+                'nazwa': 'Radom'
+            },
+            {
+                'nazwa': 'Torun'
+            }
+        ]
+    }
+    return jsonify(cities_list)
 
 
 @app.route('/dodaj_zamowienie', methods=['POST'])
 def dodaj_zamowienie():
-    if request.form['id_klienta'] is None:
-        return 404
-    id_klienta = int(request.form['id_klienta'])
+    try:
+        rrequest = request.get_json()
+        if rrequest['id_klienta'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_klienta = int(rrequest['id_klienta'])
 
-    if request.form['id_restauracji'] is None:
-        return 404
-    id_restauracji = int(request.form['id_restauracji'])
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
 
-    if request.form['lista_dan'] is None:
-        return 404
-    lista_dan = request.form['lista_dan']
+        if rrequest['lista_dan'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        lista_dan = rrequest['lista_dan']
 
-    if request.form['kwota'] is None:
-        return 404
-    kwota = float(request.form['kwota'])
+        if rrequest['kwota'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        kwota = float(rrequest['kwota'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
 
     resp = jsonify(success=True)
     resp.status_code = 200
@@ -195,33 +240,53 @@ def dodaj_zamowienie():
 
 @app.route('/dodaj_pracownika', methods=['POST'])
 def dodaj_pracownika():
-    if request.form['id_restauracji'] is None:
-        return 404
-    id_restauracji = int(request.form['id_restauracji'])
+    try:
+        rrequest = request.get_json()
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
 
-    if request.form['imie'] is None:
-        return 404
-    imie = str(request.form['imie'])
+        if rrequest['imie'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        imie = str(rrequest['imie'])
 
-    if request.form['nazwisko'] is None:
-        return 404
-    nazwisko = str(request.form['nazwisko'])
+        if rrequest['nazwisko'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        nazwisko = str(rrequest['nazwisko'])
 
-    if request.form['telefon'] is None:
-        return 404
-    telefon = str(request.form['telefon'])
+        if rrequest['telefon'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        telefon = str(rrequest['telefon'])
 
-    if request.form['stanowisko'] is None:
-        return 404
-    stanowisko = str(request.form['stanowisko'])
+        if rrequest['stanowisko'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        stanowisko = str(rrequest['stanowisko'])
 
-    if request.form['login'] is None:
-        return 404
-    login = str(request.form['login'])
+        if rrequest['login'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        login = str(rrequest['login'])
 
-    if request.form['haslo'] is None:
-        return 404
-    haslo = str(request.form['haslo'])
+        if rrequest['haslo'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        haslo = str(rrequest['haslo'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
 
     resp = jsonify(success=True)
     resp.status_code = 200

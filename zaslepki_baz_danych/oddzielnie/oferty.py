@@ -51,13 +51,22 @@ def pobierz_menu_restauracji():
         ]
     }
 
-    if request.args.get("id_restauracji") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_restauracji"))
-    if id_restauracji == 0:
-        return jsonify(network_menu)
-    else:
-        return jsonify(restaurant_menu)
+    rrequest = request.get_json()
+    print(rrequest)
+    try:
+        if rrequest["id_restauracji"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest["id_restauracji"])
+        if id_restauracji == 0:
+            return jsonify(network_menu)
+        else:
+            return jsonify(restaurant_menu)
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
@@ -83,9 +92,14 @@ def pobierz_resturacje():
             }
         ]
     }
-    if request.args.get("id_restauracji") is None:
-        return 404
-    miasto = int(request.args.get("miasto"))
+    try:
+        if request.args.get("id_restauracji") is None:
+            return 404
+        #miasto = int(request.args.get("miasto"))
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     return jsonify(restaurant_list)
 
 

@@ -8,6 +8,7 @@ import App from './App.vue'
 import Order from "./components/Order" 
 import Browse from "./components/Browse" 
 import RestauranChooser from "./components/RestaurantChooser" 
+import OrderHistory from "./components/History"
 
 Vue.config.productionTip = false
 
@@ -16,7 +17,8 @@ Vue.use(VueRouter);
 const routes = [
   { path: "/",  component: RestauranChooser },
   { path: "/checkout",  component: Order },
-  { path: "/browse",  component: Browse }
+  { path: "/browse",  component: Browse },
+  { path: "/history",  component: OrderHistory },
 ];
 
 const router = new VueRouter({ routes, mode: 'history' });

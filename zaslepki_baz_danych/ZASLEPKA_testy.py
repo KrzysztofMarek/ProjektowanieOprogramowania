@@ -1,11 +1,11 @@
 import unittest
 import json
-from zaslepki_baz_danych.oddzielnie import oferty, realizacja, zamowienia, zarzadzanie_personelem
+from zaslepki_baz_danych import  ZASLEPKA
 
 
-class TestyOfety(unittest.TestCase):
+class TestyZaslepka(unittest.TestCase):
     def setUp(self):
-        self.app = oferty.app.test_client()
+        self.app = ZASLEPKA.app.test_client()
         #uruchomienie flaska
 
     def tearDown(self):
@@ -61,14 +61,6 @@ class TestyOfety(unittest.TestCase):
         expctd = json.dumps(restaurant_menu)
         self.assertEqual(json.loads(expctd), json.loads(json.dumps(r2.get_json())))
 
-class TestyRealizacja(unittest.TestCase):
-    def setUp(self):
-        self.app = realizacja.app.test_client()
-        #uruchomienie flaska
-
-    def tearDown(self):
-         #wyłaczenie flaska
-        pass
 
     def test_pobierz_zamowienia(self):
         r1 = self.app.get('/pobierz_zamowienia', json={'id_restauracji' : 0})
@@ -113,28 +105,12 @@ class TestyRealizacja(unittest.TestCase):
         self.assertEqual(r1.status_code, 200)
 
 
-class TestyZamowienia(unittest.TestCase):
-    def setUp(self):
-        self.app = zamowienia.app.test_client()
-        #uruchomienie flaska
-
-    def tearDown(self):
-        pass
-
     def test_dodaj_zamowienie(self):
         r1 = self.app.post('/dodaj_zamowienie', json={'id_klienta': 2, 'id_restauracji':1, 'lista_dan': [{'id_dania': 1, 'nazwa': 'Chleb'},
                                                                                                          {'id_dania': 2, 'nazwa': 'Kawa'}],
                                                       'kwota': 29.99})
         self.assertEqual(r1.status_code, 200)
 
-
-class TestyZarzadzaniePersonelem(unittest.TestCase):
-    def setUp(self):
-        self.app = zarzadzanie_personelem.app.test_client()
-        # uruchomienie flaska
-
-    def tearDown(self):
-        pass
 
     def test_dodaj_pracownika(self):
         r1 = self.app.post('/dodaj_pracownika', json={'id_restauracji': 1, 'imie': 'Tomek', 'nazwisko': 'Potomek',

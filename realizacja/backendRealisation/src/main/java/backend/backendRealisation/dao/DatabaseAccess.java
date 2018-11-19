@@ -15,4 +15,5 @@ public interface DatabaseAccess {
     List<Order> getOrders(int restaruantId);
     Contact getContact(int orderId,int restaurantId);
     List<OrderWithContact> getOrdersWithContact(int restaurantId);
+    void changeOrderStatusWithContact(int orderId,String orderStatus);
 }

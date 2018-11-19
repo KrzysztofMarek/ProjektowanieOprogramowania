@@ -13,4 +13,5 @@ public interface ContactService {
 
     Contact getContact(int restaurantId);
     List<OrderWithContact> getOrderListWithContact(int restaruantId);
+    void deliveryChangeOrderStatus(int orderId, String orderStatus);
 }

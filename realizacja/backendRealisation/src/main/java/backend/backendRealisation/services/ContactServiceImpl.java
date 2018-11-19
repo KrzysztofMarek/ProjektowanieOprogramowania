@@ -29,4 +29,8 @@ public class ContactServiceImpl implements ContactService {
     public List<OrderWithContact> getOrderListWithContact(int restaruantId) {
         return databaseAccess.getOrdersWithContact(restaruantId);
     }
+
+    public void deliveryChangeOrderStatus(int orderId, String orderStatus){
+        databaseAccess.changeOrderStatusWithContact(orderId,orderStatus);
+    }
 }

@@ -16,6 +16,8 @@ public class DatabaseAccessImpl implements DatabaseAccess {
 
     RestTemplate restTemplate = new RestTemplate();
 
+    List<OrderWithContact> orderWithContactList = prepareList();
+
     @Override
     public void changeOrderStatus(int orderId, String orderStatus) {
 
@@ -75,16 +77,35 @@ public class DatabaseAccessImpl implements DatabaseAccess {
 
     @Override
     public List<OrderWithContact> getOrdersWithContact(int restaurantId) {
+        return orderWithContactList;
+    }
+
+    @Override
+    public void changeOrderStatusWithContact(int orderId, String orderStatus) {
+        orderWithContactList = new LinkedList<>();
+        Contact contact = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
+        Order order = new Order(1, Arrays.asList(new Course(1, "Stek"), new Course(1, "Frytki")), orderStatus);
+        Contact contact1 = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
+        Order order1 = new Order(2, Arrays.asList(new Course(1, "Bułka"), new Course(1, "Kanapka")), "w_drodze");
+
+
+        orderWithContactList.add(new OrderWithContact(order, contact));
+        orderWithContactList.add(new OrderWithContact(order1, contact1));
+    }
+
+
+
+    public List<OrderWithContact> prepareList(){
         Contact contact = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
         Order order = new Order(1, Arrays.asList(new Course(1, "Stek"), new Course(1, "Frytki")), "w_drodze");
         Contact contact1 = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
-        Order order1 = new Order(1, Arrays.asList(new Course(1, "Bułka"), new Course(1, "Kanapka")), "w_drodze");
+        Order order1 = new Order(2, Arrays.asList(new Course(1, "Bułka"), new Course(1, "Kanapka")), "w_drodze");
 
 
-        List<OrderWithContact> orderWithContactList = new LinkedList<>();
-        orderWithContactList.add(new OrderWithContact(order, contact));
-        orderWithContactList.add(new OrderWithContact(order1, contact1));
+        List<OrderWithContact> orderWithContactList1= new LinkedList<>();
 
-        return orderWithContactList;
+        orderWithContactList1.add(new OrderWithContact(order, contact));
+        orderWithContactList1.add(new OrderWithContact(order1, contact1));
+        return orderWithContactList1;
     }
 }

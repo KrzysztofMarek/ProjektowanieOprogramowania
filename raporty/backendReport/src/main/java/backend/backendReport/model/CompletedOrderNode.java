@@ -6,11 +6,11 @@ package backend.backendReport.model;
 public class CompletedOrderNode {
 
     private long completedOrders;
-    private String restaturant;
+    private String restaurant;
 
-    public CompletedOrderNode(String restaturant, long completedOrders) {
+    public CompletedOrderNode(String restaurant, long completedOrders) {
         this.completedOrders = completedOrders;
-        this.restaturant = restaturant;
+        this.restaurant = restaurant;
     }
 
     public long getCompletedOrders() {
@@ -21,11 +21,11 @@ public class CompletedOrderNode {
         this.completedOrders = completedOrders;
     }
 
-    public String getRestaturant() {
-        return restaturant;
+    public String getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaturant(String restaturant) {
-        this.restaturant = restaturant;
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
     }
 }

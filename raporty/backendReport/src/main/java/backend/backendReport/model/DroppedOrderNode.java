@@ -6,11 +6,11 @@ package backend.backendReport.model;
 public class DroppedOrderNode {
 
     private long droppedOrders;
-    private String restaturant;
+    private String restaurant;
 
 
     public DroppedOrderNode(String restaturant, long droppedOrders) {
-        this.restaturant = restaturant;
+        this.restaurant = restaturant;
         this.droppedOrders = droppedOrders;
 
     }
@@ -23,11 +23,11 @@ public class DroppedOrderNode {
         this.droppedOrders = droppedOrders;
     }
 
-    public String getRestaturant() {
-        return restaturant;
+    public String getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestaturant(String restaturant) {
-        this.restaturant = restaturant;
+    public void setRestaurant(String restaurant) {
+        this.restaurant = restaurant;
     }
 }

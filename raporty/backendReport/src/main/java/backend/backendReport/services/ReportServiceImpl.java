@@ -12,11 +12,11 @@ import java.util.List;
  */
 
 @Service
-public class ResportServiceImpl implements ReportService {
+public class ReportServiceImpl implements ReportService {
 
     DatabaseAccess databaseAccess;
 
-    public ResportServiceImpl(DatabaseAccess databaseAccess) {
+    public ReportServiceImpl(DatabaseAccess databaseAccess) {
         this.databaseAccess = databaseAccess;
     }
 
@@ -43,7 +43,7 @@ public class ResportServiceImpl implements ReportService {
                 continue;
             }
             for (CompletedOrderNode completedOrderNode : nodes) {
-                if (order.getCity().equals(completedOrderNode.getRestaturant())) {
+                if (order.getCity().equals(completedOrderNode.getRestaurant())) {
                     completedOrderNode.setCompletedOrders(completedOrderNode.getCompletedOrders() + 1);
                     isNode = true;
                 }
@@ -69,7 +69,7 @@ public class ResportServiceImpl implements ReportService {
                 continue;
             }
             for (DroppedOrderNode droppedOrderNode : nodes) {
-                if (order.getCity().equals(droppedOrderNode.getRestaturant())) {
+                if (order.getCity().equals(droppedOrderNode.getRestaurant())) {
                     droppedOrderNode.setDroppedOrders(droppedOrderNode.getDroppedOrders() + 1);
                     isNode = true;
                 }

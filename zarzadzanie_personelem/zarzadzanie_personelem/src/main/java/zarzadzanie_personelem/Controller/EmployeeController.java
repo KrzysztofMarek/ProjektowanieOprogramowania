@@ -21,7 +21,7 @@ public class EmployeeController {
     private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
         
     @CrossOrigin
-    @PostMapping("/dodajPracownika")
+    @PostMapping("/dodaj_pracownika")
     public String addEmployee(
             @RequestBody String employeeForm) 
     {
@@ -29,7 +29,7 @@ public class EmployeeController {
             log.info("Adding employee {}", employeeForm);
             return (new EmployeeCreator()).createEmployee(
                     employeeForm, 
-                    env.getProperty("createEmployee")
+                    env.getProperty("createEmployeeAddress")
             );
         }catch(Exception e){
             return e.toString();
@@ -37,7 +37,7 @@ public class EmployeeController {
     }
     
     @CrossOrigin
-    @PostMapping("/dodajOgloszenie")
+    @PostMapping("/dodaj_ogloszenie")
     public String addOffer(
             @RequestBody String employeeOfferForm) 
     {
@@ -53,7 +53,7 @@ public class EmployeeController {
     }
     
     @CrossOrigin
-    @GetMapping("/pobierzOgloszenia")
+    @GetMapping("/pobierz_ogloszenia")
     public String getOffers() 
     {
         try{

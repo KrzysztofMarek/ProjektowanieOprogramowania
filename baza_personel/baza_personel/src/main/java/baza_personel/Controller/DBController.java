@@ -52,7 +52,7 @@ public class DBController {
         }
     }
         
-    @GetMapping("/pobierzOgloszenie")
+    @GetMapping("/pobierzOgloszenia")
     public String getEmployeeOffers() 
     {
         try{

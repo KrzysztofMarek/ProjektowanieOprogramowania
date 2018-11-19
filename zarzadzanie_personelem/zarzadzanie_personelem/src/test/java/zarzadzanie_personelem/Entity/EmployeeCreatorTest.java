@@ -1,5 +1,6 @@
 package zarzadzanie_personelem.Entity;
 
+import com.google.gson.Gson;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;import org.mockito.Mockito;
@@ -10,7 +11,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(EmployeeCreator.class)
 public class EmployeeCreatorTest {
-        
+    
+    String invalidInput = new Gson().toJson("Invalid input");
     
     @Test
     public void testCreateEmployeeNameCorrect() throws Exception{
@@ -28,7 +30,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");   
+        assertNotEquals(result, invalidInput);   
     }    
         
     @Test
@@ -47,7 +49,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
     
     @Test
@@ -66,7 +68,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -79,7 +81,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -92,7 +94,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
     
     @Test
@@ -112,7 +114,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
         
     }
     
@@ -132,7 +134,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");        
+        assertEquals(result, invalidInput);        
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -145,7 +147,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");        
+        assertEquals(result, invalidInput);        
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -158,7 +160,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
         
     }
     
@@ -179,7 +181,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
         
     }
         
@@ -199,7 +201,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
         
     @Test
@@ -218,7 +220,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
         
     @Test
@@ -237,7 +239,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
         
     @Test
@@ -256,7 +258,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");
+        assertNotEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -269,7 +271,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");
+        assertNotEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -282,7 +284,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");
+        assertNotEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -295,7 +297,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");
+        assertNotEquals(result, invalidInput);
         
         employeeFormJson = "{\n" +
                                 "    \"id_restauracji\": \"1\", \n" +
@@ -308,7 +310,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertNotEquals(result, "Invalid input");
+        assertNotEquals(result, invalidInput);
     }
         
     @Test
@@ -327,7 +329,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
         
     @Test
@@ -346,7 +348,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
         
     @Test
@@ -365,7 +367,7 @@ public class EmployeeCreatorTest {
                                 " } ";
         
         result =helperValidator(employeeFormJson);
-        assertEquals(result, "Invalid input");
+        assertEquals(result, invalidInput);
     }
     
     

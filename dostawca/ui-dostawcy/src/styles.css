@@ -1,0 +1,18 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.my-btn {
+    margin-right: 5px;
+}
+
+.navbar-light {
+    background-color: #ffffff;
+}
+
+.ui-content {
+
+    text-align: center;
+}
+
+.take-order-btn {
+    text-align: right;
+}

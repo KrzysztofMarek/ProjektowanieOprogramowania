@@ -15,14 +15,14 @@ export class HttpServiceImpl implements HttpService {
   fetchOrders(): Observable<OrderWithContact[]> {
 
     return this.http.get<OrderWithContact[]>(
-      'http://localhost:8080/orderList/dlivery/1'
+      'http://localhost:8080/delivery/orderList/1'
     );
   }
 
   changeOrderStatus(id, status): Observable<OrderWithContact[]> {
 
     return this.http.get<OrderWithContact[]>(
-      'http://localhost:8080/orderStatus/' + id + '/' + status + '/1'
+      'http://localhost:8080/delivery/orderStatus/' + id + '/' + status + '/1'
     );
   }
 }

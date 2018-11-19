@@ -8,10 +8,10 @@ public class Contact {
     private String name;
     private String surname;
     private String phoneNumber;
-    private String adres;
+    private String adress;
 
     public Contact(String name, String surname, String phoneNumber, String adres) {
-        this.adres = adres;
+        this.adress = adres;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.surname = surname;
@@ -42,10 +42,10 @@ public class Contact {
     }
 
     public String getAdres() {
-        return adres;
+        return adress;
     }
 
     public void setAdres(String adres) {
-        this.adres = adres;
+        this.adress = adres;
     }
 }

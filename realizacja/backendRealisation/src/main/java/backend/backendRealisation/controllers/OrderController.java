@@ -4,6 +4,7 @@ import backend.backendRealisation.interfaces.PracDost;
 import backend.backendRealisation.interfaces.PracKReal;
 import backend.backendRealisation.model.Contact;
 import backend.backendRealisation.model.Order;
+import backend.backendRealisation.model.OrderWithContact;
 import backend.backendRealisation.services.ContactService;
 import backend.backendRealisation.services.OrderListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,13 @@ public class OrderController implements PracKReal, PracDost {
         return orderListService.getOrderList(restaruantId);
     }
 
-    @RequestMapping(value = "/contact/{orderId}", method = RequestMethod.GET)
-    public Contact getContact(@PathVariable("orderId") int orderId) {
-        return contactService.getContact(orderId);
+    @RequestMapping(value = "/delivery/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
+    public List<OrderWithContact> deliveryIndex(@PathVariable("restaurantId") int restaurantId) {
+        return contactService.getOrderListWithContact(restaurantId);
+    }
+
+    @RequestMapping(value = "/contact/{restaurantId}", method = RequestMethod.GET)
+    public Contact getContactWithOrder(@PathVariable ("restaurantId") int restaruantId) {
+        return contactService.getContact(restaruantId);
     }
 }

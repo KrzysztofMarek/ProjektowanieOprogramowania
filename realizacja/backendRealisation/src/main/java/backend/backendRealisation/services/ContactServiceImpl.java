@@ -2,7 +2,11 @@ package backend.backendRealisation.services;
 
 import backend.backendRealisation.dao.DatabaseAccess;
 import backend.backendRealisation.model.Contact;
+import backend.backendRealisation.model.Order;
+import backend.backendRealisation.model.OrderWithContact;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 
 /**
@@ -18,7 +22,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getContact(int orderId) {
-        return databaseAccess.getContact(orderId);
+    public Contact getContact(int restaurantId) {
+        return null;
+    }
+
+    public List<OrderWithContact> getOrderListWithContact(int restaruantId) {
+        return databaseAccess.getOrdersWithContact(restaruantId);
     }
 }

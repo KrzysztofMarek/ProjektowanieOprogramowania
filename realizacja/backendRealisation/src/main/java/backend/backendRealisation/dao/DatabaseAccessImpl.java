@@ -69,7 +69,22 @@ public class DatabaseAccessImpl implements DatabaseAccess {
     }
 
     @Override
-    public Contact getContact(int orderId) {
-        return new Contact("Jan","Kowalski","100100100","Pl. Politechniki 1");
+    public Contact getContact(int orderId, int restaurantId) {
+        return new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
+    }
+
+    @Override
+    public List<OrderWithContact> getOrdersWithContact(int restaurantId) {
+        Contact contact = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
+        Order order = new Order(1, Arrays.asList(new Course(1, "Stek"), new Course(1, "Frytki")), "w_drodze");
+        Contact contact1 = new Contact("Jan", "Kowalski", "100100100", "Pl. Politechniki 1");
+        Order order1 = new Order(1, Arrays.asList(new Course(1, "Bułka"), new Course(1, "Kanapka")), "w_drodze");
+
+
+        List<OrderWithContact> orderWithContactList = new LinkedList<>();
+        orderWithContactList.add(new OrderWithContact(order, contact));
+        orderWithContactList.add(new OrderWithContact(order1, contact1));
+
+        return orderWithContactList;
     }
 }

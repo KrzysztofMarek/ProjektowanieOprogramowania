@@ -1,3 +1,7 @@
+import re
+import string
+
+
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 
@@ -16,7 +20,42 @@ def pobierz_menu_restauracji():
     return jsonify(menu_restauarcji)
 
 
-@zarzadzanie_oferta_restauracji.route('/dodaj-danie-restauracja', methods=['POST'])
+@zarzadzanie_oferta_restauracji.route('/dodaj_danie_restauracja', methods=['POST'])
 @cross_origin()
 def dodaj_danie():
-    pass
+    danie = request.json()
+    if waliduj_danie(danie):
+        return
+    return "Danie nie jest poprawne. Sprawdz wszystkie pola"
+
+
+def waliduj_danie(danie: dict):
+    elementy_dania = ["nazwa", "cena", "opis"]
+    for element in elementy_dania:
+        if element not in elementy_dania:
+            return False
+    return waliduj_nazwe(danie.nazwa) and waliduj_cene(danie.cena) and waliduj_opis(danie.opis)
+
+
+def waliduj_nazwe(nazwa):
+    if len(nazwa) > 30:
+        return False
+    if nazwa[0] not in string.ascii_uppercase:
+        return False
+    for letter in nazwa[1:]:
+        if letter not in string.whitespace or letter not in string.ascii_lowercase:
+            return False
+    return True
+
+
+def waliduj_cene(cena):
+    if re.search(r'^\d{1, 3}[,]\d{0,2}', cena):
+        return True
+    return False
+
+
+def waliduj_opis(opis):
+    for letter in opis:
+        if letter in "!@#!$^%*&":
+            return False
+    return len(opis) < 300

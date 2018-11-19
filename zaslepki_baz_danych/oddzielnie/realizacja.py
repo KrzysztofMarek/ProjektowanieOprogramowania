@@ -45,16 +45,25 @@ def main_site():
 
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():
-    if request.form['id_zamowienia'] is None:
-        return 404
-    id_zamowienia = int(request.form['id_zamowienia'])
-    if request.form['status'] is None:
-        return 404
-    status = str(request.form['status'])
-    for zamowienie in lista_zamowien['lista_zamowien']:
-        if zamowienie['id_zamowienia'] == id_zamowienia:
-            zamowienie['status'] = str(status)
-
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_zamowienia"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_zamowienia = int(rrequest['id_zamowienia'])
+        if rrequest['status'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        status = str(rrequest['status'])
+        for zamowienie in lista_zamowien['lista_zamowien']:
+            if zamowienie['id_zamowienia'] == id_zamowienia:
+                zamowienie['status'] = str(status)
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -62,22 +71,33 @@ def zmien_status_zamowienia():
 
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-    if request.args.get("id_restauracji") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_restauracji"))
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_restauracji"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest["id_restauracji"])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     return jsonify(lista_zamowien)
 
 
 #TODO
 @app.route('/pobierz_kontakt', methods=['GET'])
 def pobierz_kontakt():
+    rrequest = request.get_json()
     lista_zamowien = [[1, "Ciastko"],
                       [2, "Kawa"],
                       [3, "Bułka"]]
 
-    if request.args.get("id_zamowienia") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_zamowienia"))
+    if rrequest["id_zamowienia"] is None:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request["id_zamowienia"])
 
     tmp = ["Jan", "Nowak", "123456789", "Bulimiii 15"]
     return jsonify(tmp)

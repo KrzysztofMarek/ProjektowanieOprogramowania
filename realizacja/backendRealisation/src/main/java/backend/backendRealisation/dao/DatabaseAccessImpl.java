@@ -67,4 +67,9 @@ public class DatabaseAccessImpl implements DatabaseAccess {
 
         return orderList;
     }
+
+    @Override
+    public Contact getContact(int orderId) {
+        return new Contact("Jan","Kowalski","100100100","Pl. Politechniki 1");
+    }
 }

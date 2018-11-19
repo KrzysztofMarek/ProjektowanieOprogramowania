@@ -1,7 +1,10 @@
 package backend.backendRealisation.controllers;
 
+import backend.backendRealisation.interfaces.PracDost;
 import backend.backendRealisation.interfaces.PracKReal;
+import backend.backendRealisation.model.Contact;
 import backend.backendRealisation.model.Order;
+import backend.backendRealisation.services.ContactService;
 import backend.backendRealisation.services.OrderListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +18,16 @@ import java.util.List;
  * Created by Piotr on 2018-10-22.
  */
 @RestController
-public class OrderController implements PracKReal {
+public class OrderController implements PracKReal, PracDost {
 
     OrderListService orderListService;
+    ContactService contactService;
+
 
     @Autowired
-    public OrderController(OrderListService orderListService) {
+    public OrderController(OrderListService orderListService, ContactService contactService) {
         this.orderListService = orderListService;
+        this.contactService=contactService;
     }
 
 
@@ -34,5 +40,10 @@ public class OrderController implements PracKReal {
     public List<Order> changeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus,@PathVariable ("restaurantId") int restaruantId) {
         orderListService.changeOrderStatus(orderId, orderStatus);
         return orderListService.getOrderList(restaruantId);
+    }
+
+    @RequestMapping(value = "/contact/{orderId}", method = RequestMethod.GET)
+    public Contact getContact(@PathVariable("orderId") int orderId) {
+        return contactService.getContact(orderId);
     }
 }

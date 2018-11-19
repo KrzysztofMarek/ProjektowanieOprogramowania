@@ -3,6 +3,8 @@ package backend.backendRealisation;
 import backend.backendRealisation.dao.DatabaseAccess;
 import backend.backendRealisation.dao.DatabaseAccessImpl;
 import backend.backendRealisation.interfaces.PracKReal;
+import backend.backendRealisation.services.ContactService;
+import backend.backendRealisation.services.ContactServiceImpl;
 import backend.backendRealisation.services.OrderListService;
 import backend.backendRealisation.services.OrderListServiceImpl;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +21,11 @@ public class BackendRealisationApplication {
     @Bean
     public OrderListService orderListService(){
         return new OrderListServiceImpl(databaseAccess());
+    }
+
+    @Bean
+    public ContactService contactService(){
+        return new ContactServiceImpl(databaseAccess());
     }
 
     @Bean

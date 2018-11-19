@@ -1,5 +1,6 @@
 package backend.backendRealisation.dao;
 
+import backend.backendRealisation.model.Contact;
 import backend.backendRealisation.model.Order;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface DatabaseAccess {
 
     void changeOrderStatus(int orderId, String orderStatus);
     List<Order> getOrders(int restaruantId);
-    // Contact getContact();
+    Contact getContact(int orderId);
 }

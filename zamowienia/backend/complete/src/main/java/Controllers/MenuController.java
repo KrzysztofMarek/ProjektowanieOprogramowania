@@ -23,10 +23,10 @@ public class MenuController {
 
     private MenuService menuComponent = new MenuService();
 
-    @RequestMapping(value="/getProducts", method=RequestMethod.GET)
+    @CrossOrigin
+    @RequestMapping(value="/pobierz_menu_restauracji", method=RequestMethod.GET, params = {"id_restauracji"})
     @ResponseBody
-    public ResponseEntity<Object> getProducts() {
-
+    public ResponseEntity<Object> getProducts(@RequestParam(value = "id_restauracji") Integer restaurantId) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;
         HttpHeaders headers = new HttpHeaders();
@@ -34,9 +34,9 @@ public class MenuController {
 
 
         try {
-            json = menuComponent.getProducts();
+            json = menuComponent.getProducts(restaurantId);
             return ResponseEntity.status(200).headers(headers).body(json);
-        } catch (IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(404).headers(headers).body(null);
 		}
     }

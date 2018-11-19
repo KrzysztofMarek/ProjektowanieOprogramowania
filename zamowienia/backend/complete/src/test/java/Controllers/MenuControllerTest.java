@@ -13,10 +13,8 @@ public class MenuControllerTest {
     @Test
     public void getProducts() {
 
-        ResponseEntity<Object> response = mc.getProducts();
+        ResponseEntity<Object> response = mc.getProducts(0);
         assertEquals(200, response.getStatusCodeValue());
-
     }
-
 
 }

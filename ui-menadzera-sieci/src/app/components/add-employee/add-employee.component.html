@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="row d-flex justify-content-center">
+    <div class="py-3 text-center">
+      <h2>Dodanie nowego Pracownika</h2>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <div class="py-3 col-md-8 order-md-1">
+      <h4 class="mb-3">Dane Pracownika</h4>
+      <form name="form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">Imię</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.imie" name="imie" #firstName="ngModel" id="firstName" placeholder=""
+              value="" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Nazwisko</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.nazwisko" name="nazwisko" #lastName="ngModel" id="lastName"
+              placeholder="" value="" required>
+          </div>
+        </div>
+
+        <div class="pl-0 mb-3 col-md-8">
+          <label for="id_restauracji">Id restauracji</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">@</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="employee.id_restauracji" name="id_restauracji" #id_restauracji="ngModel"
+              id="id_restauracji" placeholder="Restauracja" required>
+          </div>
+        </div>
+
+        <div class="pl-0 mb-3 col-md-8">
+          <label for="position">Stanowisko</label>
+          <input type="text" class="form-control" [(ngModel)]="employee.stanowisko" name="stanowisko" #position="ngModel" id="position"
+            required>
+        </div>
+
+        <div class="pl-0 mb-3 col-md-8">
+          <label for="email">Nr telefonu</label>
+          <input type="text" class="form-control" [(ngModel)]="employee.telefon" name="telefon" #phone="ngModel" id="phone">
+        </div>
+
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            <label for="username">Login</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.login" name="login" #username="ngModel" id="username" required>
+          </div>
+
+          <div class="mb-3 col-md-6">
+            <label for="password">Hasło</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.haslo" name="haslo" #password="ngModel" id="password">
+          </div>
+        </div>
+
+
+        <hr class="mb-4">
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-primary btn-lg" click="onSubmit" style="width: 200px">Dodaj</button>
+        </div>
+      </form>
+    </div>
+  </div>

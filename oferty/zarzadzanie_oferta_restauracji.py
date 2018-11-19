@@ -15,3 +15,8 @@ def pobierz_menu_restauracji():
     menu_restauarcji = pobierz_mr(id_restauracji)
     return jsonify(menu_restauarcji)
 
+
+@zarzadzanie_oferta_restauracji.route('/dodaj-danie-restauracja', methods=['POST'])
+@cross_origin()
+def dodaj_danie():
+    pass

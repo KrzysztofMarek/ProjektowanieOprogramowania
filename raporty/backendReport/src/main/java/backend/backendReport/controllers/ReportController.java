@@ -28,7 +28,7 @@ public class ReportController implements Report{
         return reportService.getCompletedOrderReport();
     }
 
-    @RequestMapping(value = "/fetch-droppedd-order-report", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/fetch-dropped-order-report", method = RequestMethod.GET, produces = "application/json")
     public DroppedOrderReport getDroppedOrderReport() {
         return reportService.getDroppedOrderReport();
     }

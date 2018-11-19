@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../models/Employee';
+import { Restaurant } from '../models/Restaurant';
+import { Recruitment } from '../models/Recruitment';
+import { Observable } from 'rxjs';
+import 'rxjs/Rx';
 
 @Injectable()
 export class DataService {
@@ -13,10 +17,32 @@ export class DataService {
         public http: HttpClient
     ) { }
 
-    Dodaj_pracownika(employee: Employee) {
+    addEmployee(employee: Employee) {
         return this.http.post('http://localhost:9090/dodajPracownika', employee)
         .subscribe((res:Response) => {
             console.log(res);
+            console.log(employee)
+          });
+    }
+
+    addRecruitment(recruitment: Recruitment) {
+        return this.http.post('http://localhost:9090/dodaj_ogloszenie', recruitment)
+        .subscribe((res:Response) => {
+            console.log(res);
+            console.log(recruitment)
+          });
+    }
+
+    getRecruitmentsList() {
+        return this.http.get('http://localhost:9090/pobierz_ogloszenia').
+        map(res => res as Recruitment);
+    }
+
+    addRestaurant(restaurant: Restaurant) {
+        return this.http.post('http://localhost:9094/dodaj_restauracje', restaurant)
+        .subscribe((res:Response) => {
+            console.log(res);
+            console.log(restaurant)
           });
     }
 

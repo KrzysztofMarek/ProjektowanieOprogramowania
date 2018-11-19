@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from './models/employee';
-import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +6,13 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'employee';
-  employee: Employee = new Employee();
+  title = 'UI manadżera sieci';
 
-  constructor(
-    public dataService:DataService
-  ){}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  onSubmit(){
-    this.dataService.Dodaj_pracownika(this.employee);
-  }
+  onSubmit() { }
 }
 
 

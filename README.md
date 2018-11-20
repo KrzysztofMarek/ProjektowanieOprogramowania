@@ -28,3 +28,9 @@ PORTY:
     platnosci_gui = 4200
     ui_menadzera_sieci = 4201
     ui_menadzera_restauracji = 4202
+
+PROBLEMY Z DEPLOYMENTEM:
+
+- gradle nie znajduje czegoś .jar
+1. Dodaj zmienną środowiskową JAVA_HOME, która wskazuje ścieżkę do Twojego jdk.
+2. Rozszerz zmienną PATH o treść "%JAVA_HOME%\bin;" (dla Windowsa)

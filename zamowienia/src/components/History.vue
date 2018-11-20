@@ -9,6 +9,7 @@
                     class="elevation-1"
                     hide-actions
                     hide-headers
+                    :loading="is_loading"
                 >
                     <template slot="items" slot-scope="props">
                         <td>
@@ -37,6 +38,7 @@
                                             </v-btn>
                                             <v-btn
                                                 flat
+                                                @click="cancel_order(props.item.id_zamowienia)"
                                             >
                                                 Tak
                                             </v-btn>
@@ -66,6 +68,7 @@ export default {
             orders: [
                 {
                     id_restauracji: 0,
+                    id_zamowienia: 0,
                     lista: [{
                         id_dania: 0,
                         nazwa: "Pierogi",
@@ -75,6 +78,7 @@ export default {
                 },
                 {
                     id_restauracji: 0,
+                    id_zamowienia: 1,
                     lista: [
                         {
                             id_dania: 0,
@@ -178,7 +182,47 @@ export default {
             s += dania[i].nazwa;
 
             return s;
-        }
+        },
+        cancel_order(id_zamowienia) {
+            let self = this;
+            zamowienia
+                .post(`/Zmien_staus_zamowienia?id_zamowienia=${id_zamowienia}&status=anulowane`)
+                .then((response) => {
+                    self.cancel_dialog = false;
+                })
+                .catch((err) => {
+                    if (err.response) {
+                        self.error_text = `${err.response.status}: ${err.response.data}`;
+                    } else if (err.request) {
+                        self.error_text = "Network error";
+                        console.error(err);
+                    } else {
+                        self.error_text = "Unexpected error";
+                        console.error(err);
+                    }
+                });
+        },
+    },
+    created: function() {
+        let self = this;
+        zamowienia
+            .get("/Pobierz_liste_zamowien?id_klienta=0")
+            .then((response) => {
+                self.is_loading = false;
+                self.orders = response.data;
+            })
+            .catch((err) => {
+                self.is_loading = false;
+                if (err.response) {
+                    self.error_text = `${err.response.status}: ${err.response.data}`;
+                } else if (err.request) {
+                    self.error_text = "Network error";
+                    console.error(err);
+                } else {
+                    self.error_text = "Unexpected error";
+                    console.error(err);
+                }
+            });
     },
 }
 </script>

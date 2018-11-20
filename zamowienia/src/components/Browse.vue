@@ -66,7 +66,7 @@ export default {
         oferty
             .get(`Pobierz_menu_restauracji?id_restauracji=${this.$store.state.restaurant.id_restauracji}`)
             .then((response) => {
-                self.dishes = response.data;
+                self.dishes = response.data.lista;
             })
     },
     methods: {

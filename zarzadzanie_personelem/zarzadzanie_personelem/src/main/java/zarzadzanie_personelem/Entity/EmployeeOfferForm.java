@@ -35,6 +35,29 @@ public class EmployeeOfferForm {
     }
 
     public void validate(){
+        if(!validateTelephone()){
+            valid = false;
+            return;
+        }
         valid = true;
+    }
+    
+    private boolean validateTelephone(){
+        if(!telefon.matches("[\\d+ ]+")){
+            log.info("Telephone number {} has illegal signs", telefon);
+            return false;            
+        }
+        String tmpPhone = telefon;
+        tmpPhone = tmpPhone.replaceAll(" ", "");
+        if(tmpPhone.codePointAt(0) == '+' && tmpPhone.length() != 12){
+            log.info("Telephone number with plus sign, {}, does not have 9 signs", telefon);
+            return false;            
+        }
+        Integer amountOfNumbers = tmpPhone.replaceAll("\\D", "").length();
+        if(amountOfNumbers != 9 && amountOfNumbers != 11 && amountOfNumbers != 13){
+            log.info("Telephone number , {}, has a different size than 9, 11 or 13", telefon);
+            return false;            
+        }
+        return true;
     }
 }

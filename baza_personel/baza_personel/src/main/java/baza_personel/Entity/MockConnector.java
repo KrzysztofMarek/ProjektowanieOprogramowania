@@ -34,6 +34,8 @@ public class MockConnector implements Connector{
         HashMap<String, String> data = new HashMap();
         data.put("id_restauracji", "1");
         data.put("stanowisko", "test");
+        data.put("etat", "40");
+        data.put("telefon", "123456789");
         
         ArrayList<Map<String, String>> dataArray = new ArrayList();
         dataArray.add(data);

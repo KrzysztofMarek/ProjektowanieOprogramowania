@@ -15,6 +15,8 @@ public class EmployeeOfferForm {
 
     private String id_restauracji;
     private String stanowisko;
+    private String etat;
+    private String telefon;
 
     public String getId_restauracji() {
         return id_restauracji;
@@ -22,6 +24,14 @@ public class EmployeeOfferForm {
 
     public String getStanowisko() {
         return stanowisko;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public String getTelefon() {
+        return telefon;
     }
 
     public void validate(){

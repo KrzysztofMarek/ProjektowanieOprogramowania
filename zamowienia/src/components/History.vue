@@ -12,10 +12,37 @@
                 >
                     <template slot="items" slot-scope="props">
                         <td>
-                            <p class="text-truncate font-weight-medium" style="max-width:600px">{{ order_list_display(props.item) }}</p>
+                            <p class="text-truncate font-weight-medium" style="max-width:420px">{{ order_list_display(props.item) }}</p>
                             <p class="text-uppercase ">
                                 {{ props.item.status}}
-                                <v-btn v-if="props.item.status == 'oczekujace'" small>anuluj</v-btn>
+                                <v-dialog v-if="props.item.status == 'oczekujace'" v-model="cancel_dialog" width="500">
+                                    <v-btn slot="activator" small>Anuluj</v-btn>
+                                    <v-card>
+                                        <v-card-title
+                                            class="headline"
+                                            primary-title
+                                        >
+                                            Anuluj zamówienie
+                                        </v-card-title>
+                                        <v-card-text>
+                                            Czy na pewno chcesz anulować zamówienie?
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <v-spacer />
+                                            <v-btn
+                                                flat
+                                                @click="cancel_dialog = false"
+                                            >
+                                                Nie
+                                            </v-btn>
+                                            <v-btn
+                                                flat
+                                            >
+                                                Tak
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
                                 <v-btn v-else small>ponów</v-btn>
                             </p>
                         </td>
@@ -35,6 +62,7 @@ export default {
         return {
             error_text: "",
             is_loading: false,
+            cancel_dialog: false,
             orders: [
                 {
                     id_restauracji: 0,

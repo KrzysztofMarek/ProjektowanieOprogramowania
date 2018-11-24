@@ -9,9 +9,110 @@
 		crossorigin="anonymous"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
 
 	<script type="text/javascript">
+		$(document).ready(function(){
+		});
+		
+		jQuery.validator.addMethod("validateOfferName", function( value, element ) {
+			var regex = new RegExp("^[a-zA-Z-\\s]+$");
+
+			if (regex.test(value)) {
+				return true;
+			}
+			return false;
+		}, "Nazwa dania może zawierać jedynie litery, białe znaki oraz myślniki");
+		
+		jQuery.validator.addMethod("validateOfferNameBigLetter", function( value, element ) {
+			var regex = new RegExp("^[A-Z]");
+
+			if (regex.test(value)) {
+				return true;
+			}
+			return false;
+		}, "Nazwa dania z dużej litery");
+		
+		jQuery.validator.addMethod("validatePrice", function( value, element ) {
+			var regex = new RegExp("^\\d{1,3}\\,?\\d{1,2}?$");
+			var isComa = value.includes(',');
+			
+			if(isComa) {
+				if (regex.test(value)) {
+					return true;
+				}
+			} else if(value.length > 0 && value.length < 4){
+				return true;
+			}
+			return false;
+		}, "Cena w formacie 000,00");
+		
+		jQuery.validator.addMethod("validateDescription", function( value, element ) {
+			var forbidden = ['#', '$', '^', '%', '&', '*', '!', '@'];
+			return forbidden.every(function(f){return !value.includes(f)});
+		}, "Pole nie może zawierać znaków specjalnych");
+		
+		jQuery(function($) {
+			$("#form").validate({
+				rules: {
+					offerName: { 
+						required: true, 
+						validateOfferName: true,
+						validateOfferNameBigLetter: true,
+					},
+					offerPrice: {
+						required: true,
+						validatePrice: true
+					},
+					offerDescription: {
+						required: true,
+						validateDescription: true
+					}
+				},
+				messages: {
+					offerName: { 
+						required: '<div class="alert alert-danger" role="alert">Podaj nazwe dania</div>',
+						validateOfferName: '<div class="alert alert-danger" role="alert">Nazwa dania może zawierać jedynie litery, białe znaki oraz myślniki</div>',
+						validateOfferNameBigLetter: '<div class="alert alert-danger" role="alert">Nazwa dania z dużej litery</div>'
+					},
+					offerPrice: {
+						required: '<div class="alert alert-danger" role="alert">Podaj cenę dania</div>',
+						validatePrice: '<div class="alert alert-danger" role="alert">Cena w formacie 000,00</div>'
+					},
+					offerDescription: {
+						required: '<div class="alert alert-danger" role="alert">Podaj opis dania</div>',
+						validateDescription: '<div class="alert alert-danger" role="alert">Pole nie może zawierać znaków specjalnych</div>'
+					}
+				}  
+			});
+		});
+		
+		function addOffer() {
+			var host="http://localhost";
+			//var port="5000";
+			//var host="http://192.168.0.13";
+			var port="8888";
+			var endpoint="/dodaj_danie_siec";
+			$.ajax({
+				type: "POST",
+				url: host+":"+port+endpoint,
+				contentType:"application/json; charset=utf-8",
+				dataType:"json",
+				data: JSON.stringify({nazwa: "fajna nazwa", cena: "3.5", opis: "no kurwa smaczne danie"}),
+				success: function(json_obj){
+					//json_obj = $.parseJSON(json);
+					console.log(json_obj);
+				}
+			});
+		}
 	</script>
+	
+	<style>
+	.error {
+		width: 100% !important;
+	}
+	</style>
 </head>
 <body>
 <ul class="nav nav-tabs">
@@ -31,20 +132,20 @@
 	<div class="col">
     </div>
     <div class="col-9">
-        <form  action="oferta_sieci.html">
+        <form  id="form" action="oferta_sieci.html">
             <div class="form-group">
                 <label for="name">Nazwa:</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" name="offerName" id="name" maxlength="30"/>
             </div>
             <div class="form-group">
                 <label for="price">Cena:</label>
-                <input type="text" class="form-control" id="price">
+                <input type="text" class="form-control" name="offerPrice" id="price" maxlength="6"/>
             </div>
             <div class="form-group">
                 <label for="description">Opis:</label>
-                <input type="text" class="form-control" id="description">
+                <textarea class="form-control" id="description" name="offerDescription" rows="3" maxlength="300"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" onclick="window.alert('Dodano potrawę!')">Dodaj</button>
+            <button type="submit" class="btn btn-primary" >Dodaj</button>
             <a href="oferta_sieci.html" class="alert-link">
                 <button type="button" class="btn btn-outline-primary">Anuluj</button>
             </a>

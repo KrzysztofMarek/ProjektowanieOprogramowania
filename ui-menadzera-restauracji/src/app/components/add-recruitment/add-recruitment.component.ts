@@ -24,7 +24,6 @@ export class AddRecruitmentComponent implements OnInit {
 
   onSubmit() {
     this.dataService.addRecruitment(this.recruitment);
-
   }
 
   onCancel() {

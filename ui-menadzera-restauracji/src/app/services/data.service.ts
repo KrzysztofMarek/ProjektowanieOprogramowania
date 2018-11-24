@@ -11,7 +11,7 @@ import 'rxjs/Rx';
 export class DataService {
 
     private readonly httpOptions = {
-            headers: new HttpHeaders({"Content-Type": "application/json"})
+        headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
     constructor(
         public http: HttpClient
@@ -19,23 +19,23 @@ export class DataService {
 
     addEmployee(employee: Employee) {
         return this.http.post('http://localhost:9090/dodaj_pracownika', employee)
-        .subscribe((res:Response) => {
-            console.log(res);
-            console.log(employee)
-          });
+            .subscribe((res: Response) => {
+                console.log(res);
+                console.log(employee)
+            });
     }
 
     addRecruitment(recruitment: Recruitment) {
         return this.http.post('http://localhost:9090/dodaj_ogloszenie', recruitment)
-        .subscribe((res:Response) => {
-            console.log(res);
-            console.log(recruitment)
-          });
+            .subscribe((res: Response) => {
+                console.log(res);
+                console.log(recruitment)
+            });;
     }
 
     getRecruitmentsList() {
         return this.http.get('http://localhost:9090/pobierz_ogloszenia').
-        map(res => res as Recruitment);
+            map(res => res as Recruitment);
     }
 
 

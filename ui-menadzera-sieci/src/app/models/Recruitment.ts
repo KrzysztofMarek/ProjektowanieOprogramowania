@@ -1,4 +1,6 @@
 export class Recruitment {
-    public id_restauracji: number;
-    public stanowisko: string;
-  }
+  public stanowisko: string;
+  public id_restauracji: number;
+  public etat: number;
+  public telefon: number;
+}

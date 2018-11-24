@@ -21,21 +21,17 @@ export class DataService {
         return this.http.post('http://localhost:9090/dodaj_pracownika', employee)
             .subscribe((res: Response) => {
                 console.log(res);
-                console.log(employee)
+                console.log(employee);
             });
     }
 
-    addRecruitment(recruitment: Recruitment) {
-        return this.http.post('http://localhost:9090/dodaj_ogloszenie', recruitment)
-            .subscribe((res: Response) => {
-                console.log(res);
-                console.log(recruitment)
-            });;
+    addRecruitment(recruitmentNew: Recruitment) {
+        return this.http.post('http://localhost:9090/dodaj_ogloszenie', recruitmentNew);
     }
 
     getRecruitmentsList() {
-        return this.http.get('http://localhost:9090/pobierz_ogloszenia').
-            map(res => res as Recruitment);
+        return this.http.get('http://localhost:9090/pobierz_ogloszenia')
+            .map(res => res as Recruitment);
     }
 
 

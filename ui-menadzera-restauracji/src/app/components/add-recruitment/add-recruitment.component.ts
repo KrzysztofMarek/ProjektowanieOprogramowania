@@ -10,6 +10,7 @@ import { DataService } from '../../services/data.service';
 export class AddRecruitmentComponent implements OnInit {
 
   recruitment: Recruitment = new Recruitment();
+  recruitmentNew: Recruitment = new Recruitment();
 
   constructor(public dataService: DataService) {
 
@@ -23,7 +24,14 @@ export class AddRecruitmentComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dataService.addRecruitment(this.recruitment);
+    this.dataService.addRecruitment(this.recruitmentNew)
+      .subscribe(res => {
+        console.log(res);
+        this.dataService.getRecruitmentsList().subscribe(recruitment => {
+          this.recruitment = recruitment;
+          console.log(recruitment);
+        });
+      });
   }
 
   onCancel() {

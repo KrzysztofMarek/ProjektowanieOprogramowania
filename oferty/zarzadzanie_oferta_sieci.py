@@ -25,7 +25,7 @@ def pobierz_menu_sieci():
 def dodaj_danie():
     danie = request.json()
     if waliduj_danie(danie):
-        return
+        return model_zs.dodaj_danie_dla_sieci(danie)
     return "Danie nie jest poprawne. Sprawdz wszystkie pola"
 
 

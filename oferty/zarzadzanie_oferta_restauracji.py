@@ -1,11 +1,13 @@
 import re
+import requests
 import string
-
 
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 
-from oferty.zarzadzanie_restauracja_model import pobierz_menu_restauracji as pobierz_mr
+from oferty.Constants import Constants
+from oferty.zarzadzanie_restauracja_model import pobierz_menu_restauracji, dodaj_danie_dla_restauracji
+
 
 zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __name__)
 
@@ -16,7 +18,7 @@ def pobierz_menu_restauracji():
     if request.args.get("id_restauracji") is None:
         return 404
     id_restauracji = int(request.args.get("id_restauracji"))
-    menu_restauarcji = pobierz_mr(id_restauracji)
+    menu_restauarcji = pobierz_menu_restauracji(id_restauracji)
     return jsonify(menu_restauarcji)
 
 
@@ -25,12 +27,12 @@ def pobierz_menu_restauracji():
 def dodaj_danie():
     danie = request.json()
     if waliduj_danie(danie):
-        return
+        dodaj_danie_dla_restauracji(danie)
     return "Danie nie jest poprawne. Sprawdz wszystkie pola"
 
 
 def waliduj_danie(danie: dict):
-    elementy_dania = ["nazwa", "cena", "opis"]
+    elementy_dania = ["nazwa", "cena", "opis", "id_restauracji"]
     for element in elementy_dania:
         if element not in elementy_dania:
             return False
@@ -55,7 +57,7 @@ def waliduj_cene(cena):
 
 
 def waliduj_opis(opis):
-    for letter in opis:
-        if letter in "!@#!$^%*&":
+    for letter in Constants.NIEPOPRAWNE_ZNAKI:
+        if letter in opis:
             return False
     return len(opis) < 300

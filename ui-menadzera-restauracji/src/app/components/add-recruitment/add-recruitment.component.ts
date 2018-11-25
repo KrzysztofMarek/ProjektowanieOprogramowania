@@ -11,6 +11,7 @@ export class AddRecruitmentComponent implements OnInit {
 
   recruitment: Recruitment = new Recruitment();
   recruitmentNew: Recruitment = new Recruitment();
+  alertString: string = "";
 
   constructor(public dataService: DataService) {
 
@@ -19,17 +20,18 @@ export class AddRecruitmentComponent implements OnInit {
   ngOnInit() {
     this.dataService.getRecruitmentsList().subscribe(recruitment => {
       this.recruitment = recruitment;
-      console.log(recruitment);
     });
   }
 
   onSubmit() {
     this.dataService.addRecruitment(this.recruitmentNew)
       .subscribe(res => {
-        console.log(res);
+        var getValueArray = Object.values(res)
+        this.alertString += getValueArray;
+        alert(this.alertString.split(',').join(""));
+        this.alertString = "";
         this.dataService.getRecruitmentsList().subscribe(recruitment => {
           this.recruitment = recruitment;
-          console.log(recruitment);
         });
       });
   }

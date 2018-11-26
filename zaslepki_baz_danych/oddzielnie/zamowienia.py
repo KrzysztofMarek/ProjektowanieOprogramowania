@@ -99,7 +99,7 @@ def dodaj_zamowienie():
         'id_restauracji': id_restauracji,
         'id_klienta': 2,
         'kwota': kwota,
-        'status': 'oczekujące',
+        'status': 'oczekujace',
         'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
     })
 
@@ -170,7 +170,7 @@ def zmien_status_zamowienia():
     return resp
 
 
-# Pobierz zamówienia -> przekopiuj z realizacji
+# Pobierz zamowienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
     rrequest = request.get_json()

@@ -46,9 +46,9 @@ def pobierz_menu_restauracji():
             },
             {
                 'id_dania': 3,
-                'nazwa': 'Bułka',
+                'nazwa': 'Bulka',
                 'cena': 2.99,
-                'opis': 'Duża buła'
+                'opis': 'Duza bula'
             }
         ]
     }
@@ -168,17 +168,7 @@ def zmien_status_zamowienia():
 
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-    rrequest = request.get_json()
-    try:
-        if rrequest["id_restauracji"] is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(rrequest["id_restauracji"])
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
+
     return jsonify(lista_zamowien)
 
 
@@ -217,11 +207,11 @@ def dodaj_zamowienie():
             return resp
         id_restauracji = int(rrequest['id_restauracji'])
 
-        if rrequest['lista_dan'] is None:
+        if rrequest['lista'] is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        lista_dan = rrequest['lista_dan']
+        lista_dan = rrequest['lista']
 
         if rrequest['kwota'] is None:
             resp = jsonify(success=False)

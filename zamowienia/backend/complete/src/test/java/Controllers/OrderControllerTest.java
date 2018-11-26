@@ -14,7 +14,7 @@ public class OrderControllerTest {
     OrderController orderController = new OrderController();
 
     @Test
-    public void getProducts() {
+    public void AddOrder() {
 
         NewOrder newOrder = new NewOrder();
         newOrder.id_klienta = 1;
@@ -29,6 +29,13 @@ public class OrderControllerTest {
         newOrder.lista.add(orderItem);
 
         ResponseEntity<Object> response = orderController.CreateOrder(newOrder);
+        assertEquals(200, response.getStatusCodeValue());
+    }
+
+    @Test
+    public void GetOrders() {
+
+        ResponseEntity<Object> response = orderController.GetOrders(0);
         assertEquals(200, response.getStatusCodeValue());
     }
 

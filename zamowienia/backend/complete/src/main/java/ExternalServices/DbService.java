@@ -73,6 +73,8 @@ public class DbService {
         if (entity != null) {
             try (InputStream instream = entity.getContent()) {
                 return Integer.parseInt(StringTools.convertStreamToString(instream));
+            }catch(Exception ex){
+                return 0;
             }
         }else{
             if(statusCode == 200){
@@ -113,7 +115,25 @@ public class DbService {
         return ordersIds;
     }
 
-    public Order GetOrder(int orderId){
-        return new Order();
+    public String GetOrders(Integer userId) throws URISyntaxException, ClientProtocolException, IOException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "pobierz_zamowienia");
+        builder.setParameter("id_restauracji", userId.toString());
+
+        HttpClient httpclient = HttpClients.createDefault();
+        HttpGet request = new HttpGet(builder.build());
+
+        request.addHeader("Content-Type", "application/json");
+
+        HttpResponse response = httpclient.execute(request);
+        HttpEntity entity = response.getEntity();
+
+        
+        if (entity != null) {
+            try (InputStream instream = entity.getContent()) {
+                return StringTools.convertStreamToString(instream);
+            }
+        }
+
+        return null;
     }
 }

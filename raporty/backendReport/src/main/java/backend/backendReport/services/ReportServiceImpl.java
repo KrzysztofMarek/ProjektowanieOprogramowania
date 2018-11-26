@@ -16,6 +16,7 @@ public class ReportServiceImpl implements ReportService {
 
     DatabaseAccess databaseAccess;
 
+
     public ReportServiceImpl(DatabaseAccess databaseAccess) {
         this.databaseAccess = databaseAccess;
     }
@@ -31,9 +32,20 @@ public class ReportServiceImpl implements ReportService {
     }
 
     private CompletedOrderReport prepareCompletedOrderReport() {
+
+        List<Order> orderList = databaseAccess.getCompletedOrderReport();
+        return countCompletedOrders(orderList);
+
+    }
+
+    private DroppedOrderReport prepareDroppedOrderReport() {
+
+        List<Order> orderList = databaseAccess.getDroppedOrderReport();
+        return countDroppedOrders(orderList);
+    }
+    public CompletedOrderReport countCompletedOrders(List<Order> orderList){
         CompletedOrderReport completedOrderReport = new CompletedOrderReport();
         List<CompletedOrderNode> nodes = new LinkedList<>();
-        List<Order> orderList = databaseAccess.getCompletedOrderReport();
         boolean isNode;
         for (Order order : orderList) {
 
@@ -54,12 +66,11 @@ public class ReportServiceImpl implements ReportService {
         }
         completedOrderReport.setNodes(nodes);
         return completedOrderReport;
-    }
 
-    private DroppedOrderReport prepareDroppedOrderReport() {
-        DroppedOrderReport droppedOrderReport = new DroppedOrderReport();
+    }
+    public DroppedOrderReport countDroppedOrders(List<Order> orderList){
+        DroppedOrderReport droppedOrderReport= new DroppedOrderReport();
         List<DroppedOrderNode> nodes = new LinkedList<>();
-        List<Order> orderList = databaseAccess.getDroppedOrderReport();
         boolean isNode;
         for (Order order : orderList) {
 
@@ -81,4 +92,6 @@ public class ReportServiceImpl implements ReportService {
         droppedOrderReport.setNodes(nodes);
         return droppedOrderReport;
     }
+
+
 }

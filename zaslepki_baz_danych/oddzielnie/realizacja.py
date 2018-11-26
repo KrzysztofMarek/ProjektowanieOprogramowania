@@ -85,22 +85,58 @@ def pobierz_zamowienia():
     return jsonify(lista_zamowien)
 
 
-#TODO
-@app.route('/pobierz_kontakt', methods=['GET'])
-def pobierz_kontakt():
-    rrequest = request.get_json()
-    lista_zamowien = [[1, "Ciastko"],
-                      [2, "Kawa"],
-                      [3, "Bułka"]]
+lista_zamowien_z_kontaktem = {
+        'lista_zamowien': [
+            {
+                'id_zamowienia': 1,
+                'lista_dan': [
+                    {'id_dania': 1, 'nazwa': 'Kawa'},
+                    {'id_dania': 2, 'nazwa': 'Ciastko'},
+                    {'id_dania': 3, 'nazwa': 'Bulka'}
+                ],
+                'status': 'oczekujace',
+                'kontakt': {'imie': 'Jan', 'nazwisko': 'Kowalski', 'telefon': '123456789', 'adres': 'Konwaliowa 3'}
+            },
+            {
+                'id_zamowienia': 2,
+                'lista_dan': [
+                    {'id_dania': 1, 'nazwa': 'Kawa'},
+                    {'id_dania': 2, 'nazwa': 'Ciastko'},
+                    {'id_dania': 3, 'nazwa': 'Bulka'}
+                ],
+                'status': 'przygotowywane',
+                'kontakt': {'imie': 'Adam', 'nazwisko': 'Wypadam', 'telefon': '123456789', 'adres': 'Wysoka 3'}
 
-    if rrequest["id_zamowienia"] is None:
+            },
+            {
+                'id_zamowienia': 3,
+                'lista_dan': [
+                    {'id_dania': 1, 'nazwa': 'Kawa'},
+                    {'id_dania': 2, 'nazwa': 'Ciastko'},
+                    {'id_dania': 3, 'nazwa': 'Bulka'}
+                ],
+                'status': 'w_drodze',
+                'kontakt': {'imie': 'Andrzej', 'nazwisko': 'Adrianowski', 'telefon': '123456789', 'adres': 'Cicha 3'}
+
+            }
+        ]
+    }
+
+
+@app.route('/pobierz_zamowienia_z_kontaktem', methods=['GET'])
+def pobierz_zamowienia_z_kontaktem():
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_restauracji"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest["id_restauracji"])
+    except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = int(request["id_zamowienia"])
-
-    tmp = ["Jan", "Nowak", "123456789", "Bulimiii 15"]
-    return jsonify(tmp)
+    return jsonify(lista_zamowien_z_kontaktem)
 
 
 if __name__ == '__main__':

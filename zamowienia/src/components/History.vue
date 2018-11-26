@@ -69,7 +69,7 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 0,
-                    lista: [{
+                    lista_dan: [{
                         id_dania: 0,
                         nazwa: "Pierogi",
                     }],
@@ -79,7 +79,7 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 1,
-                    lista: [
+                    lista_dan: [
                         {
                             id_dania: 0,
                             nazwa: "Pierogi",
@@ -171,7 +171,7 @@ export default {
             return price + " zł";
         },
         order_list_display(order) {
-            const dania = order.lista;
+            const dania = order.lista_dan;
             let i = 0;
             let s = "";
             while (i + 1 < dania.length) {
@@ -220,7 +220,7 @@ export default {
             .get("/Pobierz_liste_zamowien?id_klienta=0")
             .then((response) => {
                 self.is_loading = false;
-                self.orders = response.data;
+                self.orders = response.data.lista_zamowien;
             })
             .catch((err) => {
                 self.is_loading = false;

@@ -13,6 +13,10 @@ export const store = new Vuex.Store({
             state.order.push(product);
         },
 
+        set_order(state, order) {
+            state.order =order;
+        },
+
         clear_order(state) {
             state.order = [];
         },

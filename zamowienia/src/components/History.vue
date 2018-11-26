@@ -3,7 +3,7 @@
         <v-alert :value="error_text.length != 0">{{ error_text }}</v-alert>
         <v-layout justify-center>
             <v-flex xs12 lg6 my-2>
-                <h3>Twoje zamówienia:</h3>
+                <h3>Twoje zamówienia:</h3><br />
                 <v-data-table
                     :items="orders"
                     class="elevation-1"
@@ -13,7 +13,7 @@
                 >
                     <template slot="items" slot-scope="props">
                         <td>
-                            <p class="text-truncate font-weight-medium" style="max-width:420px">{{ order_list_display(props.item) }}</p>
+                            <p class="text-truncate font-weight-medium" style="max-width:420px;margin-top:7px">{{ order_list_display(props.item) }}</p>
                             <p class="text-uppercase ">
                                 {{ props.item.status}}
                                 <v-dialog v-if="props.item.status == 'oczekujace'" v-model="cancel_dialog" width="500">
@@ -45,7 +45,7 @@
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>
-                                <v-btn v-else small>ponów</v-btn>
+                                <v-btn v-else small @click="repeat_order(props.item)">ponów</v-btn>
                             </p>
                         </td>
                         <td class="text-xs-right">{{ display_price(props.item.kwota) }}</td>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { zamowienia } from "../backend";
+import { zamowienia, oferty } from "../backend";
 
 export default {
     data: () => {
@@ -201,6 +201,17 @@ export default {
                         console.error(err);
                     }
                 });
+        },
+        repeat_order: async function(order) {
+            try {
+                const menu_response = await oferty.get(`/Pobierz_menu_restauracji?id_restauracji=${order.id_restauracji}`);
+                const menu = menu_response.data;
+                const new_order = order.list.map(o => menu.find(x => x.id_dania == o.id_dania)).filter(x => x != undefined);
+                this.$store.commit('set_order', new_order);
+            } catch (err) {
+                this.error_text = "Nie udało się ponowić zamówienia";
+                console.error(err);
+            }
         },
     },
     created: function() {

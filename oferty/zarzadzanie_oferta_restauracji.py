@@ -5,8 +5,8 @@ import string
 from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 
-from oferty.Constants import Constants
-from oferty.zarzadzanie_restauracja_model import pobierz_menu_restauracji, dodaj_danie_dla_restauracji
+from Constants import Constants
+from zarzadzanie_restauracja_model import pobierz_menu_restauracji, dodaj_danie_dla_restauracji
 
 
 zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __name__)
@@ -25,18 +25,18 @@ def pobierz_menu_restauracji():
 @zarzadzanie_oferta_restauracji.route('/dodaj_danie_restauracja', methods=['POST'])
 @cross_origin()
 def dodaj_danie():
-    danie = request.json()
+    danie = request.json
     if waliduj_danie(danie):
-        dodaj_danie_dla_restauracji(danie)
+        return dodaj_danie_dla_restauracji(danie)
     return "Danie nie jest poprawne. Sprawdz wszystkie pola"
 
 
 def waliduj_danie(danie: dict):
     elementy_dania = ["nazwa", "cena", "opis", "id_restauracji"]
-    for element in elementy_dania:
+    for element in danie:
         if element not in elementy_dania:
             return False
-    return waliduj_nazwe(danie.nazwa) and waliduj_cene(danie.cena) and waliduj_opis(danie.opis)
+    return waliduj_nazwe(danie['nazwa']) and waliduj_cene(danie['cena']) and waliduj_opis(danie['opis'])
 
 
 def waliduj_nazwe(nazwa):
@@ -45,13 +45,16 @@ def waliduj_nazwe(nazwa):
     if nazwa[0] not in string.ascii_uppercase:
         return False
     for letter in nazwa[1:]:
-        if letter not in string.whitespace or letter not in string.ascii_lowercase:
+        if letter not in string.whitespace and letter not in string.ascii_lowercase and letter not in string.ascii_uppercase and letter != '-':
             return False
     return True
 
 
 def waliduj_cene(cena):
-    if re.search(r'^\d{1, 3}[,]\d{0,2}', cena):
+    if ',' in cena:
+        if re.search(r'^\d{1,3}\,?\d{1,2}?$', cena):
+            return True
+    elif 0 < len(cena) < 4:
         return True
     return False
 

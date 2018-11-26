@@ -12,8 +12,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
 
 	<script type="text/javascript">
-		$(document).ready(function(){
-		});
 		
 		jQuery.validator.addMethod("validateOfferName", function( value, element ) {
 			var regex = new RegExp("^[a-zA-Z-\\s]+$");
@@ -83,9 +81,59 @@
 						required: '<div class="alert alert-danger" role="alert">Podaj opis dania</div>',
 						validateDescription: '<div class="alert alert-danger" role="alert">Pole nie może zawierać znaków specjalnych</div>'
 					}
-				}  
+				},
+				submitHandler: function () {
+					addOffer();
+				}    
 			});
 		});
+		
+		function addOffer() {
+			var host="http://localhost";
+			//var port="5000";
+			//var host="http://192.168.0.13";
+			var port="8888";
+			var endpoint="/dodaj_danie_restauracja";
+			$.ajax({
+				type: "POST",
+				url: host+":"+port+endpoint,
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify({
+					id_restauracji: getUrlParameter('id_restauracji'),
+					nazwa: $("#name").val(), 
+					cena: $("#price").val(), 
+					opis: $("#description").val()
+				}),
+				success: function(response){
+					//json_obj = $.parseJSON(json);
+					console.log(response);
+					if(response == 'OK') {
+						alert('Dodano potrawę!');
+						window.location.replace('oferta_restauracji.html'+"?restaurant_id="+getUrlParameter('id_restauracji'));
+					} else {
+						alert(response);
+					}
+				},
+				error: function () {
+					alert('Nastąpił nieoczekiwany błąd połączenia. Spróbuj ponownie później.');
+				}
+			});
+		}
+
+		var getUrlParameter = function getUrlParameter(sParam) {
+			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+			sURLVariables = sPageURL.split('&'),
+			sParameterName,
+			i;
+
+			for (i = 0; i < sURLVariables.length; i++) {
+				sParameterName = sURLVariables[i].split('=');
+
+				if (sParameterName[0] === sParam) {
+					return sParameterName[1] === undefined ? true : sParameterName[1];
+				}
+			}
+		};
 	</script>
 	
 	<style>
@@ -112,7 +160,7 @@
 	<div class="col">
     </div>
     <div class="col-9">
-        <form id="form"  action="oferta_restauracji.html">
+        <form id="form">
 			<input type="hidden" name="restaurant_id" value="1"/>
             <div class="form-group">
                 <label for="name">Nazwa:</label>
@@ -126,7 +174,7 @@
                 <label for="description">Opis:</label>
                 <textarea class="form-control" id="description" name="offerDescription" rows="3" maxlength="300"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" onclick="window.alert('Dodano potrawę!')">Dodaj</button>
+            <button type="submit" class="btn btn-primary">Dodaj</button>
             <a href="oferta_restauracji.html?restaurant_id=1" class="alert-link">
                 <button type="button" class="btn btn-outline-primary">Anuluj</button>
             </a>

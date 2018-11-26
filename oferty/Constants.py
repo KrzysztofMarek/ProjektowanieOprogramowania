@@ -1,7 +1,7 @@
 
 
 class Constants:
-    NIEPOPRAWNE_ZNAKI = "!@#!$^%*&"
+    NIEPOPRAWNE_ZNAKI = "!@#$^%*&"
 
     class Danie_data:
         NAZWA = "nazwa"

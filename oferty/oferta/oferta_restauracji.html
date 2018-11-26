@@ -18,6 +18,9 @@
 			var port="8888";
 			var endpoint="/pobierz_menu_restauracji";
 			var restaurant_id = getUrlParameter('restaurant_id');
+			$('#formLink a').each(function(){
+				this.href += "?id_restauracji=" + restaurant_id;
+			});
 			$.ajax({
 				type: "GET",
 				url: host+":"+port+endpoint,
@@ -89,7 +92,7 @@
 <div class="row">
 	<div class="col">
     </div>
-    <div class="col-9">
+    <div class="col-9" id="formLink">
 		<a class="btn btn-outline-primary" role="button" href="formularz_potrawy_restauracji.html">Dodaj potrawę</a>
     </div>
     <div class="col">

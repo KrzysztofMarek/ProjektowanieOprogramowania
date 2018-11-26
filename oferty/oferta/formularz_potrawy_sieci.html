@@ -13,8 +13,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
 
 	<script type="text/javascript">
-		$(document).ready(function(){
-		});
 		
 		jQuery.validator.addMethod("validateOfferName", function( value, element ) {
 			var regex = new RegExp("^[a-zA-Z-\\s]+$");
@@ -84,6 +82,9 @@
 						required: '<div class="alert alert-danger" role="alert">Podaj opis dania</div>',
 						validateDescription: '<div class="alert alert-danger" role="alert">Pole nie może zawierać znaków specjalnych</div>'
 					}
+				},
+				submitHandler: function () {
+					addOffer();
 				}  
 			});
 		});
@@ -98,11 +99,23 @@
 				type: "POST",
 				url: host+":"+port+endpoint,
 				contentType:"application/json; charset=utf-8",
-				dataType:"json",
-				data: JSON.stringify({nazwa: "fajna nazwa", cena: "3.5", opis: "no kurwa smaczne danie"}),
-				success: function(json_obj){
+				data: JSON.stringify({
+					nazwa: $("#name").val(), 
+					cena: $("#price").val(), 
+					opis: $("#description").val()
+				}),
+				success: function(response){
 					//json_obj = $.parseJSON(json);
-					console.log(json_obj);
+					console.log(response);
+					if(response == 'OK') {
+						alert('Dodano potrawę!');
+						window.location.replace('oferta_sieci.html');
+					} else {
+						alert(response);
+					}
+				},
+				error: function () {
+					alert('Nastąpił nieoczekiwany błąd połączenia. Spróbuj ponownie później.');
 				}
 			});
 		}
@@ -132,7 +145,7 @@
 	<div class="col">
     </div>
     <div class="col-9">
-        <form  id="form" action="oferta_sieci.html">
+        <form  id="form">
             <div class="form-group">
                 <label for="name">Nazwa:</label>
                 <input type="text" class="form-control" name="offerName" id="name" maxlength="30"/>

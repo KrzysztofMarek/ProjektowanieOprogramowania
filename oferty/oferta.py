@@ -2,8 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 
 
-from oferty.zarzadzanie_oferta_restauracji import zarzadzanie_oferta_restauracji
-from oferty.zarzadzanie_oferta_sieci import zarzadzanie_oferta_sieci
+from zarzadzanie_oferta_restauracji import zarzadzanie_oferta_restauracji
+from zarzadzanie_oferta_sieci import zarzadzanie_oferta_sieci
 
 app = Flask(__name__)
 cors = CORS(app)

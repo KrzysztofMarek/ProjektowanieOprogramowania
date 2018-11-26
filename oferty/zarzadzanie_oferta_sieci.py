@@ -7,7 +7,7 @@ from flask import Blueprint, jsonify,request
 from flask_cors import cross_origin
 
 
-from oferty import zarzadzanie_siecia_model as model_zs
+import zarzadzanie_siecia_model as model_zs
 
 
 zarzadzanie_oferta_sieci = Blueprint('zarzadzanie_oferta_sieci', __name__)
@@ -23,7 +23,7 @@ def pobierz_menu_sieci():
 @zarzadzanie_oferta_sieci.route('/dodaj_danie_siec', methods=['POST'])
 @cross_origin()
 def dodaj_danie():
-    danie = request.json()
+    danie = request.json
     if waliduj_danie(danie):
         return model_zs.dodaj_danie_dla_sieci(danie)
     return "Danie nie jest poprawne. Sprawdz wszystkie pola"
@@ -31,10 +31,10 @@ def dodaj_danie():
 
 def waliduj_danie(danie: dict):
     elementy_dania = ["nazwa", "cena", "opis"]
-    for element in elementy_dania:
+    for element in danie:
         if element not in elementy_dania:
             return False
-    return waliduj_nazwe(danie.nazwa) and waliduj_cene(danie.cena) and waliduj_opis(danie.opis)
+    return waliduj_nazwe(danie['nazwa']) and waliduj_cene(danie['cena']) and waliduj_opis(danie['opis'])
 
 
 def waliduj_nazwe(nazwa):
@@ -43,19 +43,22 @@ def waliduj_nazwe(nazwa):
     if nazwa[0] not in string.ascii_uppercase:
         return False
     for letter in nazwa[1:]:
-        if letter not in string.whitespace or letter not in string.ascii_lowercase:
+        if letter not in string.whitespace and letter not in string.ascii_lowercase and letter not in string.ascii_uppercase and letter != '-':
             return False
     return True
 
 
 def waliduj_cene(cena):
-    if re.search(r'^\d{1, 3}[,]\d{0,2}', cena):
+    if ',' in cena:
+        if re.search(r'^\d{1,3}\,?\d{1,2}?$', cena):
+            return True
+    elif 0 < len(cena) < 4:
         return True
     return False
 
 
 def waliduj_opis(opis):
     for letter in opis:
-        if letter in "!@#!$^%*&":
+        if letter in "!@#$^%*&":
             return False
     return len(opis) < 300

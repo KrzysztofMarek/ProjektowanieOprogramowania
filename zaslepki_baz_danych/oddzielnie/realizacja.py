@@ -71,13 +71,12 @@ def zmien_status_zamowienia():
 
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-    rrequest = request.get_json()
     try:
-        if rrequest["id_restauracji"] is None:
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(rrequest["id_restauracji"])
+        id_restauracji = int(request.args.get("id_restauracji"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -125,13 +124,12 @@ lista_zamowien_z_kontaktem = {
 
 @app.route('/pobierz_zamowienia_z_kontaktem', methods=['GET'])
 def pobierz_zamowienia_z_kontaktem():
-    rrequest = request.get_json()
     try:
-        if rrequest["id_restauracji"] is None:
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(rrequest["id_restauracji"])
+        id_restauracji = int(request.args.get("id_restauracji"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404

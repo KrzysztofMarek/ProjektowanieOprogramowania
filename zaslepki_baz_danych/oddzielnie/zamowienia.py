@@ -23,7 +23,8 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10'
+            'ocena': '2/10',
+            'adres': "Grunwaldzka 13"
         },
         {
             'id_zamowienia': 2,
@@ -37,7 +38,8 @@ lista_zamowien = {
             'kwota': 59.88,
             'status': 'przygotowywane',
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10'
+            'ocena': '4/10',
+            'adres': "Wolności 15"
 
         },
         {
@@ -52,7 +54,8 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'w_drodze',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10'
+            'ocena': '8/10',
+            'adres': "Alternatywy 4"
 
         }
     ]
@@ -92,7 +95,8 @@ def dodaj_zamowienie():
         resp.status_code = 404
         return resp
 
-    zamowienia_interator = + 1
+    global zamowienia_interator
+    zamowienia_interator +=1
     lista_zamowien['lista_zamowien'].append({
         'id_zamowienia': zamowienia_interator,
         'lista_dan': lista_dan,
@@ -173,13 +177,12 @@ def zmien_status_zamowienia():
 # Pobierz zamówienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-    rrequest = request.get_json()
     try:
-        if rrequest["id_restauracji"] is None:
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(rrequest["id_restauracji"])
+        id_restauracji = int(request.args.get("id_restauracji"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -191,14 +194,13 @@ def pobierz_zamowienia():
 #                                                                                    kwota:double,data_zlozenia:string,status:string,ocena:int)
 
 @app.route('/pobierz_zamowienie', methods=['GET'])
-def pobierz_zamowienia():
-    rrequest = request.get_json()
+def pobierz_zamowienie():
     try:
-        if rrequest["id_zamowienia"] is None:
+        if request.args.get("id_zamowienia") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_zamowienia = int(rrequest["id_zamowienia"])
+        id_zamowienia = int(request.args.get("id_zamowienia"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404

@@ -186,7 +186,7 @@ export default {
         cancel_order(id_zamowienia) {
             let self = this;
             zamowienia
-                .post(`/Zmien_staus_zamowienia?id_zamowienia=${id_zamowienia}&status=anulowane`)
+                .post(`/zmien_staus_zamowienia?id_zamowienia=${id_zamowienia}&status=anulowane`)
                 .then((response) => {
                     self.cancel_dialog = false;
                 })
@@ -204,7 +204,7 @@ export default {
         },
         repeat_order: async function(order) {
             try {
-                const menu_response = await oferty.get(`/Pobierz_menu_restauracji?id_restauracji=${order.id_restauracji}`);
+                const menu_response = await oferty.get(`/pobierz_menu_restauracji?id_restauracji=${order.id_restauracji}`);
                 const menu = menu_response.data;
                 const new_order = order.list.map(o => menu.find(x => x.id_dania == o.id_dania)).filter(x => x != undefined);
                 this.$store.commit('set_order', new_order);
@@ -217,7 +217,7 @@ export default {
     created: function() {
         let self = this;
         zamowienia
-            .get("/Pobierz_liste_zamowien?id_klienta=0")
+            .get("/pobierz_liste_zamowien?id_klienta=0")
             .then((response) => {
                 self.is_loading = false;
                 self.orders = response.data.lista_zamowien;

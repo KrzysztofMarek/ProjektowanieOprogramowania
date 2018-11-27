@@ -29,15 +29,12 @@ public class MenuController {
     public ResponseEntity<Object> getProducts(@RequestParam(value = "id_restauracji") Integer restaurantId) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json;
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-
 
         try {
             json = menuComponent.getProducts(restaurantId);
-            return ResponseEntity.status(200).headers(headers).body(json);
+            return ResponseEntity.status(200).body(json);
         } catch (Exception e) {
-            return ResponseEntity.status(404).headers(headers).body(null);
+            return ResponseEntity.status(404).body(null);
 		}
     }
 

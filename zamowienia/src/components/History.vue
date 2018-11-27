@@ -205,9 +205,10 @@ export default {
         repeat_order: async function(order) {
             try {
                 const menu_response = await oferty.get(`/pobierz_menu_restauracji?id_restauracji=${order.id_restauracji}`);
-                const menu = menu_response.data;
-                const new_order = order.list.map(o => menu.find(x => x.id_dania == o.id_dania)).filter(x => x != undefined);
+                const menu = menu_response.data.lista;
+                const new_order = order.lista_dan.map(o => menu.find(x => x.id_dania == o.id_dania)).filter(x => x != undefined);
                 this.$store.commit('set_order', new_order);
+                this.$router.push("/checkout");
             } catch (err) {
                 this.error_text = "Nie udało się ponowić zamówienia";
                 console.error(err);

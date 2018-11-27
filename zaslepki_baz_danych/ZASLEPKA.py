@@ -53,22 +53,7 @@ def pobierz_menu_restauracji():
         ]
     }
 
-    rrequest = request.get_json()
-    print(rrequest)
-    try:
-        if rrequest["id_restauracji"] is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(rrequest["id_restauracji"])
-        if id_restauracji == 0:
-            return jsonify(network_menu)
-        else:
-            return jsonify(restaurant_menu)
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
+    return jsonify(restaurant_menu)
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
@@ -106,39 +91,53 @@ def pobierz_resturacje():
 
 
 lista_zamowien = {
-        'lista_zamowien': [
-            {
-                'id_zamowienia': 1,
-                'lista_dan': [
-                    {'id_dania': 1, 'nazwa': 'Kawa'},
-                    {'id_dania': 2, 'nazwa': 'Ciastko'},
-                    {'id_dania': 3, 'nazwa': 'Bulka'}
-                ],
-                'status': 'oczekujace',
-            },
-            {
-                'id_zamowienia': 2,
-                'lista_dan': [
-                    {'id_dania': 1, 'nazwa': 'Kawa'},
-                    {'id_dania': 2, 'nazwa': 'Ciastko'},
-                    {'id_dania': 3, 'nazwa': 'Bulka'}
-                ],
-                'status': 'przygotowywane',
+    'lista_zamowien': [
+        {
+            'id_zamowienia': 1,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 26.88,
+            'status': 'oczekujace',
+            'data_zlozenia': '2018-09-10',
+            'ocena': '2/10'
+        },
+        {
+            'id_zamowienia': 2,
+            'id_klienta': 2,
+            'id_restauracji': 3,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 59.88,
+            'status': 'przygotowywane',
+            'data_zlozenia': '2018-06-11',
+            'ocena': '4/10'
 
-            },
-            {
-                'id_zamowienia': 3,
-                'lista_dan': [
-                    {'id_dania': 1, 'nazwa': 'Kawa'},
-                    {'id_dania': 2, 'nazwa': 'Ciastko'},
-                    {'id_dania': 3, 'nazwa': 'Bulka'}
-                ],
-                'status': 'w_drodze',
+        },
+        {
+            'id_zamowienia': 3,
+            'id_klienta': 1,
+            'id_restauracji': 5,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'w_drodze',
+            'data_zlozenia': '2018-12-16',
+            'ocena': '8/10'
 
-            }
-        ]
-    }
-
+        }
+    ]
+}
 
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():

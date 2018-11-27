@@ -103,8 +103,8 @@ def pobierz_menu_restauracji():
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
-@app.route('/pobierz_restauracje', methods=['GET'])
-def pobierz_resturacje():
+@app.route('/pobierz_restauracje_z_miasta', methods=['GET'])
+def pobierz_resturacje_z_miasta():
     restaurant_list = {
         'lista': [
             {
@@ -232,8 +232,8 @@ def usun_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_dania = request.args.get("id_dania")
-    id_restauracji = request.args.get("id_restauracji")
+    id_dania = int(request.args.get("id_dania"))
+    id_restauracji = int(request.args.get("id_restauracji"))
 
     k = 0
     if id_restauracji == 0:
@@ -282,12 +282,11 @@ def modyfikuj_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = rrequest['id_restauracji']
-    if id_restauracji != 1 or id_restauracji != 2:
+    id_restauracji = int(rrequest['id_restauracji'])
+    if id_restauracji != 1 and id_restauracji != 2:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-
     try:
         if rrequest["id_dania"] is None:
             resp = jsonify(success=False)
@@ -297,8 +296,7 @@ def modyfikuj_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_dania = rrequest['id_dania']
-
+    id_dania = int(rrequest['id_dania'])
     try:
         if rrequest["nazwa"]:
             if id_restauracji == 1 :
@@ -350,6 +348,9 @@ def modyfikuj_danie():
     except KeyError:
         pass
 
+    print(network_menu)
+    print(restaurant_menu_1)
+    print(restaurant_menu_2)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp

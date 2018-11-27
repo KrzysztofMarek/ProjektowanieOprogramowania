@@ -63,8 +63,8 @@ lista_zamowien = {
 zamowienia_interator = 4
 
 
-@app.route('/dodaj_zamowienie', methods=['POST'])
-def dodaj_zamowienie():
+@app.route('/dodaj_zamowienie_Z', methods=['POST'])
+def dodaj_zamowienie_Z():
     try:
         rrequest = request.get_json()
         if rrequest['id_klienta'] is None:
@@ -101,20 +101,20 @@ def dodaj_zamowienie():
         'id_zamowienia': zamowienia_interator,
         'lista_dan': lista_dan,
         'id_restauracji': id_restauracji,
-        'id_klienta': 2,
+        'id_klienta': id_klienta,
         'kwota': kwota,
         'status': 'oczekujące',
         'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
     })
-
+    print(lista_zamowien)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
 
 
 # Edytuj_zamowienie(id_zamowienia:int, lista[id_dania:int,nazwa:string],kwota:double)
-@app.route('/edytuj_zamowienie', methods=['POST'])
-def edytuj_zamowienie():
+@app.route('/edytuj_zamowienie_Z', methods=['POST'])
+def edytuj_zamowienie_Z():
     rrequest = request.get_json()
     try:
         if rrequest["id_zamowienia"] is None:
@@ -129,7 +129,7 @@ def edytuj_zamowienie():
     try:
         if rrequest["lista_dan"]:
             for zamowienie in lista_zamowien['lista_zamowien']:
-                if zamowienie['id_zamowienia'] == rrequest['id_zamowienia']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['lista_dan'] = str(rrequest['lista_dan'])
     except KeyError:
         pass
@@ -137,19 +137,20 @@ def edytuj_zamowienie():
     try:
         if rrequest["kwota"]:
             for zamowienie in lista_zamowien['lista_zamowien']:
-                if zamowienie['id_zamowienia'] == rrequest['id_zamowienia']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['cena'] = int(rrequest['cena'])
     except KeyError:
         pass
 
+    print(lista_zamowien)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
 
 
 # Zmien_status_zamowienia(id_zamowienia:int, status:string)
-@app.route('/zmien_status_zamowienia', methods=['POST'])
-def zmien_status_zamowienia():
+@app.route('/zmien_status_zamowienia_Z', methods=['POST'])
+def zmien_status_zamowienia_Z():
     rrequest = request.get_json()
     try:
         if rrequest["id_zamowienia"] is None:
@@ -169,14 +170,15 @@ def zmien_status_zamowienia():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
+    print(lista_zamowien)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
 
 
 # Pobierz zamówienia -> przekopiuj z realizacji
-@app.route('/pobierz_zamowienia', methods=['GET'])
-def pobierz_zamowienia():
+@app.route('/pobierz_zamowienia_Z', methods=['GET'])
+def pobierz_zamowienia_Z():
     try:
         if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
@@ -193,8 +195,8 @@ def pobierz_zamowienia():
 # Czy to ma sens? : Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
 #                                                                                    kwota:double,data_zlozenia:string,status:string,ocena:int)
 
-@app.route('/pobierz_zamowienie', methods=['GET'])
-def pobierz_zamowienie():
+@app.route('/pobierz_zamowienie_Z', methods=['GET'])
+def pobierz_zamowienie_Z():
     try:
         if request.args.get("id_zamowienia") is None:
             resp = jsonify(success=False)

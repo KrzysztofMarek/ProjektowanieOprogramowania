@@ -59,7 +59,7 @@ def dodaj_restauracje():
             'id_restauracji': restauracje_iterator ,
             'adres': adres
         })
-
+    print(lista_restauracji)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -73,12 +73,14 @@ def usun_restauracje():
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = request.args.get('id_restauracji')
+        id_restauracji = int(request.args.get('id_restauracji'))
         k = 0
         for restauracja in lista_restauracji['lista_restauracji']:
             if restauracja['id_restauracji'] == id_restauracji:
                 lista_restauracji['lista_restauracji'].pop(k)
             k += 1
+
+        print(lista_restauracji)
         resp = jsonify(success=True)
         resp.status_code = 200
         return resp

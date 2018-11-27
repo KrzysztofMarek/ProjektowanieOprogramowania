@@ -103,6 +103,7 @@ def dodaj_pracownika():
             'haslo': haslo
         })
 
+    print(lista_pracownikow)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -121,6 +122,8 @@ def usun_pracownika():
             if pracownik['id_pracownika'] == id_pracownika:
                 lista_pracownikow['lista_pracownikow'].pop(k)
             k += 1
+
+        print(lista_pracownikow)
         resp = jsonify(success=True)
         resp.status_code = 200
         return resp
@@ -133,12 +136,13 @@ def usun_pracownika():
 @app.route('/pobierz_pracownikow', methods=['GET'])
 def pobierz_pracownikow():
     try:
-        if request.arg.get("id_restauracji") is None:
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(request["id_restauracji"])
-        # nie ma rozroznienia na pracownikow ze wzgledu na restauracje, przykro mi :(
+        id_restauracji = int(request.args.get("id_restauracji"))
+        # nie ma jeszcze rozroznienia na pracownikow ze wzgledu na restauracje, przykro mi :(
+        print(lista_pracownikow)
         return jsonify(lista_pracownikow)
     except KeyError:
         resp = jsonify(success=False)

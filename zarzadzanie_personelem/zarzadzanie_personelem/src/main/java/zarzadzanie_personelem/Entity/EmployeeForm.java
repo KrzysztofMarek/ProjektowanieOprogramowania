@@ -19,9 +19,8 @@ public class EmployeeForm {
     private String nazwisko;
     private String telefon;
     private String stanowisko;
-    private String login;
+    private String id_pracownika;
     private String haslo;
-
 
     public String getId_restauracji() {
         return id_restauracji;
@@ -43,8 +42,8 @@ public class EmployeeForm {
         return stanowisko;
     }
 
-    public String getLogin() {
-        return login;
+    public String getId_pracownika() {
+        return id_pracownika;
     }
 
     public String getHaslo() {
@@ -65,7 +64,7 @@ public class EmployeeForm {
             valid = false;
             return;
         }
-        if(!validateLogin()){
+        if(!validateId_pracownika()){
             valid = false;
             return;
         }
@@ -124,17 +123,17 @@ public class EmployeeForm {
         return true;
     }
     
-    private boolean validateLogin(){
-        if(login.length() > 20){
-            log.info("String {} has more than 20 signs", login);
+    private boolean validateId_pracownika(){
+        if(id_pracownika.length() > 20){
+            log.info("String {} has more than 20 signs", id_pracownika);
             return false;            
         }
-        if(login.length() < 5){
-            log.info("String {} has less than 5 signs", login);
+        if(id_pracownika.length() < 5){
+            log.info("String {} has less than 5 signs", id_pracownika);
             return false;            
         }
-        if(!login.matches("[\\p{Graph}]+")){
-            log.info("Some signs of {} are not letters", login);
+        if(!id_pracownika.matches("[\\p{Graph}]+")){
+            log.info("Some signs of {} are not letters", id_pracownika);
             return false;            
         }
         return true;

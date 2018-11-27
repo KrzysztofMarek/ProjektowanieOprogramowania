@@ -5,16 +5,14 @@
  */
 package baza_zarzadzanie_siecia.Entity;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -26,24 +24,20 @@ public class SQLConnector implements Connector {
     private static final Logger log = LoggerFactory.getLogger(SQLConnector.class);
 
     @Override
-    public String createRestaurant(final String restaurantFormJson, final String url) {
-        HttpEntity<MultiValueMap<String, String>> request = getRequest(restaurantFormJson); 
+    public String createRestaurant(final String restaurantFormJson, final String url){   
         
+        log.info("Sending {} to {}", restaurantFormJson, url);
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(url, request, String.class); 
-    }
-    
-    private HttpEntity<MultiValueMap<String, String>> getRequest(String formJson){
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        
-        HashMap<String, String> map = (new Gson()).fromJson(formJson, new TypeToken<HashMap<String, String>>(){}.getType());
-        MultiValueMap<String, String> multiMap = new LinkedMultiValueMap<>();
-        map.entrySet().forEach((entry) -> {
-            multiMap.add(entry.getKey(), entry.getValue());
-        });
-        
-        return new HttpEntity<>(multiMap, headers);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<String>(restaurantFormJson, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return "Udało się!";
+        }else{
+            return "Nie udało się!";    
+        }
     }
     
 }

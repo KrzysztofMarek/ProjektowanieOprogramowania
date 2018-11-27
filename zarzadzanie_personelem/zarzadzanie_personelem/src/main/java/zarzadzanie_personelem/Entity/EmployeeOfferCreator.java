@@ -27,43 +27,23 @@ public class EmployeeOfferCreator {
         employeeOfferForm.validate();
         if(employeeOfferForm.isValid()){
             log.info("Saving to cache");
-            saveEmployeeOfferToCache(employeeOfferForm);
+            String message = saveEmployeeOfferToCache(employeeOfferForm);
             log.info("Saved to cache");
-            return saveEmployeeOfferToDB(employeeOfferForm, url);
+            return new Gson().toJson(message);
         }else{
-            return (new Gson()).toJson("Invalid input");
+            return (new Gson()).toJson("Nie udało się!");
         }
     }
     
-    private String saveEmployeeOfferToDB(final EmployeeOfferForm employeeOfferForm, final String url){
-        RestTemplate restTemplate = new RestTemplate();
-        String responseDB = restTemplate.postForObject(url, employeeOfferForm, String.class);
-        
-        HashMap<String, String> responseUser = new HashMap();
-        responseUser.put("message", responseDB);
-        return (new Gson()).toJson(responseUser);
-    }   
-    
-    private void saveEmployeeOfferToCache(final EmployeeOfferForm employeeOfferForm) {
+    private String saveEmployeeOfferToCache(final EmployeeOfferForm employeeOfferForm) {
         log.info((new Gson()).toJson(EasyCache.getAllElements()));
         EasyCache.addElement(employeeOfferForm);
         log.info((new Gson()).toJson(EasyCache.getAllElements()));
+        return "Udało się!";
     }
     
     public String getEmployeeOffers(final String url) {
-        if(EasyCache.getSize() != 0){
-            return (new Gson()).toJson(EasyCache.getAllElements());
-        }else{
-            return (new Gson()).toJson(getEmployeeOffersFromDB(url));
-        }
+        return (new Gson()).toJson(EasyCache.getAllElements());
     }
-    private String getEmployeeOffersFromDB(final String url){
-        RestTemplate restTemplate = new RestTemplate();
-        String responseDB = restTemplate.getForObject(url, String.class);
-        
-        EasyCache.addJsonArray(responseDB, EmployeeOfferForm.class);
-        
-        return responseDB;
-    }   
     
 }

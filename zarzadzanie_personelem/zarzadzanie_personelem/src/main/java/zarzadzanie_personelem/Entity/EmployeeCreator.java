@@ -21,8 +21,10 @@ public class EmployeeCreator {
 
     public String createEmployee(final String employeeFormJson, final String url) {
         EmployeeForm employeeForm = (new Gson()).fromJson(employeeFormJson, EmployeeForm.class);
+        log.info("Validating employee data");
         employeeForm.validate();
         if(employeeForm.isValid()){
+            log.info("Adding employee to DB");
             return saveEmployeeToDB(employeeForm, url);
         }else{
             return (new Gson()).toJson("Invalid input");

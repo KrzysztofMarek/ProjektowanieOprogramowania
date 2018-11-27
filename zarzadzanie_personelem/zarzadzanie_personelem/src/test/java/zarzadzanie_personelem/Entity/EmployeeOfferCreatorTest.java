@@ -12,7 +12,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest(EmployeeOfferCreator.class)
 public class EmployeeOfferCreatorTest {
     
-    String invalidInput = new Gson().toJson("Invalid input");
+    String invalidInput = new Gson().toJson("Nie udało się!");
     
     @Test
     public void testCreateEmployeeOfferCorrect() throws Exception{
@@ -50,8 +50,7 @@ public class EmployeeOfferCreatorTest {
         EmployeeOfferCreator employeeOfferCreator = new EmployeeOfferCreator();
         EmployeeOfferCreator employeeOfferCreatorSpy = PowerMockito.spy(employeeOfferCreator);
         
-        PowerMockito.doReturn("Success").when(employeeOfferCreatorSpy, "saveEmployeeOfferToDB", Mockito.any(), Mockito.any());
-        PowerMockito.doNothing().when(employeeOfferCreatorSpy, "saveEmployeeOfferToCache", Mockito.any());
+        PowerMockito.doReturn("Success").when(employeeOfferCreatorSpy, "saveEmployeeOfferToCache", Mockito.any());
         String result = employeeOfferCreatorSpy.createEmployeeOffer(formJson, "");
         return result;
     }

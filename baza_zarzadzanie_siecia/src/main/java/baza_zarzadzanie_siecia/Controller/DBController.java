@@ -17,7 +17,7 @@ public class DBController {
     @Autowired
     private Environment env;
     
-    Connector connector = new MockConnector();
+    Connector connector = new SQLConnector();
     
     private static final Logger log = LoggerFactory.getLogger(DBController.class);
         

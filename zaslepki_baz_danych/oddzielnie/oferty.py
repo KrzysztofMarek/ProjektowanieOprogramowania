@@ -77,16 +77,15 @@ restaurant_menu_2 = {
 
 id_dania_iterator = 4
 
+
 @app.route('/pobierz_menu_restauracji', methods=['GET'])
 def pobierz_menu_restauracji():
-    rrequest = request.get_json()
-    print(rrequest)
     try:
-        if rrequest["id_restauracji"] is None:
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(rrequest["id_restauracji"])
+        id_restauracji = int( request.args.get("id_restauracji"))
         if id_restauracji == 0:
             return jsonify(network_menu)
         elif id_restauracji == 1:
@@ -104,8 +103,8 @@ def pobierz_menu_restauracji():
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
-@app.route('/pobierz_restauracje', methods=['GET'])
-def pobierz_resturacje():
+@app.route('/pobierz_restauracje_z_miasta', methods=['GET'])
+def pobierz_resturacje_z_miasta():
     restaurant_list = {
         'lista': [
             {
@@ -126,13 +125,12 @@ def pobierz_resturacje():
             }
         ]
     }
-    rrequest = request.get_json()
     try:
-        if rrequest["miasto"] is None:
+        if request.args.get("miasto") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        miasto = int(request["miasto"])
+        miasto = str(request.args.get("miasto"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -168,40 +166,65 @@ def dodaj_danie():
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
+        id_restauracji = rrequest["id_restauracji"]
+        if rrequest["nazwa"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        nazwa = rrequest["nazwa"]
+        if rrequest["opis"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        opis = rrequest["opis"]
+        if rrequest["cena"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        cena = rrequest["cena"]
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = rrequest['id_restauracji']
-    id_dania_iterator =+ 1
+    global id_dania_iterator
+    id_dania_iterator += 1
     if id_restauracji == 1:
         restaurant_menu_1['lista'].append({
                 'id_dania': id_dania_iterator,
-                'nazwa': 'Ciastko',
-                'cena': 29.99,
-                'opis': 'Pycha ciacho'
+                'nazwa': nazwa,
+                'cena': cena,
+                'opis': opis
 
             })
+        print(restaurant_menu_1)
     elif id_restauracji == 2:
         restaurant_menu_2['lista'].append({
                 'id_dania': id_dania_iterator,
-                'nazwa': 'Ciastko',
-                'cena': 29.99,
-                'opis': 'Pycha ciacho'
+                'nazwa': nazwa,
+                'cena': cena,
+                'opis': opis
 
             })
+        print(restaurant_menu_2)
     else:
         resp = jsonify('nie ma takiej restuaracji')
         resp.status_code = 404
         return resp
 
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
-# Usun_danie(id_dania:int) <- usuwa danie z oferty sieci
-@app.route('/usun_danie', methods=['POST'])
+
+# Usun_danie(id_dania:int, id_restauracji:int) <- usuwa danie z oferty sieci lub restauracji
+@app.route('/usun_danie', methods=['GET'])
 def usun_danie():
-    rrequest = request.get_json()
     try:
-        if rrequest["id_dania"] is None:
+        if request.args.get("id_dania") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
@@ -209,11 +232,41 @@ def usun_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_dania = rrequest['id_dania']
-    if id_dania == 1:
-        network_menu['lista'].pop(0)
+    id_dania = int(request.args.get("id_dania"))
+    id_restauracji = int(request.args.get("id_restauracji"))
+
+    k = 0
+    if id_restauracji == 0:
+        for danie in network_menu['lista']:
+            if danie['id_dania'] == id_dania:
+                network_menu['lista'].pop(k)
+            k += 1
+        k = 0
+        for danie in restaurant_menu_1['lista']:
+            if danie['id_dania'] == id_dania:
+                restaurant_menu_1['lista'].pop(k)
+            k += 1
+        k = 0
+        for danie in restaurant_menu_2['lista']:
+            if danie['id_dania'] == id_dania:
+                restaurant_menu_2['lista'].pop(k)
+            k += 1
+    elif id_restauracji == 1:
+        for danie in restaurant_menu_1['lista']:
+            if danie['id_dania'] == id_dania:
+                restaurant_menu_1['lista'].pop(k)
+            k += 1
     else:
-        network_menu['lista'].pop(1)
+        for danie in restaurant_menu_2['lista']:
+            if danie['id_dania'] == id_dania:
+                restaurant_menu_2['lista'].pop(k)
+            k += 1
+    print(network_menu)
+    print(restaurant_menu_1)
+    print(restaurant_menu_2)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
 # Modyfikuj_danie(id_dania:int, id_restauracji:int, nazwa:string, cena:double, opis:string)
@@ -229,12 +282,11 @@ def modyfikuj_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = rrequest['id_restauracji']
-    if id_restauracji != 1 or id_restauracji != 2:
+    id_restauracji = int(rrequest['id_restauracji'])
+    if id_restauracji != 1 and id_restauracji != 2:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-
     try:
         if rrequest["id_dania"] is None:
             resp = jsonify(success=False)
@@ -244,17 +296,19 @@ def modyfikuj_danie():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_dania = rrequest['id_dania']
-
-
+    id_dania = int(rrequest['id_dania'])
     try:
         if rrequest["nazwa"]:
             if id_restauracji == 1 :
                 for danie in restaurant_menu_1['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['nazwa'] = str(rrequest['nazwa'])
-            else:
+            elif id_restauracji ==2:
                 for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['nazwa'] = str(rrequest['nazwa'])
+            else:
+                for danie in network_menu['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['nazwa'] = str(rrequest['nazwa'])
     except KeyError:
@@ -262,28 +316,41 @@ def modyfikuj_danie():
 
     try:
         if rrequest["cena"]:
+            if id_restauracji == 1:
                 for danie in restaurant_menu_1['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['cena'] = int(rrequest['cena'])
-        else:
-            for danie in restaurant_menu_2['lista']:
-                if danie['id_dania'] == id_dania:
-                    danie['cena'] = int(rrequest['cena'])
+            elif id_restauracji == 2:
+                for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['cena'] = int(rrequest['cena'])
+            else:
+                for danie in network_menu['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['cena'] = int(rrequest['cena'])
     except KeyError:
         pass
 
     try:
         if rrequest["opis"]:
-            for danie in restaurant_menu_1['lista']:
-                if danie['id_dania'] == id_dania:
-                    danie['opis'] = str(rrequest['opis'])
-        else:
-            for danie in restaurant_menu_2['lista']:
-                if danie['id_dania'] == id_dania:
-                    danie['opis'] = str(rrequest['opis'])
+            if id_restauracji == 1:
+                for danie in restaurant_menu_1['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['opis'] = str(rrequest['opis'])
+            elif id_restauracji == 2:
+                for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['opis'] = str(rrequest['opis'])
+            else:
+                for danie in network_menu['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['opis'] = str(rrequest['opis'])
     except KeyError:
         pass
 
+    print(network_menu)
+    print(restaurant_menu_1)
+    print(restaurant_menu_2)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp

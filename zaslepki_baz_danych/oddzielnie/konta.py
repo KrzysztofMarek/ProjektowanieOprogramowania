@@ -11,13 +11,12 @@ def main_site():
 # Pobierz_pracownika(id_pracownika: string) zwraca string:login, string:hasło oraz string:stanowisko
 @app.route('/pobierz_pracownika', methods=['GET'])
 def pobierz_pracownika():
-    rrequest = request.get_json()
     try:
-        if rrequest["id_pracownika"] is None:
+        if request.args.get("id_pracownika") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_pracownika = int(request["id_pracownika"])
+        id_pracownika = str(request.args.get("id_pracownika"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -28,7 +27,7 @@ def pobierz_pracownika():
             {
                 'login': 'jusepe',
                 'hasło': 'wodjfoph35vg',
-                'stanowisko': 'Kucharz'
+                'stanowisko': 'Pracownik kuchni'
 
             },
             {
@@ -43,24 +42,24 @@ def pobierz_pracownika():
             }
         ]
     }
-    if id_pracownika == 0:
-        return jsonify(employee_list['lista'][0])
-    elif id_pracownika == 1:
-        return jsonify(employee_list['lista'][1])
-    else:
-        return jsonify(employee_list['lista'][2])
+    for pracownik in employee_list['lista']:
+        if pracownik['login'] == id_pracownika:
+            return jsonify(pracownik)
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
 
 
 # Pobierz_klienta(id_klienta:string) zwraca string:login, string:hasło
 @app.route('/pobierz_klienta', methods=['GET'])
-def pobierz_pracownika():
-    rrequest = request.get_json()
+def pobierz_klienta():
     try:
-        if rrequest["id_klienta"] is None:
+        if request.args.get("id_klienta") is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_klienta = int(request["id_klienta"])
+        id_klienta = str(request.args.get("id_klienta"))
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -83,12 +82,13 @@ def pobierz_pracownika():
             }
         ]
     }
-    if id_klienta == 0:
-        return jsonify(client_list['lista'][0])
-    elif id_klienta == 1:
-        return jsonify(client_list['lista'][1])
-    else:
-        return jsonify(client_list['lista'][2])
+    for klient in client_list['lista']:
+        if klient['login'] == id_klienta:
+            return jsonify(klient)
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
 
 
 if __name__ == '__main__':

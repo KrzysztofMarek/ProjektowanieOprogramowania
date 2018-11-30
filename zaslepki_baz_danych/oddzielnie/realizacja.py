@@ -7,6 +7,8 @@ lista_zamowien = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
+            'id_restauracji': 1,
+            'kwota': 23.99,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
@@ -17,6 +19,8 @@ lista_zamowien = {
         },
         {
             'id_zamowienia': 2,
+            'id_restauracji': 2,
+            'kwota': 25.77,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
@@ -28,6 +32,8 @@ lista_zamowien = {
         },
         {
             'id_zamowienia': 3,
+            'id_restauracji': 3,
+            'kwota': 30.57,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},

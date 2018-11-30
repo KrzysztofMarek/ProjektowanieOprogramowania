@@ -20,13 +20,13 @@ public class OrderControllerTest {
         newOrder.id_klienta = 1;
         newOrder.id_restauracji = 1;
         newOrder.kwota = 5.00;
-        newOrder.lista = new ArrayList<OrderItem>();
+        newOrder.lista_dan = new ArrayList<OrderItem>();
 
         OrderItem orderItem = new OrderItem();
         orderItem.id_dania = 2;
         orderItem.nazwa = "chlebek";
 
-        newOrder.lista.add(orderItem);
+        newOrder.lista_dan.add(orderItem);
 
         ResponseEntity<Object> response = orderController.CreateOrder(newOrder);
         assertEquals(200, response.getStatusCodeValue());

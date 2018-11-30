@@ -31,7 +31,7 @@ public class OrderController {
         headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 
         try {
-            orderId = dbService.AddOrder(newOrder.id_klienta, newOrder.id_restauracji, newOrder.lista, newOrder.kwota);
+            orderId = dbService.AddOrder(newOrder);
         } catch (Exception e) {
             return ResponseEntity.status(503).headers(headers).body(null);
         }

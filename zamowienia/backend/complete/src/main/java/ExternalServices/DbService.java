@@ -39,28 +39,31 @@ public class DbService {
         this.componentUrl = "http://127.0.0.1:5000/"; 
     }
 
-    public Integer AddOrder(int clientId, int restaurantId, ArrayList<OrderItem> products, double price)
+    public Integer AddOrder(NewOrder newOrder)
             throws UnsupportedOperationException, IOException {
         HttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost(componentUrl + "dodaj_zamowienie");
+        HttpPost httppost = new HttpPost(componentUrl + "dodaj_zamowienie_Z");
 
         JSONObject json = new JSONObject();
-        json.put("id_klienta", clientId);
-        json.put("id_restauracji", restaurantId);
-        json.put("kwota", price);
+        json.put("id_klienta", newOrder.id_klienta);
+        json.put("id_restauracji", newOrder.id_restauracji);
+        json.put("kwota", newOrder.kwota);
+        json.put("adres", newOrder.adres);
         
         JSONArray array = new JSONArray();
-        for (OrderItem orderItem : products) {
+        for (OrderItem orderItem : newOrder.lista_dan) {
             JSONObject item = new JSONObject();
             item.put("id_dania", orderItem.id_dania);
             item.put("nazwa", orderItem.nazwa);
             array.put(item);
         }
-        json.put("lista", array);
+        json.put("lista_dan", array);
 
         StringEntity requestEntity = new StringEntity(
             json.toString(),
             ContentType.APPLICATION_JSON);
+        
+        System.out.print(json.toString());
 
         httppost.setEntity(requestEntity);
 
@@ -116,7 +119,7 @@ public class DbService {
     }
 
     public String GetOrders(Integer userId) throws URISyntaxException, ClientProtocolException, IOException {
-        URIBuilder builder = new URIBuilder(this.componentUrl + "pobierz_zamowienia");
+        URIBuilder builder = new URIBuilder(this.componentUrl + "pobierz_zamowienia_Z");
         builder.setParameter("id_restauracji", userId.toString());
 
         HttpClient httpclient = HttpClients.createDefault();

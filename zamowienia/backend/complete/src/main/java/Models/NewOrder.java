@@ -7,7 +7,7 @@ public class NewOrder {
 
     public Integer id_klienta;
     public Integer id_restauracji;
-    public ArrayList<OrderItem> lista;
+    public ArrayList<OrderItem> lista_dan;
     public double kwota;
-
+    public String adres;
 }

@@ -206,6 +206,15 @@ def dodaj_danie():
 
             })
         print(restaurant_menu_2)
+    elif id_restauracji == 0:
+        network_menu['lista'].append({
+                'id_dania': id_dania_iterator,
+                'nazwa': nazwa,
+                'cena': cena,
+                'opis': opis
+
+            })
+        print(network_menu)
     else:
         resp = jsonify('nie ma takiej restuaracji')
         resp.status_code = 404

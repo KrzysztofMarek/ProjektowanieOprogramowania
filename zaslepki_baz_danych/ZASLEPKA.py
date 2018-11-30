@@ -244,6 +244,7 @@ def pobierz_miasta():
 @app.route('/dodaj_danie', methods=['POST'])
 def dodaj_danie():
     rrequest = request.get_json()
+    print(rrequest)
     try:
         if rrequest["id_restauracji"] is None:
             resp = jsonify(success=False)

@@ -6,7 +6,7 @@ from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 
 from Constants import Constants
-from zarzadzanie_restauracja_model import pobierz_menu_restauracji, dodaj_danie_dla_restauracji
+from zarzadzanie_restauracja_model import pobierz_menu_model_rest, dodaj_danie_dla_restauracji
 
 
 zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __name__)
@@ -18,8 +18,8 @@ def pobierz_menu_restauracji():
     if request.args.get("id_restauracji") is None:
         return 404
     id_restauracji = int(request.args.get("id_restauracji"))
-    menu_restauarcji = pobierz_menu_restauracji(id_restauracji)
-    return jsonify(menu_restauarcji)
+    menu_restauracji = pobierz_menu_model_rest(id_restauracji)
+    return jsonify(menu_restauracji)
 
 
 @zarzadzanie_oferta_restauracji.route('/dodaj_danie_restauracja', methods=['POST'])

@@ -3,7 +3,7 @@ import re
 import requests
 import string
 
-from flask import Blueprint, jsonify,request
+from flask import Blueprint, jsonify, request
 from flask_cors import cross_origin
 
 
@@ -16,7 +16,7 @@ zarzadzanie_oferta_sieci = Blueprint('zarzadzanie_oferta_sieci', __name__)
 @zarzadzanie_oferta_sieci.route('/pobierz_menu_sieci', methods=['GET'])
 @cross_origin()
 def pobierz_menu_sieci():
-    menu_sieci = model_zs.pobierz_menu_sieci()
+    menu_sieci = model_zs.pobierz_menu_model_siec()
     return jsonify(menu_sieci)
 
 

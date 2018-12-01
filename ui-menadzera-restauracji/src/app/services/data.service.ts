@@ -19,10 +19,6 @@ export class DataService {
 
     addEmployee(employee: Employee) {
         return this.http.post('http://localhost:9090/dodaj_pracownika', employee)
-            .subscribe((res: Response) => {
-                console.log(res);
-                console.log(employee);
-            });
     }
 
     addRecruitment(recruitmentNew: Recruitment) {

@@ -4,6 +4,6 @@ export class Employee {
     public id_restauracji: number;
     public stanowisko: string;
     public telefon: number;
-    public login: string;
+    public id_pracownika: string;
     public haslo: string;
   }

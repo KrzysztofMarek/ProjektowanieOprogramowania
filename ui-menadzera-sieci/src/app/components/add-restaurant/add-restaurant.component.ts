@@ -10,6 +10,7 @@ import { DataService } from '../../services/data.service';
 export class AddRestaurantComponent implements OnInit {
 
   restaurant: Restaurant = new Restaurant();
+  alertString: string = "";
 
   constructor(public dataService: DataService) {
 
@@ -20,7 +21,13 @@ export class AddRestaurantComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dataService.addRestaurant(this.restaurant);
+    this.dataService.addRestaurant(this.restaurant)
+    .subscribe(res => {
+      var getValueArray = Object.values(res)
+      this.alertString += getValueArray;
+      alert(this.alertString.split(',').join(""));
+      this.alertString = "";
+    });
   }
   
   onCancel() {

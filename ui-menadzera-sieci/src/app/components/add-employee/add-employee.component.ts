@@ -10,6 +10,7 @@ import { DataService } from '../../services/data.service';
 export class AddEmployeeComponent implements OnInit {
 
   employee: Employee = new Employee();
+  alertString: string = "";
 
   constructor(
     public dataService: DataService
@@ -20,7 +21,14 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.dataService.addEmployee(this.employee);
+    this.dataService.addEmployee(this.employee)
+    .subscribe(res => {
+      console.log(res);
+      var getValueArray = Object.values(res)
+      this.alertString += getValueArray;
+      alert(this.alertString.split(',').join(""));
+      this.alertString = "";
+    });
   }
 
 }

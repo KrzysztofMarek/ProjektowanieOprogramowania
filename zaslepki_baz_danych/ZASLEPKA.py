@@ -78,15 +78,8 @@ def pobierz_klienta():
                 'hasło': 'spwwocihpf'
             },
             {
-<<<<<<< HEAD
-                'id_dania': 3,
-                'nazwa': 'Bulka',
-                'cena': 2.99,
-                'opis': 'Duza bula'
-=======
                 'login': 'rysio99',
                 'hasło': 'tesy54pipoyr'
->>>>>>> master
             }
         ]
     }
@@ -94,9 +87,6 @@ def pobierz_klienta():
         if klient['login'] == id_klienta:
             return jsonify(klient)
 
-<<<<<<< HEAD
-    return jsonify(restaurant_menu)
-=======
     resp = jsonify(success=False)
     resp.status_code = 404
     return resp
@@ -193,7 +183,6 @@ def pobierz_menu_restauracji():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
->>>>>>> master
 
 
 # Pobierz_restauracje(miasto:string) zwraca (lista[id_restauracji:int, nazwa:string, adres:string])
@@ -232,14 +221,6 @@ def pobierz_resturacje_z_miasta():
     return jsonify(restaurant_list)
 
 
-<<<<<<< HEAD
-lista_zamowien = {
-    'lista_zamowien': [
-        {
-            'id_zamowienia': 1,
-            'id_klienta': 1,
-            'id_restauracji': 1,
-=======
 # Pobierz_miasta() zwraca (lista[miasto:string])
 @app.route('/pobierz_miasta', methods=['GET'])
 def pobierz_miasta():
@@ -462,74 +443,38 @@ lista_zamowien_R = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
->>>>>>> master
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
-<<<<<<< HEAD
-            'kwota': 26.88,
-            'status': 'oczekujace',
-            'data_zlozenia': '2018-09-10',
-            'ocena': '2/10'
-        },
-        {
-            'id_zamowienia': 2,
-            'id_klienta': 2,
-            'id_restauracji': 3,
-=======
             'status': 'oczekujace',
             'kontakt': {'imie': 'Jan', 'nazwisko': 'Kowalski', 'telefon': '123456789', 'adres': 'Konwaliowa 3'}
         },
         {
             'id_zamowienia': 2,
->>>>>>> master
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
-<<<<<<< HEAD
-            'kwota': 59.88,
-            'status': 'przygotowywane',
-            'data_zlozenia': '2018-06-11',
-            'ocena': '4/10'
-=======
             'status': 'przygotowywane',
             'kontakt': {'imie': 'Adam', 'nazwisko': 'Wypadam', 'telefon': '123456789', 'adres': 'Wysoka 3'}
->>>>>>> master
 
         },
         {
             'id_zamowienia': 3,
-<<<<<<< HEAD
-            'id_klienta': 1,
-            'id_restauracji': 5,
-=======
->>>>>>> master
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
-<<<<<<< HEAD
-            'kwota': 43.80,
-            'status': 'w_drodze',
-            'data_zlozenia': '2018-12-16',
-            'ocena': '8/10'
-
-        }
-    ]
-}
-=======
             'status': 'w_drodze',
             'kontakt': {'imie': 'Andrzej', 'nazwisko': 'Adrianowski', 'telefon': '123456789', 'adres': 'Cicha 3'}
         }
     ]
 }
 
->>>>>>> master
 
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():
@@ -559,29 +504,6 @@ def zmien_status_zamowienia():
 
 @app.route('/pobierz_zamowienia', methods=['GET'])
 def pobierz_zamowienia():
-<<<<<<< HEAD
-
-    return jsonify(lista_zamowien)
-
-
-# Pobierz_miasta() zwraca (lista[miasto:string])
-@app.route('/pobierz_miasta', methods=['GET'])
-def pobierz_miasta():
-    cities_list = {
-        'lista': [
-            {
-                'nazwa': 'Warszawa'
-            },
-            {
-                'nazwa': 'Radom'
-            },
-            {
-                'nazwa': 'Torun'
-            }
-        ]
-    }
-    return jsonify(cities_list)
-=======
     try:
         if request.args.get("id_restauracji") is None:
             resp = jsonify(success=False)
@@ -593,7 +515,6 @@ def pobierz_miasta():
         resp.status_code = 404
         return resp
     return jsonify(lista_zamowien_R)
->>>>>>> master
 
 
 lista_zamowien = {

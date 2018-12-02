@@ -165,7 +165,7 @@ export default {
             let zamowienie = {
                 id_klienta: 0,
                 id_restauracji: this.$store.state.restaurant.id_restauracji,
-                lista: this.$store.state.order.map(v => { v.id_dania, v.nazwa }),
+                lista: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
                 kwota: this.total_price
             };
             zamowienia

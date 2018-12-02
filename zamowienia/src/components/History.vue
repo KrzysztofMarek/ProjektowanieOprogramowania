@@ -45,8 +45,10 @@
                                         </v-card-actions>
                                     </v-card>
                                 </v-dialog>
-                                <v-btn v-else small @click="repeat_order(props.item)">ponów</v-btn>
+                                <v-btn v-else-if="props.item.status == 'dostarczone'" small @click="repeat_order(props.item)">ponów</v-btn>
+                                <v-btn v-else-if="props.item.status == 'anulowane'" small @click="repeat_order(props.item)">ponów</v-btn>
                             </p>
+                            
                         </td>
                         <td class="text-xs-right">{{ display_price(props.item.kwota) }}</td>
                     </template>

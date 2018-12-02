@@ -169,7 +169,7 @@ export default {
                 kwota: this.total_price
             };
             zamowienia
-                .post("/Zloz_zamowienie", zamowienie)
+                .post("/dodaj_zamowienie", zamowienie)
                 .then((response) => {
                     self.is_loading = false;
                     window.location.href = response.data;

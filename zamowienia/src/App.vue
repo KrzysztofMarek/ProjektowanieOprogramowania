@@ -7,6 +7,18 @@
       <v-spacer></v-spacer>
       <v-btn
         flat
+        to="/history"
+      >
+        <v-badge
+          overlap
+          color="red"
+          right
+        >
+          <v-icon>history</v-icon>
+        </v-badge>
+      </v-btn>
+      <v-btn
+        flat
         to="/checkout"
       >
         <v-badge

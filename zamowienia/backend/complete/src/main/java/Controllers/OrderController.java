@@ -27,13 +27,10 @@ public class OrderController {
 
         Integer orderId = null;
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-
         try {
             orderId = dbService.AddOrder(newOrder);
         } catch (Exception e) {
-            return ResponseEntity.status(503).headers(headers).body(null);
+            return ResponseEntity.status(503).body(null);
         }
 
         if(orderId != null){
@@ -49,11 +46,11 @@ public class OrderController {
             json.put("id_zamowienia", orderId);
             json.put("redirect", redirectUrl);
 
-            return ResponseEntity.status(200).headers(headers).body(json.toString());
+            return ResponseEntity.status(200).body(json.toString());
 
             
         }else{
-            return ResponseEntity.status(400).headers(headers).body(null);
+            return ResponseEntity.status(400).body(null);
         }
 		
     }

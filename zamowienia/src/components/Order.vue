@@ -165,14 +165,19 @@ export default {
             let zamowienie = {
                 id_klienta: 0,
                 id_restauracji: this.$store.state.restaurant.id_restauracji,
-                lista: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
-                kwota: this.total_price
+                lista_dan: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
+                kwota: this.total_price,
+                adres: this.address,
             };
             zamowienia
                 .post("/dodaj_zamowienie", zamowienie)
                 .then((response) => {
                     self.is_loading = false;
-                    window.location.href = response.data;
+                    if (response.data.redirect == undefined) {
+                        self.$router.push("/history");
+                    } else {
+                        window.location.href = response.data.redirect;
+                    }
                 })
                 .catch((err) => {
                     self.is_loading = false;

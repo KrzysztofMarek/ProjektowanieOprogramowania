@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.httpService.fetchOrders().subscribe(
       data => {
-        this.orderList = data;
+        this.orderList = data.filter( d => d.order.orderStatus !== 'dostarczono');
       }
     );
   }

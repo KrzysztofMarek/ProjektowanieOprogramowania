@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   deliver(id) {
     this.httpService.changeOrderStatus(id, 'dostarczono').subscribe(
       data => {
-        this.orderList = data;
+        this.orderList = data.filter( d => d.order.orderStatus !== 'dostarczono');
       }
     );
   }

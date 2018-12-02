@@ -49,16 +49,13 @@
             <th scope="col">ID Zamówienia</th>
             <th scope="col">Lista zamówionych dań</th>
             <th scope="col">Satus</th>
-            <th scope="col">Data dodania</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let order of orderList">
             <td>{{order.id}}</td>
             <td>{{getCoursesList(order)}}</td>
-            <td>{{order.price}}</td>
             <td>{{order.orderStatus}}</td>
-            <td>{{order.addingDate | date:'short'}}</td>
             <th>
               <button 
                 type="button" 

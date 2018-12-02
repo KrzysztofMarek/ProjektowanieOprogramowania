@@ -37,7 +37,12 @@ export class AppComponent implements OnInit {
         this.dataDisplayed = {
           labels: labelsFromData,
           datasets: [{
-            data: dataFromData
+            data: dataFromData,
+            backgroundColor: [
+              '#ffccff',
+              '#99ff99',
+              '#ffff99'
+            ]
           }]
         };
       }
@@ -65,7 +70,12 @@ export class AppComponent implements OnInit {
         this.dataDisplayed = {
           labels: labelsFromData,
           datasets: [{
-            data: dataFromData
+            data: dataFromData,
+            backgroundColor: [
+              '#ffccff',
+              '#99ff99',
+              '#ffff99'
+            ]
           }]
         };
       }

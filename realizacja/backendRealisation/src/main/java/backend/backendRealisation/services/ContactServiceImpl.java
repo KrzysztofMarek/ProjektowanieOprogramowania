@@ -31,6 +31,6 @@ public class ContactServiceImpl implements ContactService {
     }
 
     public void deliveryChangeOrderStatus(int orderId, String orderStatus){
-        databaseAccess.changeOrderStatusWithContact(orderId,orderStatus);
+        databaseAccess.changeOrderStatus(orderId,orderStatus);
     }
 }

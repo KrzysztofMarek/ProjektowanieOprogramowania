@@ -31,23 +31,23 @@ public class OrderController implements PracKReal, PracDost {
         this.contactService=contactService;
     }
 
-
+    //done
     @RequestMapping(value = "/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
     public List<Order> index(@PathVariable("restaurantId") int restaurantId) {
         return orderListService.getOrderList(restaurantId);
     }
-
+    //done
     @RequestMapping(value = "/orderStatus/{orderId}/{orderStatus}/{restaurantId}", method = RequestMethod.GET)
     public List<Order> changeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus,@PathVariable ("restaurantId") int restaruantId) {
         orderListService.changeOrderStatus(orderId, orderStatus);
         return orderListService.getOrderList(restaruantId);
     }
-
+    //done
     @RequestMapping(value = "/delivery/orderList/{restaurantId}", method = RequestMethod.GET, produces = "application/json")
     public List<OrderWithContact> deliveryIndex(@PathVariable("restaurantId") int restaurantId) {
         return contactService.getOrderListWithContact(restaurantId);
     }
-
+    //done
     @RequestMapping(value = "/delivery/{orderId}/{orderStatus}/{restaurantId}", method = RequestMethod.GET)
     public List<OrderWithContact> deliveryChangeOrderStatus(@PathVariable("orderId") int orderId, @PathVariable("orderStatus") String orderStatus,@PathVariable ("restaurantId") int restaruantId) {
         contactService.deliveryChangeOrderStatus(orderId, orderStatus);
@@ -55,7 +55,7 @@ public class OrderController implements PracKReal, PracDost {
     }
 
 
-
+    //done
     @RequestMapping(value = "/contact/{restaurantId}", method = RequestMethod.GET)
     public Contact getContactWithOrder(@PathVariable ("restaurantId") int restaruantId) {
         return contactService.getContact(restaruantId);

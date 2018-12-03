@@ -13,7 +13,7 @@ def pobierz_miasta():
     return jsonify({"cities": cities})
 
 
-@oferta.route('/miasta/<city_id>', methods=['GET'])
+@oferta.route('/pobierz_restauracje_z_miasta', methods=['GET'])
 @cross_origin()
 def pobierz_restauracje():
     if request.args.get("id_miata") is None:
@@ -25,7 +25,7 @@ def pobierz_restauracje():
     return jsonify(menu_restauracji)
 
 
-@oferta.route('/oferta_restauracji/<restaurant_id>', methods=['GET'])
+@oferta.route('/pobierz_menu_restauracji', methods=['GET'])
 @cross_origin()
 def pobierz_oferte():
     if request.args.get("id_restauracji") is None:

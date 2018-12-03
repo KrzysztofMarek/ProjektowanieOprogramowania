@@ -16,11 +16,11 @@ def pobierz_miasta():
 @oferta.route('/pobierz_restauracje_z_miasta', methods=['GET'])
 @cross_origin()
 def pobierz_restauracje():
-    if request.args.get("id_miata") is None:
+    if request.args.get("miasto") is None:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = int(request.args.get("id_miasta"))
+    id_restauracji = request.args.get("miasto")
     menu_restauracji = oferty_model.pobierz_restauracje(id_restauracji)
     return jsonify(menu_restauracji)
 

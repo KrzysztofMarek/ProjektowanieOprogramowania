@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
         },
 
         set_order(state, order) {
-            state.order =order;
+            state.order = order;
         },
 
         clear_order(state) {
@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
         },
 
         set_restaurant(state, restaurant) {
-            state.restaurant = restaurant
+            state.current_restaurant = restaurant
         },
     }
 })

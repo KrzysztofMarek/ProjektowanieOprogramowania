@@ -63,8 +63,8 @@ export default {
     }),
     created() {
         let self = this;
-        zamowienia
-            .get(`pobierz_menu_restauracji?id_restauracji=${this.$store.state.restaurant.id_restauracji}`)
+        oferty
+            .get(`pobierz_menu_restauracji?id_restauracji=${this.$store.state.current_restaurant}`)
             .then((response) => {
                 self.dishes = response.data.lista;
             })

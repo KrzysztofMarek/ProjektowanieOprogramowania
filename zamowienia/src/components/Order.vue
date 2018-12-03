@@ -163,7 +163,7 @@ export default {
             let self = this;
             let zamowienie = {
                 id_klienta: 0,
-                id_restauracji: this.$store.state.restaurant.id_restauracji,
+                id_restauracji: this.$store.state.current_restaurant.id_restauracji,
                 lista_dan: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
                 kwota: this.total_price,
                 adres: this.address,

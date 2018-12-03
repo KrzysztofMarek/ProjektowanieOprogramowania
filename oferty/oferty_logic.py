@@ -20,8 +20,8 @@ def pobierz_restauracje():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    id_restauracji = request.args.get("miasto")
-    menu_restauracji = oferty_model.pobierz_restauracje(id_restauracji)
+    miasto = request.args.get("miasto")
+    menu_restauracji = oferty_model.pobierz_restauracje(miasto)
     return jsonify(menu_restauracji)
 
 

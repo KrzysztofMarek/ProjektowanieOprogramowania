@@ -116,8 +116,9 @@ function phone_length_validator(s) {
 }
 
 export default {
-    data: () => {
+    data: function() {
         let only_letter = XRegExp('^\\p{L}+$');
+        let address = this.$store.state.address;
         return {
             is_tos_accepted: false,
             error_text: "",
@@ -149,7 +150,7 @@ export default {
                 v => RegExp('\\+{0,1}[0-9 ].+').test(v) || "Tylko +, cyfry i spacje",
                 phone_length_validator,
             ],
-            address: $this.store.address,
+            address,
             address_rules: [
                 v => !!v || "Adres jest wymagany",
             ],

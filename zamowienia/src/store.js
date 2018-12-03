@@ -25,5 +25,9 @@ export const store = new Vuex.Store({
         set_restaurant(state, restaurant) {
             state.current_restaurant = restaurant
         },
+
+        set_address(state, address) {
+            state.address = address
+        },
     }
 })

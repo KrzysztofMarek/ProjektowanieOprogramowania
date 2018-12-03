@@ -10,7 +10,7 @@ oferta = Blueprint('oferta', __name__)
 @cross_origin()
 def pobierz_miasta():
     cities = oferty_model.get_cities()
-    return jsonify({"cities": cities})
+    return jsonify(cities)
 
 
 @oferta.route('/pobierz_restauracje_z_miasta', methods=['GET'])

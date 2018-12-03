@@ -13,5 +13,5 @@ def pobierz_miasta():
 
 
 def pobierz_restauracje(id_miasta: int):
-    miasta = requests.get(f'http://0.0.0.0:5000/pobierz_restauracje?id_miasta={id_miasta}')
-    return json.loads(miasta.text)
+    restauracje = requests.get(f'http://0.0.0.0:5000/pobierz_restauracje?id_miasta={id_miasta}')
+    return json.loads(restauracje.text)

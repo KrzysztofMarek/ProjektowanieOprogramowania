@@ -39,7 +39,7 @@ export default {
     created() {
         let self = this;
         oferty
-            .get("/Pobierz_miasta")
+            .get("/pobierz_miasta")
             .then((response) => {
                 self.miasta_is_loading = false;
                 self.miasta = response.data;
@@ -63,7 +63,7 @@ export default {
             this.restauracje_is_loading = true;
             let self = this;
             oferty
-                .get(`/Pobierz_restauracje?miasto=${miasto}`)
+                .get(`/pobierz_restrauracje_z_miasta?miasto=${miasto}`)
                 .then((response) => {
                     self.restauracje_is_loading = false;
                     self.restauracje = response.data.lista;

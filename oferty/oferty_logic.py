@@ -16,9 +16,11 @@ def pobierz_miasta():
 @oferta.route('/miasta/<city_id>', methods=['GET'])
 @cross_origin()
 def pobierz_restauracje():
-    if request.args.get("id_restauracji") is None:
-        return 404
-    id_restauracji = int(request.args.get("id_restauracji"))
+    if request.args.get("id_miata") is None:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get("id_miasta"))
     menu_restauracji = oferty_model.pobierz_restauracje(id_restauracji)
     return jsonify(menu_restauracji)
 
@@ -27,7 +29,9 @@ def pobierz_restauracje():
 @cross_origin()
 def pobierz_oferte():
     if request.args.get("id_restauracji") is None:
-        return 404
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     id_restauracji = int(request.args.get("id_restauracji"))
     menu_restauracji = oferty_model.pobierz_menu_restauracji(id_restauracji)
     return jsonify(menu_restauracji)

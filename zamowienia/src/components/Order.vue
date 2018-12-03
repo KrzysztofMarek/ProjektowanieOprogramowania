@@ -76,7 +76,7 @@
                     <v-textarea
                         v-model="address"
                         :rules="address_rules"
-                        :counter="30"
+                        :counter="200"
                         label="Adres"
                         required
                     />

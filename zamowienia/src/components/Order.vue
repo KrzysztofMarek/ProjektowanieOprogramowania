@@ -149,7 +149,7 @@ export default {
                 v => RegExp('\\+{0,1}[0-9 ].+').test(v) || "Tylko +, cyfry i spacje",
                 phone_length_validator,
             ],
-            address: "",
+            address: $this.store.address,
             address_rules: [
                 v => !!v || "Adres jest wymagany",
             ],

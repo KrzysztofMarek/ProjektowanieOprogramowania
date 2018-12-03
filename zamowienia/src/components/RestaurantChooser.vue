@@ -42,7 +42,7 @@ export default {
             .get("/pobierz_miasta")
             .then((response) => {
                 self.miasta_is_loading = false;
-                self.miasta = response.data;
+                self.miasta = response.data.lista.map(x => x.nazwa);
             })
             .catch((err) => {
                 self.miasta_is_loading = false;
@@ -63,7 +63,7 @@ export default {
             this.restauracje_is_loading = true;
             let self = this;
             oferty
-                .get(`/pobierz_restrauracje_z_miasta?miasto=${miasto}`)
+                .get(`/pobierz_restauracje_z_miasta?miasto=${miasto}`)
                 .then((response) => {
                     self.restauracje_is_loading = false;
                     self.restauracje = response.data.lista;

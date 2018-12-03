@@ -71,6 +71,7 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 0,
+                    adres: "",
                     lista_dan: [{
                         id_dania: 0,
                         nazwa: "Pierogi",
@@ -81,6 +82,7 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 1,
+                    adres: "",
                     lista_dan: [
                         {
                             id_dania: 0,

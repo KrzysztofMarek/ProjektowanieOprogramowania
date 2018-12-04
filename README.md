@@ -28,6 +28,8 @@ PORTY:
     platnosci_gui = 4200
     ui_menadzera_sieci = 4201
     ui_menadzera_restauracji = 4202
+    recruitment_simulation = 4203
+    payment_simulation = 4042
 
 PROBLEMY Z DEPLOYMENTEM:
 

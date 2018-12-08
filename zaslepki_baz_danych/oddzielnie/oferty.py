@@ -214,6 +214,20 @@ def dodaj_danie():
                 'opis': opis
 
             })
+        restaurant_menu_1['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis
+
+        })
+        restaurant_menu_2['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis
+
+        })
         print(network_menu)
     else:
         resp = jsonify('nie ma takiej restuaracji')

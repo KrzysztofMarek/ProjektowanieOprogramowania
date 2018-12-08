@@ -1,7 +1,7 @@
 import unittest
 import json
 from zaslepki_baz_danych.oddzielnie import oferty, realizacja, zamowienia, zarzadzanie_personelem, konta, \
-    zarzadzanie_siecia
+    zarzadzanie_siecia, klient
 
 
 class TestyKonta(unittest.TestCase):
@@ -230,7 +230,7 @@ class TestyZamowienia(unittest.TestCase):
         r1 = self.app.post('/dodaj_zamowienie_Z',
                            json={'id_klienta': 2, 'id_restauracji': 1, 'lista_dan': [{'id_dania': 1, 'nazwa': 'Chleb'},
                                                                                      {'id_dania': 2, 'nazwa': 'Kawa'}],
-                                 'kwota': 29.99})
+                                 'kwota': 29.99, 'adres': 'kek', 'miasto': 'Toruń'})
         self.assertEqual(r1.status_code, 200)
 
     def test_edytuj_zamowienie_Z(self):
@@ -319,6 +319,16 @@ class TestyZamowienia(unittest.TestCase):
         r1 = self.app.get('/pobierz_zamowienie_Z', query_string=dict(id_zamowienia=0))
         expctd = json.dumps(zamowienie)
         self.assertEqual(json.loads(expctd), json.loads(json.dumps(r1.get_json())))
+
+
+    def test_dodaj_ocene_Z(self):
+        self.app.post('/dodaj_zamowienie_Z',
+                           json={'id_klienta': 2, 'id_restauracji': 1, 'lista_dan': [{'id_dania': 1, 'nazwa': 'Chleb'},
+                                                                                     {'id_dania': 2, 'nazwa': 'Kawa'}],
+                                 'kwota': 29.99, 'adres': 'kek', 'miasto': 'Toruń'})
+
+        r1 = self.app.post('/dodaj_ocene_Z', json={'id_zamowienia': 61, 'ocena': '2/10'})
+        self.assertEqual(r1.status_code, 200)
 
 
 class TestyZarzadzaniePersonelem(unittest.TestCase):
@@ -427,6 +437,21 @@ class TestyZarzadzanieSiecia(unittest.TestCase):
         r1 = self.app.get('/usun_restauracje', query_string=dict(id_restauracji=1))
         self.assertEqual(r1.status_code, 200)
 
+
+class TestyKlienci(unittest.TestCase):
+    def setUp(self):
+        self.app = klient.app.test_client()
+        # uruchomienie flaska
+
+    def tearDown(self):
+        pass
+
+    def test_dodaj_punkty(self):
+        r1 = self.app.post('/dodaj_punkty', json={
+            'id_klienta': 'heheszek',
+            'punkty': 7
+        })
+        self.assertEqual(r1.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()

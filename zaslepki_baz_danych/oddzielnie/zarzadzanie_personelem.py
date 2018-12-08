@@ -31,12 +31,42 @@ lista_pracownikow = {
         },
         {
             'id_pracownika': 'KNow',
-            'id_restauracji': 4,
+            'id_restauracji': 1,
             'imie': 'Kasia',
             'nazwisko': 'Nowak',
             'telefon': '333444555',
             'stanowisko': 'menadzer restauracji',
             'haslo': 'kKdPS'
+
+        },
+        {
+            'id_pracownika': 'rahim',
+            'id_restauracji': 2,
+            'imie': 'Rahim',
+            'nazwisko': 'bin Amdel',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'wdjfh'
+
+        },
+        {
+            'id_pracownika': 'gracia12',
+            'id_restauracji': 3,
+            'imie': 'Grażyna',
+            'nazwisko': 'Nowak',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'pjdp'
+
+        },
+        {
+            'id_pracownika': 'lubDum',
+            'id_restauracji': 4,
+            'imie': 'Robert',
+            'nazwisko': 'Kowalak',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'alkdjflk'
 
         }
     ]

@@ -1192,16 +1192,6 @@ def zmien_status_zamowienia_Z():
 # Pobierz zamówienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia_Z', methods=['GET'])
 def pobierz_zamowienia_Z():
-    try:
-        if request.args.get("id_restauracji") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
     return jsonify(lista_zamowien)
 
 

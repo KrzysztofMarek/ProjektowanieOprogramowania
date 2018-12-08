@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row" style="margin-top:20px;">
 	<div class="col">
 	</div>
 	<div class="col-9">
@@ -23,9 +23,9 @@
 				<textarea class="form-control" id="description" name="offerDescription" rows="3" maxlength="300"></textarea>
 			</div>
 			<button type="submit" class="btn btn-primary">Dodaj</button>
-			<a href="{{ url_for('oferta_sieci.wyswietl_oferte_sieci') }}" class="alert-link">
-				<button type="button" class="btn btn-outline-primary">Anuluj</button>
-			</a>
+			<!-- <a href="{{ url_for('oferta_sieci.wyswietl_oferte_sieci') }}" class="alert-link"> -->
+				<button type="button" onclick="window.history.back()" class="btn btn-outline-primary">Anuluj</button>
+			<!-- </a> -->
 		</form>
 	</div>
 	<div class="col">

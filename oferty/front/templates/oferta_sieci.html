@@ -6,16 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row" style="margin-top:20px;">
 	<div class="col">
 	</div>
 	<div class="col-9">
 		<table id="menu" class="table table-striped" style="margin-top:30px;">
 			<thead>
 				<tr>
-					<th scope="col"></th>
-					<th scope="col">Cena</th>
-					<th scope="col">Opis</th>
+					<th scope="col" style="width: 35%"></th>
+					<th scope="col" style="width: 15%">Cena</th>
+					<th scope="col" style="width: 25%">Opis</th>
+					<th scope="col" style="width: 25%"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -43,6 +44,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function () {
+		get_dishes();
+	});
+	
+	function get_dishes() {
 		var host = "http://{{ config.BACKEND_HOST }}";
 		var port = "{{ config.BACKEND_PORT }}";
 		var endpoint = "/pobierz_menu_sieci";
@@ -57,12 +62,78 @@
 					row += '<td>' + menu_item.nazwa + '</td>';
 					row += '<td>' + menu_item.cena + '</td>';
 					row += '<td>' + menu_item.opis + '</td>';
-					row += '</tr>'
+					row += '<td styl>' 
+						+ '<button onClick="edit_dish(this)" type="button" class="btn btn-outline-info" style="margin-right:15px;">Modyfikuj</button>' 
+						+ '<button onClick="delete_dish(this)" type="button" class="btn btn-outline-danger">Usuń</button>' 
+						+ '</td>';
+					row += '</tr>';
 					$('#menu').children('tbody').append(row);
 				});
 			}
 		});
-	});
+	}
+
+	function edit_dish(btn) {
+		var row = btn.parentNode.parentNode;
+		var dish_id = row.id;
+		var dish_name = row.children[0].textContent;
+		var dish_price = row.children[1].textContent;
+		var dish_desc = row.children[2].textContent;
+		var form = document.createElement("form");
+   		document.body.appendChild(form);
+  		form.method = "POST";
+   		form.action = "{{ url_for('formularz_potrawy_sieci.wyswietl_edycja') }}";
+
+   		var dish_id_input = document.createElement("INPUT");         
+		dish_id_input.name = "dish_id";
+    	dish_id_input.value = dish_id;
+		dish_id_input.type = 'hidden';
+    	form.appendChild(dish_id_input);
+
+		var dish_name_input = document.createElement("INPUT");         
+		dish_name_input.name = "dish_name";
+    	dish_name_input.value = dish_name;
+		dish_name_input.type = 'hidden';
+    	form.appendChild(dish_name_input);
+
+		var dish_price_input = document.createElement("INPUT");         
+		dish_price_input.name = "dish_price";
+    	dish_price_input.value = dish_price;
+		dish_price_input.type = 'hidden';
+    	form.appendChild(dish_price_input);
+
+		var dish_desc_input = document.createElement("INPUT");         
+		dish_desc_input.name = "dish_desc";
+		dish_desc_input.value = dish_desc;
+		dish_desc_input.type = 'hidden';
+		form.appendChild(dish_desc_input);
+
+    	form.submit();
+	}
+
+	function delete_dish(btn) {
+		var row = btn.parentNode.parentNode;
+		var dish_id = row.id;
+		var dish_name = row.children[0].textContent;
+		var confirmed = confirm("Usunąć " + dish_name + "?");
+		if(confirmed) {
+			var host = "http://{{ config.BACKEND_HOST }}";
+			var port = "{{ config.BACKEND_PORT }}";
+			var endpoint = "/usun_danie";
+			$.ajax({
+				type: "GET",
+				url: host + ":" + port + endpoint,
+				data: { 
+					"id_dania": dish_id 
+				},
+				success: function (json_obj) {
+					//json_obj = $.parseJSON(json);
+					console.log(json_obj);
+					get_dishes();
+				}
+			});
+		}
+	}
 </script>
 
 {% endblock %}

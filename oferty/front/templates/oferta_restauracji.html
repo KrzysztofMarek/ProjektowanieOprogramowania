@@ -42,8 +42,8 @@
 {{ super() }}
 <script type="text/javascript">
 	$(document).ready(function () {
-		var host = "http://localhost";
-		var port = "8888";
+		var host = "http://{{ config.BACKEND_HOST }}";
+		var port = "{{ config.BACKEND_PORT }}";
 		var endpoint = "/pobierz_menu_restauracji";
 		$.ajax({
 			type: "GET",

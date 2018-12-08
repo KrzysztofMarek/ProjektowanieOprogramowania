@@ -6,7 +6,7 @@
 
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#" routerLink="/">UI Menadżera Restauracji</a>
+    <a class="navbar-brand" href="http://{{ config.UI_HOST }}:{{ config.UI_RESTAURACJA_PORT }}/">UI Menadżera Restauracji</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link ml-2" href="#" routerLink="/add_employee">Dodanie nowego pracownika</a>
+                <a class="nav-link ml-2" href="http://{{ config.UI_HOST }}:{{ config.UI_RESTAURACJA_PORT }}/add_employee">Dodanie nowego pracownika</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-2" href="#" routerLink="/add_recruitment">Dodanie nowego ogłoszenia</a>
+                <a class="nav-link ml-2" href="http://{{ config.UI_HOST }}:{{ config.UI_RESTAURACJA_PORT }}/add_recruitment">Dodanie nowego ogłoszenia</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link ml-2" href="{{ url_for('oferta_restauracji.wyswietl_oferte_restauracji') }}">Oferta</a>

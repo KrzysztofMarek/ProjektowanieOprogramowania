@@ -39,5 +39,55 @@ public class SQLConnector implements Connector {
             return "Nie udało się!";    
         }
     }
+
+    @Override
+    public String getRestaurant(String url) {
+        log.info("Sending to {}", url);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    @Override
+    public String assignManager(String assignManagerForm, String url) {
+        log.info("Sending {} to {}", assignManagerForm, url);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(assignManagerForm, headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return "Udało się!";
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    @Override
+    public String removeRestaurant(String restaurantId, String url) {
+        String urlWithId = url+"?id_restauracji="+restaurantId;
+        
+        log.info("Sending to {}", urlWithId);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return "Udało się!";
+        }else{
+            return "Nie udało się!";    
+        }
+    }
     
 }

@@ -13,4 +13,10 @@ package baza_zarzadzanie_siecia.Entity;
 public interface Connector {
     
     public String createRestaurant(final String restaurantFormJson, final String url);
+
+    public String getRestaurant(String property);
+
+    public String assignManager(String assignManagerForm, String property);
+
+    public String removeRestaurant(String restaurantIdForm, String property);
 }

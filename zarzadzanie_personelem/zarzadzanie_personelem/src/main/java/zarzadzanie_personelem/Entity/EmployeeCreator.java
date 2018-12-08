@@ -38,5 +38,34 @@ public class EmployeeCreator {
         responseUser.put("message", responseDB);
         return (new Gson()).toJson(responseUser);
     }   
+
+    public String getEmployees(final String url) {
+        RestTemplate restTemplate = new RestTemplate();
+        String responseDB = restTemplate.getForObject(url, String.class);
+        HashMap<String, String> responseUser = new HashMap();
+        responseUser.put("message", responseDB);
+        return (new Gson()).toJson(responseUser);
+    }
+    
+    public String getEmployees(final String id_restauracji, final String url) {
+        String urlWithId = url + "?id_restauracji=" + id_restauracji;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        String responseDB = restTemplate.getForObject(url, String.class);
+        HashMap<String, String> responseUser = new HashMap();
+        responseUser.put("message", responseDB);
+        return (new Gson()).toJson(responseUser);
+    }
+
+    public String removeEmployee(final String id_pracownika, final String url) {
+        String urlWithId = url + "?id_pracownika=" + id_pracownika;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        String responseDB = restTemplate.getForObject(urlWithId, String.class);
+        HashMap<String, String> responseUser = new HashMap();
+        responseUser.put("message", responseDB);
+        return (new Gson()).toJson(responseUser);
+    }
+
     
 }

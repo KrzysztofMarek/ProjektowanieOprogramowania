@@ -20,4 +20,19 @@ public class MockConnector implements Connector{
     public String createRestaurant(final String employeeFormJson, final String url) {
         return "You are perfect!"; 
     }
+
+    @Override
+    public String getRestaurant(String property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String assignManager(String assignManagerForm, String property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String removeRestaurant(String restaurantIdForm, String property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

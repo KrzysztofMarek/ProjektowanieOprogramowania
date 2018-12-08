@@ -30,10 +30,58 @@ public class SQLConnector{
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(employeeFormJson, headers);
+        HttpEntity<String> entity = new HttpEntity<>(employeeFormJson, headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         if(response.getStatusCode() == HttpStatus.OK){
             return "Udało się!";
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    public String getEmployees(final String url) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        log.info("Sending GET to {}", url);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    public String getEmployees(String id_restauracji, String url) {   
+        String urlWithId = url + "?id_resturacji=" + id_restauracji;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        log.info("Sending GET to {}", url);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    public String removeEmployee(final String id_pracownika, final String url) {
+        String urlWithId = url + "?id_pracownika=" + id_pracownika;        
+        
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(urlWithId, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
         }else{
             return "Nie udało się!";    
         }

@@ -297,6 +297,20 @@ def dodaj_danie():
             'opis': opis
 
         })
+        restaurant_menu_1['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis
+
+        })
+        restaurant_menu_2['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis
+
+        })
         print(network_menu)
     else:
         resp = jsonify('nie ma takiej restuaracji')
@@ -552,14 +566,14 @@ lista_zamowien = {
         {
             'id_zamowienia': 2,
             'id_klienta': 2,
-            'id_restauracji': 3,
+            'id_restauracji': 1,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 59.88,
-            'status': 'przygotowywane',
+            'status': 'dostarczone',
             'data_zlozenia': '2018-06-11',
             'ocena': '4/10',
             'adres': "Wolności 15"
@@ -568,14 +582,14 @@ lista_zamowien = {
         {
             'id_zamowienia': 3,
             'id_klienta': 1,
-            'id_restauracji': 5,
+            'id_restauracji': 1,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 43.80,
-            'status': 'w_drodze',
+            'status': 'dostarczone',
             'data_zlozenia': '2018-12-16',
             'ocena': '8/10',
             'adres': "Alternatywy 4"

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-package class diagram">
+  <ClassDiagramComponents>
+    <Class name="Application" package="baza_zarzadzanie_siecia" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="api" returnType="Docket" visibility="public"/>
+        <Method name="main" returnType="String[]" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DBController" package="baza_zarzadzanie_siecia.Controller" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="env" type="Environment" visibility="private"/>
+        <Field name="connector" type="Connector1" visibility="package"/>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="addRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantForm"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Connector" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="MockConnector" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="employeeFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SQLConnector" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+        <Method name="getRequest" returnType="String" visibility="private">
+          <Argument type="String" name="formJson"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="DBController1" package="baza_zarzadzanie_siecia.Controller" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="env" type="Environment" visibility="private"/>
+        <Field name="connector" type="Connector1" visibility="package"/>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="addRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantForm"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Connector1" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="MockConnector1" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="employeeFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SQLConnector1" package="baza_zarzadzanie_siecia.Entity" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="log" type="Logger" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createRestaurant" returnType="String" visibility="public">
+          <Argument type="String" name="restaurantFormJson"/>
+          <Argument type="String" name="url"/>
+        </Method>
+        <Method name="getRequest" returnType="String" visibility="private">
+          <Argument type="String" name="formJson"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="baza_zarzadzanie_siecia.Entity.MockConnector" target="baza_zarzadzanie_siecia.Entity.Connector"/>
+    <HasRelation name="connector" source="baza_zarzadzanie_siecia.Controller.DBController" target="baza_zarzadzanie_siecia.Entity.Connector" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="baza_zarzadzanie_siecia.Entity.SQLConnector" target="baza_zarzadzanie_siecia.Entity.Connector"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

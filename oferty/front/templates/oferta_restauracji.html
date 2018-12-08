@@ -1,95 +1,69 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="utf-8">
-    <title>ReCS System</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+{% extends "layout_restauracja.html" %}
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var host="http://localhost";
-			var port="8888";
-			var endpoint="/pobierz_menu_restauracji";
-			$.ajax({
-				type: "GET",
-				url: host+":"+port+endpoint,
-				data: {"id_restauracji": {{ restaurant_id }} },
-				success: function(json_obj){
-					//json_obj = $.parseJSON(json);
-					console.log(json_obj);
-					var menu_list = json_obj['lista'];
-					$.each(menu_list, function(i, menu_item) {
-						var row = '<tr id="' + menu_item.id_dania + '">'; 
-						row += '<td>' + menu_item.nazwa + '</td>';
-						row += '<td>' + menu_item.cena + '</td>';
-						row += '<td>' + menu_item.opis + '</td>';
-						row += '</tr>'
-						$('#menu').children('tbody').append(row);
-					});
-				}
-			});
-		});
-		var getUrlParameter = function getUrlParameter(sParam) {
-			var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-			sURLVariables = sPageURL.split('&'),
-			sParameterName,
-			i;
+{% block head %}
+{{ super() }}
 
-			for (i = 0; i < sURLVariables.length; i++) {
-				sParameterName = sURLVariables[i].split('=');
+{% endblock %}
 
-				if (sParameterName[0] === sParam) {
-					return sParameterName[1] === undefined ? true : sParameterName[1];
-				}
-			}
-		};
-	</script>
-</head>
-<body>
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link" href="{{ url_for('strona_glowna') }}">Strona główna</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{{ url_for('oferta_sieci.wyswietl_oferte_sieci') }}">Oferta sieci</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link active" href="{{ url_for('oferta_restauracji.wyswietl_oferte_restauracji') }}">Oferta restauracji</a>
-	</li>
-</ul>
+{% block content %}
 <div class="row">
 	<div class="col">
-    </div>
-    <div class="col-9">
-        <table id="menu" class="table table-striped" style="margin-top:30px;">
+	</div>
+	<div class="col-9">
+		<table id="menu" class="table table-striped" style="margin-top:30px;">
 			<thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Opis</th>
-                <th scope="col">Cena</th>
-            </tr>
-            </thead>
-            <tbody>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Cena</th>
+					<th scope="col">Opis</th>
+				</tr>
+			</thead>
+			<tbody>
 			</tbody>
 		</table>
-    </div>
-    <div class="col">
-    </div>
+	</div>
+	<div class="col">
+	</div>
 </div>
 
 <div class="row">
 	<div class="col">
-    </div>
-    <div class="col-9" id="formLink">
-		<a class="btn btn-outline-primary" role="button" href="{{ url_for('formularz_potrawy_restauracji.wyswietl_formularz', restaurant_id=restaurant_id) }}">Dodaj potrawę</a>
-    </div>
-    <div class="col">
-    </div>
+	</div>
+	<div class="col-9" id="formLink">
+		<a class="btn btn-outline-primary" role="button" href="{{ url_for('formularz_potrawy_restauracji.wyswietl_formularz', restaurant_id=restaurant_id) }}">Dodaj
+			potrawę</a>
+	</div>
+	<div class="col">
+	</div>
 </div>
-</body>
-</html>
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+	$(document).ready(function () {
+		var host = "http://localhost";
+		var port = "8888";
+		var endpoint = "/pobierz_menu_restauracji";
+		$.ajax({
+			type: "GET",
+			url: host + ":" + port + endpoint,
+			data: { "id_restauracji": {{ restaurant_id }} },
+			success: function (json_obj) {
+				//json_obj = $.parseJSON(json);
+				console.log(json_obj);
+				var menu_list = json_obj['lista'];
+				$.each(menu_list, function (i, menu_item) {
+					var row = '<tr id="' + menu_item.id_dania + '">';
+					row += '<td>' + menu_item.nazwa + '</td>';
+					row += '<td>' + menu_item.cena + '</td>';
+					row += '<td>' + menu_item.opis + '</td>';
+					row += '</tr>'
+					$('#menu').children('tbody').append(row);
+				});
+			}
+			});
+	});
+</script>
+
+{% endblock %}

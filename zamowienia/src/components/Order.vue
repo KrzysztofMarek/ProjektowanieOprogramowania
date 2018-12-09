@@ -76,7 +76,6 @@
                     <v-textarea
                         v-model="address"
                         :rules="address_rules"
-                        :counter="30"
                         label="Adres"
                         required
                     />
@@ -117,8 +116,9 @@ function phone_length_validator(s) {
 }
 
 export default {
-    data: () => {
+    data: function() {
         let only_letter = XRegExp('^\\p{L}+$');
+        let address = this.$store.state.address;
         return {
             is_tos_accepted: false,
             error_text: "",
@@ -150,7 +150,7 @@ export default {
                 v => RegExp('\\+{0,1}[0-9 ].+').test(v) || "Tylko +, cyfry i spacje",
                 phone_length_validator,
             ],
-            address: "",
+            address,
             address_rules: [
                 v => !!v || "Adres jest wymagany",
             ],
@@ -164,7 +164,7 @@ export default {
             let self = this;
             let zamowienie = {
                 id_klienta: 0,
-                id_restauracji: this.$store.state.restaurant.id_restauracji,
+                id_restauracji: this.$store.state.current_restaurant.id_restauracji,
                 lista_dan: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
                 kwota: this.total_price,
                 adres: this.address,

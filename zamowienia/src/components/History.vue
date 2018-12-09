@@ -71,6 +71,7 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 0,
+                    adres: "",
                     lista_dan: [{
                         id_dania: 0,
                         nazwa: "Pierogi",
@@ -81,83 +82,8 @@ export default {
                 {
                     id_restauracji: 0,
                     id_zamowienia: 1,
+                    adres: "",
                     lista_dan: [
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
                         {
                             id_dania: 0,
                             nazwa: "Pierogi",
@@ -210,6 +136,8 @@ export default {
                 const menu = menu_response.data.lista;
                 const new_order = order.lista_dan.map(o => menu.find(x => x.id_dania == o.id_dania)).filter(x => x != undefined);
                 this.$store.commit('set_order', new_order);
+                this.$store.commit('set_restaurant', order.id_restauracji);
+                this.$store.commit('set_address', order.adres);
                 this.$router.push("/checkout");
             } catch (err) {
                 this.error_text = "Nie udało się ponowić zamówienia";

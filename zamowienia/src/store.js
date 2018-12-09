@@ -7,6 +7,7 @@ export const store = new Vuex.Store({
     state: {
         order: [],
         current_restaurant: null,
+        address: "",
     },
     mutations: {
         add_product(state, product) {
@@ -14,7 +15,7 @@ export const store = new Vuex.Store({
         },
 
         set_order(state, order) {
-            state.order =order;
+            state.order = order;
         },
 
         clear_order(state) {
@@ -22,7 +23,11 @@ export const store = new Vuex.Store({
         },
 
         set_restaurant(state, restaurant) {
-            state.restaurant = restaurant
+            state.current_restaurant = restaurant
+        },
+
+        set_address(state, address) {
+            state.address = address
         },
     }
 })

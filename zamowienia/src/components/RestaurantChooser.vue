@@ -39,10 +39,10 @@ export default {
     created() {
         let self = this;
         oferty
-            .get("/Pobierz_miasta")
+            .get("/pobierz_miasta")
             .then((response) => {
                 self.miasta_is_loading = false;
-                self.miasta = response.data;
+                self.miasta = response.data.lista.map(x => x.nazwa);
             })
             .catch((err) => {
                 self.miasta_is_loading = false;
@@ -63,10 +63,10 @@ export default {
             this.restauracje_is_loading = true;
             let self = this;
             oferty
-                .get(`/Pobierz_restauracje?miasto=${miasto}`)
+                .get(`/pobierz_restauracje_z_miasta?miasto=${miasto}`)
                 .then((response) => {
                     self.restauracje_is_loading = false;
-                    self.restauracje = response.data;
+                    self.restauracje = response.data.lista;
                 })
                 .catch((err) => {
                     self.restauracje_is_loading = false;
@@ -75,7 +75,7 @@ export default {
                     } else if (err.request) {
                         self.error_text = "Network error";
                         console.error(err);
-                        self.restauracje = [{ id_restauracji: 0, nazwa: "Cafe:Student", opis: "" }];
+                        self.restauracje = [{ id_restauracji: 0, nazwa: "Cafe:Student", adres: "" }];
                     } else {
                         self.error_text = "Unexpected error";
                         console.error(err);
@@ -83,7 +83,7 @@ export default {
                 });
         },
         restauracja_selected: function(restauracja, old) {
-            this.$store.commit("set_restaurant", restauracja);
+            this.$store.commit("set_restaurant", restauracja.id_restauracji);
             this.$router.push(`/browse`);
         },
     }

@@ -9,6 +9,7 @@ import Order from "./components/Order"
 import Browse from "./components/Browse" 
 import RestauranChooser from "./components/RestaurantChooser" 
 import OrderHistory from "./components/History"
+import Rate from "./components/Rate"
 
 Vue.config.productionTip = false
 
@@ -19,6 +20,7 @@ const routes = [
   { path: "/checkout",  component: Order },
   { path: "/browse",  component: Browse },
   { path: "/history",  component: OrderHistory },
+  { path: "/rate",  component: Rate }
 ];
 
 const router = new VueRouter({ routes, mode: 'history' });

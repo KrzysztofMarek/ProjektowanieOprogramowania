@@ -5,8 +5,26 @@
     </li>
   </ul>
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="completed()">Wyświetl raport zrealizowanych zamówień</button>
-    <button type="button" class="btn btn-outline-dark btn-lg" (click)="dropped()">Wyświetl raport porzuconych zamówień</button>
+    <button type="button" class="btn btn-outline-dark" (click)="completed()">
+      Raport zrealizowanych zamówień
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="dropped()">
+      Raport porzuconych zamówień
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="avgDeliveries()">
+      Raport średnich czasów dostawy
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="avgRealisations()">
+      Raport średnich czasów realizacji
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="dropped()">
+      Histogram złożonych zamówień
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="testReport(currentType)">
+      Eksport do PDF
+    </button>
   </div>
-  <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+  <div id="content">
+    <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+  </div>
 </div>

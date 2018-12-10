@@ -1,3 +1,5 @@
+import { AvgRealisationTimesReport } from './../avg-realisation-times-report';
+import { AvgDeliveryTimesReport } from './../avg-delivery-times-report';
 import { DroppedOrderReport } from './../dropped-order-report';
 import { CompletedOrderReport } from './../completed-order-report';
 import { HttpService } from './http.service';
@@ -24,6 +26,20 @@ export class HttpServiceImpl implements HttpService {
 
     return this.http.get<DroppedOrderReport>(
       'http://localhost:8081/fetch-dropped-order-report'
+    );
+  }
+
+  fetchAvgDeliveryTimes(): Observable<AvgDeliveryTimesReport> {
+
+    return this.http.get<AvgDeliveryTimesReport>(
+      'http://localhost:8081/fetch-average-delivery-time'
+    );
+  }
+
+  fetchAvgRealisations(): Observable<AvgRealisationTimesReport> {
+
+    return this.http.get<AvgRealisationTimesReport>(
+      'http://localhost:8081/fetch-average-realisation-time'
     );
   }
 }

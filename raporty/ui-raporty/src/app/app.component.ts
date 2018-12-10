@@ -8,6 +8,10 @@ import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import * as ascii from 'ascii-json';
 
+declare global {
+  interface Window { html2canvas: any; }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

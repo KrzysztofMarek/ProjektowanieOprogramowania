@@ -69,4 +69,21 @@ public class OrderController {
 		}
     }
 
+    @CrossOrigin
+    @RequestMapping(value="/dodaj_ocene_zamowienia", method=RequestMethod.POST )
+    @ResponseBody
+    public ResponseEntity<Object> RateOrder(@RequestParam(value = "id_zamowienia", required = true) Integer orderId,
+                                            @RequestParam(value = "ocena", required = true) String rating) 
+    {
+        try{
+            if(dbService.RateOrder(orderId, rating)){
+                return ResponseEntity.status(200).body(null);
+            }else{
+                return ResponseEntity.status(403).body(null);
+            }
+        }catch(Exception ex){
+            return ResponseEntity.status(403).body(null);
+        }
+    }
+
 }

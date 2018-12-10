@@ -62,8 +62,6 @@ public class DbService {
         StringEntity requestEntity = new StringEntity(
             json.toString(),
             ContentType.APPLICATION_JSON);
-        
-        System.out.print(json.toString());
 
         httppost.setEntity(requestEntity);
 
@@ -97,25 +95,32 @@ public class DbService {
         return false;
     }
 
-    public boolean RateOrder(int orderId, int rating){
-        return false;
-    }
-
-    public ArrayList<Integer> GetPreviousOrdersIds(Integer clientId) throws URISyntaxException, ClientProtocolException, IOException {
-        ArrayList<Integer> ordersIds = new ArrayList<Integer>();
-        ordersIds.add(124412);
-        
-        URIBuilder builder = new URIBuilder(this.componentUrl);
-        builder.setParameter("id_klienta", clientId.toString());
+    public boolean RateOrder(Integer orderId, String rating) throws URISyntaxException, ClientProtocolException, IOException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "dodaj_ocene_Z");
 
         HttpClient httpclient = HttpClients.createDefault();
-        HttpGet request = new HttpGet(builder.build());
+        HttpPost httppost = new HttpPost(builder.build());
 
-        //Execute and get the response.
-        HttpResponse response = httpclient.execute(request);
-        HttpEntity entity = response.getEntity();
+        JSONObject json = new JSONObject();
+        json.put("id_zamowienia", orderId);
+        json.put("ocena", rating);
 
-        return ordersIds;
+        StringEntity requestEntity = new StringEntity(
+            json.toString(),
+            ContentType.APPLICATION_JSON);
+
+        httppost.setEntity(requestEntity);
+
+        HttpResponse response = httpclient.execute(httppost);
+
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        if(statusCode == 200){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     public String GetOrders(Integer userId) throws URISyntaxException, ClientProtocolException, IOException {

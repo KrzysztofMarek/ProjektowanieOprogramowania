@@ -152,7 +152,7 @@ export default {
             this.rating_dialog = false;
 
             let self = this;
-            zamowienia.post(`/dodaj_ocene_zamowienia?id_zamowienia=${order.id_zamowienia}&ocena=${order.rating}`)
+            zamowienia.post(`/dodaj_ocene_zamowienia?id_zamowienia=${order.id_zamowienia}&ocena=${order.ocena}`)
                 .catch((err) => {
                     if (err.response) {
                         self.error_text = `${err.response.status}: ${err.response.data}`;

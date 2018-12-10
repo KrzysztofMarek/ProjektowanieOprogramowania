@@ -5,20 +5,20 @@ package backend.backendReport.model;
  */
 public class AverageRealisationTimeNode {
 
-    private long averageRealistaionTime;
+    private long averageRealisationTime;
     private String city;
 
-    public AverageRealisationTimeNode(long averageRealistaionTime, String city) {
-        this.averageRealistaionTime = averageRealistaionTime;
+    public AverageRealisationTimeNode(long averageRealisationTime, String city) {
+        this.averageRealisationTime = averageRealisationTime;
         this.city = city;
     }
 
-    public long getAverageRealistaionTime() {
-        return averageRealistaionTime;
+    public long getAverageRealisationTime() {
+        return averageRealisationTime;
     }
 
-    public void setAverageRealistaionTime(long averageRealistaionTime) {
-        this.averageRealistaionTime = averageRealistaionTime;
+    public void setAverageRealisationTime(long averageRealistaionTime) {
+        this.averageRealisationTime = averageRealistaionTime;
     }
 
     public String getCity() {

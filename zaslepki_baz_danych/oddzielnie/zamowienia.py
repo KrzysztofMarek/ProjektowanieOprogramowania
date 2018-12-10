@@ -23,7 +23,7 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -39,7 +39,7 @@ lista_zamowien = {
             'kwota': 59.88,
             'status': 'dostarczone',
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -56,7 +56,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -73,7 +73,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -92,7 +92,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -111,7 +111,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 25,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -128,7 +128,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -145,7 +145,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -161,7 +161,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -177,7 +177,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -195,7 +195,7 @@ lista_zamowien = {
             'czas_dostawy': 32,
             'czas_realizacji': 44,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -211,7 +211,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -227,7 +227,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -245,7 +245,7 @@ lista_zamowien = {
             'czas_dostawy': 18,
             'czas_realizacji': 67,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -263,7 +263,7 @@ lista_zamowien = {
             'czas_dostawy': 32,
             'czas_realizacji': 85,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -281,7 +281,7 @@ lista_zamowien = {
             'czas_dostawy': 22,
             'czas_realizacji': 15,
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -299,7 +299,7 @@ lista_zamowien = {
             'czas_dostawy': 10,
             'czas_realizacji': 28,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -316,7 +316,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -333,7 +333,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -352,7 +352,7 @@ lista_zamowien = {
             'czas_dostawy': 92,
             'czas_realizacji': 35,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -371,7 +371,7 @@ lista_zamowien = {
             'czas_dostawy': 22,
             'czas_realizacji': 34,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -388,7 +388,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -405,7 +405,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -421,7 +421,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -437,7 +437,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -455,7 +455,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 8,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -471,7 +471,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -487,7 +487,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -505,7 +505,7 @@ lista_zamowien = {
             'czas_dostawy': 58,
             'czas_realizacji': 13,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -521,7 +521,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -537,7 +537,7 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -555,7 +555,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -572,7 +572,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -589,7 +589,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -608,7 +608,7 @@ lista_zamowien = {
             'czas_dostawy': 19,
             'czas_realizacji': 56,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -627,7 +627,7 @@ lista_zamowien = {
             'czas_dostawy': 14,
             'czas_realizacji': 37,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -644,7 +644,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -661,7 +661,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -677,7 +677,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -693,7 +693,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -711,7 +711,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -727,7 +727,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -743,7 +743,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -761,7 +761,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -779,7 +779,7 @@ lista_zamowien = {
             'czas_dostawy': 52,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -797,7 +797,7 @@ lista_zamowien = {
             'czas_dostawy': 18,
             'czas_realizacji': 38,
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -815,7 +815,7 @@ lista_zamowien = {
             'czas_dostawy': 42,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -832,7 +832,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -849,7 +849,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -868,7 +868,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -887,7 +887,7 @@ lista_zamowien = {
             'czas_dostawy': 28,
             'czas_realizacji': 24,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -904,7 +904,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -921,7 +921,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -937,7 +937,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -953,7 +953,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -971,7 +971,7 @@ lista_zamowien = {
             'czas_dostawy': 25,
             'czas_realizacji': 75,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -987,7 +987,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -1003,7 +1003,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -1021,7 +1021,7 @@ lista_zamowien = {
             'czas_dostawy': 24,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': None,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -1037,7 +1037,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },

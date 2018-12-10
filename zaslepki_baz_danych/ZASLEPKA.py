@@ -646,7 +646,7 @@ def pobierz_zamowienia():
     return jsonify(lista_zamowien)
 
 
-lista_zamowien = {
+lista_zamowien_Z = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
@@ -1729,7 +1729,7 @@ def dodaj_zamowienie_Z():
 
     global zamowienia_interator
     zamowienia_interator += 1
-    lista_zamowien['lista_zamowien'].append({
+    lista_zamowien_Z['lista_zamowien'].append({
         'id_zamowienia': zamowienia_interator,
         'lista_dan': lista_dan,
         'id_restauracji': id_restauracji,
@@ -1762,7 +1762,7 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["lista_dan"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['lista_dan'] = str(rrequest['lista_dan'])
     except KeyError:
@@ -1770,7 +1770,7 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["kwota"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['cena'] = int(rrequest['cena'])
     except KeyError:
@@ -1778,7 +1778,7 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["adres"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['adres'] = int(rrequest['adres'])
     except KeyError:
@@ -1786,13 +1786,13 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["miasto"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['miasto'] = int(rrequest['miasto'])
     except KeyError:
         pass
 
-    print(lista_zamowien)
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -1813,14 +1813,14 @@ def zmien_status_zamowienia_Z():
             resp.status_code = 404
             return resp
         status = str(rrequest['status'])
-        for zamowienie in lista_zamowien['lista_zamowien']:
+        for zamowienie in lista_zamowien_Z['lista_zamowien']:
             if zamowienie['id_zamowienia'] == id_zamowienia:
                 zamowienie['status'] = str(status)
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    print(lista_zamowien)
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -1829,17 +1829,7 @@ def zmien_status_zamowienia_Z():
 # Pobierz zamówienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia_Z', methods=['GET'])
 def pobierz_zamowienia_Z():
-    try:
-        if request.args.get("id_restauracji") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
-    return jsonify(lista_zamowien)
+    return jsonify(lista_zamowien_Z)
 
 
 # Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
@@ -1857,7 +1847,7 @@ def pobierz_zamowienie_Z():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    return jsonify(lista_zamowien['lista_zamowien'][id_zamowienia])
+    return jsonify(lista_zamowien_Z['lista_zamowien'][id_zamowienia])
 
 
 @app.route('/dodaj_ocene_Z', methods=['POST'])
@@ -1879,7 +1869,7 @@ def dodaj_ocene_Z():
         resp.status_code = 404
         return resp
 
-    for zamowienie in lista_zamowien['lista_zamowien']:
+    for zamowienie in lista_zamowien_Z['lista_zamowien']:
         if zamowienie['id_zamowienia'] == id_zamowienia:
             print(zamowienie)
             zamowienie.update({'ocena': str(ocena)})

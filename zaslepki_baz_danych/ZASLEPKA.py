@@ -9,6 +9,7 @@ def main_site():
     return 404
 
 
+<<<<<<< HEAD
 klienci = {'lista': [
     {
         'id_klienta': 'heheszek',
@@ -108,6 +109,8 @@ def usun_punkty():
     return resp
 
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 # Pobierz_pracownika(id_pracownika: string) zwraca string:login, string:hasło oraz string:stanowisko
 @app.route('/pobierz_pracownika', methods=['GET'])
 def pobierz_pracownika():
@@ -396,6 +399,7 @@ def dodaj_danie():
             'opis': opis
 
         })
+<<<<<<< HEAD
         restaurant_menu_1['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
@@ -410,6 +414,8 @@ def dodaj_danie():
             'opis': opis
 
         })
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         print(network_menu)
     else:
         resp = jsonify('nie ma takiej restuaracji')
@@ -561,7 +567,11 @@ def modyfikuj_danie():
     return resp
 
 
+<<<<<<< HEAD
 lista_zamowien = {
+=======
+lista_zamowien_R = {
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
@@ -604,7 +614,10 @@ lista_zamowien = {
 }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():
     rrequest = request.get_json()
@@ -619,7 +632,11 @@ def zmien_status_zamowienia():
             resp.status_code = 404
             return resp
         status = str(rrequest['status'])
+<<<<<<< HEAD
         for zamowienie in lista_zamowien['lista_zamowien']:
+=======
+        for zamowienie in lista_zamowien_R['lista_zamowien']:
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             if zamowienie['id_zamowienia'] == id_zamowienia:
                 zamowienie['status'] = str(status)
     except KeyError:
@@ -643,7 +660,11 @@ def pobierz_zamowienia():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
+<<<<<<< HEAD
     return jsonify(lista_zamowien)
+=======
+    return jsonify(lista_zamowien_R)
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 
 
 lista_zamowien = {
@@ -661,36 +682,54 @@ lista_zamowien = {
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
             'ocena': '2/10',
+<<<<<<< HEAD
             'miasto': 'Warszawa',
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'adres': "Grunwaldzka 13"
         },
         {
             'id_zamowienia': 2,
             'id_klienta': 2,
+<<<<<<< HEAD
             'id_restauracji': 1,
+=======
+            'id_restauracji': 3,
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 59.88,
+<<<<<<< HEAD
             'status': 'dostarczone',
             'data_zlozenia': '2018-06-11',
             'ocena': '4/10',
             'miasto': 'Toruń',
+=======
+            'status': 'przygotowywane',
+            'data_zlozenia': '2018-06-11',
+            'ocena': '4/10',
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'adres': "Wolności 15"
 
         },
         {
             'id_zamowienia': 3,
             'id_klienta': 1,
+<<<<<<< HEAD
             'id_restauracji': 1,
+=======
+            'id_restauracji': 5,
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 43.80,
+<<<<<<< HEAD
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': '8/10',
@@ -1900,6 +1939,176 @@ lista_pracownikow = {
             'telefon': '123456789',
             'stanowisko': 'pracownik kuchni',
             'haslo': 'soicrupogi'
+=======
+            'status': 'w_drodze',
+            'data_zlozenia': '2018-12-16',
+            'ocena': '8/10',
+            'adres': "Alternatywy 4"
+
+        }
+    ]
+}
+zamowienia_interator = 4
+
+
+@app.route('/dodaj_zamowienie_Z', methods=['POST'])
+def dodaj_zamowienie_Z():
+    try:
+        rrequest = request.get_json()
+        if rrequest['id_klienta'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_klienta = int(rrequest['id_klienta'])
+
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
+
+        if rrequest['lista_dan'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        lista_dan = rrequest['lista_dan']
+
+        if rrequest['kwota'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        kwota = float(rrequest['kwota'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    global zamowienia_interator
+    zamowienia_interator += 1
+    lista_zamowien['lista_zamowien'].append({
+        'id_zamowienia': zamowienia_interator,
+        'lista_dan': lista_dan,
+        'id_restauracji': id_restauracji,
+        'id_klienta': id_klienta,
+        'kwota': kwota,
+        'status': 'oczekujące',
+        'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
+    })
+    print(lista_zamowien)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
+
+
+# Edytuj_zamowienie(id_zamowienia:int, lista[id_dania:int,nazwa:string],kwota:double)
+@app.route('/edytuj_zamowienie_Z', methods=['POST'])
+def edytuj_zamowienie_Z():
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_zamowienia"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    try:
+        if rrequest["lista_dan"]:
+            for zamowienie in lista_zamowien['lista_zamowien']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
+                    zamowienie['lista_dan'] = str(rrequest['lista_dan'])
+    except KeyError:
+        pass
+
+    try:
+        if rrequest["kwota"]:
+            for zamowienie in lista_zamowien['lista_zamowien']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
+                    zamowienie['cena'] = int(rrequest['cena'])
+    except KeyError:
+        pass
+
+    print(lista_zamowien)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
+
+
+# Zmien_status_zamowienia(id_zamowienia:int, status:string)
+@app.route('/zmien_status_zamowienia_Z', methods=['POST'])
+def zmien_status_zamowienia_Z():
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_zamowienia"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_zamowienia = int(rrequest['id_zamowienia'])
+        if rrequest['status'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        status = str(rrequest['status'])
+        for zamowienie in lista_zamowien['lista_zamowien']:
+            if zamowienie['id_zamowienia'] == id_zamowienia:
+                zamowienie['status'] = str(status)
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    print(lista_zamowien)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
+
+
+# Pobierz zamówienia -> przekopiuj z realizacji
+@app.route('/pobierz_zamowienia_Z', methods=['GET'])
+def pobierz_zamowienia_Z():
+    try:
+        if request.args.get("id_restauracji") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(request.args.get("id_restauracji"))
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    return jsonify(lista_zamowien)
+
+
+# Czy to ma sens? : Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
+#                                                                                    kwota:double,data_zlozenia:string,status:string,ocena:int)
+
+@app.route('/pobierz_zamowienie_Z', methods=['GET'])
+def pobierz_zamowienie_Z():
+    try:
+        if request.args.get("id_zamowienia") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_zamowienia = int(request.args.get("id_zamowienia"))
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    return jsonify(lista_zamowien['lista_zamowien'][id_zamowienia])
+
+
+lista_pracownikow = {
+    'lista_pracownikow': [
+        {
+            'id_pracownika': 'janPan',
+            'id_restauracji': 1,
+            'imie': 'Jan',
+            'nazwisko': 'Nowak',
+            'telefon': '123456789',
+            'stanowisko': 'pracownik kuchni',
+            'haslo': 'soicrupogi'
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         },
         {
             'id_pracownika': 'AAmen',
@@ -1913,13 +2122,18 @@ lista_pracownikow = {
         },
         {
             'id_pracownika': 'KNow',
+<<<<<<< HEAD
             'id_restauracji': 1,
+=======
+            'id_restauracji': 4,
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'imie': 'Kasia',
             'nazwisko': 'Nowak',
             'telefon': '333444555',
             'stanowisko': 'menadzer restauracji',
             'haslo': 'kKdPS'
 
+<<<<<<< HEAD
         },
         {
             'id_pracownika': 'rahim',
@@ -1950,6 +2164,8 @@ lista_pracownikow = {
             'stanowisko': 'menadzer restauracji',
             'haslo': 'alkdjflk'
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         }
     ]
 }
@@ -2078,6 +2294,7 @@ lista_restauracji = {
             'nazwa': 'Students Dream',
             'id_restauracji': 3,
             'adres': 'Granadierow 5'
+<<<<<<< HEAD
         },
         {
             'nazwa': 'Zew Mięsa',
@@ -2088,6 +2305,8 @@ lista_restauracji = {
             'nazwa': 'Piwowo',
             'id_restauracji': 5,
             'adres': 'Browarna 46'
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         }
     ]
 }
@@ -2128,6 +2347,10 @@ def dodaj_restauracje():
     resp.status_code = 200
     return resp
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 # b) Usuń_restauracje(id_restauracji:int)
 @app.route('/usun_restauracje', methods=['GET'])
 def usun_restauracje():

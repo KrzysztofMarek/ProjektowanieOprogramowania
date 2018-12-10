@@ -214,6 +214,7 @@ def dodaj_danie():
                 'opis': opis
 
             })
+<<<<<<< HEAD
         restaurant_menu_1['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
@@ -228,6 +229,8 @@ def dodaj_danie():
             'opis': opis
 
         })
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         print(network_menu)
     else:
         resp = jsonify('nie ma takiej restuaracji')

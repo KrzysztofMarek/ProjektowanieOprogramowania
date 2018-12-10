@@ -24,6 +24,7 @@ lista_restauracji = {
             'nazwa': 'Students Dream',
             'id_restauracji': 3,
             'adres': 'Granadierow 5'
+<<<<<<< HEAD
         },
         {
             'nazwa': 'Zew Mięsa',
@@ -34,6 +35,8 @@ lista_restauracji = {
             'nazwa': 'Piwowo',
             'id_restauracji': 5,
             'adres': 'Browarna 46'
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         }
     ]
 }

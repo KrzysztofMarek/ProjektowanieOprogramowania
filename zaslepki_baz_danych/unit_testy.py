@@ -1,7 +1,11 @@
 import unittest
 import json
 from zaslepki_baz_danych.oddzielnie import oferty, realizacja, zamowienia, zarzadzanie_personelem, konta, \
+<<<<<<< HEAD
     zarzadzanie_siecia, klient
+=======
+    zarzadzanie_siecia
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 
 
 class TestyKonta(unittest.TestCase):
@@ -230,7 +234,11 @@ class TestyZamowienia(unittest.TestCase):
         r1 = self.app.post('/dodaj_zamowienie_Z',
                            json={'id_klienta': 2, 'id_restauracji': 1, 'lista_dan': [{'id_dania': 1, 'nazwa': 'Chleb'},
                                                                                      {'id_dania': 2, 'nazwa': 'Kawa'}],
+<<<<<<< HEAD
                                  'kwota': 29.99, 'adres': 'kek', 'miasto': 'Toruń'})
+=======
+                                 'kwota': 29.99})
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         self.assertEqual(r1.status_code, 200)
 
     def test_edytuj_zamowienie_Z(self):
@@ -321,6 +329,7 @@ class TestyZamowienia(unittest.TestCase):
         self.assertEqual(json.loads(expctd), json.loads(json.dumps(r1.get_json())))
 
 
+<<<<<<< HEAD
     def test_dodaj_ocene_Z(self):
         self.app.post('/dodaj_zamowienie_Z',
                            json={'id_klienta': 2, 'id_restauracji': 1, 'lista_dan': [{'id_dania': 1, 'nazwa': 'Chleb'},
@@ -331,6 +340,8 @@ class TestyZamowienia(unittest.TestCase):
         self.assertEqual(r1.status_code, 200)
 
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 class TestyZarzadzaniePersonelem(unittest.TestCase):
     def setUp(self):
         self.app = zarzadzanie_personelem.app.test_client()
@@ -438,6 +449,7 @@ class TestyZarzadzanieSiecia(unittest.TestCase):
         self.assertEqual(r1.status_code, 200)
 
 
+<<<<<<< HEAD
 class TestyKlienci(unittest.TestCase):
     def setUp(self):
         self.app = klient.app.test_client()
@@ -453,5 +465,7 @@ class TestyKlienci(unittest.TestCase):
         })
         self.assertEqual(r1.status_code, 200)
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 if __name__ == '__main__':
     unittest.main()

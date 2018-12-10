@@ -31,13 +31,18 @@ lista_pracownikow = {
         },
         {
             'id_pracownika': 'KNow',
+<<<<<<< HEAD
             'id_restauracji': 1,
+=======
+            'id_restauracji': 4,
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'imie': 'Kasia',
             'nazwisko': 'Nowak',
             'telefon': '333444555',
             'stanowisko': 'menadzer restauracji',
             'haslo': 'kKdPS'
 
+<<<<<<< HEAD
         },
         {
             'id_pracownika': 'rahim',
@@ -68,6 +73,8 @@ lista_pracownikow = {
             'stanowisko': 'menadzer restauracji',
             'haslo': 'alkdjflk'
 
+=======
+>>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         }
     ]
 }

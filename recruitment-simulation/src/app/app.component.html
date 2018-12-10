@@ -1,0 +1,29 @@
+<div class="container text-center">
+  <div class="card border-primary">
+    <div class="card-header">
+      Lista ogłoszeń
+    </div>
+    <div class="card-body">
+      <table *ngIf="recruitment?.length > 0; else noRecruitments" class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Stanowisko</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Telefon</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rec of recruitment">
+            <td>{{rec.stanowisko}}</td>
+            <td>{{rec.etat}}</td>
+            <td>{{rec.telefon}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template #noRecruitments>
+    <hr>
+    <h5>Nie ma ogłoszeń w bazie</h5>
+  </ng-template>
+</div>

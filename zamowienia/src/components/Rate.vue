@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <div id="add-rating-stars-container">
-            <img :src="'/stars/'+currentRating+'.png'" class="img-responsive" id="rating-stars"/>
+            <img :src="'/stars/'+(value || 0)+'.png'" class="img-responsive" id="rating-stars"/>
             <div class="add-rate" id="add-rate-1"></div>
             <div class="add-rate" id="add-rate-2"></div>
             <div class="add-rate" id="add-rate-3"></div>
@@ -20,9 +20,12 @@
 
 export default {
     name: "Rate",
-    data: () => ({
-        currentRating: 0
-    }),
+    props: {
+        value: {
+            type: Number,
+            default: 0,
+        }
+    },
     mounted() {
         this.setRatingSystem();
     },
@@ -35,15 +38,12 @@ export default {
                 var starObject = document.getElementById("add-rate-" + i);
                 if (starObject != null) {
                     starObject.onclick = function () {
-                        self.currentRating = k;
+                        self.$emit('input', k);
                     }
                 }
             }());
         }
       },
-      setRating: function(rating){
-          this.currentRating = rating;
-      }
     }
 }
 </script>

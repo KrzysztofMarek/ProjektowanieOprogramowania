@@ -27,6 +27,22 @@ public class Order {
         this.orderStatus=orderStatus;
         this.city=city;
     }
+    public Order(int id, List<Course> courseList,String orderStatus, Long realisationTime,String city){
+        this.id=id;
+        this.courseList=courseList;
+        this.orderStatus=orderStatus;
+        this.city=city;
+        this.realisationTime=realisationTime;
+    }
+    public Order(int id, List<Course> courseList,String orderStatus,String city, Long deliveryTime){
+        this.id=id;
+        this.courseList=courseList;
+        this.orderStatus=orderStatus;
+        this.city=city;
+        this.deliveryTime =deliveryTime;
+    }
+
+
 
     private int id;
     private int clientId;
@@ -37,6 +53,14 @@ public class Order {
     private LocalDate addingDate;
     private int grade;
     private String city;
+    private Long realisationTime;
+    private Long deliveryTime;
+
+    public Order(int id_zamowienia, List<Course> courseList, String status) {
+        this.id=id_zamowienia;
+        this.courseList =courseList;
+        this.orderStatus=status;
+    }
 
 
     public int getId() {
@@ -109,5 +133,21 @@ public class Order {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Long getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Long deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Long getRealisationTime() {
+        return realisationTime;
+    }
+
+    public void setRealisationTime(Long realisationTime) {
+        this.realisationTime = realisationTime;
     }
 }

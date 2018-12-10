@@ -1,8 +1,6 @@
 package backend.backendReport.dao;
 
-import backend.backendReport.model.CompletedOrderReport;
-import backend.backendReport.model.DroppedOrderReport;
-import backend.backendReport.model.Order;
+import backend.backendReport.model.*;
 
 import java.util.List;
 
@@ -13,4 +11,6 @@ public interface DatabaseAccess {
 
     List<Order> getCompletedOrderReport();
     List<Order> getDroppedOrderReport();
+    List<Order> getAverageRealisationTimeReport();
+    List<Order> getAverageDeliveryTimeReport();
 }

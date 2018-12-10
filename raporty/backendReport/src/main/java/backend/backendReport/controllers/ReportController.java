@@ -1,6 +1,8 @@
 package backend.backendReport.controllers;
 
 import backend.backendReport.interfaces.Report;
+import backend.backendReport.model.AverageDeliveryTimeReport;
+import backend.backendReport.model.AverageRealisationTimeReport;
 import backend.backendReport.model.CompletedOrderReport;
 import backend.backendReport.model.DroppedOrderReport;
 import backend.backendReport.services.ReportService;
@@ -31,5 +33,15 @@ public class ReportController implements Report{
     @RequestMapping(value = "/fetch-dropped-order-report", method = RequestMethod.GET, produces = "application/json")
     public DroppedOrderReport getDroppedOrderReport() {
         return reportService.getDroppedOrderReport();
+    }
+
+    @RequestMapping(value = "/fetch-average-realisation-time", method = RequestMethod.GET, produces = "application/json")
+    public AverageRealisationTimeReport getAverageRealisationTime() {
+        return reportService.getAverageRealisationTimeReport();
+    }
+
+    @RequestMapping(value = "/fetch-average-delivery-time", method = RequestMethod.GET, produces = "application/json")
+    public AverageDeliveryTimeReport getAverageDeliveryTime() {
+        return reportService.getAverageDeliveryTimeReport();
     }
 }

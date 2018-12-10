@@ -31,6 +31,18 @@ public class ReportServiceImpl implements ReportService {
         return prepareDroppedOrderReport();
     }
 
+    @Override
+    public AverageRealisationTimeReport getAverageRealisationTimeReport() {
+        List<Order> orderList = databaseAccess.getAverageRealisationTimeReport();
+        return countAverageRealisationTimeReport(orderList);
+    }
+
+    @Override
+    public AverageDeliveryTimeReport getAverageDeliveryTimeReport() {
+        List<Order> orderList = databaseAccess.getAverageDeliveryTimeReport();
+        return countAverageDeliveryTimeReport(orderList);
+    }
+
     private CompletedOrderReport prepareCompletedOrderReport() {
 
         List<Order> orderList = databaseAccess.getCompletedOrderReport();
@@ -43,6 +55,71 @@ public class ReportServiceImpl implements ReportService {
         List<Order> orderList = databaseAccess.getDroppedOrderReport();
         return countDroppedOrders(orderList);
     }
+
+    public AverageRealisationTimeReport countAverageRealisationTimeReport(List<Order> orderList){
+        AverageRealisationTimeReport averageRealisationTimeReport = new AverageRealisationTimeReport();
+        List<AverageRealisationTimeNode> nodes = new LinkedList<>();
+        List<CounterObjectForReport> counterObjectForReports = new LinkedList<>();
+
+        boolean isNode;
+        for (Order order : orderList) {
+
+            isNode = false;
+            if (counterObjectForReports.isEmpty()) {
+                counterObjectForReports.add(new CounterObjectForReport(order.getRealisationTime(),order.getCity(), 1));
+                continue;
+            }
+            for (CounterObjectForReport counterObjectForReport: counterObjectForReports) {
+                if (order.getCity().equals(counterObjectForReport.getCity())) {
+                    counterObjectForReport.setTime(counterObjectForReport.getTime() + order.getRealisationTime());
+                    counterObjectForReport.setCounter(counterObjectForReport.getCounter() + 1);
+                    isNode = true;
+                }
+            }
+            if (isNode == false) {
+                counterObjectForReports.add(new CounterObjectForReport(order.getRealisationTime(),order.getCity(), 1));
+            }
+        }
+        for(CounterObjectForReport counterObjectForReport: counterObjectForReports){
+            nodes.add(new AverageRealisationTimeNode(counterObjectForReport.getTime()/counterObjectForReport.getCounter(),counterObjectForReport.getCity()));
+        }
+        averageRealisationTimeReport.setNodes(nodes);
+        return averageRealisationTimeReport;
+
+    }
+
+    public AverageDeliveryTimeReport countAverageDeliveryTimeReport(List<Order> orderList){
+        AverageDeliveryTimeReport averageDeliveryTimeReport = new AverageDeliveryTimeReport();
+        List< AverageDeliveryTimeNode> nodes = new LinkedList<>();
+        List<CounterObjectForReport> counterObjectForReports = new LinkedList<>();
+
+        boolean isNode;
+        for (Order order : orderList) {
+
+            isNode = false;
+            if (counterObjectForReports.isEmpty()) {
+                counterObjectForReports.add(new CounterObjectForReport(order.getDeliveryTime(),order.getCity(), 1));
+                continue;
+            }
+            for (CounterObjectForReport counterObjectForReport: counterObjectForReports) {
+                if (order.getCity().equals(counterObjectForReport.getCity())) {
+                    counterObjectForReport.setTime(counterObjectForReport.getTime() + order.getDeliveryTime());
+                    counterObjectForReport.setCounter(counterObjectForReport.getCounter() + 1);
+                    isNode = true;
+                }
+            }
+            if (isNode == false) {
+                counterObjectForReports.add(new CounterObjectForReport(order.getDeliveryTime(),order.getCity(), 1));
+            }
+        }
+        for(CounterObjectForReport counterObjectForReport: counterObjectForReports){
+            nodes.add(new  AverageDeliveryTimeNode(counterObjectForReport.getTime()/counterObjectForReport.getCounter(),counterObjectForReport.getCity()));
+        }
+        averageDeliveryTimeReport.setNodes(nodes);
+        return averageDeliveryTimeReport;
+
+    }
+
     public CompletedOrderReport countCompletedOrders(List<Order> orderList){
         CompletedOrderReport completedOrderReport = new CompletedOrderReport();
         List<CompletedOrderNode> nodes = new LinkedList<>();

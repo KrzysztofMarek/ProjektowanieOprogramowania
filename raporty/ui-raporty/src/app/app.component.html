@@ -24,7 +24,14 @@
       Eksport do PDF
     </button>
   </div>
-  <div id="content">
-    <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+  <div *ngIf="diagramTypeChart">
+    <div id="content">
+      <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+    </div>
   </div>
+  <div *ngIf="!diagramTypeChart">
+      <div id="content">
+        <p-chart type="bar" [data]="dataDisplayed"></p-chart>
+      </div>
+    </div>
 </div>

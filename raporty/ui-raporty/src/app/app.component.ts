@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompletedOrderReport } from './completed-order-report';
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
+import * as ascii from 'ascii-json';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
 
   dataDisplayed: any;
   currentType = 'none';
+  diagramTypeChart = true;
   dataCompleted: CompletedOrderReport;
   dataDropped: DroppedOrderReport;
   dataAvgDelivery: AvgDeliveryTimesReport;
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit {
 
         this.dataCompleted = data;
         this.currentType = 'completed';
+        this.diagramTypeChart = true;
 
         const labelsFromData: string[] = [];
 
@@ -67,6 +70,7 @@ export class AppComponent implements OnInit {
 
         this.dataDropped = data;
         this.currentType = 'dropped';
+        this.diagramTypeChart = true;
 
         const labelsFromData: string[] = [];
 
@@ -104,6 +108,7 @@ export class AppComponent implements OnInit {
 
         this.dataAvgDelivery = data;
         this.currentType = 'avgDelivery';
+        this.diagramTypeChart = false;
 
         const labelsFromData: string[] = [];
 
@@ -141,6 +146,7 @@ export class AppComponent implements OnInit {
 
         this.dataAvgRealisation = data;
         this.currentType = 'avgRealisation';
+        this.diagramTypeChart = false;
 
         const labelsFromData: string[] = [];
 
@@ -183,25 +189,33 @@ export class AppComponent implements OnInit {
     } else if (reportType === 'completed') {
 
       this.dataCompleted.nodes.forEach(n => {
-        text.push(n.restaurant + ': ' + n.completedOrders);
+        let tmp = n.restaurant + ': ' + n.completedOrders;
+        tmp = ascii.escapeNonAsciis(tmp);
+        text.push(tmp);
       });
 
     } else if (reportType === 'dropped') {
 
       this.dataDropped.nodes.forEach(n => {
+        let tmp = n.restaurant + ': ' + n.droppedOrders;
+        tmp = ascii.escapeNonAsciis(tmp);
         text.push(n.restaurant + ': ' + n.droppedOrders);
       });
 
     } else if (reportType === 'avgDelivery') {
 
       this.dataAvgDelivery.nodes.forEach(n => {
-        text.push(n.city + ': ' + n.averageDeliveryTime);
+        let tmp = n.city + ': ' + n.averageDeliveryTime;
+        tmp = ascii.escapeNonAsciis(tmp);
+        text.push(tmp);
       });
 
     } else if (reportType === 'avgRealisation') {
 
       this.dataAvgRealisation.nodes.forEach(n => {
-        text.push(n.city + ': ' + n.averageRealisationTime);
+        let tmp = n.city + ': ' + n.averageRealisationTime;
+        tmp = ascii.escapeNonAsciis(tmp);
+        text.push(tmp);
       });
     }
 

@@ -11,10 +11,11 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddRecruitmentComponent } from './components/add-recruitment/add-recruitment.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { ManageEmployeeComponent } from './components/manage-employee/manage-employee.component';
 
 const appRoutes: Routes = [
   {path:'', component:HomepageComponent},
-  {path:'add_employee', component:AddEmployeeComponent},
+  {path:'manage_employee', component:ManageEmployeeComponent},
   {path:'add_recruitment', component:AddRecruitmentComponent}
 ];
 
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     AddEmployeeComponent,
     NavbarComponent,
     AddRecruitmentComponent,
-    HomepageComponent
+    HomepageComponent,
+    ManageEmployeeComponent
   ],
   imports: [
     BrowserModule,

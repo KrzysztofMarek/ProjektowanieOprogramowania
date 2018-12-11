@@ -12,11 +12,13 @@ import { AddRestaurantComponent } from './components/add-restaurant/add-restaura
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AddRecruitmentComponent } from './components/add-recruitment/add-recruitment.component';
+import { ManageEmployeeComponent } from './components/manage-employee/manage-employee.component';
+import { ManageRestaurantComponent } from './components/manage-restaurant/manage-restaurant.component';
 
 const appRoutes: Routes = [
   {path:'', component:HomePageComponent},
-  {path:'add_employee', component:AddEmployeeComponent},
-  {path:'add_restaurant', component:AddRestaurantComponent},
+  {path:'manage_employee', component:ManageEmployeeComponent},
+  {path:'manage_restaurant', component:ManageRestaurantComponent},
   {path:'add_recruitment', component:AddRecruitmentComponent}
 ];
 
@@ -27,7 +29,9 @@ const appRoutes: Routes = [
     AddRestaurantComponent,
     NavbarComponent,
     HomePageComponent,
-    AddRecruitmentComponent
+    AddRecruitmentComponent,
+    ManageEmployeeComponent,
+    ManageRestaurantComponent
   ],
   imports: [
     BrowserModule,

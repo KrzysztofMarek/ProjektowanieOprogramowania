@@ -49,7 +49,7 @@ public class DBController {
         }
     }
     
-    @GetMapping("/pobierzPracownikow")
+    @GetMapping("/pobierzPracownikowRestauracji")
     public String getEmployeesOfRestaurant(
             @RequestParam("id_restauracji") String id_restauracji) 
     {

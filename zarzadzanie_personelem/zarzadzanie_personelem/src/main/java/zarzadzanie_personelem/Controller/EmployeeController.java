@@ -52,7 +52,7 @@ public class EmployeeController {
     }
     
     @CrossOrigin
-    @GetMapping("/pobierz_pracownikow")
+    @GetMapping("/pobierz_pracownikow_restauracji")
     public String getEmployeesOfRestaurant(
             @RequestParam("id_restauracji") String id_restauracji) 
     {

@@ -64,12 +64,61 @@
 					row += '<td>' + menu_item.nazwa + '</td>';
 					row += '<td>' + menu_item.cena + '</td>';
 					row += '<td>' + menu_item.opis + '</td>';
-					row += '<td>' + '<button onClick="delete_dish(this)" type="button" class="btn btn-outline-danger">Usuń</button>' + '</td>';
+					row += '<td>'
+						+ '<button onClick="edit_dish(this)" type="button" class="btn btn-outline-info" style="margin-right:15px;">Modyfikuj</button>' 
+						+ '<button onClick="delete_dish(this)" type="button" class="btn btn-outline-danger">Usuń</button>' 
+						+ '</td>';
 					row += '</tr>'
 					$('#menu').children('tbody').append(row);
 				});
 			}
 		});
+	}
+
+	
+	function edit_dish(btn) {
+		var row = btn.parentNode.parentNode;
+		var restaurant_id = {{ restaurant_id }};
+		var dish_id = row.id;
+		var dish_name = row.children[0].textContent;
+		var dish_price = row.children[1].textContent;
+		var dish_desc = row.children[2].textContent;
+		var form = document.createElement("form");
+   		document.body.appendChild(form);
+  		form.method = "POST";
+   		form.action = "{{ url_for('formularz_potrawy_restauracji.wyswietl_edycja') }}";
+
+		var restaurant_id_input = document.createElement("INPUT");         
+		restaurant_id_input.name = "restaurant_id";
+    	restaurant_id_input.value = restaurant_id;
+		restaurant_id_input.type = 'hidden';
+    	form.appendChild(restaurant_id_input);
+
+   		var dish_id_input = document.createElement("INPUT");         
+		dish_id_input.name = "dish_id";
+    	dish_id_input.value = dish_id;
+		dish_id_input.type = 'hidden';
+    	form.appendChild(dish_id_input);
+
+		var dish_name_input = document.createElement("INPUT");         
+		dish_name_input.name = "dish_name";
+    	dish_name_input.value = dish_name;
+		dish_name_input.type = 'hidden';
+    	form.appendChild(dish_name_input);
+
+		var dish_price_input = document.createElement("INPUT");         
+		dish_price_input.name = "dish_price";
+    	dish_price_input.value = dish_price;
+		dish_price_input.type = 'hidden';
+    	form.appendChild(dish_price_input);
+
+		var dish_desc_input = document.createElement("INPUT");         
+		dish_desc_input.name = "dish_desc";
+		dish_desc_input.value = dish_desc;
+		dish_desc_input.type = 'hidden';
+		form.appendChild(dish_desc_input);
+
+    	form.submit();
 	}
 
 	function delete_dish(btn) {

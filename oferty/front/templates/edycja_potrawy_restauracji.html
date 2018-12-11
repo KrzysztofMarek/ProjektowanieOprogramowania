@@ -1,0 +1,147 @@
+{% extends "layout_restauracja.html" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top:20px;">
+	<div class="col">
+	</div>
+	<div class="col-9">
+		<form id="form">
+			<div class="form-group">
+				<label for="name">Nazwa:</label>
+				<input type="text" class="form-control" name="offerName" id="name" maxlength="30" value="{{ dish_name }}"/>
+			</div>
+			<div class="form-group">
+				<label for="price">Cena:</label>
+				<input type="text" class="form-control" name="offerPrice" id="price" maxlength="6" value="{{ dish_price }}"/>
+			</div>
+			<div class="form-group">
+				<label for="description">Opis:</label>
+				<textarea class="form-control" id="description" name="offerDescription" rows="3" maxlength="300">{{ dish_desc }}</textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Zapisz</button>
+			<button type="button" onclick="window.history.back()" class="btn btn-outline-primary">Anuluj</button>
+		</form>
+	</div>
+	<div class="col">
+	</div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+    $(document).ready(function () {
+		$('#price').val($('#price').val().replace('.', ','));
+	});
+
+	jQuery.validator.addMethod("validateOfferName", function (value, element) {
+		var regex = new RegExp("^[a-zA-Z-\\s]+$");
+
+		if (regex.test(value)) {
+			return true;
+		}
+		return false;
+	}, "Nazwa dania może zawierać jedynie litery, białe znaki oraz myślniki");
+
+	jQuery.validator.addMethod("validateOfferNameBigLetter", function (value, element) {
+		var regex = new RegExp("^[A-Z]");
+
+		if (regex.test(value)) {
+			return true;
+		}
+		return false;
+	}, "Nazwa dania z dużej litery");
+
+	jQuery.validator.addMethod("validatePrice", function (value, element) {
+		var regex = new RegExp("^\\d{1,3}\\,?\\d{1,2}?$");
+		var isComa = value.includes(',');
+
+		if (isComa) {
+			if (regex.test(value)) {
+				return true;
+			}
+		} else if (value.length > 0 && value.length < 4) {
+			return true;
+		}
+		return false;
+	}, "Cena w formacie 000,00");
+
+	jQuery.validator.addMethod("validateDescription", function (value, element) {
+		var forbidden = ['#', '$', '^', '%', '&', '*', '!', '@'];
+		return forbidden.every(function (f) { return !value.includes(f) });
+	}, "Pole nie może zawierać znaków specjalnych");
+
+	jQuery(function ($) {
+		$("#form").validate({
+			rules: {
+				offerName: {
+					required: true,
+					validateOfferName: true,
+					validateOfferNameBigLetter: true,
+				},
+				offerPrice: {
+					required: true,
+					validatePrice: true
+				},
+				offerDescription: {
+					required: true,
+					validateDescription: true
+				}
+			},
+			messages: {
+				offerName: {
+					required: '<div class="alert alert-danger" role="alert">Podaj nazwe dania</div>',
+					validateOfferName: '<div class="alert alert-danger" role="alert">Nazwa dania może zawierać jedynie litery, białe znaki oraz myślniki</div>',
+					validateOfferNameBigLetter: '<div class="alert alert-danger" role="alert">Nazwa dania z dużej litery</div>'
+				},
+				offerPrice: {
+					required: '<div class="alert alert-danger" role="alert">Podaj cenę dania</div>',
+					validatePrice: '<div class="alert alert-danger" role="alert">Cena w formacie 000,00</div>'
+				},
+				offerDescription: {
+					required: '<div class="alert alert-danger" role="alert">Podaj opis dania</div>',
+					validateDescription: '<div class="alert alert-danger" role="alert">Pole nie może zawierać znaków specjalnych</div>'
+				}
+			},
+			submitHandler: function () {
+				modifyOffer();
+			}
+		});
+	});
+
+	function modifyOffer() {
+		var host = "http://{{ config.BACKEND_HOST }}";
+		var port = "{{ config.BACKEND_PORT }}";
+		var endpoint = "/modyfikuj_danie";
+		$.ajax({
+			type: "POST",
+			url: host + ":" + port + endpoint,
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({
+                id_restauracji: {{ restaurant_id }},
+                id_dania: {{ dish_id }},
+				nazwa: $("#name").val(),
+				cena: $("#price").val(),
+				opis: $("#description").val()
+			}),
+			success: function (response) {
+				console.log(response);
+				if (response == 'OK') {
+					alert('Zapisano zmiany!');
+					window.location.replace("{{ url_for('oferta_sieci.wyswietl_oferte_sieci') }}");
+				} else {
+					alert(response);
+				}
+			},
+			error: function () {
+				alert('Nastąpił nieoczekiwany błąd połączenia. Spróbuj ponownie później.');
+			}
+		});
+	}
+</script>
+
+{% endblock %}

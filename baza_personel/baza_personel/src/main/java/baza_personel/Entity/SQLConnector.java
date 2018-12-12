@@ -86,5 +86,36 @@ public class SQLConnector{
             return "Nie udało się!";    
         }
     }
+
+    public String restaurantExists(final String id_restauracji, final String url) {
+        String urlWithId = url + "?id_restauracji=" + id_restauracji;        
+        
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(urlWithId, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return "Yes";
+        }else{
+            return "Nie udało się!";    
+        }
+    }
+
+    public String getManagers(final String url) {     
+        
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){
+            return response.getBody();
+        }else{
+            return "Nie udało się!";    
+        }
+    }
     
 }

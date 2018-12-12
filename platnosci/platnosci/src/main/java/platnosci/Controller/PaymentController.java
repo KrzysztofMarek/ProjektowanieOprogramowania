@@ -35,22 +35,22 @@ public class PaymentController {
     
     @PostMapping("/potwierdz_zaplate")
     public String confirm(
-            @RequestBody String token) 
+            @RequestBody String data) 
     {
         try{
-            log.info("Received payment confirmation for token {}", token);
-            return (new PaymentVerifier()).confirm(token);
+            log.info("Received payment confirmation for {}", data);
+            return (new PaymentVerifier()).confirm(data, env.getProperty("confirmPaymentAddress"));
         }catch(Exception e){
             return e.toString();
         }
     }
     @PostMapping("/anuluj_zaplate")
     public String cancel(
-            @RequestBody String token) 
+            @RequestBody String data) 
     {
         try{
-            log.info("Received payment cancel for token {}", token);
-            return (new PaymentVerifier()).cancel(token);
+            log.info("Received payment cancel for {}", data);
+            return (new PaymentVerifier()).cancel(data, env.getProperty("confirmPaymentAddress"));
         }catch(Exception e){
             return e.toString();
         }
@@ -64,6 +64,32 @@ public class PaymentController {
         try{
             log.info("Received status request for id {}", id);
             return (new PaymentVerifier()).get_status(id);
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
+    @CrossOrigin
+    @PostMapping("/zaplac_wewnetrzne")
+    public String payInternal(
+            @RequestBody String paymentForm) 
+    {
+        try{
+            log.info("Intiaiting payment {}", paymentForm);
+            return (new PaymentVerifier()).payInternal(paymentForm);
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
+    @CrossOrigin
+    @PostMapping("/pobierz_zamowienie")
+    public String getOrder(
+            @RequestParam("id_zamowienia") String orderId) 
+    {
+        try{
+            log.info("Fetching order {}", orderId);
+            return (new PaymentVerifier()).getOrder(orderId);
         }catch(Exception e){
             return e.toString();
         }

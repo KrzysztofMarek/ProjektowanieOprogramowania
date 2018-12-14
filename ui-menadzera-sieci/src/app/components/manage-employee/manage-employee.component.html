@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-4 mt-5">
+      <div class="card">
+        <div class="mb-3 card-header text-center">
+          <h4 class="my-auto">Dodanie nowego pracownika</h4>
+        </div>
+
+        <form class="card-body" name="form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Imię</label>
+              <input type="text" class="form-control" [(ngModel)]="employee.imie" name="imie" #firstName="ngModel" id="firstName"
+                placeholder="" value="" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Nazwisko</label>
+              <input type="text" class="form-control" [(ngModel)]="employee.nazwisko" name="nazwisko" #lastName="ngModel"
+                id="lastName" placeholder="" value="" required>
+            </div>
+          </div>
+
+          <div class="pl-0 mb-3 col-md-8">
+            <label for="id_restauracji">Id restauracji</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="employee.id_restauracji" name="id_restauracji"
+                #id_restauracji="ngModel" id="id_restauracji" placeholder="Restauracja" required>
+            </div>
+          </div>
+
+          <div class="pl-0 mb-3 col-md-8">
+            <label for="position">Stanowisko</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.stanowisko" name="stanowisko" #position="ngModel"
+              id="position" required>
+          </div>
+
+          <div class="pl-0 mb-3 col-md-8">
+            <label for="email">Nr telefonu</label>
+            <input type="text" class="form-control" [(ngModel)]="employee.telefon" name="telefon" #phone="ngModel" id="phone">
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="username">Login</label>
+              <input type="text" class="form-control" [(ngModel)]="employee.id_pracownika" name="id_pracownika"
+                #username="ngModel" id="username" required>
+            </div>
+
+            <div class="mb-3 col-md-6">
+              <label for="password">Hasło</label>
+              <input type="text" class="form-control" [(ngModel)]="employee.haslo" name="haslo" #password="ngModel" id="password">
+            </div>
+          </div>
+
+
+          <hr class="mb-4">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn-lg" click="onSubmit" style="width: 200px">Dodaj</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-6 mt-5">
+      <table class="table border">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Stanowisko</th>
+            <th scope="col">Nr. telefonu</th>
+            <th scope="col">ID restauracji</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center">
+            <td>TestName</td>
+            <td>TestnSurname</td>
+            <td>Kelner</td>
+            <td>777 777 777</td>
+            <td>#1</td>
+            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
+          </tr>
+          <tr class="text-center">
+            <td>TestName</td>
+            <td>TestnSurname</td>
+            <td>Kelner</td>
+            <td>777 777 777</td>
+            <td>#1</td>
+            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
+          </tr>
+          <tr class="text-center">
+            <td>TestName</td>
+            <td>TestnSurname</td>
+            <td>Kelner</td>
+            <td>777 777 777</td>
+            <td>#1</td>
+            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>

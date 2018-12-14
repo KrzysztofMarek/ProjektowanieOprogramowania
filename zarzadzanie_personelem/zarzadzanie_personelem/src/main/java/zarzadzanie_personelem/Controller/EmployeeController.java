@@ -30,7 +30,9 @@ public class EmployeeController {
             log.info("Adding employee {}", employeeForm);
             return (new EmployeeCreator()).createEmployee(
                     employeeForm, 
-                    env.getProperty("createEmployeeAddress")
+                    env.getProperty("createEmployeeAddress"),
+                    env.getProperty("checkRestaurantAddress")
+                    
             );
         }catch(Exception e){
             return e.toString();
@@ -45,6 +47,20 @@ public class EmployeeController {
             log.info("Fetching employees");
             return (new EmployeeCreator()).getEmployees(
                     env.getProperty("getEmployeesAddress")
+            );
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
+    @CrossOrigin
+    @GetMapping("/pobierz_menadzerow")
+    public String getManagers() 
+    {
+        try{
+            log.info("Fetching managers");
+            return (new EmployeeCreator()).getManagers(
+                    env.getProperty("getManagersAddress")
             );
         }catch(Exception e){
             return e.toString();

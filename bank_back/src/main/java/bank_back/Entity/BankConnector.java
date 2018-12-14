@@ -2,6 +2,7 @@ package bank_back.Entity;
 
 import bank_back.Controller.BankController;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.Random;
 import org.slf4j.Logger;
@@ -21,7 +22,9 @@ public class BankConnector {
         RestTemplate restTemplate = new RestTemplate();
         log.info("Sending failure response with token {}", token);
         
-        String message = restTemplate.postForObject(url, token, String.class);
+        String body = getPostBody(token, id);
+        
+        String message = restTemplate.postForObject(url, body, String.class);
         HashMap<String, String> response = new HashMap();
         response.put("message", message);
         return (new Gson()).toJson(response);    
@@ -34,7 +37,9 @@ public class BankConnector {
         RestTemplate restTemplate = new RestTemplate();
         log.info("Sending failure response with token {}", token);
         
-        String message = restTemplate.postForObject(url, token, String.class);
+        String body = getPostBody(token, id);
+        
+        String message = restTemplate.postForObject(url, body, String.class);
         HashMap<String, String> response = new HashMap();
         response.put("message", message);
         return (new Gson()).toJson(response);    
@@ -42,16 +47,20 @@ public class BankConnector {
     
     public String startPayment(String paymentJson, Environment env){
         String url = env.getProperty("mockPaymentAddressStartPayment");
-        String redirectForm = generateRedirectForm(env);
+        String redirectForm = generateRedirectForm(paymentJson, env);
         
         return redirectForm;   
     }
     
-    private String generateRedirectForm(Environment env){
+    private String generateRedirectForm(String paymentJson, Environment env){
+        HashMap<String, String> paymentForm = new Gson().fromJson(
+            paymentJson,
+            new TypeToken<HashMap<String, String>>(){}.getType()
+        );
         String base_url = env.getProperty("mockPaymentAddress");
         
         Random rand = new Random();
-        String id = Integer.toString(rand.nextInt(100));
+        String id = paymentForm.get("id_zamowienia");
         String token = Integer.toString(rand.nextInt(100000));
         EasyCache.addElement(id, token);
         
@@ -63,5 +72,12 @@ public class BankConnector {
         redirectForm.put("redirectLink", redirectLink);
         
         return (new Gson()).toJson(redirectForm);
+    }
+
+    private String getPostBody(String token, String id) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("id", id);
+        body.put("token", token);
+        return new Gson().toJson(body);
     }
 }

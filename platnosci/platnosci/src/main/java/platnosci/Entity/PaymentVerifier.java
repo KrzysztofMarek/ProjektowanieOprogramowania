@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 import utils.EasyCache;
 
 public class PaymentVerifier {
@@ -34,13 +35,39 @@ public class PaymentVerifier {
         return processRedirectForm(redirectForm);
     }
     
-    public String confirm(String token){
-        EasyCache.addElement(token, "complete");
+    private void sendPOST(final String id, final String status, final String url){
+        
+        RestTemplate restTemplate = new RestTemplate();
+        
+        HashMap<String, String> responseUser = new HashMap();
+        responseUser.put("id", id);
+        responseUser.put("status", status);
+        String form = new Gson().toJson(responseUser);
+        
+        restTemplate.postForObject(url, form, String.class);
+    }
+    
+    public String confirm(final String data, final String url){
+        HashMap<String, String> unpackedData = new Gson().fromJson(
+                data, 
+                new TypeToken<HashMap<String, String>>(){}.getType()
+        );
+        
+        EasyCache.addElement(unpackedData.get("token"), "complete");
+        sendPOST(unpackedData.get("id"), "SUCCESS", url);
+                
         return "Cool";
     }
     
-    public String cancel(String token){
-        EasyCache.addElement(token, "cancel");
+    public String cancel(final String data, final String url){
+        HashMap<String, String> unpackedData = new Gson().fromJson(
+                data, 
+                new TypeToken<HashMap<String, String>>(){}.getType()
+        );
+        
+        EasyCache.addElement(unpackedData.get("token"), "cancel");
+        sendPOST(unpackedData.get("id"), "FAILURE", url);
+        
         return "Cool";
     }
     
@@ -81,4 +108,22 @@ public class PaymentVerifier {
         response.put("redirectLink", redirectData.get("redirectLink"));
         return (new Gson()).toJson(response);
     }    
+
+    public String payInternal(String paymentForm) {
+        HashMap<String, String> request = new Gson().fromJson(
+                paymentForm, 
+                new TypeToken<HashMap<String, String>>(){}.getType()
+        );
+        EasyCache.addElement(
+                request.get("id"), 
+                request.get("zamowienie")
+        );
+        return "Cool!";
+    }
+
+    public String getOrder(String orderId) {
+        String order = EasyCache.getElement(orderId);
+        
+        return new Gson().toJson(order);
+    }
 }

@@ -82,7 +82,7 @@ public class SQLConnector implements Connector {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(urlWithId, HttpMethod.GET, entity, String.class);
         if(response.getStatusCode() == HttpStatus.OK){
             return "Udało się!";
         }else{

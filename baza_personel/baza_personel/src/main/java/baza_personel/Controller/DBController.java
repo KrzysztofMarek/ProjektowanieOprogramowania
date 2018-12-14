@@ -49,6 +49,19 @@ public class DBController {
         }
     }
     
+    @GetMapping("/pobierzMenadzerow")
+    public String geManagers() 
+    {
+        try{
+            log.info("Fetching managers");
+            return connector.getManagers( 
+                    env.getProperty("getManagersAddress")
+            );
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
     @GetMapping("/pobierzPracownikowRestauracji")
     public String getEmployeesOfRestaurant(
             @RequestParam("id_restauracji") String id_restauracji) 
@@ -73,6 +86,21 @@ public class DBController {
             return connector.removeEmployee(
                     id_pracownika, 
                     env.getProperty("removeEmployeeAddress")
+            );
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
+    @GetMapping("/restauracjaIstnieje")
+    public String restaurantExists(
+            @RequestParam("id_restauracji") String id_restauracji) 
+    {
+        try{
+            log.info("Checking if restaurant {} exists", id_restauracji);
+            return connector.restaurantExists(
+                    id_restauracji, 
+                    env.getProperty("restaurantExistsAddress")
             );
         }catch(Exception e){
             return e.toString();

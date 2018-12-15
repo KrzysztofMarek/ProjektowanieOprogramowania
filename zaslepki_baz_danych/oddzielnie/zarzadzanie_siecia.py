@@ -106,5 +106,28 @@ def pobierz_restauracje():
     return jsonify(lista_restauracji)
 
 
+@app.route('/restauracja_istnieje', methods=['GET'])
+def restauracja_istnieje():
+    try:
+        if request.args.get('id_restauracji') is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get('id_restauracji'))
+    for restauracja in lista_restauracji['lista_restauracji']:
+        if restauracja['id_restauracji'] == id_restauracji:
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify('Restauracja nie znaleziona')
+    resp.status_code = 404
+    return resp
+
+
 if __name__ == '__main__':
     app.run()

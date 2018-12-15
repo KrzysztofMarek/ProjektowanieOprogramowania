@@ -2037,18 +2037,40 @@ def usun_pracownika():
 
 @app.route('/pobierz_pracownikow', methods=['GET'])
 def pobierz_pracownikow():
+    return jsonify(lista_pracownikow)
+
+
+@app.route('/przydziel_menadzera', methods=['POST'])
+def przydziel_menadzera():
     try:
-        if request.args.get("id_restauracji") is None:
+        rrequest = request.get_json()
+        if rrequest['id_pracownika'] is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-        # nie ma jeszcze rozroznienia na pracownikow ze wzgledu na restauracje, przykro mi :(
-        print(lista_pracownikow)
-        return jsonify(lista_pracownikow)
+        id_pracownika = rrequest['id_pracownika']
+
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
+
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
+        return resp
+
+    for pracownik in lista_pracownikow['lista_pracownikow']:
+        if pracownik['stanowisko'] != 'menadzer restauracji':
+            resp = jsonify('Pracownik o id: ' + str(id_restauracji) + " nie jest menadzerem")
+            resp.status_code = 404
+            return resp
+        if pracownik['id_pracownika'] == id_pracownika:
+            pracownik['id_restauracji'] = id_restauracji
+
+        resp = jsonify(success=True)
+        resp.status_code = 200
         return resp
 
 
@@ -2147,6 +2169,29 @@ def usun_restauracje():
 @app.route('/pobierz_restauracje', methods=['GET'])
 def pobierz_restauracje():
     return jsonify(lista_restauracji)
+
+@app.route('/restauracja_istnieje', methods=['GET'])
+def restauracja_istnieje():
+    try:
+        if request.args.get('id_restauracji') is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get('id_restauracji'))
+    for restauracja in lista_restauracji['lista_restauracji']:
+        if restauracja['id_restauracji'] == id_restauracji:
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify('Restauracja nie znaleziona')
+    resp.status_code = 404
+    return resp
+
 
 
 if __name__ == '__main__':

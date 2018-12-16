@@ -197,14 +197,16 @@ network_menu = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         }
     ]
 }
@@ -215,20 +217,23 @@ restaurant_menu_1 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 3,
             'nazwa': 'Bułka',
             'cena': 2.99,
-            'opis': 'Duża buła'
+            'opis': 'Duża buła',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -239,20 +244,23 @@ restaurant_menu_2 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 4,
             'nazwa': 'Chleb',
             'cena': 0.99,
-            'opis': 'Dobry chlebek'
+            'opis': 'Dobry chlebek',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -375,7 +383,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_1)
@@ -384,7 +393,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_2)
@@ -393,21 +403,24 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         restaurant_menu_1['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         restaurant_menu_2['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         print(network_menu)
@@ -550,6 +563,23 @@ def modyfikuj_danie():
                 for danie in network_menu['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['opis'] = str(rrequest['opis'])
+    except KeyError:
+        pass
+
+    try:
+        if rrequest["typ"]:
+            if id_restauracji == 1:
+                for danie in restaurant_menu_1['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            elif id_restauracji == 2:
+                for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            else:
+                for danie in network_menu['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
     except KeyError:
         pass
 

@@ -5,72 +5,58 @@
     </li>
   </ul>
   <hr>
-  <nav class="navbar navbar-light">
-    <a class="nav-item active">Bieżące zamówienie: {{getCoursesList(currentOrder)}}</a>
-    <form class="form-inline">
-      <button 
-        type="button" 
-        class="btn btn-outline-dark my-2 my-sm-0 my-btn" 
-        (click)="finalizeRealisation()"
-        [disabled]="currentOrder === null"
-      >
-        Realizacja zakończona
-      </button>
-      <div class="btn-group" role="group">
-        <button 
-          id="btnGroupDrop1" 
-          type="button" 
-          class="btn btn-outline-dark dropdown-toggle" 
-          data-toggle="dropdown" 
-          aria-haspopup="true"
-          aria-expanded="false"
-          [disabled]="currentOrder === null"
-        >
-          Porzuć zamówienie
+  <div *ngIf="isUserLogged">
+    <nav class="navbar navbar-light">
+      <a class="nav-item active">Bieżące zamówienie: {{getCoursesList(currentOrder)}}</a>
+      <form class="form-inline">
+        <button type="button" class="btn btn-outline-dark my-2 my-sm-0 my-btn" (click)="finalizeRealisation()"
+          [disabled]="currentOrder === null">
+          Realizacja zakończona
         </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Brak składników</a>
-          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Awaria urządzenia</a>
-          <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Problem z personelem</a>
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" [disabled]="currentOrder === null">
+            Porzuć zamówienie
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Brak składników</a>
+            <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Awaria urządzenia</a>
+            <a class="dropdown-item" href="#" (click)="dropCurrentOrder()">Problem z personelem</a>
+          </div>
         </div>
+      </form>
+    </nav>
+    <hr>
+    <br>
+    <div class="row">
+      <div class="col">
       </div>
-    </form>
-  </nav>
-  <hr>
-  <br>
-  <div class="row">
-    <div class="col">
-    </div>
-    <div class="col-10 ui-content">
-      <h1 class="lead">Lista zamówień</h1>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">ID Zamówienia</th>
-            <th scope="col">Lista zamówionych dań</th>
-            <th scope="col">Satus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orderList">
-            <td>{{order.id}}</td>
-            <td>{{getCoursesList(order)}}</td>
-            <td>{{order.orderStatus}}</td>
-            <th>
-              <button 
-                type="button" 
-                class="btn btn-outline-dark"
-                (click)="takeOrder(order.id)"
-                [disabled]="order.orderStatus === 'przygotowywane' || order.orderStatus === 'w_drodze'"
-              >
-                Podejmij zamówienie
-              </button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col">
+      <div class="col-10 ui-content">
+        <h1 class="lead">Lista zamówień</h1>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID Zamówienia</th>
+              <th scope="col">Lista zamówionych dań</th>
+              <th scope="col">Satus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orderList">
+              <td>{{order.id}}</td>
+              <td>{{getCoursesList(order)}}</td>
+              <td>{{order.orderStatus}}</td>
+              <th>
+                <button type="button" class="btn btn-outline-dark" (click)="takeOrder(order.id)" [disabled]="order.orderStatus === 'przygotowywane' || order.orderStatus === 'w_drodze'">
+                  Podejmij zamówienie
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+      </div>
     </div>
   </div>
 </div>

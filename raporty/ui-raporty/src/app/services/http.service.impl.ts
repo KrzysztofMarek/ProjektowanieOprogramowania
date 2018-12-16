@@ -4,13 +4,27 @@ import { DroppedOrderReport } from './../dropped-order-report';
 import { CompletedOrderReport } from './../completed-order-report';
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpServiceImpl implements HttpService {
+
+  performLogin(): Observable<boolean> {
+
+    return this.http.get<String>(
+      'http://localhost:7777/getsession'
+    ).pipe(map(data => {
+      if (data === 'Not logged in!') {
+        return false;
+      } else {
+        return true;
+      }
+    }));
+  }
 
   constructor(private http: HttpClient) { }
 

@@ -4,34 +4,36 @@
       <a class="nav-link disabled" href="#">Raporty</a>
     </li>
   </ul>
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-outline-dark" (click)="completed()">
-      Raport zrealizowanych zamówień
-    </button>
-    <button type="button" class="btn btn-outline-dark" (click)="dropped()">
-      Raport porzuconych zamówień
-    </button>
-    <button type="button" class="btn btn-outline-dark" (click)="avgDeliveries()">
-      Raport średnich czasów dostawy
-    </button>
-    <button type="button" class="btn btn-outline-dark" (click)="avgRealisations()">
-      Raport średnich czasów realizacji
-    </button>
-    <button type="button" class="btn btn-outline-dark">
-      Histogram złożonych zamówień
-    </button>
-    <button type="button" class="btn btn-outline-dark" (click)="testReport(currentType)">
-      Eksport do PDF
-    </button>
-  </div>
-  <div *ngIf="diagramTypeChart">
-    <div id="content">
-      <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+  <div *ngIf="isUserLogged">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-outline-dark" (click)="completed()">
+        Raport zrealizowanych zamówień
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="dropped()">
+        Raport porzuconych zamówień
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="avgDeliveries()">
+        Raport średnich czasów dostawy
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="avgRealisations()">
+        Raport średnich czasów realizacji
+      </button>
+      <button type="button" class="btn btn-outline-dark">
+        Histogram złożonych zamówień
+      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="testReport(currentType)">
+        Eksport do PDF
+      </button>
     </div>
-  </div>
-  <div *ngIf="!diagramTypeChart">
+    <div *ngIf="diagramTypeChart">
+      <div id="content">
+        <p-chart type="pie" [data]="dataDisplayed"></p-chart>
+      </div>
+    </div>
+    <div *ngIf="!diagramTypeChart">
       <div id="content">
         <p-chart type="bar" [data]="dataDisplayed"></p-chart>
       </div>
     </div>
+  </div>
 </div>

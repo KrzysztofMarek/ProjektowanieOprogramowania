@@ -5,44 +5,41 @@
     </li>
   </ul>
   <hr>
-  <br>
-  <div class="row">
-    <div class="col">
-    </div>
-    <div class="col-10 ui-content">
-      <h1 class="lead">Lista zamówień do doręczenia</h1>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">ID Zamówienia</th>
-            <th scope="col">Lista zamówionych dań</th>
-            <th scope="col">Adres dostawy</th>
-            <th scope="col">Telefon dostawy</th>
-            <th scope="col">Nazwa odbiorcy</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orderList">
-            <td>{{order.order.id}}</td>
-            <td>{{getCoursesList(order.order)}}</td>
-            <td>{{order.contact.adress}}</td>
-            <td>{{order.contact.phoneNumber}}</td>
-            <td>{{order.contact.name + ' ' + order.contact.surname}}</td>
-            <th>
-              <button 
-                type="button" 
-                class="btn btn-outline-dark"
-                (click)="deliver(order.order.id)"
-                [disabled]="order.order.orderStatus === 'dostarczono'"
-              >
-                Dostarcz
-              </button>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col">
+  <div *ngIf="isUserLogged">
+    <br>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-10 ui-content">
+        <h1 class="lead">Lista zamówień do doręczenia</h1>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID Zamówienia</th>
+              <th scope="col">Lista zamówionych dań</th>
+              <th scope="col">Adres dostawy</th>
+              <th scope="col">Telefon dostawy</th>
+              <th scope="col">Nazwa odbiorcy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orderList">
+              <td>{{order.order.id}}</td>
+              <td>{{getCoursesList(order.order)}}</td>
+              <td>{{order.contact.adress}}</td>
+              <td>{{order.contact.phoneNumber}}</td>
+              <td>{{order.contact.name + ' ' + order.contact.surname}}</td>
+              <th>
+                <button type="button" class="btn btn-outline-dark" (click)="deliver(order.order.id)" [disabled]="order.order.orderStatus === 'dostarczono'">
+                  Dostarcz
+                </button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+      </div>
     </div>
   </div>
 </div>

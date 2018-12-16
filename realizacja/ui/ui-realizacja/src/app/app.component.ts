@@ -11,14 +11,24 @@ export class AppComponent implements OnInit {
 
   orderList: Order[];
   currentOrder: Order;
+  isUserLogged = false;
 
   constructor(private httpService: HttpServiceImpl) { }
 
   ngOnInit() {
+    this.login();
     this.currentOrder = null;
     this.httpService.fetchOrders().subscribe(
       data => {
         this.orderList = data;
+      }
+    );
+  }
+
+  login() {
+    this.httpService.performLogin().subscribe(
+      data => {
+        this.isUserLogged = data;
       }
     );
   }

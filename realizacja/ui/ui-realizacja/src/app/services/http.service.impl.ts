@@ -2,6 +2,7 @@ import { HttpService } from './http.service';
 import { Order } from '../order';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -23,5 +24,18 @@ export class HttpServiceImpl implements HttpService {
     return this.http.get<Order[]>(
       'http://localhost:8080/orderStatus/' + id + '/' + status + '/1'
     );
+  }
+
+  performLogin(): Observable<boolean> {
+
+    return this.http.get<String>(
+      'http://localhost:7777/getsession'
+    ).pipe(map(data => {
+      if (data === 'Not logged in!') {
+        return false;
+      } else {
+        return true;
+      }
+    }));
   }
 }

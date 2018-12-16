@@ -8,4 +8,5 @@ export interface HttpService {
 
     fetchOrders(): Observable<Order[]>;
     changeOrderStatus(id, status): Observable<Order[]>;
+    performLogin(): Observable<boolean>;
 }

@@ -11,13 +11,23 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   orderList: OrderWithContact[];
+  isUserLogged = false;
 
   constructor(private httpService: HttpServiceImpl) { }
 
   ngOnInit() {
+    this.login();
     this.httpService.fetchOrders().subscribe(
       data => {
         this.orderList = data.filter( d => d.order.orderStatus !== 'dostarczono');
+      }
+    );
+  }
+
+  login() {
+    this.httpService.performLogin().subscribe(
+      data => {
+        this.isUserLogged = data;
       }
     );
   }

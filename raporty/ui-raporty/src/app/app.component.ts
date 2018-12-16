@@ -26,10 +26,21 @@ export class AppComponent implements OnInit {
   dataDropped: DroppedOrderReport;
   dataAvgDelivery: AvgDeliveryTimesReport;
   dataAvgRealisation: AvgRealisationTimesReport;
+  isUserLogged = false;
 
-  constructor(private httpService: HttpServiceImpl) { }
+  constructor(private httpService: HttpServiceImpl) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.login();
+  }
+
+  login() {
+    this.httpService.performLogin().subscribe(
+      data => {
+        this.isUserLogged = data;
+      }
+    );
+  }
 
   completed() {
     this.httpService.fetchCompletedOrderReport().subscribe(

@@ -11,12 +11,12 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">Imię</label>
-              <input type="text" class="form-control" [(ngModel)]="employee.imie" name="imie" #firstName="ngModel" id="firstName"
+              <input type="text" class="form-control" [(ngModel)]="employeeNew.imie" name="imie" #firstName="ngModel" id="firstName"
                 placeholder="" value="" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Nazwisko</label>
-              <input type="text" class="form-control" [(ngModel)]="employee.nazwisko" name="nazwisko" #lastName="ngModel"
+              <input type="text" class="form-control" [(ngModel)]="employeeNew.nazwisko" name="nazwisko" #lastName="ngModel"
                 id="lastName" placeholder="" value="" required>
             </div>
           </div>
@@ -27,32 +27,32 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">@</span>
               </div>
-              <input type="text" class="form-control" [(ngModel)]="employee.id_restauracji" name="id_restauracji"
+              <input type="text" class="form-control" [(ngModel)]="employeeNew.id_restauracji" name="id_restauracji"
                 #id_restauracji="ngModel" id="id_restauracji" placeholder="Restauracja" required>
             </div>
           </div>
 
           <div class="pl-0 mb-3 col-md-8">
             <label for="position">Stanowisko</label>
-            <input type="text" class="form-control" [(ngModel)]="employee.stanowisko" name="stanowisko" #position="ngModel"
+            <input type="text" class="form-control" [(ngModel)]="employeeNew.stanowisko" name="stanowisko" #position="ngModel"
               id="position" required>
           </div>
 
           <div class="pl-0 mb-3 col-md-8">
             <label for="email">Nr telefonu</label>
-            <input type="text" class="form-control" [(ngModel)]="employee.telefon" name="telefon" #phone="ngModel" id="phone">
+            <input type="text" class="form-control" [(ngModel)]="employeeNew.telefon" name="telefon" #phone="ngModel" id="phone">
           </div>
 
           <div class="row">
             <div class="mb-3 col-md-6">
               <label for="username">Login</label>
-              <input type="text" class="form-control" [(ngModel)]="employee.id_pracownika" name="id_pracownika"
+              <input type="text" class="form-control" [(ngModel)]="employeeNew.id_pracownika" name="id_pracownika"
                 #username="ngModel" id="username" required>
             </div>
 
             <div class="mb-3 col-md-6">
               <label for="password">Hasło</label>
-              <input type="text" class="form-control" [(ngModel)]="employee.haslo" name="haslo" #password="ngModel" id="password">
+              <input type="text" class="form-control" [(ngModel)]="employeeNew.haslo" name="haslo" #password="ngModel" id="password">
             </div>
           </div>
 
@@ -78,27 +78,11 @@
         </thead>
         <tbody>
           <tr class="text-center">
-            <td>TestName</td>
-            <td>TestnSurname</td>
-            <td>Kelner</td>
-            <td>777 777 777</td>
-            <td>#1</td>
-            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
-          </tr>
-          <tr class="text-center">
-            <td>TestName</td>
-            <td>TestnSurname</td>
-            <td>Kelner</td>
-            <td>777 777 777</td>
-            <td>#1</td>
-            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
-          </tr>
-          <tr class="text-center">
-            <td>TestName</td>
-            <td>TestnSurname</td>
-            <td>Kelner</td>
-            <td>777 777 777</td>
-            <td>#1</td>
+            <td>imie</td>
+            <td>nazwisko</td>
+            <td>stanowisko</td>
+            <td>telefon</td>
+            <td>id_pracownika</td>
             <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
           </tr>
         </tbody>

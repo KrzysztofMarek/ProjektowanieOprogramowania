@@ -9,12 +9,12 @@
             <div class="form-group">
               <label for="inputName">Nazwa Restauracji <span style="color:red">*</span></label>
               <input class="form-control input-lg" type="text" placeholder="Proszę wpisać nazwę restauracji"
-                [(ngModel)]="restaurant.nazwa" name="nazwa" #nazwa="ngModel" id="restaurant_name">
+                [(ngModel)]="restaurantNew.nazwa" name="nazwa" #nazwa="ngModel" id="restaurant_name">
             </div>
             <div class="form-group">
               <label for="inputSurname">Lokalizacja <span style="color:red">*</span></label>
               <input class="form-control input-lg" type="text" placeholder="Proszę wpisać adres restauracji"
-                [(ngModel)]="restaurant.adres" name="adres" #adres="ngModel" id="adress">
+                [(ngModel)]="restaurantNew.adres" name="adres" #adres="ngModel" id="adress">
             </div>
             <div class="d-flex justify-content-center py-3">
               <button class="btn btn-lg btn-primary mr-4" click="onSubmit">Dodaj</button>
@@ -38,10 +38,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="text-center">
-            <td class="align-middle">#1</td>
-            <td class="align-middle">TestNazwa</td>
-            <td class="align-middle">TestLokalizacja</td>
+          <tr *ngFor="let rest of restaurant.lista_restauracji; let i = index" class="text-center">
+            <td class="align-middle">{{rest.id_restauracji}}</td>
+            <td class="align-middle">{{rest.nazwa}}</td>
+            <td class="align-middle">{{rest.adres}}</td>
             <td class="align-middle">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -55,61 +55,11 @@
                 </div>
               </div>
             </td>
-            <td class="align-middle"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
+            <td class="align-middle"><button (click)="onClick(rest)" type="button" class="btn btn-outline-primary" data-toggle="modal"
                 data-target="#exampleModal">
                 Pracownicy
               </button>
 
-            </td>
-            <td class="align-middle"><button type="button" class="btn btn-danger">X</button></td>
-          </tr>
-          <tr class="text-center">
-            <td class="align-middle">#1</td>
-            <td class="align-middle">TestNazwa</td>
-            <td class="align-middle">TestLokalizacja</td>
-            <td class="align-middle">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Menedżer
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Menedżer_1</a>
-                  <a class="dropdown-item" href="#">Menedżer_2</a>
-                  <a class="dropdown-item" href="#">Menedżer_3</a>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                data-target="#exampleModal">
-                Pracownicy
-              </button>
-            </td>
-            <td class="align-middle"><button type="button" class="btn btn-danger">X</button></td>
-          </tr>
-          <tr class="text-center">
-            <td class="align-middle">#1</td>
-            <td class="align-middle">TestNazwa</td>
-            <td class="align-middle">TestLokalizacja</td>
-            <td class="align-middle">
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  Menedżer
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Menedżer_1</a>
-                  <a class="dropdown-item" href="#">Menedżer_2</a>
-                  <a class="dropdown-item" href="#">Menedżer_3</a>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle"><button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                data-target="#exampleModal">
-                Pracownicy
-              </button>
-
-              <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -121,42 +71,31 @@
                       </button>
                     </div>
                     <div class="modal-body p-0">
-                        <table class="table border">
-                            <thead class="thead-light">
-                              <tr>
-                                <th scope="col">Imię</th>
-                                <th scope="col">Nazwisko</th>
-                                <th scope="col">Stanowisko</th>
-                                <th scope="col">Nr. telefonu</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr class="text-center">
-                                <td>TestName</td>
-                                <td>TestnSurname</td>
-                                <td>Kelner</td>
-                                <td>777 777 777</td>
-                              </tr>
-                              <tr class="text-center">
-                                <td>TestName</td>
-                                <td>TestnSurname</td>
-                                <td>Kelner</td>
-                                <td>777 777 777</td>
-                              </tr>
-                              <tr class="text-center">
-                                <td>TestName</td>
-                                <td>TestnSurname</td>
-                                <td>Kelner</td>
-                                <td>777 777 777</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                      <table class="table border">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Imię</th>
+                            <th scope="col">Nazwisko</th>
+                            <th scope="col">Stanowisko</th>
+                            <th scope="col">Nr. telefonu</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let emp of employee.lista_pracownikow" class="text-center">
+                            <td>{{emp.imie}}</td>
+                            <td>{{emp.nazwisko}}</td>
+                            <td>{{emp.stanowisko}}</td>
+                            <td>{{emp.telefon}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
+
             </td>
-            <td class="align-middle"><button type="button" class="btn btn-danger">X</button></td>
+            <td class="align-middle"><button (click)="onDelete(rest)" type="button" class="btn btn-danger">X</button></td>
           </tr>
         </tbody>
       </table>

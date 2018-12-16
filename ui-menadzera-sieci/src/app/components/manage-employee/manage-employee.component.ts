@@ -10,24 +10,29 @@ import { DataService } from '../../services/data.service';
 export class ManageEmployeeComponent implements OnInit {
 
   employee: Employee = new Employee();
+  employeeNew: Employee = new Employee();
   alertString: string = "";
 
-  constructor(
-    public dataService: DataService
-  ) { }
+  constructor(public dataService: DataService) { }
 
   ngOnInit() {
+/*    this.dataService.getEmployeesList().subscribe(employee => {
+      this.employee = employee;
+    }); */
   }
 
   onSubmit() {
-    this.dataService.addEmployee(this.employee)
-    .subscribe(res => {
-      console.log(res);
-      var getValueArray = Object.values(res)
-      this.alertString += getValueArray;
-      alert(this.alertString.split(',').join(""));
-      this.alertString = "";
-    });
+    console.log(this.employeeNew);
+    this.dataService.addEmployee(this.employeeNew)
+      .subscribe(res => {
+        var getValueArray = Object.values(res)
+        this.alertString += getValueArray;
+        alert(this.alertString.split(',').join(""));
+        this.alertString = "";
+        this.dataService.getEmployeesList().subscribe(employee => {
+          this.employee = employee;
+        });
+      });
   }
 
 }

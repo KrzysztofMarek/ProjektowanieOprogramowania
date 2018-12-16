@@ -17,21 +17,36 @@ export class DataService {
         public http: HttpClient
     ) { }
 
-    addEmployee(employee: Employee) {
-        return this.http.post('http://localhost:9090/dodaj_pracownika', employee)
+    addEmployee(employeeNew: Employee) {
+        return this.http.post('http://localhost:9090/dodaj_pracownika', employeeNew);
+    }
+
+    getEmployeesList():Observable<Employee> {
+       return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow');
+    }
+
+    getRestaurantEmployeesList(id: number):Observable<Employee> {
+        return this.http.get<Employee>(`http://localhost:9090/pobierz_pracownikow_restauracji?id_restauracji=${id}`);
     }
 
     addRecruitment(recruitmentNew: Recruitment) {
         return this.http.post('http://localhost:9090/dodaj_ogloszenie', recruitmentNew);
     }
 
-    getRecruitmentsList() {
-        return this.http.get('http://localhost:9090/pobierz_ogloszenia')
-            .map(res => res as Recruitment);
+    getRecruitmentsList():Observable<Recruitment> {
+        return this.http.get<Recruitment>(`http://localhost:9090/pobierz_ogloszenia`)
     }
 
-    addRestaurant(restaurant: Restaurant) {
-        return this.http.post('http://localhost:9094/dodaj_restauracje', restaurant);
+    addRestaurant(restaurantNew: Restaurant) {
+        return this.http.post('http://localhost:9094/dodaj_restauracje', restaurantNew);
+    }
+
+    deleteRestaurant(id:number) {
+        return this.http.post('http://localhost:9094/usun_restauracje', id);
+    }
+
+    getRestauranstList():Observable<Restaurant> {
+        return this.http.get<Restaurant>('http://localhost:9094/pobierz_restauracje');
     }
 
 }

@@ -20,6 +20,8 @@ export class AddRecruitmentComponent implements OnInit {
   ngOnInit() {
     this.dataService.getRecruitmentsList().subscribe(recruitment => {
       this.recruitment = recruitment;
+      console.log(recruitment);
+      console.log(this.recruitment);
     });
   }
 

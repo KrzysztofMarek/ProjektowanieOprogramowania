@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 //Service Imports
 import { DataService } from './services/data.service';
-import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { AddRecruitmentComponent } from './components/add-recruitment/add-recruitment.component';
@@ -25,8 +23,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AddEmployeeComponent,
-    AddRestaurantComponent,
     NavbarComponent,
     HomePageComponent,
     AddRecruitmentComponent,

@@ -24,7 +24,6 @@ lista_restauracji = {
             'nazwa': 'Students Dream',
             'id_restauracji': 3,
             'adres': 'Granadierow 5'
-<<<<<<< HEAD
         },
         {
             'nazwa': 'Zew Mięsa',
@@ -35,8 +34,6 @@ lista_restauracji = {
             'nazwa': 'Piwowo',
             'id_restauracji': 5,
             'adres': 'Browarna 46'
-=======
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
         }
     ]
 }
@@ -107,6 +104,29 @@ def usun_restauracje():
 @app.route('/pobierz_restauracje', methods=['GET'])
 def pobierz_restauracje():
     return jsonify(lista_restauracji)
+
+
+@app.route('/restauracja_istnieje', methods=['GET'])
+def restauracja_istnieje():
+    try:
+        if request.args.get('id_restauracji') is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get('id_restauracji'))
+    for restauracja in lista_restauracji['lista_restauracji']:
+        if restauracja['id_restauracji'] == id_restauracji:
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify('Restauracja nie znaleziona')
+    resp.status_code = 404
+    return resp
 
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ def main_site():
     return 404
 
 
-lista_zamowien = {
+lista_zamowien_Z = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
@@ -23,17 +23,13 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
-<<<<<<< HEAD
+            'ocena': 2,
             'miasto': 'Warszawa',
-=======
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'adres': "Grunwaldzka 13"
         },
         {
             'id_zamowienia': 2,
             'id_klienta': 2,
-<<<<<<< HEAD
             'id_restauracji': 1,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
@@ -43,7 +39,7 @@ lista_zamowien = {
             'kwota': 59.88,
             'status': 'dostarczone',
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -60,7 +56,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -77,7 +73,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -96,7 +92,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -115,7 +111,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 25,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -132,7 +128,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -149,7 +145,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -165,7 +161,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -181,7 +177,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -199,7 +195,7 @@ lista_zamowien = {
             'czas_dostawy': 32,
             'czas_realizacji': 44,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -215,7 +211,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -231,7 +227,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -249,7 +245,7 @@ lista_zamowien = {
             'czas_dostawy': 18,
             'czas_realizacji': 67,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -267,7 +263,7 @@ lista_zamowien = {
             'czas_dostawy': 32,
             'czas_realizacji': 85,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -285,7 +281,7 @@ lista_zamowien = {
             'czas_dostawy': 22,
             'czas_realizacji': 15,
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -303,7 +299,7 @@ lista_zamowien = {
             'czas_dostawy': 10,
             'czas_realizacji': 28,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -320,7 +316,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -337,7 +333,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -356,7 +352,7 @@ lista_zamowien = {
             'czas_dostawy': 92,
             'czas_realizacji': 35,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -375,7 +371,7 @@ lista_zamowien = {
             'czas_dostawy': 22,
             'czas_realizacji': 34,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -392,7 +388,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -409,7 +405,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -425,7 +421,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -441,7 +437,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -459,7 +455,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 8,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -475,7 +471,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -491,7 +487,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -509,7 +505,7 @@ lista_zamowien = {
             'czas_dostawy': 58,
             'czas_realizacji': 13,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -525,7 +521,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -541,7 +537,7 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -559,7 +555,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
             'adres': "Wolności 15"
 
@@ -576,7 +572,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -593,7 +589,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -612,7 +608,7 @@ lista_zamowien = {
             'czas_dostawy': 19,
             'czas_realizacji': 56,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -631,7 +627,7 @@ lista_zamowien = {
             'czas_dostawy': 14,
             'czas_realizacji': 37,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -648,7 +644,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -665,7 +661,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -681,7 +677,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -697,7 +693,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -715,7 +711,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -731,7 +727,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -747,7 +743,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -765,7 +761,7 @@ lista_zamowien = {
             'czas_dostawy': 12,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -783,7 +779,7 @@ lista_zamowien = {
             'czas_dostawy': 52,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -801,7 +797,7 @@ lista_zamowien = {
             'czas_dostawy': 18,
             'czas_realizacji': 38,
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
             'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
@@ -809,32 +805,22 @@ lista_zamowien = {
             'id_zamowienia': 47,
             'id_klienta': 2,
             'id_restauracji': 1,
-=======
-            'id_restauracji': 3,
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 59.88,
-<<<<<<< HEAD
             'status': 'dostarczone',
             'czas_dostawy': 42,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
             'miasto': 'Toruń',
-=======
-            'status': 'przygotowywane',
-            'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'adres': "Wolności 15"
 
         },
         {
-<<<<<<< HEAD
             'id_zamowienia': 48,
             'id_klienta': 1,
             'id_restauracji': 1,
@@ -846,7 +832,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -863,7 +849,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
@@ -882,7 +868,7 @@ lista_zamowien = {
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -901,7 +887,7 @@ lista_zamowien = {
             'czas_dostawy': 28,
             'czas_realizacji': 24,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -910,21 +896,15 @@ lista_zamowien = {
             'id_zamowienia': 52,
             'id_klienta': 1,
             'id_restauracji': 1,
-=======
-            'id_zamowienia': 3,
-            'id_klienta': 1,
-            'id_restauracji': 5,
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 43.80,
-<<<<<<< HEAD
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
 
@@ -941,7 +921,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -957,7 +937,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -973,7 +953,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -991,7 +971,7 @@ lista_zamowien = {
             'czas_dostawy': 25,
             'czas_realizacji': 75,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Radom',
             'adres': "Alternatywy 4"
         },
@@ -1007,7 +987,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
@@ -1023,7 +1003,7 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -1041,7 +1021,7 @@ lista_zamowien = {
             'czas_dostawy': 24,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': None,
             'miasto': 'Warszawa',
             'adres': "Alternatywy 4"
         },
@@ -1057,24 +1037,13 @@ lista_zamowien = {
             'kwota': 43.80,
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
             'miasto': 'Toruń',
             'adres': "Alternatywy 4"
         },
     ]
 }
 zamowienia_interator = 60
-=======
-            'status': 'w_drodze',
-            'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
-            'adres': "Alternatywy 4"
-
-        }
-    ]
-}
-zamowienia_interator = 4
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 
 
 @app.route('/dodaj_zamowienie_Z', methods=['POST'])
@@ -1104,7 +1073,6 @@ def dodaj_zamowienie_Z():
             resp.status_code = 404
             return resp
         kwota = float(rrequest['kwota'])
-<<<<<<< HEAD
 
         if rrequest['miasto'] is None:
             resp = jsonify(success=False)
@@ -1117,8 +1085,6 @@ def dodaj_zamowienie_Z():
             resp.status_code = 404
             return resp
         adres = str(rrequest['adres'])
-=======
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -1126,24 +1092,18 @@ def dodaj_zamowienie_Z():
 
     global zamowienia_interator
     zamowienia_interator +=1
-    lista_zamowien['lista_zamowien'].append({
+    lista_zamowien_Z['lista_zamowien'].append({
         'id_zamowienia': zamowienia_interator,
         'lista_dan': lista_dan,
         'id_restauracji': id_restauracji,
         'id_klienta': id_klienta,
         'kwota': kwota,
         'status': 'oczekujące',
-<<<<<<< HEAD
         'adres': adres,
         'miasto': miasto,
         'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
     })
     print('DODANO ZAM')
-=======
-        'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
-    })
-    print(lista_zamowien)
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -1165,7 +1125,7 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["lista_dan"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['lista_dan'] = str(rrequest['lista_dan'])
     except KeyError:
@@ -1173,16 +1133,15 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["kwota"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['cena'] = int(rrequest['cena'])
     except KeyError:
         pass
 
-<<<<<<< HEAD
     try:
         if rrequest["adres"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['adres'] = int(rrequest['adres'])
     except KeyError:
@@ -1190,15 +1149,13 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["miasto"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['miasto'] = int(rrequest['miasto'])
     except KeyError:
         pass
 
-=======
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
-    print(lista_zamowien)
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -1219,14 +1176,14 @@ def zmien_status_zamowienia_Z():
             resp.status_code = 404
             return resp
         status = str(rrequest['status'])
-        for zamowienie in lista_zamowien['lista_zamowien']:
+        for zamowienie in lista_zamowien_Z['lista_zamowien']:
             if zamowienie['id_zamowienia'] == id_zamowienia:
                 zamowienie['status'] = str(status)
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    print(lista_zamowien)
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -1235,8 +1192,7 @@ def zmien_status_zamowienia_Z():
 # Pobierz zamówienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia_Z', methods=['GET'])
 def pobierz_zamowienia_Z():
-<<<<<<< HEAD
-    return jsonify(lista_zamowien)
+    return jsonify(lista_zamowien_Z)
 
 
 # Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
@@ -1250,20 +1206,11 @@ def pobierz_zamowienie_Z():
             resp.status_code = 404
             return resp
         id_zamowienia = int(request.args.get("id_zamowienia"))
-=======
-    try:
-        if request.args.get("id_restauracji") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-<<<<<<< HEAD
-    return jsonify(lista_zamowien['lista_zamowien'][id_zamowienia])
+    return jsonify(lista_zamowien_Z['lista_zamowien'][id_zamowienia])
 
 
 @app.route('/dodaj_ocene_Z', methods=['POST'])
@@ -1280,29 +1227,12 @@ def dodaj_ocene_Z():
             resp.status_code = 404
             return resp
         ocena = str(rrequest['ocena'])
-=======
-    return jsonify(lista_zamowien)
-
-
-# Czy to ma sens? : Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
-#                                                                                    kwota:double,data_zlozenia:string,status:string,ocena:int)
-
-@app.route('/pobierz_zamowienie_Z', methods=['GET'])
-def pobierz_zamowienie_Z():
-    try:
-        if request.args.get("id_zamowienia") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_zamowienia = int(request.args.get("id_zamowienia"))
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-<<<<<<< HEAD
 
-    for zamowienie in lista_zamowien['lista_zamowien']:
+    for zamowienie in lista_zamowien_Z['lista_zamowien']:
         if zamowienie['id_zamowienia'] == id_zamowienia:
             print(zamowienie)
             zamowienie.update({'ocena': str(ocena)})
@@ -1311,9 +1241,6 @@ def pobierz_zamowienie_Z():
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
-=======
-    return jsonify(lista_zamowien['lista_zamowien'][id_zamowienia])
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243
 
 
 if __name__ == '__main__':

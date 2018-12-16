@@ -35,7 +35,7 @@ public class PaymentVerifier {
         return processRedirectForm(redirectForm);
     }
     
-    private void sendPOST(final String id, final String status, final String url){
+    private String sendPOST(final String id, final String status, final String url){
         
         RestTemplate restTemplate = new RestTemplate();
         
@@ -44,7 +44,7 @@ public class PaymentVerifier {
         responseUser.put("status", status);
         String form = new Gson().toJson(responseUser);
         
-        restTemplate.postForObject(url, form, String.class);
+        return restTemplate.postForObject(url, form, String.class);
     }
     
     public String confirm(final String data, final String url){
@@ -53,8 +53,12 @@ public class PaymentVerifier {
                 new TypeToken<HashMap<String, String>>(){}.getType()
         );
         
-        EasyCache.addElement(unpackedData.get("token"), "complete");
-        sendPOST(unpackedData.get("id"), "SUCCESS", url);
+        String response = sendPOST(unpackedData.get("id"), "SUCCESS", url);
+        HashMap<String, String> responseMap = new Gson().fromJson(
+            response,
+            new TypeToken<HashMap<String, String>>(){}.getType()
+        );
+        EasyCache.addElement(unpackedData.get("token"), responseMap.get("redirect"));
                 
         return "Cool";
     }
@@ -65,8 +69,13 @@ public class PaymentVerifier {
                 new TypeToken<HashMap<String, String>>(){}.getType()
         );
         
-        EasyCache.addElement(unpackedData.get("token"), "cancel");
-        sendPOST(unpackedData.get("id"), "FAILURE", url);
+        String response = sendPOST(unpackedData.get("id"), "FAILURE", url);
+        HashMap<String, String> responseMap = new Gson().fromJson(
+            response,
+            new TypeToken<HashMap<String, String>>(){}.getType()
+        );
+        EasyCache.addElement(unpackedData.get("token"), responseMap.get("redirect"));
+                
         
         return "Cool";
     }

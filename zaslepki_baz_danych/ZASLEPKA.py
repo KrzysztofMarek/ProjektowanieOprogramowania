@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, jsonify
 import datetime
 
@@ -75,6 +76,30 @@ def dodaj_punkty():
     print(klienci)
     resp = jsonify(success=True)
     resp.status_code = 200
+    return resp
+
+
+@app.route('/pobierz_punkty_klienta', methods=['GET'])
+def pobierz_punkty_klienta():
+    try:
+        if request.args.get("id_klienta") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 403
+            return resp
+        id_klienta = request.args.get("id_klienta")
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 500
+        return resp
+
+    for klient in klienci['lista']:
+        if klient['id_klienta'] == id_klienta:
+            resp = jsonify(int(klient['punkty']))
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
     return resp
 
 
@@ -634,7 +659,6 @@ lista_zamowien = {
 }
 
 
-
 @app.route('/zmien_status_zamowienia', methods=['POST'])
 def zmien_status_zamowienia():
     rrequest = request.get_json()
@@ -705,6 +729,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 59.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'data_zlozenia': '2018-06-11',
             'ocena': 4,
             'miasto': 'Toruń',
@@ -756,6 +781,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
@@ -775,6 +801,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 12,
             'czas_realizacji': 25,
             'data_zlozenia': '2018-12-16',
@@ -859,6 +886,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 32,
             'czas_realizacji': 44,
             'data_zlozenia': '2018-12-16',
@@ -909,6 +937,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 18,
             'czas_realizacji': 67,
             'data_zlozenia': '2018-12-16',
@@ -927,6 +956,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 32,
             'czas_realizacji': 85,
             'data_zlozenia': '2018-12-16',
@@ -945,6 +975,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 26.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 22,
             'czas_realizacji': 15,
             'data_zlozenia': '2018-09-10',
@@ -963,6 +994,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 59.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 10,
             'czas_realizacji': 28,
             'data_zlozenia': '2018-06-11',
@@ -1016,6 +1048,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 92,
             'czas_realizacji': 35,
             'data_zlozenia': '2018-12-16',
@@ -1035,6 +1068,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 22,
             'czas_realizacji': 34,
             'data_zlozenia': '2018-12-16',
@@ -1119,6 +1153,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 12,
             'czas_realizacji': 8,
             'data_zlozenia': '2018-12-16',
@@ -1169,6 +1204,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 58,
             'czas_realizacji': 13,
             'data_zlozenia': '2018-12-16',
@@ -1219,6 +1255,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 59.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-06-11',
@@ -1272,6 +1309,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 19,
             'czas_realizacji': 56,
             'data_zlozenia': '2018-12-16',
@@ -1291,6 +1329,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 14,
             'czas_realizacji': 37,
             'data_zlozenia': '2018-12-16',
@@ -1375,6 +1414,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
@@ -1425,6 +1465,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 12,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
@@ -1443,6 +1484,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 52,
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
@@ -1461,6 +1503,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 26.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 18,
             'czas_realizacji': 38,
             'data_zlozenia': '2018-09-10',
@@ -1479,6 +1522,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 59.88,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 42,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-06-11',
@@ -1532,6 +1576,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 72,
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
@@ -1551,6 +1596,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 28,
             'czas_realizacji': 24,
             'data_zlozenia': '2018-12-16',
@@ -1635,6 +1681,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 25,
             'czas_realizacji': 75,
             'data_zlozenia': '2018-12-16',
@@ -1685,6 +1732,7 @@ lista_zamowien_Z = {
             ],
             'kwota': 43.80,
             'status': 'dostarczone',
+            'oplacone': True,
             'czas_dostawy': 24,
             'czas_realizacji': 18,
             'data_zlozenia': '2018-12-16',
@@ -1766,6 +1814,7 @@ def dodaj_zamowienie_Z():
         'id_klienta': id_klienta,
         'kwota': kwota,
         'status': 'oczekujące',
+        'oplacone': False,
         'adres': adres,
         'miasto': miasto,
         'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
@@ -1773,6 +1822,31 @@ def dodaj_zamowienie_Z():
     print('DODANO ZAM')
     resp = jsonify(success=True)
     resp.status_code = 200
+    return resp
+
+
+@app.route('/oplac_zamowienie_Z', methods=['POST'])
+def oplac_zamowienie_Z():
+    try:
+        if request.args.get("id_zamowienia") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 403
+            return resp
+        id_zamowienia = request.args.get("id_zamowienia")
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 500
+        return resp
+
+    for zamowienie in lista_zamowien_Z['lista_zamowien']:
+        if zamowienie['id_zamowienia'] == int(id_zamowienia):
+            zamowienie['oplacone'] = True
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
     return resp
 
 
@@ -2170,6 +2244,7 @@ def dodaj_restauracje():
     resp.status_code = 200
     return resp
 
+
 # b) Usuń_restauracje(id_restauracji:int)
 @app.route('/usun_restauracje', methods=['GET'])
 def usun_restauracje():
@@ -2200,6 +2275,7 @@ def usun_restauracje():
 def pobierz_restauracje():
     return jsonify(lista_restauracji)
 
+
 @app.route('/restauracja_istnieje', methods=['GET'])
 def restauracja_istnieje():
     try:
@@ -2221,7 +2297,6 @@ def restauracja_istnieje():
     resp = jsonify('Restauracja nie znaleziona')
     resp.status_code = 404
     return resp
-
 
 
 if __name__ == '__main__':

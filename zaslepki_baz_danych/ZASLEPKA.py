@@ -199,14 +199,16 @@ network_menu = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         }
     ]
 }
@@ -217,20 +219,23 @@ restaurant_menu_1 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 3,
             'nazwa': 'Bułka',
             'cena': 2.99,
-            'opis': 'Duża buła'
+            'opis': 'Duża buła',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -241,20 +246,23 @@ restaurant_menu_2 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 4,
             'nazwa': 'Chleb',
             'cena': 0.99,
-            'opis': 'Dobry chlebek'
+            'opis': 'Dobry chlebek',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -377,7 +385,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_1)
@@ -386,7 +395,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_2)
@@ -395,21 +405,24 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         restaurant_menu_1['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         restaurant_menu_2['lista'].append({
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         print(network_menu)
@@ -552,6 +565,23 @@ def modyfikuj_danie():
                 for danie in network_menu['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['opis'] = str(rrequest['opis'])
+    except KeyError:
+        pass
+
+    try:
+        if rrequest["typ"]:
+            if id_restauracji == 1:
+                for danie in restaurant_menu_1['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            elif id_restauracji == 2:
+                for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            else:
+                for danie in network_menu['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
     except KeyError:
         pass
 
@@ -2039,18 +2069,40 @@ def usun_pracownika():
 
 @app.route('/pobierz_pracownikow', methods=['GET'])
 def pobierz_pracownikow():
+    return jsonify(lista_pracownikow)
+
+
+@app.route('/przydziel_menadzera', methods=['POST'])
+def przydziel_menadzera():
     try:
-        if request.args.get("id_restauracji") is None:
+        rrequest = request.get_json()
+        if rrequest['id_pracownika'] is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-        # nie ma jeszcze rozroznienia na pracownikow ze wzgledu na restauracje, przykro mi :(
-        print(lista_pracownikow)
-        return jsonify(lista_pracownikow)
+        id_pracownika = rrequest['id_pracownika']
+
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
+
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
+        return resp
+
+    for pracownik in lista_pracownikow['lista_pracownikow']:
+        if pracownik['stanowisko'] != 'menadzer restauracji':
+            resp = jsonify('Pracownik o id: ' + str(id_restauracji) + " nie jest menadzerem")
+            resp.status_code = 404
+            return resp
+        if pracownik['id_pracownika'] == id_pracownika:
+            pracownik['id_restauracji'] = id_restauracji
+
+        resp = jsonify(success=True)
+        resp.status_code = 200
         return resp
 
 
@@ -2149,6 +2201,29 @@ def usun_restauracje():
 @app.route('/pobierz_restauracje', methods=['GET'])
 def pobierz_restauracje():
     return jsonify(lista_restauracji)
+
+@app.route('/restauracja_istnieje', methods=['GET'])
+def restauracja_istnieje():
+    try:
+        if request.args.get('id_restauracji') is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get('id_restauracji'))
+    for restauracja in lista_restauracji['lista_restauracji']:
+        if restauracja['id_restauracji'] == id_restauracji:
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify('Restauracja nie znaleziona')
+    resp.status_code = 404
+    return resp
+
 
 
 if __name__ == '__main__':

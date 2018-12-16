@@ -5,6 +5,8 @@
  */
 package baza_personel.Entity;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -47,24 +49,7 @@ public class SQLConnector{
         HttpEntity<String> entity = new HttpEntity<>(headers);
         log.info("Sending GET to {}", url);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        if(response.getStatusCode() == HttpStatus.OK){
-            return response.getBody();
-        }else{
-            return "Nie udało się!";    
-        }
-    }
-
-    public String getEmployees(String id_restauracji, String url) {   
-        String urlWithId = url + "?id_resturacji=" + id_restauracji;
-        
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        log.info("Sending GET to {}", url);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        if(response.getStatusCode() == HttpStatus.OK){
+        if(response.getStatusCode() == HttpStatus.OK){            
             return response.getBody();
         }else{
             return "Nie udało się!";    
@@ -98,21 +83,6 @@ public class SQLConnector{
         ResponseEntity<String> response = restTemplate.exchange(urlWithId, HttpMethod.GET, entity, String.class);
         if(response.getStatusCode() == HttpStatus.OK){
             return "Yes";
-        }else{
-            return "Nie udało się!";    
-        }
-    }
-
-    public String getManagers(final String url) {     
-        
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-        if(response.getStatusCode() == HttpStatus.OK){
-            return response.getBody();
         }else{
             return "Nie udało się!";    
         }

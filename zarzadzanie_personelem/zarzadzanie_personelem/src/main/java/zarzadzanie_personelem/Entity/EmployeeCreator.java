@@ -6,10 +6,14 @@
 package zarzadzanie_personelem.Entity;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.client.RestTemplate;
 import utils.RestClient;
 
 /**
@@ -65,10 +69,11 @@ public class EmployeeCreator {
         return RestClient.sendGET(url);        
     }
     
-    public String getEmployees(final String id_restauracji, final String url) {
-        String urlWithId = url + "?id_restauracji=" + id_restauracji;
-        
-        return RestClient.sendGET(urlWithId);
+    public String getEmployees(final String id_restauracji, final String url) {        
+        HashMap<String,String> response = RestClient.sendGETRaw(url);
+        ArrayList<EmployeeForm> employees = castToEmployees(response.get("message"));
+        ArrayList<EmployeeForm> employeesOfRestaurant = filterEmployeesOfRestaurant(employees, id_restauracji);
+        return new Gson().toJson(employeesOfRestaurant);        
     }
 
     public String removeEmployee(final String id_pracownika, final String url) {
@@ -78,7 +83,35 @@ public class EmployeeCreator {
     }
 
     public String getManagers(final String url) {    
-        return RestClient.sendGET(url);        
+        HashMap<String,String> response = RestClient.sendGETRaw(url);        
+        log.info("Processing response {}", response);
+        ArrayList<EmployeeForm> employees = castToEmployees(response.get("message"));
+        ArrayList<EmployeeForm> managers = filterManagers(employees);
+        return new Gson().toJson(managers);
+    }
+
+    private ArrayList<EmployeeForm> castToEmployees(String response) {
+        Gson gson = new Gson();
+        
+        JsonObject responseObject = gson.fromJson(response, JsonObject.class);
+        JsonArray employeeListFormObject = responseObject
+                .get("lista_pracownikow").getAsJsonArray();
+        
+        ArrayList<EmployeeForm> employeeListForm = new Gson().fromJson(
+                employeeListFormObject, 
+                new TypeToken<ArrayList<EmployeeForm>>(){}.getType()
+        );
+        return employeeListForm;
+    }
+
+    private ArrayList<EmployeeForm> filterManagers(ArrayList<EmployeeForm> employees) {
+        employees.removeIf(employee -> !employee.getStanowisko().equals("menadzer restauracji"));
+        return employees;
+    }
+
+    private ArrayList<EmployeeForm> filterEmployeesOfRestaurant(ArrayList<EmployeeForm> employees, final String id) {
+        employees.removeIf(employee -> !employee.getId_restauracji().equals(id));
+        return employees;
     }
 
     

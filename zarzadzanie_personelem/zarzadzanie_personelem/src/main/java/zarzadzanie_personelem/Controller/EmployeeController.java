@@ -60,7 +60,7 @@ public class EmployeeController {
         try{
             log.info("Fetching managers");
             return (new EmployeeCreator()).getManagers(
-                    env.getProperty("getManagersAddress")
+                    env.getProperty("getEmployeesAddress")
             );
         }catch(Exception e){
             return e.toString();

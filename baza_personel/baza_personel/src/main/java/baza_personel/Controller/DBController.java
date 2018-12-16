@@ -49,34 +49,6 @@ public class DBController {
         }
     }
     
-    @GetMapping("/pobierzMenadzerow")
-    public String geManagers() 
-    {
-        try{
-            log.info("Fetching managers");
-            return connector.getManagers( 
-                    env.getProperty("getManagersAddress")
-            );
-        }catch(Exception e){
-            return e.toString();
-        }
-    }
-    
-    @GetMapping("/pobierzPracownikowRestauracji")
-    public String getEmployeesOfRestaurant(
-            @RequestParam("id_restauracji") String id_restauracji) 
-    {
-        try{
-            log.info("Fetching employees from restaurant {}", id_restauracji);
-            return connector.getEmployees(
-                    id_restauracji,
-                    env.getProperty("getEmployeesAddress")
-            );
-        }catch(Exception e){
-            return e.toString();
-        }
-    }
-    
     @GetMapping("/usunPracownika")
     public String removeEmployee(
             @RequestParam("id_pracownika") String id_pracownika) 

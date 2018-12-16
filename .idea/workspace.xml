@@ -4,8 +4,6 @@
     <list default="true" id="e44075b7-9bee-43ae-860d-2889ad1ff44d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/Controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/Controllers/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/ExternalServices/DbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/ExternalServices/DbService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zamowienia/backend/order-rest-service-0.1.jar" beforeDir="false" afterPath="$PROJECT_DIR$/zamowienia/backend/order-rest-service-0.1.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py" beforeDir="false" afterPath="$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,15 +13,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ZASLEPKA.py" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ZASLEPKA.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="23" selection-start-column="23" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zamowienia.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2723">
+              <caret line="1176" column="23" lean-forward="true" selection-start-line="1176" selection-start-column="23" selection-end-line="1176" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="klient.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -51,7 +67,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -64,10 +79,17 @@
               <item name="PO" type="462c0819:PsiDirectoryNode" />
               <item name="zaslepki_baz_danych" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="PO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PO" type="462c0819:PsiDirectoryNode" />
+              <item name="zaslepki_baz_danych" type="462c0819:PsiDirectoryNode" />
+              <item name="oddzielnie" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -126,24 +148,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.24946696" />
+      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.2521322" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32897604" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -154,9 +177,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2723">
+          <caret line="1176" column="23" lean-forward="true" selection-start-line="1176" selection-start-column="23" selection-end-line="1176" selection-end-column="23" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
         </state>
       </provider>
     </entry>

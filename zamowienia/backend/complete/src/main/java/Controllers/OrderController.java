@@ -86,4 +86,19 @@ public class OrderController {
         }
     }
 
+    @CrossOrigin
+    @RequestMapping(value="/dodaj_ocene_zamowienia", method=RequestMethod.POST )
+    @ResponseBody
+    public ResponseEntity<Object> CancelOrder(@RequestParam(value = "id_zamowienia", required = true) Integer orderId) 
+    {
+        try{
+            if(dbService.ChangeOrderStatus(orderId, "anulowane")){
+                return ResponseEntity.status(200).body(null);
+            }else{
+                return ResponseEntity.status(403).body(null);
+            }
+        }catch(Exception ex){
+            return ResponseEntity.status(403).body(null);
+        }
+    }
 }

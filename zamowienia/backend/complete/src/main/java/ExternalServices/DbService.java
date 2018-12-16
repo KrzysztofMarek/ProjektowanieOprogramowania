@@ -91,8 +91,31 @@ public class DbService {
         return false;
     }
 
-    public boolean ChangeOrderStatus(int orderId, String status){
-        return false;
+    public boolean ChangeOrderStatus(int orderId, String status) throws URISyntaxException, ClientProtocolException, IOException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "zmien_status_zamowienia_Z");
+
+        HttpClient httpclient = HttpClients.createDefault();
+        HttpPost httppost = new HttpPost(builder.build());
+
+        JSONObject json = new JSONObject();
+        json.put("id_zamowienia", orderId);
+        json.put("status", status);
+
+        StringEntity requestEntity = new StringEntity(
+            json.toString(),
+            ContentType.APPLICATION_JSON);
+
+        httppost.setEntity(requestEntity);
+
+        HttpResponse response = httpclient.execute(httppost);
+
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        if(statusCode == 200){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public boolean RateOrder(Integer orderId, String rating) throws URISyntaxException, ClientProtocolException, IOException {

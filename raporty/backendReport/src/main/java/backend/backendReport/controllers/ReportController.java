@@ -59,7 +59,7 @@ public class ReportController implements Report {
         return new ResponseEntity<>(reportService.createCompletedOrderPdf(), headers, HttpStatus.CREATED);
 
     }
-    @RequestMapping(value = "/create-dropped-order-pdf", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/create-dropped-order-report-pdf", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<byte[]> createDroppedOrderPdf() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/pdf");
@@ -67,7 +67,7 @@ public class ReportController implements Report {
         headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
         return new ResponseEntity<>(reportService.createDroppedOrderPdf(), headers, HttpStatus.CREATED);
     }
-    @RequestMapping(value = "/create-average-realisation-pdf", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/create-average-realisation-time-pdf", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<byte[]> createAverageRealisationOrderPdf() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/pdf");
@@ -75,7 +75,7 @@ public class ReportController implements Report {
         headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
         return new ResponseEntity<>(reportService.createAverageRealisationTimePdf(), headers, HttpStatus.CREATED);
     }
-    @RequestMapping(value = "/create-average-delivery-pdf", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/create-average-delivery-time-pdf", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<byte[]> createAverageDeliveryOrderPdf() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/pdf");

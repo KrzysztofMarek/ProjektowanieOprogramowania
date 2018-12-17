@@ -37,7 +37,6 @@
                 <v-data-table
                     :items="orders"
                     class="elevation-1"
-                    hide-actions
                     hide-headers
                     :loading="is_loading"
                 >
@@ -56,7 +55,7 @@
                                             Anuluj zamówienie
                                         </v-card-title>
                                         <v-card-text>
-                                            Czy na pewno chcesz anulować zamówienie?
+                                            Czy na pewno chcesz anulować zamówienie <strong>{{ order_list_display(props.item) }}</strong>?
                                         </v-card-text>
                                         <v-card-actions>
                                             <v-spacer />

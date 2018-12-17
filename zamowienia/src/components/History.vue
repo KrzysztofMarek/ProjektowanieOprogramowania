@@ -102,39 +102,12 @@ export default {
     data: () => {
         return {
             error_text: "",
-            is_loading: false,
+            is_loading: true,
             cancel_dialog: false,
             rating_dialog: false,
             rating_editing: 0,
             order_editing_idx: 0,
-            orders: [
-                {
-                    id_restauracji: 0,
-                    id_zamowienia: 0,
-                    adres: "",
-                    lista_dan: [{
-                        id_dania: 0,
-                        nazwa: "Pierogi",
-                    }],
-                    kwota: 10.0,
-                    status: "dostarczone",
-                    ocena: null,
-                },
-                {
-                    id_restauracji: 0,
-                    id_zamowienia: 1,
-                    adres: "",
-                    lista_dan: [
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                    ],
-                    kwota: 200.0,
-                    status: "oczekujace",
-                    ocena: null,
-                }
-            ],
+            orders: [],
         }},
     methods: {
         display_price: function(price) {

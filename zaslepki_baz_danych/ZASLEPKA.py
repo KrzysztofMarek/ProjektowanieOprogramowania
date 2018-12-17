@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, jsonify
 import datetime
 
@@ -7,6 +8,129 @@ app = Flask(__name__)
 @app.route('/')
 def main_site():
     return 404
+
+
+klienci = {'lista': [
+    {
+        'id_klienta': 'heheszek',
+        'imie': 'Jan',
+        'nazwisko': 'Kowalski',
+        'telefon': '333444555',
+        'haslo': 'wdjfh',
+        'email': 'jan@jan.pl',
+        'adres': 'Konwaliowa 3',
+        'punkty': 3
+    },
+    {
+        'id_klienta': 'silacz',
+        'imie': 'Arnold',
+        'nazwisko': 'Czarny',
+        'telefon': '333444555',
+        'haslo': 'wdjfh',
+        'email': 'get@tothe.chopper',
+        'adres': 'Terminowa 2',
+        'punkty': 0
+    },
+    {
+        'id_klienta': 'SyLweK',
+        'imie': 'Sykwester',
+        'nazwisko': 'Stalowy',
+        'telefon': '333444555',
+        'haslo': 'wdjfh',
+        'email': 'ramob@bumbum.rpg',
+        'adres': 'Wybuchowa 4',
+        'punkty': 16
+    }
+]}
+
+
+@app.route('/pobierz_klientow', methods=['GET'])
+def pobierz_klientow():
+    return jsonify(klienci)
+
+
+@app.route('/dodaj_punkty', methods=['POST'])
+def dodaj_punkty():
+    try:
+        rrequest = request.get_json()
+        if rrequest['id_klienta'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_klienta = rrequest['id_klienta']
+
+        if rrequest['punkty'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        punkty = int(rrequest['punkty'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    for klient in klienci['lista']:
+        if klient['id_klienta'] == id_klienta:
+            klient['punkty'] += punkty
+
+    print(klienci)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
+
+
+@app.route('/pobierz_punkty_klienta', methods=['GET'])
+def pobierz_punkty_klienta():
+    try:
+        if request.args.get("id_klienta") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 403
+            return resp
+        id_klienta = request.args.get("id_klienta")
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 500
+        return resp
+
+    for klient in klienci['lista']:
+        if klient['id_klienta'] == id_klienta:
+            resp = jsonify(int(klient['punkty']))
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
+
+
+@app.route('/usun_punkty', methods=['POST'])
+def usun_punkty():
+    try:
+        rrequest = request.get_json()
+        if rrequest['id_klienta'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_klienta = rrequest['id_klienta']
+
+        if rrequest['punkty'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        punkty = int(rrequest['punkty'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    for klient in klienci['lista']:
+        if klient['id_klienta'] == id_klienta:
+            klient['punkty'] -= punkty
+
+    print(klienci)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
 # Pobierz_pracownika(id_pracownika: string) zwraca string:login, string:hasło oraz string:stanowisko
@@ -98,14 +222,16 @@ network_menu = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         }
     ]
 }
@@ -116,20 +242,23 @@ restaurant_menu_1 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 3,
             'nazwa': 'Bułka',
             'cena': 2.99,
-            'opis': 'Duża buła'
+            'opis': 'Duża buła',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -140,20 +269,23 @@ restaurant_menu_2 = {
             'id_dania': 1,
             'nazwa': 'Ciastko',
             'cena': 29.99,
-            'opis': 'Pycha ciacho'
+            'opis': 'Pycha ciacho',
+            'typ': 'menu_sieci'
 
         },
         {
             'id_dania': 2,
             'nazwa': 'Kawa',
             'cena': 5.99,
-            'opis': 'Dobra kawusia'
+            'opis': 'Dobra kawusia',
+            'typ': 'menu_sieci'
         },
         {
             'id_dania': 4,
             'nazwa': 'Chleb',
             'cena': 0.99,
-            'opis': 'Dobry chlebek'
+            'opis': 'Dobry chlebek',
+            'typ': 'menu_rest'
         }
     ]
 }
@@ -277,7 +409,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_1)
@@ -286,7 +419,8 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_rest'
 
         })
         print(restaurant_menu_2)
@@ -295,7 +429,24 @@ def dodaj_danie():
             'id_dania': id_dania_iterator,
             'nazwa': nazwa,
             'cena': cena,
-            'opis': opis
+            'opis': opis,
+            'typ': 'menu_sieci'
+
+        })
+        restaurant_menu_1['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis,
+            'typ': 'menu_sieci'
+
+        })
+        restaurant_menu_2['lista'].append({
+            'id_dania': id_dania_iterator,
+            'nazwa': nazwa,
+            'cena': cena,
+            'opis': opis,
+            'typ': 'menu_sieci'
 
         })
         print(network_menu)
@@ -441,6 +592,23 @@ def modyfikuj_danie():
     except KeyError:
         pass
 
+    try:
+        if rrequest["typ"]:
+            if id_restauracji == 1:
+                for danie in restaurant_menu_1['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            elif id_restauracji == 2:
+                for danie in restaurant_menu_2['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+            else:
+                for danie in network_menu['lista']:
+                    if danie['id_dania'] == id_dania:
+                        danie['typ'] = str(rrequest['typ'])
+    except KeyError:
+        pass
+
     print(network_menu)
     print(restaurant_menu_1)
     print(restaurant_menu_2)
@@ -449,7 +617,7 @@ def modyfikuj_danie():
     return resp
 
 
-lista_zamowien_R = {
+lista_zamowien = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
@@ -506,7 +674,7 @@ def zmien_status_zamowienia():
             resp.status_code = 404
             return resp
         status = str(rrequest['status'])
-        for zamowienie in lista_zamowien_R['lista_zamowien']:
+        for zamowienie in lista_zamowien['lista_zamowien']:
             if zamowienie['id_zamowienia'] == id_zamowienia:
                 zamowienie['status'] = str(status)
     except KeyError:
@@ -530,10 +698,10 @@ def pobierz_zamowienia():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    return jsonify(lista_zamowien_R)
+    return jsonify(lista_zamowien)
 
 
-lista_zamowien = {
+lista_zamowien_Z = {
     'lista_zamowien': [
         {
             'id_zamowienia': 1,
@@ -547,44 +715,1051 @@ lista_zamowien = {
             'kwota': 26.88,
             'status': 'oczekujace',
             'data_zlozenia': '2018-09-10',
-            'ocena': '2/10',
+            'ocena': 2,
+            'miasto': 'Warszawa',
             'adres': "Grunwaldzka 13"
         },
         {
             'id_zamowienia': 2,
             'id_klienta': 2,
-            'id_restauracji': 3,
+            'id_restauracji': 1,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 59.88,
-            'status': 'przygotowywane',
+            'status': 'dostarczone',
+            'oplacone': True,
             'data_zlozenia': '2018-06-11',
-            'ocena': '4/10',
+            'ocena': 4,
+            'miasto': 'Toruń',
             'adres': "Wolności 15"
 
         },
         {
             'id_zamowienia': 3,
             'id_klienta': 1,
-            'id_restauracji': 5,
+            'id_restauracji': 1,
             'lista_dan': [
                 {'id_dania': 1, 'nazwa': 'Kawa'},
                 {'id_dania': 2, 'nazwa': 'Ciastko'},
                 {'id_dania': 3, 'nazwa': 'Bulka'}
             ],
             'kwota': 43.80,
-            'status': 'w_drodze',
+            'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
-            'ocena': '8/10',
+            'ocena': 8,
+            'miasto': 'Radom',
             'adres': "Alternatywy 4"
 
-        }
+        },
+        {
+            'id_zamowienia': 4,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 5,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 72,
+            'czas_realizacji': 45,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 6,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 12,
+            'czas_realizacji': 25,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 7,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 8,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 9,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 10,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 11,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 32,
+            'czas_realizacji': 44,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 12,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 13,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 14,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 18,
+            'czas_realizacji': 67,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 15,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 32,
+            'czas_realizacji': 85,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 16,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 26.88,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 22,
+            'czas_realizacji': 15,
+            'data_zlozenia': '2018-09-10',
+            'ocena': 2,
+            'miasto': 'Warszawa',
+            'adres': "Grunwaldzka 13"
+        },
+        {
+            'id_zamowienia': 17,
+            'id_klienta': 2,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 59.88,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 10,
+            'czas_realizacji': 28,
+            'data_zlozenia': '2018-06-11',
+            'ocena': 4,
+            'miasto': 'Toruń',
+            'adres': "Wolności 15"
+
+        },
+        {
+            'id_zamowienia': 18,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 19,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 20,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 92,
+            'czas_realizacji': 35,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 21,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 22,
+            'czas_realizacji': 34,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 22,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 23,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 24,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 25,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 26,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 12,
+            'czas_realizacji': 8,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 27,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 28,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 29,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 58,
+            'czas_realizacji': 13,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 30,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 31,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 26.88,
+            'status': 'oczekujace',
+            'data_zlozenia': '2018-09-10',
+            'ocena': 2,
+            'miasto': 'Warszawa',
+            'adres': "Grunwaldzka 13"
+        },
+        {
+            'id_zamowienia': 32,
+            'id_klienta': 2,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 59.88,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 72,
+            'czas_realizacji': 45,
+            'data_zlozenia': '2018-06-11',
+            'ocena': 4,
+            'miasto': 'Toruń',
+            'adres': "Wolności 15"
+
+        },
+        {
+            'id_zamowienia': 33,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 34,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 35,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 19,
+            'czas_realizacji': 56,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 36,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 14,
+            'czas_realizacji': 37,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 37,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 38,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 39,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 40,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 41,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 72,
+            'czas_realizacji': 45,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 42,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 43,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 44,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 12,
+            'czas_realizacji': 17,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 45,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 52,
+            'czas_realizacji': 17,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 46,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 26.88,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 18,
+            'czas_realizacji': 38,
+            'data_zlozenia': '2018-09-10',
+            'ocena': 2,
+            'miasto': 'Warszawa',
+            'adres': "Grunwaldzka 13"
+        },
+        {
+            'id_zamowienia': 47,
+            'id_klienta': 2,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 59.88,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 42,
+            'czas_realizacji': 18,
+            'data_zlozenia': '2018-06-11',
+            'ocena': 4,
+            'miasto': 'Toruń',
+            'adres': "Wolności 15"
+
+        },
+        {
+            'id_zamowienia': 48,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 49,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 50,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 72,
+            'czas_realizacji': 45,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 51,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 28,
+            'czas_realizacji': 24,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 52,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+
+        },
+        {
+            'id_zamowienia': 53,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 54,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 55,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 56,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 25,
+            'czas_realizacji': 75,
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Radom',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 57,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 58,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 59,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'dostarczone',
+            'oplacone': True,
+            'czas_dostawy': 24,
+            'czas_realizacji': 18,
+            'data_zlozenia': '2018-12-16',
+            'ocena': None,
+            'miasto': 'Warszawa',
+            'adres': "Alternatywy 4"
+        },
+        {
+            'id_zamowienia': 60,
+            'id_klienta': 1,
+            'id_restauracji': 1,
+            'lista_dan': [
+                {'id_dania': 1, 'nazwa': 'Kawa'},
+                {'id_dania': 2, 'nazwa': 'Ciastko'},
+                {'id_dania': 3, 'nazwa': 'Bulka'}
+            ],
+            'kwota': 43.80,
+            'status': 'anulowane',
+            'data_zlozenia': '2018-12-16',
+            'ocena': 8,
+            'miasto': 'Toruń',
+            'adres': "Alternatywy 4"
+        },
     ]
 }
-zamowienia_interator = 4
+zamowienia_interator = 60
 
 
 @app.route('/dodaj_zamowienie_Z', methods=['POST'])
@@ -614,6 +1789,18 @@ def dodaj_zamowienie_Z():
             resp.status_code = 404
             return resp
         kwota = float(rrequest['kwota'])
+
+        if rrequest['miasto'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        miasto = str(rrequest['miasto'])
+
+        if rrequest['adres'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        adres = str(rrequest['adres'])
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
@@ -621,18 +1808,46 @@ def dodaj_zamowienie_Z():
 
     global zamowienia_interator
     zamowienia_interator += 1
-    lista_zamowien['lista_zamowien'].append({
+    lista_zamowien_Z['lista_zamowien'].append({
         'id_zamowienia': zamowienia_interator,
         'lista_dan': lista_dan,
         'id_restauracji': id_restauracji,
         'id_klienta': id_klienta,
         'kwota': kwota,
         'status': 'oczekujące',
+        'oplacone': False,
+        'adres': adres,
+        'miasto': miasto,
         'data_zlozenia': str(datetime.datetime.today().strftime('%Y-%m-%d'))
     })
-    print(lista_zamowien)
+    print('DODANO ZAM')
     resp = jsonify(success=True)
     resp.status_code = 200
+    return resp
+
+
+@app.route('/oplac_zamowienie_Z', methods=['POST'])
+def oplac_zamowienie_Z():
+    try:
+        if request.args.get("id_zamowienia") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 403
+            return resp
+        id_zamowienia = request.args.get("id_zamowienia")
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 500
+        return resp
+
+    for zamowienie in lista_zamowien_Z['lista_zamowien']:
+        if zamowienie['id_zamowienia'] == int(id_zamowienia):
+            zamowienie['oplacone'] = True
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
     return resp
 
 
@@ -652,7 +1867,7 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["lista_dan"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['lista_dan'] = str(rrequest['lista_dan'])
     except KeyError:
@@ -660,13 +1875,29 @@ def edytuj_zamowienie_Z():
 
     try:
         if rrequest["kwota"]:
-            for zamowienie in lista_zamowien['lista_zamowien']:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
                 if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
                     zamowienie['cena'] = int(rrequest['cena'])
     except KeyError:
         pass
 
-    print(lista_zamowien)
+    try:
+        if rrequest["adres"]:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
+                    zamowienie['adres'] = int(rrequest['adres'])
+    except KeyError:
+        pass
+
+    try:
+        if rrequest["miasto"]:
+            for zamowienie in lista_zamowien_Z['lista_zamowien']:
+                if zamowienie['id_zamowienia'] == int(rrequest['id_zamowienia']):
+                    zamowienie['miasto'] = int(rrequest['miasto'])
+    except KeyError:
+        pass
+
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -687,14 +1918,14 @@ def zmien_status_zamowienia_Z():
             resp.status_code = 404
             return resp
         status = str(rrequest['status'])
-        for zamowienie in lista_zamowien['lista_zamowien']:
+        for zamowienie in lista_zamowien_Z['lista_zamowien']:
             if zamowienie['id_zamowienia'] == id_zamowienia:
                 zamowienie['status'] = str(status)
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    print(lista_zamowien)
+    print(lista_zamowien_Z)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
@@ -703,20 +1934,10 @@ def zmien_status_zamowienia_Z():
 # Pobierz zamówienia -> przekopiuj z realizacji
 @app.route('/pobierz_zamowienia_Z', methods=['GET'])
 def pobierz_zamowienia_Z():
-    try:
-        if request.args.get("id_restauracji") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
-    return jsonify(lista_zamowien)
+    return jsonify(lista_zamowien_Z)
 
 
-# Czy to ma sens? : Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
+# Pobierz_zamowienie(id_zamowienia:int) zwraca (id_klienta:int, id_restauracji:int, lista[id_dania:int,nazwa:string],
 #                                                                                    kwota:double,data_zlozenia:string,status:string,ocena:int)
 
 @app.route('/pobierz_zamowienie_Z', methods=['GET'])
@@ -731,7 +1952,37 @@ def pobierz_zamowienie_Z():
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
-    return jsonify(lista_zamowien['lista_zamowien'][id_zamowienia])
+    return jsonify(lista_zamowien_Z['lista_zamowien'][id_zamowienia])
+
+
+@app.route('/dodaj_ocene_Z', methods=['POST'])
+def dodaj_ocene_Z():
+    rrequest = request.get_json()
+    try:
+        if rrequest["id_zamowienia"] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_zamowienia = int(rrequest['id_zamowienia'])
+        if rrequest['ocena'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        ocena = str(rrequest['ocena'])
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    for zamowienie in lista_zamowien_Z['lista_zamowien']:
+        if zamowienie['id_zamowienia'] == id_zamowienia:
+            print(zamowienie)
+            zamowienie.update({'ocena': str(ocena)})
+
+    print(zamowienie)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 
 lista_pracownikow = {
@@ -757,12 +2008,42 @@ lista_pracownikow = {
         },
         {
             'id_pracownika': 'KNow',
-            'id_restauracji': 4,
+            'id_restauracji': 1,
             'imie': 'Kasia',
             'nazwisko': 'Nowak',
             'telefon': '333444555',
             'stanowisko': 'menadzer restauracji',
             'haslo': 'kKdPS'
+
+        },
+        {
+            'id_pracownika': 'rahim',
+            'id_restauracji': 2,
+            'imie': 'Rahim',
+            'nazwisko': 'bin Amdel',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'wdjfh'
+
+        },
+        {
+            'id_pracownika': 'gracia12',
+            'id_restauracji': 3,
+            'imie': 'Grażyna',
+            'nazwisko': 'Nowak',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'pjdp'
+
+        },
+        {
+            'id_pracownika': 'lubDum',
+            'id_restauracji': 4,
+            'imie': 'Robert',
+            'nazwisko': 'Kowalak',
+            'telefon': '333444555',
+            'stanowisko': 'menadzer restauracji',
+            'haslo': 'alkdjflk'
 
         }
     ]
@@ -861,18 +2142,40 @@ def usun_pracownika():
 
 @app.route('/pobierz_pracownikow', methods=['GET'])
 def pobierz_pracownikow():
+    return jsonify(lista_pracownikow)
+
+
+@app.route('/przydziel_menadzera', methods=['POST'])
+def przydziel_menadzera():
     try:
-        if request.args.get("id_restauracji") is None:
+        rrequest = request.get_json()
+        if rrequest['id_pracownika'] is None:
             resp = jsonify(success=False)
             resp.status_code = 404
             return resp
-        id_restauracji = int(request.args.get("id_restauracji"))
-        # nie ma jeszcze rozroznienia na pracownikow ze wzgledu na restauracje, przykro mi :(
-        print(lista_pracownikow)
-        return jsonify(lista_pracownikow)
+        id_pracownika = rrequest['id_pracownika']
+
+        if rrequest['id_restauracji'] is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_restauracji = int(rrequest['id_restauracji'])
+
     except KeyError:
         resp = jsonify(success=False)
         resp.status_code = 404
+        return resp
+
+    for pracownik in lista_pracownikow['lista_pracownikow']:
+        if pracownik['stanowisko'] != 'menadzer restauracji':
+            resp = jsonify('Pracownik o id: ' + str(id_restauracji) + " nie jest menadzerem")
+            resp.status_code = 404
+            return resp
+        if pracownik['id_pracownika'] == id_pracownika:
+            pracownik['id_restauracji'] = id_restauracji
+
+        resp = jsonify(success=True)
+        resp.status_code = 200
         return resp
 
 
@@ -892,6 +2195,16 @@ lista_restauracji = {
             'nazwa': 'Students Dream',
             'id_restauracji': 3,
             'adres': 'Granadierow 5'
+        },
+        {
+            'nazwa': 'Zew Mięsa',
+            'id_restauracji': 4,
+            'adres': 'Mięsna 35'
+        },
+        {
+            'nazwa': 'Piwowo',
+            'id_restauracji': 5,
+            'adres': 'Browarna 46'
         }
     ]
 }
@@ -962,6 +2275,29 @@ def usun_restauracje():
 @app.route('/pobierz_restauracje', methods=['GET'])
 def pobierz_restauracje():
     return jsonify(lista_restauracji)
+
+
+@app.route('/restauracja_istnieje', methods=['GET'])
+def restauracja_istnieje():
+    try:
+        if request.args.get('id_restauracji') is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+    id_restauracji = int(request.args.get('id_restauracji'))
+    for restauracja in lista_restauracji['lista_restauracji']:
+        if restauracja['id_restauracji'] == id_restauracji:
+            resp = jsonify(success=True)
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify('Restauracja nie znaleziona')
+    resp.status_code = 404
+    return resp
 
 
 if __name__ == '__main__':

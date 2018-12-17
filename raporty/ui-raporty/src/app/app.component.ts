@@ -4,9 +4,7 @@ import { DroppedOrderReport } from './dropped-order-report';
 import { HttpServiceImpl } from './services/http.service.impl';
 import { Component, OnInit } from '@angular/core';
 import { CompletedOrderReport } from './completed-order-report';
-import * as jspdf from 'jspdf';
-import * as html2canvas from 'html2canvas';
-import * as ascii from 'ascii-json';
+import { saveAs } from 'file-saver/FileSaver';
 
 declare global {
   interface Window { html2canvas: any; }
@@ -194,55 +192,45 @@ export class AppComponent implements OnInit {
 
   testReport(reportType) {
 
-    const text: string[] = [];
-    let i = 20;
-
     if (reportType === 'none') {
 
       throw new Error('No data to report!');
 
     } else if (reportType === 'completed') {
 
-      this.dataCompleted.nodes.forEach(n => {
-        let tmp = n.restaurant + ': ' + n.completedOrders;
-        tmp = ascii.escapeNonAsciis(tmp);
-        text.push(tmp);
-      });
+      this.httpService.fetchCompletedOrderReportAsPdf().subscribe(
+        (response: Response) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          saveAs(blob, 'report.pdf');
+        }
+      );
 
     } else if (reportType === 'dropped') {
 
-      this.dataDropped.nodes.forEach(n => {
-        let tmp = n.restaurant + ': ' + n.droppedOrders;
-        tmp = ascii.escapeNonAsciis(tmp);
-        text.push(n.restaurant + ': ' + n.droppedOrders);
-      });
+      this.httpService.fetchDroppedOrderReportAsPdf().subscribe(
+        (response: Response) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          saveAs(blob, 'report.pdf');
+        }
+      );
 
     } else if (reportType === 'avgDelivery') {
 
-      this.dataAvgDelivery.nodes.forEach(n => {
-        let tmp = n.city + ': ' + n.averageDeliveryTime;
-        tmp = ascii.escapeNonAsciis(tmp);
-        text.push(tmp);
-      });
+      this.httpService.fetchAvgDeliveryTimesAsPdf().subscribe(
+        (response: Response) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          saveAs(blob, 'report.pdf');
+        }
+      );
 
     } else if (reportType === 'avgRealisation') {
 
-      this.dataAvgRealisation.nodes.forEach(n => {
-        let tmp = n.city + ': ' + n.averageRealisationTime;
-        tmp = ascii.escapeNonAsciis(tmp);
-        text.push(tmp);
-      });
+      this.httpService.fetchAvgRealisationsAsPdf().subscribe(
+        (response: Response) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          saveAs(blob, 'report.pdf');
+        }
+      );
     }
-
-    window.html2canvas = html2canvas;
-    const pdf = new jspdf('landscape');
-    const canvas = document.querySelector('canvas');
-    const image = canvas.toDataURL('image/png', 1.0);
-    pdf.addImage(image, 'JPEG', 10, 10, 280, 150);
-    text.forEach(t => {
-      pdf.text(t, 20, i);
-      i = i + 10;
-    });
-    pdf.save('report.pdf');
   }
 }

@@ -50,7 +50,7 @@ public class ReportController implements Report {
         return reportService.getAverageDeliveryTimeReport();
     }
 
-    @RequestMapping(value = "/create-completed-order-pdf", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/create-completed-order-report-pdf", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<byte[]> createCompletedOrderPdf() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/pdf");

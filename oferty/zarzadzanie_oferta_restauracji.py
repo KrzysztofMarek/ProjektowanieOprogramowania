@@ -6,7 +6,7 @@ from flask import Blueprint, request, jsonify
 from flask_cors import cross_origin
 
 from Constants import Constants
-from zarzadzanie_restauracja_model import pobierz_menu_model_rest, dodaj_danie_dla_restauracji
+from zarzadzanie_restauracja_model import pobierz_menu_model_rest, dodaj_danie_dla_restauracji, modyfikuj_d, usun_d
 
 
 zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __name__)
@@ -16,7 +16,9 @@ zarzadzanie_oferta_restauracji = Blueprint('zarzadzanie_oferta_restauracji', __n
 @cross_origin()
 def pobierz_menu_restauracji():
     if request.args.get("id_restauracji") is None:
-        return 404
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
     id_restauracji = int(request.args.get("id_restauracji"))
     menu_restauracji = pobierz_menu_model_rest(id_restauracji)
     return jsonify(menu_restauracji)
@@ -28,13 +30,36 @@ def dodaj_danie():
     danie = request.json
     if waliduj_danie(danie):
         return dodaj_danie_dla_restauracji(danie)
-    return "Danie nie jest poprawne. Sprawdz wszystkie pola"
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
 
+
+@zarzadzanie_oferta_restauracji.route('/modyfikuj_danie', methods=['POST'] )
+@cross_origin()
+def modyfikuj_danie():
+    danie = request.json
+    print(danie)
+    if waliduj_danie(danie):
+        return modyfikuj_d(danie)
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
+
+@zarzadzanie_oferta_restauracji.route('/usun_danie', methods=['GET'] )
+@cross_origin()
+def usun_danie():
+    id_dania = int(request.args.get("id_dania"))
+    id_restauracji = int(request.args.get("id_restauracji"))
+    usun_d(id_dania, id_restauracji)
+    resp = jsonify(success=True)
+    resp.status_code = 200
+    return resp
 
 def waliduj_danie(danie: dict):
     elementy_dania = ["nazwa", "cena", "opis", "id_restauracji"]
-    for element in danie:
-        if element not in elementy_dania:
+    for element in elementy_dania:
+        if element not in danie:
             return False
     return waliduj_nazwe(danie['nazwa']) and waliduj_cene(danie['cena']) and waliduj_opis(danie['opis'])
 

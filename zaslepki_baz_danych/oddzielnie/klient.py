@@ -46,6 +46,29 @@ klienci = {'lista': [
 def pobierz_klientow():
     return jsonify(klienci)
 
+@app.route('/pobierz_punkty_klienta', methods=['GET'])
+def pobierz_punkty_klienta():
+    try:
+        if request.args.get("id_klienta") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 403
+            return resp
+        id_klienta = request.args.get("id_klienta")
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 500
+        return resp
+
+    for klient in klienci['lista']:
+        if klient['id_klienta'] == id_klienta:
+            resp = jsonify(int(klient['punkty']))
+            resp.status_code = 200
+            return resp
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
+
 
 @app.route('/dodaj_punkty', methods=['POST'])
 def dodaj_punkty():

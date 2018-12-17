@@ -37,7 +37,6 @@
                 <v-data-table
                     :items="orders"
                     class="elevation-1"
-                    hide-actions
                     hide-headers
                     :loading="is_loading"
                 >
@@ -56,7 +55,7 @@
                                             Anuluj zamówienie
                                         </v-card-title>
                                         <v-card-text>
-                                            Czy na pewno chcesz anulować zamówienie?
+                                            Czy na pewno chcesz anulować zamówienie <strong>{{ order_list_display(props.item) }}</strong>?
                                         </v-card-text>
                                         <v-card-actions>
                                             <v-spacer />
@@ -79,7 +78,7 @@
                                 <v-btn v-else-if="props.item.status == 'anulowane'" small @click="repeat_order(props.item)">ponów</v-btn>
 
                                 <template v-if="props.item.status == 'dostarczone' && props.item.ocena == null">
-                                    <v-btn small color="primary" @click="edit_rating(props.index)">Oceń</v-btn>
+                                    <v-btn small color="primary" @click="edit_rating(props.index)" :loading="save_rating_is_loading">Oceń</v-btn>
                                 </template>
                                 <template v-else-if="props.item.ocena != null">
                                     <span class="font-weight-medium" style="font-size:1.2rem">{{props.item.ocena / 2.0}}/5</span>
@@ -103,39 +102,13 @@ export default {
     data: () => {
         return {
             error_text: "",
-            is_loading: false,
+            is_loading: true,
+            save_rating_is_loading: false,
             cancel_dialog: false,
             rating_dialog: false,
             rating_editing: 0,
             order_editing_idx: 0,
-            orders: [
-                {
-                    id_restauracji: 0,
-                    id_zamowienia: 0,
-                    adres: "",
-                    lista_dan: [{
-                        id_dania: 0,
-                        nazwa: "Pierogi",
-                    }],
-                    kwota: 10.0,
-                    status: "dostarczone",
-                    ocena: null,
-                },
-                {
-                    id_restauracji: 0,
-                    id_zamowienia: 1,
-                    adres: "",
-                    lista_dan: [
-                        {
-                            id_dania: 0,
-                            nazwa: "Pierogi",
-                        },
-                    ],
-                    kwota: 200.0,
-                    status: "oczekujace",
-                    ocena: null,
-                }
-            ],
+            orders: [],
         }},
     methods: {
         display_price: function(price) {
@@ -149,11 +122,16 @@ export default {
         save_rating() {
             this.orders[this.rating_editing_idx].ocena = this.rating_editing;
             let order = this.orders[this.rating_editing_idx];
+            this.save_rating_is_loading = true;
             this.rating_dialog = false;
 
             let self = this;
             zamowienia.post(`/dodaj_ocene_zamowienia?id_zamowienia=${order.id_zamowienia}&ocena=${order.ocena}`)
+                .then( _ => {
+                    self.save_rating_is_loading = false;
+                })
                 .catch((err) => {
+                    self.save_rating_is_loading = false;
                     if (err.response) {
                         self.error_text = `${err.response.status}: ${err.response.data}`;
                     } else if (err.request) {

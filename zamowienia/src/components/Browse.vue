@@ -18,7 +18,7 @@
                     >
                         <v-card>
                             <v-img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Japanese_Raw_Aonori_Misoshiru.JPG/1024px-Japanese_Raw_Aonori_Misoshiru.JPG"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/320px-A_small_cup_of_coffee.JPG"
                                 aspect-ratio="2.0"
                             ></v-img>
 

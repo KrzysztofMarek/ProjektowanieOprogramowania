@@ -20,28 +20,7 @@
         <v-layout justify-center text-xs-right>
             <v-flex xs12 lg6>
                 <strong>Razem: {{ display_price(total_price) }}</strong>
-                <v-dialog v-model="points_dialog" width="500">
-                    <v-btn slot="activator" flat small>wykorzystaj punkty</v-btn>
-                    <v-card>
-                        <v-card-title
-                            class="headline"
-                            primary-title
-                        >
-                            Wykorzystaj punkty lojalnościowe
-                        </v-card-title>
-                        <v-card-text>
-                            Nie masz żadnych punktów do wykorzystania.
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn
-                                flat
-                                @click="points_dialog = false"
-                            >
-                                Anuluj
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+                <v-btn v-if="!points_loading" flat small :disabled="points == 0" @click="use_points">wykorzystaj punkty</v-btn>
             </v-flex>
         </v-layout>
         <v-layout justify-center>
@@ -100,7 +79,7 @@
 </template>
 
 <script>
-import { zamowienia } from "../backend";
+import { zamowienia, punkty } from "../backend";
 import XRegExp from "xregexp";
 
 function phone_length_validator(s) {
@@ -124,7 +103,9 @@ export default {
             error_text: "",
             is_loading: false,
             valid: false,
-            points_dialog: false,
+            points_loading: true,
+            points_to_use: 0,
+            points: 0,
             name: "",
             name_rules: [
                 v => !!v || "Imię jest wymagane",
@@ -155,20 +136,54 @@ export default {
                 v => !!v || "Adres jest wymagany",
             ],
         }},
+    created() {
+        let self = this;
+
+        // FIXME id klienta
+        punkty.get(`/pobierz_punkty?id_klienta=${1}`)
+                .then((response) => {
+                    self.points_loading = false;
+                    self.points = response;
+                })
+                .catch((err) => {
+                    self.points_loading = false;
+                    if (err.response) {
+                        self.error_text = `${err.response.status}: ${err.response.data}`;
+                    } else if (err.request) {
+                        self.error_text = "Network error";
+                        console.error(err);
+                    } else {
+                        self.error_text = "Unexpected error";
+                        console.error(err);
+                    }
+                });
+
+    },
     methods: {
         display_price: function(price) {
-            return price + " zł";
+            let discount = 1.0 - this.points_to_use / 100.0;
+            return price * discount + " zł";
+        },
+        use_points: function() {
+            this.points_to_use = Math.min(this.points, 75);
         },
         create_order: function() {
             this.is_loading = true;
+            let discount = 1.0 - this.points_to_use / 100.0;
+
             let self = this;
             let zamowienie = {
-                id_klienta: 0,
+                id_klienta: 1,
                 id_restauracji: this.$store.state.current_restaurant.id_restauracji,
                 lista_dan: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
-                kwota: this.total_price,
+                kwota: this.total_price * discount,
                 adres: this.address,
+                punkty: this.points_to_use
             };
+
+            this.points -= this.points_to_use;
+            this.points_to_use = 0;
+
             zamowienia
                 .post("/dodaj_zamowienie", zamowienie)
                 .then((response) => {

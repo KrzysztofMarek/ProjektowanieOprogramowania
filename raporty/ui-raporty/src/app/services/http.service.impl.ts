@@ -1,3 +1,4 @@
+import { Histogram } from './../histogram';
 import { AvgRealisationTimesReport } from './../avg-realisation-times-report';
 import { AvgDeliveryTimesReport } from './../avg-delivery-times-report';
 import { DroppedOrderReport } from './../dropped-order-report';
@@ -13,6 +14,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HttpServiceImpl implements HttpService {
 
+  private headers = new HttpHeaders();
+
   performLogin(): Observable<boolean> {
 
     return this.http.get<String>(
@@ -26,7 +29,9 @@ export class HttpServiceImpl implements HttpService {
     }));
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.headers.append('Content-Type', 'application/pdf');
+  }
 
   fetchCompletedOrderReport(): Observable<CompletedOrderReport> {
 
@@ -57,48 +62,51 @@ export class HttpServiceImpl implements HttpService {
     );
   }
 
-  fetchCompletedOrderReportAsPdf(): any {
+  fetchHistogram(): Observable<Histogram> {
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/pdf');
+    return this.http.get<Histogram>(
+      'http://localhost:8081/fetch-histogram'
+    );
+  }
+
+  fetchHistogramAsPdf(): any {
+
+    return this.http.get(
+      'http://localhost:8081/fetch-histogram',
+      {headers: this.headers, responseType: 'blob'}
+    );
+  }
+
+  fetchCompletedOrderReportAsPdf(): any {
 
     return this.http.get(
       'http://localhost:8081/create-completed-order-report-pdf',
-      {headers: headers, responseType: 'blob'}
+      {headers: this.headers, responseType: 'blob'}
     );
   }
 
 
   fetchDroppedOrderReportAsPdf(): any {
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/pdf');
-
     return this.http.get(
       'http://localhost:8081/create-dropped-order-report-pdf',
-      {headers: headers, responseType: 'blob'}
+      {headers: this.headers, responseType: 'blob'}
     );
   }
 
   fetchAvgDeliveryTimesAsPdf(): any {
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/pdf');
-
     return this.http.get(
       'http://localhost:8081/create-average-delivery-time-pdf',
-      {headers: headers, responseType: 'blob'}
+      {headers: this.headers, responseType: 'blob'}
     );
   }
 
   fetchAvgRealisationsAsPdf(): any {
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/pdf');
-
     return this.http.get(
       'http://localhost:8081/create-average-realisation-time-pdf',
-      {headers: headers, responseType: 'blob'}
+      {headers: this.headers, responseType: 'blob'}
     );
   }
 }

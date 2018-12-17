@@ -1,3 +1,4 @@
+import { Histogram } from './histogram';
 import { AvgRealisationTimesReport } from './avg-realisation-times-report';
 import { AvgDeliveryTimesReport } from './avg-delivery-times-report';
 import { DroppedOrderReport } from './dropped-order-report';
@@ -24,12 +25,13 @@ export class AppComponent implements OnInit {
   dataDropped: DroppedOrderReport;
   dataAvgDelivery: AvgDeliveryTimesReport;
   dataAvgRealisation: AvgRealisationTimesReport;
-  isUserLogged = false;
+  dataHistogram: Histogram;
+  isUserLogged = true;
 
   constructor(private httpService: HttpServiceImpl) {}
 
   ngOnInit() {
-    this.login();
+    // this.login();
   }
 
   login() {
@@ -190,6 +192,44 @@ export class AppComponent implements OnInit {
     );
   }
 
+  histogram() {
+
+    this.httpService.fetchHistogram().subscribe(
+      data => {
+
+        this.dataHistogram = data;
+        this.currentType = 'histogram';
+        this.diagramTypeChart = false;
+
+        const labelsFromData: string[] = [];
+
+        data.nodes.forEach(d => {
+
+          labelsFromData.push(d.period);
+        });
+
+        const dataFromData: number[] = [];
+
+        data.nodes.forEach(d => {
+
+          dataFromData.push(d.value);
+        });
+
+        this.dataDisplayed = {
+          labels: labelsFromData,
+          datasets: [{
+            data: dataFromData,
+            backgroundColor: [
+              '#ffccff',
+              '#99ff99',
+              '#ffff99'
+            ]
+          }]
+        };
+      }
+    );
+  }
+
   testReport(reportType) {
 
     if (reportType === 'none') {
@@ -226,6 +266,14 @@ export class AppComponent implements OnInit {
     } else if (reportType === 'avgRealisation') {
 
       this.httpService.fetchAvgRealisationsAsPdf().subscribe(
+        (response: Response) => {
+          const blob = new Blob([response], {type: 'application/pdf'});
+          saveAs(blob, 'report.pdf');
+        }
+      );
+    } else if (reportType === 'histogram') {
+
+      this.httpService.fetchHistogramAsPdf().subscribe(
         (response: Response) => {
           const blob = new Blob([response], {type: 'application/pdf'});
           saveAs(blob, 'report.pdf');

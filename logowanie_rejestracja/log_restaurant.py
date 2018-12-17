@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, escape, g ,render_template, url_for, redirect, request, flash, session
 from flask_jwt import JWT, jwt_required
-
 from security import authenticate, userrole_mapping, username_mapping
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = "key"
 
 
 @app.route('/', methods=['GET','POST'])
-def register():
+def rejestruj():
     return render_template('register.html')
 
 
 @app.route('/login', methods=['GET','POST'])
-def index():
+def waliduj():
     if request.method == 'POST':
         session.pop('user', None)
         login = request.form['login']
@@ -32,31 +33,31 @@ def index():
     return render_template('login.html')
 
 
-@app.route('/protected_klient')
+@app.route('/widok_klient')
 def klient():
     if g.user:
         return render_template('results_client.html')
-    return redirect(url_for('index'))
+    return redirect(url_for('waliduj'))
 
 
-@app.route('/protected_dostawca')
+@app.route('/widok_dostawca')
 def dostawca():
     if g.user:
         return render_template('results_worker.html', the_login=session['user'], the_title="Witaj dostawco!")
-    return redirect(url_for('index'))
+    return redirect(url_for('waliduj'))
 
 
-@app.route('/protected_pracownik_kuchni')
+@app.route('/widok_pracownik_kuchni')
 def kucharz():
     if g.user:
         return render_template('results_worker.html', the_login=session['user'], the_title="Witaj pracowniku kuchni!")
-    return redirect(url_for('index'))
+    return redirect(url_for('waliduj'))
 
 @app.route('/protected_menadzer_restauracji')
 def menadzer():
     if g.user:
         return render_template('results_worker.html', the_login=session['user'], the_title="Witaj menadżerze restauracji!")
-    return redirect(url_for('index'))
+    return redirect(url_for('waliduj'))
 
 
 
@@ -67,14 +68,14 @@ def before_request():
         g.user = session['user']
 
 
-@app.route('/getsession')
+@app.route('/sesja')
 def getsession():
     if 'user' in session:
         return session['user']
     return 'Not logged in!'
 
 
-@app.route('/dropsession')
+@app.route('/usunsesje')
 def dropsession():
     session.pop('user', None)
     return 'Session dropped!'

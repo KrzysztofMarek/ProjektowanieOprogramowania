@@ -167,4 +167,22 @@ public class DbService {
 
         return null;
     }
+
+    public boolean ConfirmPayment(Integer orderId) throws URISyntaxException, ClientProtocolException, IOException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "oplac_zamowienie_Z");
+        builder.setParameter("id_zamowienia", orderId.toString());
+
+        HttpClient httpclient = HttpClients.createDefault();
+        HttpPost httppost = new HttpPost(builder.build());
+
+        HttpResponse response = httpclient.execute(httppost);
+
+        int statusCode = response.getStatusLine().getStatusCode();
+
+        if(statusCode == 200){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -7,6 +7,10 @@ import backend.backendReport.model.CompletedOrderReport;
 import backend.backendReport.model.DroppedOrderReport;
 import backend.backendReport.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,19 +51,36 @@ public class ReportController implements Report {
     }
 
     @RequestMapping(value = "/create-completed-order-pdf", method = RequestMethod.GET, produces = "application/json")
-    public void createCompletedOrderPdf() {
-        reportService.createCompletedOrderPdf();
+    public ResponseEntity<byte[]> createCompletedOrderPdf() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/pdf");
+        headers.add("Content-Disposition", "attachment; filename=report.pdf");
+        headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
+        return new ResponseEntity<>(reportService.createCompletedOrderPdf(), headers, HttpStatus.CREATED);
+
     }
     @RequestMapping(value = "/create-dropped-order-pdf", method = RequestMethod.GET, produces = "application/json")
-    public void createDroppedOrderPdf() {
-        reportService.createDroppedOrderPdf();
+    public ResponseEntity<byte[]> createDroppedOrderPdf() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/pdf");
+        headers.add("Content-Disposition", "attachment; filename=report.pdf");
+        headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
+        return new ResponseEntity<>(reportService.createDroppedOrderPdf(), headers, HttpStatus.CREATED);
     }
     @RequestMapping(value = "/create-average-realisation-pdf", method = RequestMethod.GET, produces = "application/json")
-    public void createAverageRealisationOrderPdf() {
-        reportService.createAverageRealisationTimePdf();
+    public ResponseEntity<byte[]> createAverageRealisationOrderPdf() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/pdf");
+        headers.add("Content-Disposition", "attachment; filename=report.pdf");
+        headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
+        return new ResponseEntity<>(reportService.createAverageRealisationTimePdf(), headers, HttpStatus.CREATED);
     }
     @RequestMapping(value = "/create-average-delivery-pdf", method = RequestMethod.GET, produces = "application/json")
-    public void createAverageDeliveryOrderPdf() {
-        reportService.createAverageDeliveryTimePdf();
+    public ResponseEntity<byte[]> createAverageDeliveryOrderPdf() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/pdf");
+        headers.add("Content-Disposition", "attachment; filename=report.pdf");
+        headers.add("Access-Control-Allow-Headers", "Content-Disposition, Content-Type");
+        return new ResponseEntity<>(reportService.createAverageDeliveryTimePdf(), headers, HttpStatus.CREATED);
     }
 }

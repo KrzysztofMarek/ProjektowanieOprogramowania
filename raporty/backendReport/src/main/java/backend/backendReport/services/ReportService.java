@@ -14,8 +14,8 @@ public interface ReportService {
     DroppedOrderReport getDroppedOrderReport();
     AverageRealisationTimeReport getAverageRealisationTimeReport();
     AverageDeliveryTimeReport getAverageDeliveryTimeReport();
-    void createCompletedOrderPdf();
-    void createDroppedOrderPdf();
-    void createAverageDeliveryTimePdf();
-    void createAverageRealisationTimePdf();
+    byte[] createCompletedOrderPdf();
+    byte[] createDroppedOrderPdf();
+    byte[] createAverageDeliveryTimePdf();
+    byte[] createAverageRealisationTimePdf();
 }

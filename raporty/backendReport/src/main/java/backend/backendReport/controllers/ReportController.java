@@ -7,6 +7,7 @@ import backend.backendReport.model.CompletedOrderReport;
 import backend.backendReport.model.DroppedOrderReport;
 import backend.backendReport.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class ReportController implements Report{
+public class ReportController implements Report {
 
     ReportService reportService;
 
     @Autowired
-    public ReportController (ReportService reportService){
-        this.reportService=reportService;
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
     }
 
     @RequestMapping(value = "/fetch-completed-order-report", method = RequestMethod.GET, produces = "application/json")
@@ -43,5 +44,22 @@ public class ReportController implements Report{
     @RequestMapping(value = "/fetch-average-delivery-time", method = RequestMethod.GET, produces = "application/json")
     public AverageDeliveryTimeReport getAverageDeliveryTime() {
         return reportService.getAverageDeliveryTimeReport();
+    }
+
+    @RequestMapping(value = "/create-completed-order-pdf", method = RequestMethod.GET, produces = "application/json")
+    public void createCompletedOrderPdf() {
+        reportService.createCompletedOrderPdf();
+    }
+    @RequestMapping(value = "/create-dropped-order-pdf", method = RequestMethod.GET, produces = "application/json")
+    public void createDroppedOrderPdf() {
+        reportService.createDroppedOrderPdf();
+    }
+    @RequestMapping(value = "/create-average-realisation-pdf", method = RequestMethod.GET, produces = "application/json")
+    public void createAverageRealisationOrderPdf() {
+        reportService.createAverageRealisationTimePdf();
+    }
+    @RequestMapping(value = "/create-average-delivery-pdf", method = RequestMethod.GET, produces = "application/json")
+    public void createAverageDeliveryOrderPdf() {
+        reportService.createAverageDeliveryTimePdf();
     }
 }

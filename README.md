@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-# ProjektowanieOprogramowania
-
-Nasz projekt na studia - wrzucamy kod do swoich branchy ;)
-Na masterze znajdują się także zaślepki baz danych.
-
-=======
 # ProjektowanieOprogramowania
 
 Nasz projekt na studia - wrzucamy kod do swoich branchy ;)
@@ -43,4 +36,3 @@ PROBLEMY Z DEPLOYMENTEM:
 - gradle nie znajduje czegoś .jar
 1. Dodaj zmienną środowiskową JAVA_HOME, która wskazuje ścieżkę do Twojego jdk.
 2. Rozszerz zmienną PATH o treść "%JAVA_HOME%\bin;" (dla Windowsa)
->>>>>>> 9645587ab41b1ac88fae21563e813d241c63d243

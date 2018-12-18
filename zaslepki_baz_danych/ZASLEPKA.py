@@ -732,7 +732,7 @@ lista_zamowien_Z = {
             'oplacone': True,
             'data_zlozenia': '2018-06-11',
             'ocena': 4,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Wolności 15"
 
         },
@@ -786,7 +786,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -806,7 +806,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 25,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -823,7 +823,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -872,7 +872,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -907,7 +907,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -961,7 +961,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 85,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -999,7 +999,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 28,
             'data_zlozenia': '2018-06-11',
             'ocena': 4,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Wolności 15"
 
         },
@@ -1053,7 +1053,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 35,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1073,7 +1073,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 34,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1090,7 +1090,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1139,7 +1139,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1174,7 +1174,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1225,7 +1225,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1260,7 +1260,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 45,
             'data_zlozenia': '2018-06-11',
             'ocena': 4,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Wolności 15"
 
         },
@@ -1314,7 +1314,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 56,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1334,7 +1334,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 37,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1351,7 +1351,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1400,7 +1400,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1435,7 +1435,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1489,7 +1489,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 17,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1527,7 +1527,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 18,
             'data_zlozenia': '2018-06-11',
             'ocena': 4,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Wolności 15"
 
         },
@@ -1581,7 +1581,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 45,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1601,7 +1601,7 @@ lista_zamowien_Z = {
             'czas_realizacji': 24,
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1618,7 +1618,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
 
         },
@@ -1667,7 +1667,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1702,7 +1702,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
         {
@@ -1753,7 +1753,7 @@ lista_zamowien_Z = {
             'status': 'anulowane',
             'data_zlozenia': '2018-12-16',
             'ocena': 8,
-            'miasto': 'Toruń',
+            'miasto': 'Gdynia',
             'adres': "Alternatywy 4"
         },
     ]

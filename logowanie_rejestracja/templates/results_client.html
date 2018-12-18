@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }} </h2>
+
+<script language="javascript" type="text/javascript">
+
+    window.setTimeout('window.open("http://localhost:9999/","newsite")',0);
+
+</script>
+
+<p>Witaj kliencie {{ the_login }}</p>
+
+
+{% endblock %}

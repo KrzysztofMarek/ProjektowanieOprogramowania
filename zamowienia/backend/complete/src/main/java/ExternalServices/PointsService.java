@@ -32,8 +32,8 @@ public class PointsService {
     }
 
     public int GetClientPoints(String clientId) throws ClientProtocolException, IOException, URISyntaxException{
-        URIBuilder builder = new URIBuilder(this.componentUrl + "dodaj_punkty");
-        builder.setParameter("id_restauracji", clientId);
+        URIBuilder builder = new URIBuilder(this.componentUrl + "pobierz_punkty_klienta");
+        builder.setParameter("id_klienta", clientId);
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(builder.build());

@@ -195,8 +195,9 @@ export default {
     },
     created: function() {
         let self = this;
+        // FIXME id klienta
         zamowienia
-            .get("/pobierz_liste_zamowien?id_klienta=0")
+            .get(`/pobierz_liste_zamowien?id_klienta=${"SyLweK"}`)
             .then((response) => {
                 self.is_loading = false;
                 self.orders = response.data.lista_zamowien;

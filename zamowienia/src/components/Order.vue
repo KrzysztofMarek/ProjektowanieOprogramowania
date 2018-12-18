@@ -140,7 +140,7 @@ export default {
         let self = this;
 
         // FIXME id klienta
-        punkty.get(`/pobierz_punkty?id_klienta=${1}`)
+        punkty.get(`/pobierz_punkty?id_klienta=${"SyLweK"}`)
                 .then((response) => {
                     self.points_loading = false;
                     self.points = response;
@@ -172,8 +172,9 @@ export default {
             let discount = 1.0 - this.points_to_use / 100.0;
 
             let self = this;
+            // FIXME id klienta
             let zamowienie = {
-                id_klienta: 1,
+                id_klienta: "SyLweK",
                 id_restauracji: this.$store.state.current_restaurant.id_restauracji,
                 lista_dan: this.$store.state.order.map(v => { return { id_dania: v.id_dania, nazwa: v.nazwa }}),
                 kwota: this.total_price * discount,

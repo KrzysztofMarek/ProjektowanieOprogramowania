@@ -17,7 +17,7 @@ public class OrderControllerTest {
     public void AddOrder() {
 
         NewOrder newOrder = new NewOrder();
-        newOrder.id_klienta = 1;
+        newOrder.id_klienta = "SyLweK";
         newOrder.id_restauracji = 1;
         newOrder.kwota = 5.00;
         newOrder.lista_dan = new ArrayList<OrderItem>();

@@ -9,6 +9,8 @@ import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Service;
 
@@ -85,30 +87,33 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public byte[] createAverageDeliveryTimePdf() {
-        DefaultPieDataset dataSet = new DefaultPieDataset();
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset ();
 
         AverageDeliveryTimeReport averageDeliveryTimeReport = getAverageDeliveryTimeReport();
 
 
         for(AverageDeliveryTimeNode averageDeliveryTimeNode : averageDeliveryTimeReport.getNodes()) {
-            dataSet.setValue(averageDeliveryTimeNode.getCity(), averageDeliveryTimeNode.getAverageDeliveryTime());
+            dataSet.setValue( averageDeliveryTimeNode.getAverageDeliveryTime(), Long.toString(averageDeliveryTimeNode.getAverageDeliveryTime()),averageDeliveryTimeNode.getCity());
         }
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Average Delivery Time", dataSet, true, true, false);
+
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Czas dostawy", "Miasto", "Czas",
+                dataSet, PlotOrientation.VERTICAL, false, true, false);
         return writeChartToPDF(chart, 500, 400, "D://barchart.pdf");
     }
 
     @Override
     public byte[] createAverageRealisationTimePdf() {
-        DefaultPieDataset dataSet = new DefaultPieDataset();
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         AverageRealisationTimeReport averageRealisationTimeReport = getAverageRealisationTimeReport();
 
 
         for(AverageRealisationTimeNode averageRealisationTimeNode : averageRealisationTimeReport.getNodes()) {
-            dataSet.setValue(averageRealisationTimeNode.getCity(), averageRealisationTimeNode.getAverageRealisationTime());
+            dataSet.setValue(averageRealisationTimeNode.getAverageRealisationTime(), Long.toString(averageRealisationTimeNode.getAverageRealisationTime()),averageRealisationTimeNode.getCity());
         }
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Average Delivery Time", dataSet, true, true, false);
+        JFreeChart chart = ChartFactory.createBarChart(
+                "Czas dostawy", "Miasto", "Czas",
+                dataSet, PlotOrientation.VERTICAL, false, true, false);
         return writeChartToPDF(chart, 500, 400, "D://barchart.pdf");
     }
 

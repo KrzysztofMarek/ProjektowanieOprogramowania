@@ -45,17 +45,20 @@ public class EmployeeCreator {
             log.info("Data is incorrect");
             return false;
         }
+        log.info("Data is correct");
         
         if(!restaurantExists(employeeForm.getId_restauracji(), url)){
             log.info("Restaurant does not exist.");
             return false;
         }
+        log.info("Restaurant is correct");
         
         return true;
     }
     
     private boolean restaurantExists(final String id, final String url){        
         String urlWithId = url + "?id_restauracji=" + id;
+        log.info("Sending GET to {}", urlWithId);                
 
         String response = RestClient.sendGETRaw(urlWithId).get("message");
         return response.equals("Yes");        

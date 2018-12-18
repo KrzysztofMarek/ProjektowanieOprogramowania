@@ -16,9 +16,10 @@ export class ManageEmployeeComponent implements OnInit {
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
-/*    this.dataService.getEmployeesList().subscribe(employee => {
-      this.employee = employee;
-    }); */
+    this.dataService.getEmployeesList().subscribe(employee => {
+      this.employee = JSON.parse(employee['message']);
+      console.log(employee);
+    });
   }
 
   onSubmit() {

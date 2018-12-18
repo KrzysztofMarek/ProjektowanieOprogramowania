@@ -2005,7 +2005,6 @@ def dodaj_pracownika():
         'haslo': haslo
     })
 
-    print(lista_pracownikow)
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp

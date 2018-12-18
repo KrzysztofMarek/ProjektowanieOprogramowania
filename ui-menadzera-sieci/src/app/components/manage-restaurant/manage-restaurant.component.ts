@@ -50,7 +50,7 @@ export class ManageRestaurantComponent implements OnInit {
   onDelete(rest) {
     console.log(rest.id_restauracji);
     if (confirm("Czy napewno chcesz usunąć restaurację?")) {
-      this.dataService.deleteRestaurant(rest.id_restauracji);
+      this.dataService.deleteRestaurant(rest.id_restauracji).subscribe();
       this.dataService.getRestauranstList().subscribe(restaurant => {
         this.restaurant = JSON.parse(restaurant['message']);
         console.log(this.restaurant)

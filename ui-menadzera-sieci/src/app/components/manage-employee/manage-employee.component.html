@@ -66,23 +66,23 @@
     </div>
     <div class="col-6 mt-5">
       <table class="table border">
-        <thead class="thead-light">
+        <thead class="thead-light text-center">
           <tr>
             <th scope="col">Imię</th>
             <th scope="col">Nazwisko</th>
             <th scope="col">Stanowisko</th>
             <th scope="col">Nr. telefonu</th>
-            <th scope="col">ID restauracji</th>
+            <th scope="col">ID pracownika</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr class="text-center">
-            <td>imie</td>
-            <td>nazwisko</td>
-            <td>stanowisko</td>
-            <td>telefon</td>
-            <td>id_pracownika</td>
+          <tr *ngFor="let pracownik of employee.lista_pracownikow" class="text-center">
+            <td>{{pracownik.imie}}</td>
+            <td>{{pracownik.nazwisko}}</td>
+            <td>{{pracownik.stanowisko}}</td>
+            <td>{{pracownik.telefon}}</td>
+            <td>{{pracownik.id_pracownika}}</td>
             <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
           </tr>
         </tbody>

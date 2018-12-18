@@ -61,8 +61,10 @@ public class RestaurantCreator {
         String id_restauracji = getId_restauracji(restaurantIdForm);
         String urlWithId = url+"?id_restauracji="+id_restauracji;
         
+        log.info("Sending GET to {}", urlWithId);
+        
         RestTemplate restTemplate = new RestTemplate();
-        String responseDB = restTemplate.getForObject(url, String.class);
+        String responseDB = restTemplate.getForObject(urlWithId, String.class);
         
         HashMap<String, String> responseUser = new HashMap();
         responseUser.put("message", responseDB);

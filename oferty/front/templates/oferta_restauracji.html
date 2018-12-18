@@ -64,10 +64,16 @@
 					row += '<td>' + menu_item.nazwa + '</td>';
 					row += '<td>' + menu_item.cena + '</td>';
 					row += '<td>' + menu_item.opis + '</td>';
-					row += '<td>'
-						+ '<button onClick="edit_dish(this)" type="button" class="btn btn-outline-info" style="margin-right:15px;">Modyfikuj</button>' 
-						+ '<button onClick="delete_dish(this)" type="button" class="btn btn-outline-danger">Usuń</button>' 
-						+ '</td>';
+					if(menu_item.typ == 'menu_rest')
+						row += '<td>'
+							+ '<button onClick="edit_dish(this)" type="button" class="btn btn-outline-info" style="margin-right:15px;">Modyfikuj</button>' 
+							+ '<button onClick="delete_dish(this)" type="button" class="btn btn-outline-danger">Usuń</button>' 
+							+ '</td>';
+					else
+						row += '<td>'
+							+ '<button title="Nie masz wymaganych uprawnień" disabled type="button" class="btn btn-outline-info" style="margin-right:15px;">Modyfikuj</button>' 
+							+ '<button title="Nie masz wymaganych uprawnień" disabled type="button" class="btn btn-outline-danger">Usuń</button>' 
+							+ '</td>';
 					row += '</tr>'
 					$('#menu').children('tbody').append(row);
 				});

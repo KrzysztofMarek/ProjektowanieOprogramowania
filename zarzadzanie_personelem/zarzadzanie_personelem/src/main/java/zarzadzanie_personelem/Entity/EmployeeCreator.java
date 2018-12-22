@@ -7,13 +7,17 @@ package zarzadzanie_personelem.Entity;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import utils.RestClient;
 
 /**
@@ -68,11 +72,60 @@ public class EmployeeCreator {
         return RestClient.sendPOST(url, employeeForm);
     }   
 
-    public String getEmployees(final String url) {        
-        return RestClient.sendGET(url);        
+    public String getEmployees(
+            final String session, 
+            final String getUrl,
+            final String authUrl
+    ) {
+        ResponseEntity<String> response = getManagerId(session, authUrl);
+        String managerType = getManagerType(response);
+        
+        if(managerType.equals("Network")){
+            return RestClient.sendGET(getUrl);            
+        }else if(managerType.equals("Restaurant")){
+            String Id = getManagerId(response);
+            return getEmployeesOfRestaurant(Id, getUrl);
+        }else{
+            return getInvalidTypeMessage();
+        }        
     }
     
-    public String getEmployees(final String id_restauracji, final String url) {        
+    private ResponseEntity<String> getManagerId(final String session, final String authUrl){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cookie", "session="+session);
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.exchange(
+            authUrl,
+            HttpMethod.GET,
+            new HttpEntity<>(headers),
+            String.class
+        );
+    }
+    
+    private String getManagerType(ResponseEntity<String> response){
+        // TO BE IMPLEMENTED WHEN LOGIN RETURNS PROPER INFO
+        if(response.getStatusCodeValue() == 200){
+            return "Network";            
+        }else{
+            log.info("Bad response code");
+            return "Error";
+        }
+    }
+    
+    private String getManagerId(ResponseEntity<String> response){
+        // TO BE IMPLEMENTED WHEN LOGIN RETURNS PROPER INFO
+        return "1";
+    }
+    
+    private String getInvalidTypeMessage(){
+        String message = "Unable to authenticate";
+        HashMap<String, String> map = new HashMap<>();
+        map.put("message", message);
+        return new Gson().toJson(map);
+    }
+    
+    public String getEmployeesOfRestaurant(final String id_restauracji, final String url) {        
         HashMap<String,String> response = RestClient.sendGETRaw(url);
         ArrayList<EmployeeForm> employees = castToEmployees(response.get("message"));
         ArrayList<EmployeeForm> employeesOfRestaurant = filterEmployeesOfRestaurant(employees, id_restauracji);

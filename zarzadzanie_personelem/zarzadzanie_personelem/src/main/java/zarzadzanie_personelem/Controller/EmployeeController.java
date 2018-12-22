@@ -1,10 +1,14 @@
 package zarzadzanie_personelem.Controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import zarzadzanie_personelem.Entity.EmployeeCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,12 +45,16 @@ public class EmployeeController {
     
     @CrossOrigin
     @GetMapping("/pobierz_pracownikow")
-    public String getEmployees() 
+    public String getEmployees(
+        @CookieValue("session") String session) 
     {
         try{
+            log.info("session = {}", session);
             log.info("Fetching employees");
-            return (new EmployeeCreator()).getEmployees(
-                    env.getProperty("getEmployeesAddress")
+            return (new EmployeeCreator()).getEmployees( 
+                    session,
+                    env.getProperty("getEmployeesAddress"),
+                    env.getProperty("authAddress")
             );
         }catch(Exception e){
             return e.toString();
@@ -74,7 +82,7 @@ public class EmployeeController {
     {
         try{
             log.info("Fetching employees");
-            return (new EmployeeCreator()).getEmployees(
+            return (new EmployeeCreator()).getEmployeesOfRestaurant(
                     id_restauracji,
                     env.getProperty("getEmployeesAddress")
             );

@@ -22,7 +22,8 @@ export class DataService {
     }
 
     getEmployeesList():Observable<Employee> {
-       return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow');
+       let options = new RequestOptions({ withCredentials: true });
+       return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow', options);
     }
 
     getRestaurantEmployeesList(id: number):Observable<Employee> {

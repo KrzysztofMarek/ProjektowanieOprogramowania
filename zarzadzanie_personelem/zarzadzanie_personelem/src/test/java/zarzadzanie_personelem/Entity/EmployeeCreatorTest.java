@@ -376,7 +376,7 @@ public class EmployeeCreatorTest {
         EmployeeCreator employeeCreatorSpy = PowerMockito.spy(employeeCreator);
         
         PowerMockito.doReturn("Success").when(employeeCreatorSpy, "saveEmployeeToDB", Mockito.any(), Mockito.any());
-//        PowerMockito.doReturn(new Boolean("True")).when(employeeCreatorSpy, "restaurantExist", Mockito.any(), Mockito.any());
+        PowerMockito.doReturn(true).when(employeeCreatorSpy, "restaurantExists", Mockito.any(), Mockito.any());
         String result = employeeCreatorSpy.createEmployee(formJson, "", "");
         return result;
     }

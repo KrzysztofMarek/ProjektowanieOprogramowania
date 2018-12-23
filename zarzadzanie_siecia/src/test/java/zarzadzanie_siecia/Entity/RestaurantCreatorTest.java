@@ -36,12 +36,40 @@ public class RestaurantCreatorTest {
     }    
        
     @Test
-    public void testCreateRestaurantIncorrect() throws Exception{
+    public void testCreateRestaurantNameLongerThan30Signs() throws Exception{
         String result;
         String restaurantFormJson;
         
         restaurantFormJson = "{\n" +
-                                "    \"nazwa\": \"1\", \n" +
+                                "    \"nazwa\": \"Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\", \n" +
+                                "    \"adres\": \"40\" \n" +
+                                " } ";
+        
+        result =helperValidator(restaurantFormJson);
+        assertEquals(result, invalidInput);   
+    }    
+       
+    @Test
+    public void testCreateRestaurantNameIllegalSigns() throws Exception{
+        String result;
+        String restaurantFormJson;
+        
+        restaurantFormJson = "{\n" +
+                                "    \"nazwa\": \"Ąę\", \n" +
+                                "    \"adres\": \"40\" \n" +
+                                " } ";
+        
+        result =helperValidator(restaurantFormJson);
+        assertEquals(result, invalidInput);   
+    }    
+       
+    @Test
+    public void testCreateRestaurantNameFirstLetterNotUppercase() throws Exception{
+        String result;
+        String restaurantFormJson;
+        
+        restaurantFormJson = "{\n" +
+                                "    \"nazwa\": \"amrit\", \n" +
                                 "    \"adres\": \"40\" \n" +
                                 " } ";
         

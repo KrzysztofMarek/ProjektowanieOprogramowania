@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, g ,render_template, url_for, redirect, request, session
-from security import authenticate, username_mapping, userid_mapping
+from flask import Flask, render_template, request, escape, g ,render_template, url_for, redirect, request, flash, session
+from flask_jwt import JWT, jwt_required
+from security import authenticate, userrole_mapping, username_mapping, userid_mapping
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -8,7 +9,8 @@ CORS(app)
 app.secret_key = "key"
 
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET','POST'])
 def rejestruj():
     return render_template('register.html')
 

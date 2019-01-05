@@ -133,47 +133,6 @@ def usun_punkty():
     return resp
 
 
-# Pobierz_pracownika(id_pracownika: string) zwraca string:login, string:hasło oraz string:stanowisko
-@app.route('/pobierz_pracownika', methods=['GET'])
-def pobierz_pracownika():
-    try:
-        if request.args.get("id_pracownika") is None:
-            resp = jsonify(success=False)
-            resp.status_code = 404
-            return resp
-        id_pracownika = str(request.args.get("id_pracownika"))
-    except KeyError:
-        resp = jsonify(success=False)
-        resp.status_code = 404
-        return resp
-
-    employee_list = {
-        'lista': [
-            {
-                'login': 'jusepe',
-                'hasło': 'wodjfoph35vg',
-                'stanowisko': 'Pracownik kuchni'
-
-            },
-            {
-                'login': 'jadeSzybko12',
-                'hasło': 'epivrugoi',
-                'stanowisko': 'Dostawca'
-            },
-            {
-                'login': 'hania_87',
-                'hasło': 'wr98cyeui',
-                'stanowisko': 'Sprzątaczka'
-            }
-        ]
-    }
-    for pracownik in employee_list['lista']:
-        if pracownik['login'] == id_pracownika:
-            return jsonify(pracownik)
-
-    resp = jsonify(success=False)
-    resp.status_code = 404
-    return resp
 
 
 # Pobierz_klienta(id_klienta:string) zwraca string:login, string:hasło
@@ -2047,6 +2006,28 @@ lista_pracownikow = {
         }
     ]
 }
+
+# Pobierz_pracownika(id_pracownika: string) zwraca string:login, string:hasło oraz string:stanowisko
+@app.route('/pobierz_pracownika', methods=['GET'])
+def pobierz_pracownika():
+    try:
+        if request.args.get("id_pracownika") is None:
+            resp = jsonify(success=False)
+            resp.status_code = 404
+            return resp
+        id_pracownika = str(request.args.get("id_pracownika"))
+    except KeyError:
+        resp = jsonify(success=False)
+        resp.status_code = 404
+        return resp
+
+    for pracownik in lista_pracownikow['lista_pracownikow']:
+        if pracownik['id_pracownika'] == id_pracownika:
+            return jsonify(pracownik)
+
+    resp = jsonify(success=False)
+    resp.status_code = 404
+    return resp
 
 
 @app.route('/dodaj_pracownika', methods=['POST'])

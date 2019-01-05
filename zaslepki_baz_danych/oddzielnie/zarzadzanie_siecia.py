@@ -131,3 +131,4 @@ def restauracja_istnieje():
 
 if __name__ == '__main__':
     app.run()
+# ah jo

@@ -319,7 +319,7 @@ def modyfikuj_danie():
         resp.status_code = 404
         return resp
     id_restauracji = int(rrequest['id_restauracji'])
-    if id_restauracji != 1 and id_restauracji != 2:
+    if id_restauracji != 0 and id_restauracji != 1 and id_restauracji != 2:
         resp = jsonify(success=False)
         resp.status_code = 404
         return resp
@@ -335,11 +335,11 @@ def modyfikuj_danie():
     id_dania = int(rrequest['id_dania'])
     try:
         if rrequest["nazwa"]:
-            if id_restauracji == 1 :
+            if id_restauracji == 1:
                 for danie in restaurant_menu_1['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['nazwa'] = str(rrequest['nazwa'])
-            elif id_restauracji ==2:
+            elif id_restauracji == 2:
                 for danie in restaurant_menu_2['lista']:
                     if danie['id_dania'] == id_dania:
                         danie['nazwa'] = str(rrequest['nazwa'])
@@ -355,15 +355,15 @@ def modyfikuj_danie():
             if id_restauracji == 1:
                 for danie in restaurant_menu_1['lista']:
                     if danie['id_dania'] == id_dania:
-                        danie['cena'] = int(rrequest['cena'])
+                        danie['cena'] = float(rrequest['cena'])
             elif id_restauracji == 2:
                 for danie in restaurant_menu_2['lista']:
                     if danie['id_dania'] == id_dania:
-                        danie['cena'] = int(rrequest['cena'])
+                        danie['cena'] = float(rrequest['cena'])
             else:
                 for danie in network_menu['lista']:
                     if danie['id_dania'] == id_dania:
-                        danie['cena'] = int(rrequest['cena'])
+                        danie['cena'] = float(rrequest['cena'])
     except KeyError:
         pass
 
@@ -407,7 +407,6 @@ def modyfikuj_danie():
     resp = jsonify(success=True)
     resp.status_code = 200
     return resp
-
 
 if __name__ == '__main__':
     app.run()

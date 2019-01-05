@@ -123,11 +123,16 @@ public class PaymentVerifier {
                 paymentForm, 
                 new TypeToken<HashMap<String, String>>(){}.getType()
         );
+        HashMap<String, String> order = new HashMap<>();
+        order.put("kwota", request.get("kwota"));
+        order.put("lista_dan", request.get("lista_dan"));
+
         EasyCache.addElement(
-                request.get("id"), 
-                request.get("zamowienie")
+                request.get("id_zamowienia"), 
+                new Gson().toJson(order)
         );
-        String urlWithId = url+"?id_zamowienia="+request.get("id");
+        
+        String urlWithId = url+"?id_zamowienia="+request.get("id_zamowienia");
         HashMap<String, String> response = new HashMap<>();
         response.put("redirectLink", urlWithId);
         return new Gson().toJson(response);

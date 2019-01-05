@@ -146,9 +146,9 @@ public class DbService {
 
     }
 
-    public String GetOrders(Integer userId) throws URISyntaxException, ClientProtocolException, IOException {
+    public String GetOrders(String userId) throws URISyntaxException, ClientProtocolException, IOException {
         URIBuilder builder = new URIBuilder(this.componentUrl + "pobierz_zamowienia_Z");
-        builder.setParameter("id_restauracji", userId.toString());
+        builder.setParameter("id_restauracji", userId);
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet request = new HttpGet(builder.build());

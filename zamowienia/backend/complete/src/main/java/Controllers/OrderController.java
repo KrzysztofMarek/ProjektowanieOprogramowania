@@ -46,7 +46,7 @@ public class OrderController {
             }
 
             try {
-                Double pointMultiplier = newOrder.kwota / 20;
+                Double pointMultiplier = newOrder.kwota / 20.0;
                 Integer pointsToAdd = pointMultiplier.intValue();
                 pointsService.AddClientPoints(newOrder.id_klienta, pointsToAdd);
             } catch (Exception e){
@@ -69,7 +69,7 @@ public class OrderController {
     @CrossOrigin
     @RequestMapping(value="/pobierz_liste_zamowien", method=RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object> GetOrders(@RequestParam(value = "id_klienta", required = false, defaultValue = "0") Integer clientId){
+    public ResponseEntity<Object> GetOrders(@RequestParam(value = "id_klienta", required = false, defaultValue = "0") String clientId){
         String json;
 
         try {

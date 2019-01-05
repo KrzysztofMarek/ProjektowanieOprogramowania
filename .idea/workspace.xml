@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e44075b7-9bee-43ae-860d-2889ad1ff44d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/Controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/Controllers/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/ExternalServices/DbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/zamowienia/backend/complete/src/main/java/ExternalServices/DbService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zamowienia.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="zamowienia.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2723">
-              <caret line="1176" column="23" lean-forward="true" selection-start-line="1176" selection-start-column="23" selection-end-line="1176" selection-end-column="23" />
+            <state relative-caret-position="377">
+              <caret line="1138" column="8" lean-forward="true" selection-start-line="1138" selection-start-column="8" selection-end-line="1138" selection-end-column="8" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="klient.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="klient.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+            <state relative-caret-position="836">
+              <caret line="61" column="35" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -57,8 +57,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1542" />
-    <option name="y" value="-12" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -147,19 +147,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.2521322" />
+      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="3" visible="true" weight="0.26012793" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Favorites" order="0" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="0" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -180,6 +180,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="35" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19329">
+          <caret line="1137" column="4" selection-start-line="1137" selection-start-column="4" selection-end-line="1137" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="35" lean-forward="true" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19312">
+          <caret line="1137" column="4" lean-forward="true" selection-start-line="1137" selection-start-column="4" selection-end-line="1137" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -189,7 +230,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2723">
+        <state relative-caret-position="19975">
           <caret line="1176" column="23" lean-forward="true" selection-start-line="1176" selection-start-column="23" selection-end-line="1176" selection-end-column="23" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -201,6 +242,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/ZASLEPKA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/klient.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="61" column="35" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zaslepki_baz_danych/oddzielnie/zamowienia.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="1138" column="8" lean-forward="true" selection-start-line="1138" selection-start-column="8" selection-end-line="1138" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

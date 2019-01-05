@@ -28,7 +28,7 @@ public class PointsService {
     private String componentUrl;
 
     public PointsService(){
-        this.componentUrl = "http://127.0.0.1:5000/";
+        this.componentUrl = "http://localhost:8091/";
     }
 
     public int GetClientPoints(String clientId) throws ClientProtocolException, IOException, URISyntaxException{
@@ -43,29 +43,25 @@ public class PointsService {
 
         int statusCode = response.getStatusLine().getStatusCode();
 
-        Integer clientPoints;
-        try (InputStream instream = entity.getContent()) {
-            clientPoints = Integer.parseInt(StringTools.convertStreamToString(instream));
-        }
-
         if(statusCode == 200){
+            Integer clientPoints;
+            try (InputStream instream = entity.getContent()) {
+                clientPoints = Integer.parseInt(StringTools.convertStreamToString(instream));
+            }
+
             return clientPoints;
         }
 
         return 0;
     }
 
-    public boolean AddClientPoints(String clientId, Integer points) throws ClientProtocolException, IOException{
+    public boolean AddClientPoints(String clientId, Integer points) throws ClientProtocolException, IOException, URISyntaxException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "dodaj_punkty");
+        builder.setParameter("id_klienta", clientId);
+        builder.setParameter("punkty", points.toString());
+
         HttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost(componentUrl + "dodaj_punkty");
-
-        JSONObject json = new JSONObject();
-        json.put("id_klienta", clientId);
-        json.put("punkty", points);
-
-        StringEntity requestEntity = new StringEntity(
-            json.toString(),
-            ContentType.APPLICATION_JSON);
+        HttpPost httppost = new HttpPost(builder.build());
 
         HttpResponse response = httpclient.execute(httppost);
         HttpEntity entity = response.getEntity();
@@ -80,17 +76,13 @@ public class PointsService {
     }
 
 
-    public boolean RemoveClientPoints(String clientId, Integer points) throws ClientProtocolException, IOException{
+    public boolean RemoveClientPoints(String clientId, Integer points) throws ClientProtocolException, IOException, URISyntaxException {
+        URIBuilder builder = new URIBuilder(this.componentUrl + "usun_punkty");
+        builder.setParameter("id_klienta", clientId);
+        builder.setParameter("punkty", points.toString());
+
         HttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost(componentUrl + "usun_punkty");
-
-        JSONObject json = new JSONObject();
-        json.put("id_klienta", clientId);
-        json.put("punkty", points);
-
-        StringEntity requestEntity = new StringEntity(
-            json.toString(),
-            ContentType.APPLICATION_JSON);
+        HttpPost httppost = new HttpPost(builder.build());
 
         HttpResponse response = httpclient.execute(httppost);
         HttpEntity entity = response.getEntity();

@@ -1996,11 +1996,11 @@ lista_pracownikow = {
         },
         {
             'id_pracownika': 'lubDum',
-            'id_restauracji': 4,
+            'id_restauracji': 0,
             'imie': 'Robert',
             'nazwisko': 'Kowalak',
             'telefon': '333444555',
-            'stanowisko': 'menadzer restauracji',
+            'stanowisko': 'menadzer sieci',
             'haslo': 'alkdjflk'
 
         }

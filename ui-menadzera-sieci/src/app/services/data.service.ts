@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../models/Employee';
 import { Restaurant } from '../models/Restaurant';
 import { Recruitment } from '../models/Recruitment';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/observable';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -21,6 +21,10 @@ export class DataService {
         return this.http.post('http://localhost:9090/dodaj_pracownika', employeeNew);
     }
 
+    dismissEmployee(id:number) {
+        return this.http.get(`http://localhost:9090/usun_pracownika?id_pracownika=${id}`); 
+    }
+
     getEmployeesList():Observable<Employee> {
        return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow', this.requestOptions);
     }
@@ -34,14 +38,14 @@ export class DataService {
     }
 
     getRecruitmentsList():Observable<Recruitment> {
-        return this.http.get<Recruitment>(`http://localhost:9090/pobierz_ogloszenia`)
+        return this.http.get<Recruitment>(`http://localhost:9090/pobierz_ogloszenia`, this.requestOptions)
     }
 
     addRestaurant(restaurantNew: Restaurant) {
         return this.http.post('http://localhost:9094/dodaj_restauracje', restaurantNew);
     }
 
-    deleteRestaurant(id:number) {
+    deleteRestaurant(id) {
         return this.http.post('http://localhost:9094/usun_restauracje', id);
     }
 
@@ -49,4 +53,12 @@ export class DataService {
         return this.http.get<Restaurant>('http://localhost:9094/pobierz_restauracje');
     }
 
+    getManagerList():Observable<Employee> {
+        return this.http.get<Employee>('http://localhost:9090/pobierz_menadzerow');
+    }
+/*
+    changeManager(newManager: Manager) {
+        return this.http.post(`http://localhost:9094/przydziel_menadzera`, newManager);
+    }
+*/
 }

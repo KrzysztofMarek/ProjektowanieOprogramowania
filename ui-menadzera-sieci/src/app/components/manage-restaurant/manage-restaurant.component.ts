@@ -11,6 +11,7 @@ import { DataService } from '../../services/data.service';
 export class ManageRestaurantComponent implements OnInit {
 
   employee: Employee = new Employee();
+  managerList: Employee; 
   restaurant: Restaurant = new Restaurant();
   restaurantNew: Restaurant = new Restaurant();
   alertString: string = "";
@@ -23,6 +24,10 @@ export class ManageRestaurantComponent implements OnInit {
     this.dataService.getRestauranstList().subscribe(restaurant => {
       this.restaurant = JSON.parse(restaurant['message']);
       console.log(this.restaurant)
+    });
+    this.dataService.getManagerList().subscribe(managers => {
+      this.managerList = managers; 
+      console.log(managers)
     });
   }
 
@@ -50,12 +55,20 @@ export class ManageRestaurantComponent implements OnInit {
   onDelete(rest) {
     console.log(rest.id_restauracji);
     if (confirm("Czy napewno chcesz usunąć restaurację?")) {
-      this.dataService.deleteRestaurant(rest.id_restauracji).subscribe();
+      const id_restauracji = {
+        id_restauracji: rest.id_restauracji
+      }
+      this.dataService.deleteRestaurant(id_restauracji).subscribe(res => 
+        console.log(id_restauracji))
       this.dataService.getRestauranstList().subscribe(restaurant => {
         this.restaurant = JSON.parse(restaurant['message']);
         console.log(this.restaurant)
       });
     }
+  }
+
+  onSelect(event) {
+    console.log(event.target.value);
   }
 
 }

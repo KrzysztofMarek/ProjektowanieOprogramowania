@@ -36,4 +36,14 @@ export class ManageEmployeeComponent implements OnInit {
       });
   }
 
+  onDelete(employee) {
+    console.log(employee.id_pracownika);
+    if (confirm("Czy napewno chcesz usunąć tego pracownika?")) {
+      this.dataService.dismissEmployee(employee.id_pracownika).subscribe(res =>
+        this.dataService.getEmployeesList().subscribe(employee => {
+          this.employee = JSON.parse(employee['message']);
+          console.log(employee);
+        }));
+    }
+  }
 }

@@ -77,13 +77,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pracownik of employee.lista_pracownikow" class="text-center">
-            <td>{{pracownik.imie}}</td>
-            <td>{{pracownik.nazwisko}}</td>
-            <td>{{pracownik.stanowisko}}</td>
-            <td>{{pracownik.telefon}}</td>
-            <td>{{pracownik.id_pracownika}}</td>
-            <td class="p-0"><button type="button" class="btn btn-danger mr-2 my-1">X</button></td>
+          <tr *ngFor="let empl of employee.lista_pracownikow" class="text-center">
+            <td>{{empl.imie}}</td>
+            <td>{{empl.nazwisko}}</td>
+            <td>{{empl.stanowisko}}</td>
+            <td>{{empl.telefon}}</td>
+            <td>{{empl.id_pracownika}}</td>
+            <td class="p-0"><button type="button" (click)="onDelete(empl)" class="btn btn-danger mr-2 my-1">X</button></td>
           </tr>
         </tbody>
       </table>

@@ -1,4 +1,4 @@
-from pip._vendor import requests
+import requests
 from werkzeug.security import safe_str_cmp
 from user import User
 

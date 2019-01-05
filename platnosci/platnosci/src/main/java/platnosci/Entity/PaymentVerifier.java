@@ -118,7 +118,7 @@ public class PaymentVerifier {
         return (new Gson()).toJson(response);
     }    
 
-    public String payInternal(String paymentForm) {
+    public String payInternal(String paymentForm, String url) {
         HashMap<String, String> request = new Gson().fromJson(
                 paymentForm, 
                 new TypeToken<HashMap<String, String>>(){}.getType()
@@ -127,7 +127,10 @@ public class PaymentVerifier {
                 request.get("id"), 
                 request.get("zamowienie")
         );
-        return "Cool!";
+        String urlWithId = url+"?id_zamowienia="+request.get("id");
+        HashMap<String, String> response = new HashMap<>();
+        response.put("redirectLink", urlWithId);
+        return new Gson().toJson(response);
     }
 
     public String getOrder(String orderId) {

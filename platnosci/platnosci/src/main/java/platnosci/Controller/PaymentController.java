@@ -75,8 +75,8 @@ public class PaymentController {
             @RequestBody String paymentForm) 
     {
         try{
-            log.info("Intiaiting payment {}", paymentForm);
-            return (new PaymentVerifier()).payInternal(paymentForm);
+            log.info("Initiating payment {}", paymentForm);
+            return (new PaymentVerifier()).payInternal(paymentForm, env.getProperty("paymentAddress"));
         }catch(Exception e){
             return e.toString();
         }

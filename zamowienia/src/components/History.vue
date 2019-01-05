@@ -159,7 +159,7 @@ export default {
         cancel_order(id_zamowienia) {
             let self = this;
             zamowienia
-                .post(`/zmien_staus_zamowienia?id_zamowienia=${id_zamowienia}&status=anulowane`)
+                .post(`/anuluj_zamowienie?id_zamowienia=${id_zamowienia}`)
                 .then((response) => {
                     self.cancel_dialog = false;
                 })

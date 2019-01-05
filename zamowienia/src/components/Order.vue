@@ -143,7 +143,7 @@ export default {
         punkty.get(`/pobierz_punkty?id_klienta=${"SyLweK"}`)
                 .then((response) => {
                     self.points_loading = false;
-                    self.points = response;
+                    self.points = response.data;
                 })
                 .catch((err) => {
                     self.points_loading = false;
@@ -162,7 +162,8 @@ export default {
     methods: {
         display_price: function(price) {
             let discount = 1.0 - this.points_to_use / 100.0;
-            return price * discount + " zł";
+            let p = price * discount
+            return Math.round(p * 100.0) / 100.0 + " zł";
         },
         use_points: function() {
             this.points_to_use = Math.min(this.points, 75);

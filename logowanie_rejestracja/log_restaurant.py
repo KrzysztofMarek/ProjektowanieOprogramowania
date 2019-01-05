@@ -25,7 +25,7 @@ def waliduj():
         response = requests.get("http://127.0.0.1:5000/pobierz_pracownika", params=parameters)
         data = response.json()
         if "success" not in data:
-            if authenticate(login, password, data["login"], data["hasło"]):
+            if authenticate(login, password, data["id_pracownika"], data["haslo"]):
                 session['user'] = request.form['login']
                 if data['stanowisko'] == "Pracownik kuchni":
                     return redirect(url_for("kucharz"))

@@ -36,6 +36,21 @@ public class DBController {
         }
     }
     
+    @GetMapping("/pobierzPracownika")
+    public String getEmployee(
+            @RequestParam("id_pracownika") String id_pracownika) 
+    {
+        try{
+            log.info("Fetching employee with id {}", id_pracownika);
+            return connector.getEmployee( 
+                    env.getProperty("getEmployeeAddress"),
+                    id_pracownika
+            );
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+    
     @GetMapping("/pobierzPracownikow")
     public String getEmployees() 
     {

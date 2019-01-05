@@ -1,13 +1,10 @@
 package zarzadzanie_personelem.Controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import zarzadzanie_personelem.Entity.EmployeeCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +51,7 @@ public class EmployeeController {
             return (new EmployeeCreator()).getEmployees( 
                     session,
                     env.getProperty("getEmployeesAddress"),
+                    env.getProperty("getEmployeeAddress"),
                     env.getProperty("authAddress")
             );
         }catch(Exception e){

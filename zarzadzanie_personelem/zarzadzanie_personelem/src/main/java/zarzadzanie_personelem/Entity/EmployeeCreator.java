@@ -74,23 +74,27 @@ public class EmployeeCreator {
 
     public String getEmployees(
             final String session, 
-            final String getUrl,
+            final String getUrl, 
+            final String getManagerUrl,
             final String authUrl
     ) {
-        ResponseEntity<String> response = getManagerId(session, authUrl);
-        String managerType = getManagerType(response);
+        String managerId = getManagerId(session, authUrl);
+        EmployeeForm employee = getManagerInfo(managerId, getManagerUrl);
+        log.info("Got employee {}", employee.toString());
         
-        if(managerType.equals("Network")){
+        if(employee.getStanowisko().equals("menadzer sieci")){
+            log.info("Fetching employees for network manager");
             return RestClient.sendGET(getUrl);            
-        }else if(managerType.equals("Restaurant")){
-            String Id = getManagerId(response);
-            return getEmployeesOfRestaurant(Id, getUrl);
+        }else if(employee.getStanowisko().equals("menadzer restauracji")){
+            log.info("Fetching employees for restaurant manager");
+            return getEmployeesOfRestaurant(employee.getId_restauracji(), getUrl);
         }else{
+            log.info("Could not determine manager type");
             return getInvalidTypeMessage();
         }        
     }
     
-    private ResponseEntity<String> getManagerId(final String session, final String authUrl){
+    private String getManagerId(final String session, final String authUrl){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cookie", "session="+session);
 
@@ -100,22 +104,14 @@ public class EmployeeCreator {
             HttpMethod.GET,
             new HttpEntity<>(headers),
             String.class
-        );
+        ).getBody();
     }
     
-    private String getManagerType(ResponseEntity<String> response){
-        // TO BE IMPLEMENTED WHEN LOGIN RETURNS PROPER INFO
-        if(response.getStatusCodeValue() == 200){
-            return "Network";            
-        }else{
-            log.info("Bad response code");
-            return "Error";
-        }
-    }
-    
-    private String getManagerId(ResponseEntity<String> response){
-        // TO BE IMPLEMENTED WHEN LOGIN RETURNS PROPER INFO
-        return "1";
+    private EmployeeForm getManagerInfo(final String managerId, final String getManagerUrl){
+        String getManagerUrlWithId = getManagerUrl + "?id_pracownika=" + managerId;
+        HashMap<String, String> response = RestClient.sendGETRaw(getManagerUrlWithId);
+        EmployeeForm employee = new Gson().fromJson(response.get("message"), EmployeeForm.class);
+        return employee;
     }
     
     private String getInvalidTypeMessage(){
@@ -125,7 +121,10 @@ public class EmployeeCreator {
         return new Gson().toJson(map);
     }
     
-    public String getEmployeesOfRestaurant(final String id_restauracji, final String url) {        
+    public String getEmployeesOfRestaurant(final String id_restauracji, final String url) {       
+        if(id_restauracji.equals("0"))
+            return new Gson().toJson("[]");
+            
         HashMap<String,String> response = RestClient.sendGETRaw(url);
         ArrayList<EmployeeForm> employees = castToEmployees(response.get("message"));
         ArrayList<EmployeeForm> employeesOfRestaurant = filterEmployeesOfRestaurant(employees, id_restauracji);

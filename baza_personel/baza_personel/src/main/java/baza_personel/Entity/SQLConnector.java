@@ -87,5 +87,23 @@ public class SQLConnector{
             return "Nie udało się!";    
         }
     }
+
+    public String getEmployee(String url, String id) {
+        String urlWithId = url + "?id_pracownika=" + id;
+        
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        log.info("Sending GET to {}", urlWithId);
+        ResponseEntity<String> response = restTemplate.exchange(urlWithId, HttpMethod.GET, entity, String.class);
+        if(response.getStatusCode() == HttpStatus.OK){   
+            log.info(response.getBody());
+            return response.getBody();
+        }else{
+            return "Nie udało się!";    
+        }
+    }
     
 }

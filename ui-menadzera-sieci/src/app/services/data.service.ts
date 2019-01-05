@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../models/Employee';
 import { Restaurant } from '../models/Restaurant';
@@ -10,9 +9,10 @@ import 'rxjs/Rx';
 @Injectable()
 export class DataService {
 
-    private readonly httpOptions = {
-        headers: new HttpHeaders({ "Content-Type": "application/json" })
-    };
+    private requestOptions = {
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+        withCredentials: true
+       };
     constructor(
         public http: HttpClient
     ) { }
@@ -22,8 +22,7 @@ export class DataService {
     }
 
     getEmployeesList():Observable<Employee> {
-       let options = new RequestOptions({ withCredentials: true });
-       return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow', options);
+       return this.http.get<Employee>('http://localhost:9090/pobierz_pracownikow', this.requestOptions);
     }
 
     getRestaurantEmployeesList(id: number):Observable<Employee> {

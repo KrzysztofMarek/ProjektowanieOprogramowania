@@ -40,7 +40,7 @@ public class EmployeeController {
         }
     }
     
-    @CrossOrigin
+    @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
     @GetMapping("/pobierz_pracownikow")
     public String getEmployees(
         @CookieValue("session") String session) 
